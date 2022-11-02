@@ -131,6 +131,34 @@ declare namespace JSX {
 }
 ```
 
+## Usage example in NextJS
+
+1 - to avoid "window is not defined" import the module inside a useEffect hook, like so
+
+```javascript
+import { useEffect } from 'react'
+
+function App() {
+
+  useEffect(() => {
+    import('@johanaarstein/dotlottie-player')
+  }, [])
+
+  return (
+    <div className="App">
+      <dotlottie-player
+        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+        autoplay
+        loop
+        style={{ height: '100%', width: '100%' }}
+      />
+    </div>
+  )
+}
+
+export default App
+```
+
 ## Usage example in NuxtJS / VueJS
 
 1 - update the plugins array in nuxt.config.js file in your root as follows
