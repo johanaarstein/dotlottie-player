@@ -198,9 +198,9 @@ export default {}
 | `hover`            | `hover`      | Whether to play on mouse hover.    | `boolean`                            | `false`           |
 | `loop`             | `loop`       | Whether to loop animation.         | `boolean`                            | `false`           |
 | `mode`             | `mode`       | Play mode.                         | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
+| `preserveAspectRatio`            | `preserveAspectRatio`      | Aspect ratio.                   | `string`                             | `'xMidYMid meet'`               |
 | `renderer`         | `renderer`   | Renderer to use.                   | `"svg"`                              | `'svg'`           |
 | `speed`            | `speed`      | Animation speed.                   | `number`                             | `1`               |
-| `preserveAspectRatio`            | `preserveAspectRatio`      | Aspect ratio.                   | `string`                             | `'xMidYMid meet'`               |
 | `src` _(required)_ | `src`        | URL to .lottie file.               | `string`                             | `undefined`       |
 
 ## Methods

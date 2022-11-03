@@ -17,6 +17,6 @@
     "noImplicitThis": true,
     "experimentalDecorators": true
   },
-  "include": ["src/**/*.ts", "types/*.ts"],
+  "include": ["src/**/*.ts", "types/*.ts", "src/dotlottie-player.tsx"],
   "exclude": ["node_modules", "dist"]
 }
