@@ -21,8 +21,8 @@
     "serve": "yarn build && cp dist/dotlottie-player.js src/ && http-server src/ -o"
   },
   "dependencies": {
-    "jszip": "^3.5.0",
-    "lit": "^2.1.2",
+    "jszip": "^3.10.1",
+    "lit": "^2.4.1",
     "lottie-web": "^5.9.6"
   },
   "devDependencies": {
