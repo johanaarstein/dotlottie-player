@@ -1,21 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "es2015",
-    "moduleResolution": "node",
-    "lib": ["esnext.array", "esnext", "es2017", "dom"],
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
+    "experimentalDecorators": true,
     "inlineSources": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "lib": [
+      "esnext.array",
+      "esnext",
+      "es2017",
+      "dom"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
-    "experimentalDecorators": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017"
   },
   "include": ["src/**/*.ts", "types/*.ts", "src/dotlottie-player.tsx"],
   "exclude": ["node_modules", "dist"]
