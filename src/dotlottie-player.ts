@@ -523,7 +523,11 @@ export class DotLottiePlayer extends LitElement {
     if (!this._lottie) {
       return
     }
-    
+
+    if (this._lottie) {
+      this._lottie.destroy()
+    }
+
     if (this.src) {
       await this.load(this.src)
     }
