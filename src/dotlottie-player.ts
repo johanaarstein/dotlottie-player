@@ -516,6 +516,20 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
+   * Reloads animation.
+   *
+   */
+  public async reload(): Promise<void> {
+    if (!this._lottie) {
+      return
+    }
+    
+    if (this.src) {
+      await this.load(this.src)
+    }
+  }
+
+  /**
    * Sets animation play speed.
    *
    * @param value Playback speed.
