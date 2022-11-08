@@ -23,7 +23,7 @@ This fork renders dotLottie files or JSON files as svg or canvas, and it provide
 - Import from CDN.
 
 ```html
-<script src="https://unpkg.com/@johanaarstein/dotlottie-player@1.2.9/dist/dotlottie-player.js"></script>
+<script src="https://unpkg.com/@johanaarstein/dotlottie-player@1.2.15/dist/dotlottie-player.js"></script>
 ```
 
 - Import from local node_modules directory.
@@ -313,6 +313,14 @@ Type: `void`
 ### `togglePlay() => void`
 
 Toggle playing state.
+
+#### Returns
+
+Type: `void`
+
+### `reload() => void`
+
+Reloads Lottie.
 
 #### Returns
 
