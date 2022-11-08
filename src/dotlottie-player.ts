@@ -230,16 +230,13 @@ export class DotLottiePlayer extends LitElement {
 
     // Load the resource information
     try {
-      let srcParsed
-
-      if (typeof src === 'string') {
-        srcParsed = await fetchPath(src)
-        if (srcParsed === undefined) throw new Error('[dotLottie] No animation to load!')
-        if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failing. Object is not a valid Lottie.')
-      } else if (typeof src === 'object') {
-        srcParsed = src
-        if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failing. Object is not a valid Lottie.')
+      if (typeof src !== 'string' && typeof src !== 'object') {
+        throw new Error('[dotLottie] No animation to load, or the file is corrupted.')
       }
+
+      const srcParsed = typeof src === 'string' ? await fetchPath(src) : src
+
+      if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failing. Object is not a valid Lottie.')
 
       // Clear previous animation, if any
       if (this._lottie) {
