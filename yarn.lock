@@ -2408,9 +2408,9 @@
   "version" "2.0.0"
 
 "ci-info@^3.1.0", "ci-info@^3.2.0":
-  "integrity" "sha512-yH4RezKOGlOhxkmhbeNuC4eYZKAUsEaGtBuBzDDP1eFUKiccDWzBABxBfOx31IDwDIXMTxWuwAxUGModvkbuVw=="
-  "resolved" "https://registry.npmjs.org/ci-info/-/ci-info-3.5.0.tgz"
-  "version" "3.5.0"
+  "integrity" "sha512-up5ggbaDqOqJ4UqLKZ2naVkyqSJQgJi5lwD6b6mM748ysrghDBX0bx/qJTUHzw7zu6Mq4gycviSF5hJnwceD8w=="
+  "resolved" "https://registry.npmjs.org/ci-info/-/ci-info-3.6.1.tgz"
+  "version" "3.6.1"
 
 "cipher-base@^1.0.0", "cipher-base@^1.0.1", "cipher-base@^1.0.3":
   "integrity" "sha512-Kkht5ye6ZGmwv40uUDZztayT2ThLQGfnj/T71N/XzeZeo3nf8foyW7zGTsPYkEya3m5f3cAypH+qe7YOrM1U2Q=="
@@ -2646,9 +2646,9 @@
   "version" "0.1.1"
 
 "core-js-compat@^3.25.1":
-  "integrity" "sha512-piOX9Go+Z4f9ZiBFLnZ5VrOpBl0h7IGCkiFUN11QTe6LjAvOT3ifL/5TdoizMh99hcGy5SoLyWbapIY/PIb/3A=="
-  "resolved" "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.26.0.tgz"
-  "version" "3.26.0"
+  "integrity" "sha512-622/KzTudvXCDLRw70iHW4KKs1aGpcRcowGWyYJr2DEBfRrd6hNJybxSWJFuZYD4ma86xhrwDDHxmDaIq4EA8A=="
+  "resolved" "https://registry.npmjs.org/core-js-compat/-/core-js-compat-3.26.1.tgz"
+  "version" "3.26.1"
   dependencies:
     "browserslist" "^4.21.4"
 
@@ -6928,16 +6928,16 @@
   "version" "3.2.0"
 
 "regexpu-core@^5.1.0":
-  "integrity" "sha512-HrnlNtpvqP1Xkb28tMhBUO2EbyUHdQlsnlAhzWcwHy8WJR53UWr7/MAvqrsQKMbV4qdpv03oTMG8iIhfsPFktQ=="
-  "resolved" "https://registry.npmjs.org/regexpu-core/-/regexpu-core-5.2.1.tgz"
-  "version" "5.2.1"
+  "integrity" "sha512-T0+1Zp2wjF/juXMrMxHxidqGYn8U4R+zleSJhX9tQ1PUsS8a9UtYfbsF9LdiVgNX3kiX8RNaKM42nfSgvFJjmw=="
+  "resolved" "https://registry.npmjs.org/regexpu-core/-/regexpu-core-5.2.2.tgz"
+  "version" "5.2.2"
   dependencies:
     "regenerate" "^1.4.2"
     "regenerate-unicode-properties" "^10.1.0"
     "regjsgen" "^0.7.1"
     "regjsparser" "^0.9.1"
     "unicode-match-property-ecmascript" "^2.0.0"
-    "unicode-match-property-value-ecmascript" "^2.0.0"
+    "unicode-match-property-value-ecmascript" "^2.1.0"
 
 "regjsgen@^0.7.1":
   "integrity" "sha512-RAt+8H2ZEzHeYWxZ3H2z6tF18zyyOnlcdaafLrm21Bguj7uZy6ULibiAFdXEtKQY4Sy7wDTwDiOazasMLc4KPA=="
@@ -8222,10 +8222,10 @@
     "unicode-canonical-property-names-ecmascript" "^2.0.0"
     "unicode-property-aliases-ecmascript" "^2.0.0"
 
-"unicode-match-property-value-ecmascript@^2.0.0":
-  "integrity" "sha512-7Yhkc0Ye+t4PNYzOGKedDhXbYIBe1XEQYQxOPyhcXNMJ0WCABqqj6ckydd6pWRZTHV4GuCPKdBAUiMc60tsKVw=="
-  "resolved" "https://registry.npmjs.org/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.0.0.tgz"
-  "version" "2.0.0"
+"unicode-match-property-value-ecmascript@^2.1.0":
+  "integrity" "sha512-qxkjQt6qjg/mYscYMC0XKRn3Rh0wFPlfxB0xkt9CfyTvpX1Ra0+rAmdX2QyAobptSEvuy4RtpPRui6XkV+8wjA=="
+  "resolved" "https://registry.npmjs.org/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.1.0.tgz"
+  "version" "2.1.0"
 
 "unicode-property-aliases-ecmascript@^2.0.0":
   "integrity" "sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w=="
