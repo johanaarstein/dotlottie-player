@@ -5,7 +5,7 @@
   "main": "dist/dotlottie-player.js",
   "module": "dist/dotlottie-player.esm.js",
   "types": "dist/dotlottie-player.d.ts",
-  "homepage": "https://dotlottie.com/players",
+  "homepage": "https://www.aarstein.media",
   "repository": "https://github.com/johanaarstein/dotlottie-player.git",
   "bugs": "https://github.com/johanaarstein/dotlottie-player/issues",
   "author": "Johan Martin Aarstein <johan@aarstein.media>",
@@ -36,6 +36,7 @@
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
+    "babel-cli": "^6.26.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -51,6 +52,8 @@
     "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-visualizer": "^4.0.4",
     "shx": "^0.3.3",
+    "swc": "^1.0.11",
+    "swc-cli": "^0.1.9",
     "typescript": "^3.7.5"
   },
   "files": [
