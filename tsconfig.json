@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
+    "target": "es2017",
+    "module": "es2017",
     "allowJs": true,
     "removeComments": true,
     "resolveJsonModule": true,
@@ -12,7 +12,7 @@
     "outDir": "dist",
     "strict": true,
     "lib": [
-      "es2020"
+      "es2017"
     ],
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
@@ -21,14 +21,6 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "Node",
     "skipLibCheck": true,
-    "paths": {
-      "@routes/*": [
-        "./src/routes/*"
-      ],
-      "@middlewares/*": [
-        "./src/middlewares/*"
-      ]
-    }
   },
   "include": [
     "src/**/*.ts",

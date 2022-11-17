@@ -6,15 +6,7 @@
       "decorators": true,
       "dynamicImport": true
     },
-    "target": "es2020",
-    "paths": {
-      "@routes/*": [
-        "./src/routes/*"
-      ],
-      "@middlewares/*": [
-        "./src/middlewares/*"
-      ]
-    },
+    "target": "es2017",
     "baseUrl": "."
   },
   "module": {
