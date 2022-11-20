@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators'
 import { TemplateResult } from 'lit/html'
 import * as lottie from 'lottie-web/build/player/lottie'
-import JSZip from 'jszip/dist/jszip'
+import { loadAsync } from 'jszip/dist/jszip'
 
 import styles from './dotlottie-player.styles'
 
@@ -50,16 +50,16 @@ export async function fetchPath(path: string): Promise<any> {
     
     if (ext === 'json') return await result.json()
 
-    const zip = await JSZip.loadAsync(await result.arrayBuffer()),
-      manifestFile: string = await zip.file('manifest.json').async('string'),
-      manifest = await JSON.parse(manifestFile)
+    const zip = await loadAsync(await result.arrayBuffer()),
+      manifestFile: string | undefined = await zip.file('manifest.json')?.async('string'),
+      manifest = await JSON.parse(manifestFile as string)
 
     if (!('animations' in manifest)) throw new Error('Manifest not found')
     if (!manifest.animations.length) throw new Error('No animations listed in the manifest')
 
     const defaultLottie = manifest.animations[0],
-      lottieString: string = await zip.file(`animations/${defaultLottie.id}.json`).async('string'),
-      lottieJson = await JSON.parse(lottieString)
+      lottieString: string | undefined = await zip.file(`animations/${defaultLottie.id}.json`)?.async('string'),
+      lottieJson = await JSON.parse(lottieString as string)
 
     if ('assets' in lottieJson) {
       Promise.all(lottieJson.assets.map((asset: any) => {
@@ -68,7 +68,7 @@ export async function fetchPath(path: string): Promise<any> {
 
         return new Promise((resolveAsset: any) => {
           const ext = asset.p.split('.').pop(),
-            assetB64 = zip.file(`images/${asset.p}`).async('base64')
+            assetB64 = zip.file(`images/${asset.p}`)?.async('base64')
 
           asset.p = ext === 'svg' || ext === 'svg+xml' ? `data:image/svg+xmlbase64,${assetB64}` : `data:base64,${assetB64}`
           asset.e = 1
