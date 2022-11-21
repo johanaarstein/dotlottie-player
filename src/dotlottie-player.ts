@@ -643,9 +643,9 @@ export class DotLottiePlayer extends LitElement {
     const isStopped: boolean = this.currentState === PlayerState.Stopped
 
     return html`
-      <div id="lottie-controls" aria-label="lottie-animation-controls" class="toolbar">
+      <div class="lottie-controls" aria-label="lottie-animation-controls" class="toolbar">
         <button
-          id="lottie-play-button"
+          name="lottie-play-button"
           @click=${this.togglePlay}
           class=${isPlaying || isPaused ? 'active' : ''}
           style="align-items:center"
@@ -665,7 +665,7 @@ export class DotLottiePlayer extends LitElement {
               `}
         </button>
         <button
-          id="lottie-stop-button"
+          name="lottie-stop-button"
           @click=${this.stop}
           class=${isStopped ? 'active' : ''}
           style="align-items:center"
@@ -677,7 +677,7 @@ export class DotLottiePlayer extends LitElement {
           </svg>
         </button>
         <input
-          id="lottie-seeker-input"
+          name="lottie-seeker-input"
           class="seeker"
           type="range"
           min="0"
@@ -700,7 +700,7 @@ export class DotLottiePlayer extends LitElement {
           aria-label="lottie-seek-input"
         />
         <button
-          id="lottie-loop-toggle"
+          name="lottie-loop-toggle"
           @click=${this.toggleLooping}
           class=${this.loop ? 'active' : ''}
           style="align-items:center"
@@ -721,8 +721,8 @@ export class DotLottiePlayer extends LitElement {
     const className: string = this.controls ? 'main controls' : 'main'
     const animationClass: string = this.controls ? 'animation controls' : 'animation'
     return html`
-      <div id="animation-container" class=${className} lang="en" role="img" aria-label=${this.description}>
-        <div id="animation" class=${animationClass} style="background:${this.background}">
+      <div class=${'animation-container ' + className} lang="en" role="img" aria-label=${this.description}>
+        <div class=${animationClass} style="background:${this.background}">
           ${this.currentState === PlayerState.Error
         ? html`
                 <div class="error">⚠️</div>
