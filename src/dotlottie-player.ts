@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators'
 import { TemplateResult } from 'lit/html'
-import * as lottie from 'lottie-web/build/player/lottie'
+import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
 import { loadAsync } from 'jszip/dist/jszip'
 
 import styles from './dotlottie-player.styles'
@@ -244,11 +244,11 @@ export class DotLottiePlayer extends LitElement {
       }
 
       if (this.webworkers) {
-        lottie.useWebWorker(true)
+        useWebWorker(true)
       }
 
       // Initialize lottie player and load animation
-      this._lottie = lottie.loadAnimation({
+      this._lottie = loadAnimation({
         ...options,
         animationData: srcParsed,
       })
