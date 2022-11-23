@@ -6,10 +6,18 @@
   "module": "dist/dotlottie-player.esm.js",
   "types": "dist/dotlottie-player.d.ts",
   "homepage": "https://dotlottie.com/players",
-  "repository": "https://github.com/johanaarstein/dotlottie-player.git",
+  "repository": {
+    "url": "https://github.com/johanaarstein/dotlottie-player.git",
+    "type": "git"
+  },
   "bugs": "https://github.com/johanaarstein/dotlottie-player/issues",
-  "author": "Johan Martin Aarstein <johan@aarstein.media>",
-  "license": "MIT",
+  "author": {
+    "name": "Johan Martin Aarstein",
+    "email": "johan@aarstein.media",
+    "url": "https://www.aarstein.media",
+    "organization": "Aarstein Media"
+  },
+  "license": "GPL-2.0-or-later",
   "scripts": {
     "build": "yarn build-dotlottie",
     "build-dotlottie": "npm run cleanup && rollup -c",
@@ -75,5 +83,8 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
   }
 }
