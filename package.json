@@ -82,7 +82,8 @@
     "> 3%"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/johanaarstein"
   },
   "engines": {
     "node": ">= 7.6.0"
