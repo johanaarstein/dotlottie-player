@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit'
-import { customElement, property, query } from 'lit/decorators'
+import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
-import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
-import { loadAsync } from 'jszip/dist/jszip'
+// import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
+import lottie from 'lottie-web/build/player/lottie'
+import { loadAsync } from 'jszip'
 
 import styles from './dotlottie-player.styles'
 
@@ -42,7 +43,7 @@ export enum PlayerEvents {
 /**
  * Load a resource from a path URL
  */
-export async function fetchPath(path: string): Promise<any> {
+export async function fetchPath(path: string): Promise<JSON> {
   const ext: string | undefined = path.split('.').pop()?.toLowerCase()
 
   try {
@@ -243,12 +244,12 @@ export class DotLottiePlayer extends LitElement {
         this._lottie.destroy()
       }
 
-      if (this.webworkers) {
-        useWebWorker(true)
-      }
+      // if (this.webworkers) {
+      //   useWebWorker(true)
+      // }
 
       // Initialize lottie player and load animation
-      this._lottie = loadAnimation({
+      this._lottie = lottie.loadAnimation({
         ...options,
         animationData: srcParsed,
       })
@@ -732,5 +733,11 @@ export class DotLottiePlayer extends LitElement {
         ${this.controls ? this.renderControls() : undefined}
       </div>
     `
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'dotlottie-player': DotLottiePlayer;
   }
 }

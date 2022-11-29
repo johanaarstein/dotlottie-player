@@ -1,43 +1,45 @@
-import babel from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy';
-import filesize from 'rollup-plugin-filesize';
-import resolve from '@rollup/plugin-node-resolve';
-import serve from 'rollup-plugin-serve';
-import { terser } from 'rollup-plugin-terser';
-import typescript2 from 'rollup-plugin-typescript2';
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import nodePolyfills from 'rollup-plugin-polyfill-node'
+import copy from 'rollup-plugin-copy'
+import filesize from 'rollup-plugin-filesize'
+import resolve from '@rollup/plugin-node-resolve'
+import serve from 'rollup-plugin-serve'
+import terser from '@rollup/plugin-terser'
+import typescript from '@rollup/plugin-typescript'
 
-const production = !process.env.ROLLUP_WATCH;
-const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
-const outputDir = './dist/';
+const production = !process.env.ROLLUP_WATCH,
+  extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
+  outputDir = './dist/',
+  
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  pkg = require('./package.json')
 
 export default {
   input: './src/dotlottie-player.ts',
   treeshake: false,
   output: [
     {
-      file: './dist/dotlottie-player.esm.js',
-      // dir: outputDir,
+      file: pkg.module,
       format: 'es',
       sourcemap: true,
     },
     {
-      file: './dist/dotlottie-player.js',
+      file: pkg.main,
       format: 'umd',
       name: 'dotlottie-player',
       sourcemap: true,
     },
   ],
   plugins: [
+    nodePolyfills(),
     resolve({
       extensions,
       jsnext: true,
       module: true,
     }),
     commonjs(),
-    typescript2({
-      check: false,
-    }),
+    typescript(),
     babel({
       extensions: extensions,
       exclude: ['./node_modules/**'],
@@ -69,4 +71,4 @@ export default {
 
     production && terser(),
   ],
-};
+}

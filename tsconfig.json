@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "declarationDir": "types",
     "declarationMap": true,
     "experimentalDecorators": true,
     "inlineSources": true,
     "lib": [
       "esnext.array",
       "esnext",
-      "es2017",
+      "ES2018",
       "dom"
     ],
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -18,10 +19,12 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "outDir": "dist",
+    "rootDir": "src",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "ES2018",
+    "useDefineForClassFields": false
   },
-  "include": ["src/**/*.ts", "types/*.ts", "src/dotlottie-player.tsx"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src", "./types"]
 }
