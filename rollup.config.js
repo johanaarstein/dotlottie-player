@@ -8,28 +8,27 @@ import serve from 'rollup-plugin-serve'
 import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
 
+import pkg from './package.json' assert { type: 'json' }
+
 const production = !process.env.ROLLUP_WATCH,
   extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
-  outputDir = './dist/',
-  
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  pkg = require('./package.json')
+  outputDir = './dist/'
 
 export default {
   input: './src/dotlottie-player.ts',
   treeshake: false,
   output: [
     {
-      file: pkg.module,
-      format: 'es',
+      file: pkg.main,
+      format: 'umd',
+      name: pkg.name,
       sourcemap: true,
     },
     {
-      file: pkg.main,
-      format: 'umd',
-      name: 'dotlottie-player',
+      file: pkg.module,
+      format: 'es',
       sourcemap: true,
-    },
+    }
   ],
   plugins: [
     nodePolyfills(),
@@ -39,17 +38,17 @@ export default {
       module: true,
     }),
     commonjs(),
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json'
+    }),
     babel({
-      extensions: extensions,
+      extensions,
       exclude: ['./node_modules/**'],
       babelHelpers: 'bundled'
     }),
     !production &&
       copy({
         targets: [
-          { src: './src/index.html', dest: outputDir },
-          { src: './src/sample_dotlottie.lottie', dest: outputDir },
           {
             src: './node_modules/@webcomponents/webcomponentsjs/bundles/',
             dest: outputDir,

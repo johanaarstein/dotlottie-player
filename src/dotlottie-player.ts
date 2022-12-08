@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
 // import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
-import lottie from 'lottie-web/build/player/lottie'
+import Lottie from 'lottie-web'
 import { loadAsync } from 'jszip'
 
 import styles from './dotlottie-player.styles'
@@ -249,7 +249,7 @@ export class DotLottiePlayer extends LitElement {
       // }
 
       // Initialize lottie player and load animation
-      this._lottie = lottie.loadAnimation({
+      this._lottie = Lottie.loadAnimation({
         ...options,
         animationData: srcParsed,
       })
