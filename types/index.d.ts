@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { TemplateResult } from 'lit/html';
+import { Unzipped } from 'fflate';
 export declare enum PlayerState {
     Destroyed = "destroyed",
     Error = "error",
@@ -26,6 +27,13 @@ export declare enum PlayerEvents {
     Ready = "ready",
     Rendered = "rendered",
     Stop = "stop"
+}
+export interface LottieManifest {
+    animations: [Record<string, unknown>];
+    version?: string;
+}
+export interface LottieAnimation extends Unzipped {
+    "manifest.json": Uint8Array;
 }
 /**
  * Load a resource from a path URL
@@ -215,4 +223,4 @@ declare global {
         'dotlottie-player': DotLottiePlayer;
     }
 }
-//# sourceMappingURL=dotlottie-player.d.ts.map
+//# sourceMappingURL=index.d.ts.map

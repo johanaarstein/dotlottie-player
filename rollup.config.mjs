@@ -15,14 +15,14 @@ const production = !process.env.ROLLUP_WATCH,
   outputDir = './dist/'
 
 export default {
-  input: './src/dotlottie-player.ts',
+  input: './src/index.ts',
   treeshake: false,
   output: [
     {
       file: pkg.main,
       format: 'umd',
-      name: pkg.name,
       sourcemap: true,
+      name: pkg.name
     },
     {
       file: pkg.module,

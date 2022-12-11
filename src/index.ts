@@ -3,9 +3,9 @@ import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
 // import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
 import Lottie from 'lottie-web'
-import { loadAsync } from 'jszip'
+import { strFromU8, unzip, Unzipped } from 'fflate'
 
-import styles from './dotlottie-player.styles'
+import styles from './index.styles'
 
 // Define valid player states
 export enum PlayerState {
@@ -40,6 +40,15 @@ export enum PlayerEvents {
   Stop = 'stop',
 }
 
+export interface LottieManifest {
+  animations: [Record<string, unknown>]
+  version?: string
+}
+
+export interface LottieAnimation extends Unzipped {
+  "manifest.json": Uint8Array
+}
+
 /**
  * Load a resource from a path URL
  */
@@ -51,25 +60,38 @@ export async function fetchPath(path: string): Promise<JSON> {
     
     if (ext === 'json') return await result.json()
 
-    const zip = await loadAsync(await result.arrayBuffer()),
-      manifestFile: string | undefined = await zip.file('manifest.json')?.async('string'),
-      manifest = await JSON.parse(manifestFile as string)
+    const buffer = new Uint8Array(await result.arrayBuffer()),
+      unzipped = await new Promise((resolve, reject) => {
+        unzip(buffer, (err, file) => {
+          if (err) reject(err)
+          resolve(file)
+        })
+      }),
+
+      //Todo: Hack for TypeScript
+      lottieAnimation = unzipped as LottieAnimation,
+
+      manifestFile: string | undefined = strFromU8(lottieAnimation['manifest.json']),
+      manifest: LottieManifest = JSON.parse(manifestFile as string)
 
     if (!('animations' in manifest)) throw new Error('Manifest not found')
     if (!manifest.animations.length) throw new Error('No animations listed in the manifest')
 
-    const defaultLottie = manifest.animations[0],
-      lottieString: string | undefined = await zip.file(`animations/${defaultLottie.id}.json`)?.async('string'),
+    const { id } = manifest.animations[0],
+
+      lottieString = strFromU8(lottieAnimation?.[`animations/${id}.json`]),
       lottieJson = await JSON.parse(lottieString as string)
 
     if ('assets' in lottieJson) {
       Promise.all(lottieJson.assets.map((asset: any) => {
 
-        if (!asset.p || !zip.file(`images/${asset.p}`)) return
+        const { p } = asset
 
-        return new Promise((resolveAsset: any) => {
-          const ext = asset.p.split('.').pop(),
-            assetB64 = zip.file(`images/${asset.p}`)?.async('base64')
+        if (!p || !lottieAnimation?.[`images/${p}`]) return
+
+        return new Promise<void>((resolveAsset) => {
+          const ext = p.split('.').pop(),
+            assetB64 = Buffer.from(lottieAnimation?.[`images/${p}`])?.toString('base64')
 
           asset.p = ext === 'svg' || ext === 'svg+xml' ? `data:image/svg+xmlbase64,${assetB64}` : `data:base64,${assetB64}`
           asset.e = 1
