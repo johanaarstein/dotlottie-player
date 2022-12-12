@@ -666,7 +666,7 @@ export class DotLottiePlayer extends LitElement {
     const isStopped: boolean = this.currentState === PlayerState.Stopped
 
     return html`
-      <div class="lottie-controls" aria-label="lottie-animation-controls" class="toolbar">
+      <div class="lottie-controls toolbar" aria-label="lottie-animation-controls" class="toolbar">
         <button
           name="lottie-play-button"
           @click=${this.togglePlay}
