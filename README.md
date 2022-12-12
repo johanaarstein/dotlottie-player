@@ -1,18 +1,10 @@
 ## dotlottie-player Web Component
 
-This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component).
-
-This fork renders dotLottie files or JSON files as svg or canvas, and it provides the option to alter aspect ratio.
-
-<!-- [![npm](https://img.shields.io/npm/v/@dotlottie/player-component.svg)](https://www.npmjs.com/package/johanaarstein/dotlottie-player) -->
-
-<!-- ## Demo
-
-- [TODO] -->
+This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 
 <!-- ## Documentation
 
-- [View documentation](https://dotlottie.github.io/player-component/) -->
+- [View full documentation](https://dotlottie.github.io/player-component/) -->
 
 ## Installation
 
@@ -23,7 +15,7 @@ This fork renders dotLottie files or JSON files as svg or canvas, and it provide
 - Import from CDN.
 
 ```html
-<script src="https://unpkg.com/@johanaarstein/dotlottie-player@1.2.20/dist/dotlottie-player.js"></script>
+<script src="https://unpkg.com/@johanaarstein/dotlottie-player@1.2.22/dist/dotlottie-player.js"></script>
 ```
 
 - Import from local node_modules directory.
@@ -188,20 +180,20 @@ export default {}
 
 ## Properties
 
-| Property           | Attribute    | Description                        | Type                                 | Default           |
-| ------------------ | ------------ | ---------------------------------- | ------------------------------------ | ----------------- |
-| `autoplay`         | `autoplay`   | Autoplay animation on load.        | `boolean`                            | `false`           |
-| `background`       | `background` | Background color.                  | `string`                             | `undefined`       |
-| `controls`         | `controls`   | Show controls.                     | `boolean`                            | `false`           |
-| `count`            | `count`      | Number of times to loop animation. | `number`                             | `undefined`       |
-| `direction`        | `direction`  | Direction of animation.            | `number`                             | `1`               |
-| `hover`            | `hover`      | Whether to play on mouse hover.    | `boolean`                            | `false`           |
-| `loop`             | `loop`       | Whether to loop animation.         | `boolean`                            | `false`           |
-| `mode`             | `mode`       | Play mode.                         | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
-| `preserveAspectRatio`            | `preserveAspectRatio`      | Aspect ratio.                   | `string`                             | `'xMidYMid meet'`               |
-| `renderer`         | `renderer`   | Renderer to use.                   | `"svg"`                              | `'svg'`           |
-| `speed`            | `speed`      | Animation speed.                   | `number`                             | `1`               |
-| `src` _(required)_ | `src`        | URL to .lottie file.               | `string`                             | `undefined`       |
+| Property              | Attribute             | Description                        | Type                                 | Default           |
+| --------------------- | --------------------- | ---------------------------------- | ------------------------------------ | ----------------- |
+| `autoplay`            | `autoplay`            | Autoplay animation on load.        | `boolean`                            | `false`           |
+| `background`          | `background`          | Background color.                  | `string`                             | `undefined`       |
+| `controls`            | `controls`            | Show controls.                     | `boolean`                            | `false`           |
+| `count`               | `count`               | Number of times to loop animation. | `number`                             | `undefined`       |
+| `direction`           | `direction`           | Direction of animation.            | `number`                             | `1`               |
+| `hover`               | `hover`               | Whether to play on mouse hover.    | `boolean`                            | `false`           |
+| `loop`                | `loop`                | Whether to loop animation.         | `boolean`                            | `false`           |
+| `mode`                | `mode`                | Play mode.                         | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
+| `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio.                      | `string`                             | `'xMidYMid meet'` |
+| `renderer`            | `renderer`            | Renderer to use.                   | `"svg"`                              | `'svg'`           |
+| `speed`               | `speed`               | Animation speed.                   | `number`                             | `1`               |
+| `src` _(required)_    | `src`                 | URL to .lottie file.               | `string`                             | `undefined`       |
 
 ## Methods
 
@@ -349,13 +341,22 @@ The following events are exposed and can be listened to via `addEventListener` c
 | Custom property                              | Description               | Default                |
 | -------------------------------------------- | ------------------------- | ---------------------- |
 | --dotlottie-player-toolbar-height            | Toolbar height            | 35px                   |
-| --dotlottie-player-toolbar-background-color  | Toolbar background color  | transparent            |
-| --dotlottie-player-toolbar-icon-color        | Toolbar icon color        | #999                   |
-| --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #222                   |
-| --dotlottie-player-toolbar-icon-active-color | Toolbar icon active color | #555                   |
-| --dotlottie-player-seeker-track-color        | Seeker track color        | #CCC                   |
-| --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | rgba(0, 107, 120, 0.8) |
+| --dotlottie-player-toolbar-background-color  | Toolbar background color  | #FFF                   |
+| --dotlottie-player-toolbar-icon-color        | Toolbar icon color        | #000                   |
+| --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #000                   |
+| --dotlottie-player-toolbar-icon-active-color | Toolbar icon active color | #4285f4                |
+| --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(0, 0, 0, 0.2)     |
+| --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                |
+
+By default there is also a mode:
+| Custom property                              | Description               | Default                  |
+| -------------------------------------------- | ------------------------- | ------------------------ |
+| --dotlottie-player-toolbar-background-color  | Toolbar background color  | #000                     |
+| --dotlottie-player-toolbar-icon-color        | Toolbar icon color        | #FFF                     |
+| --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #FFF                     |
+| --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(255, 255, 255, 0.6) |
+| --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                  |
 
 ## License
 
-MIT License © LottieFiles.com
+GPL-2.0-or-later
