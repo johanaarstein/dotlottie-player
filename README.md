@@ -15,7 +15,7 @@ This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player
 - Import from CDN.
 
 ```html
-<script src="https://unpkg.com/@johanaarstein/dotlottie-player@1.2.22/dist/dotlottie-player.js"></script>
+<script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/dotlottie-player.js"></script>
 ```
 
 - Import from local node_modules directory.

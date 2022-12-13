@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
-// import { loadAnimation, useWebWorker } from 'lottie-web/build/player/lottie'
 import Lottie from 'lottie-web'
 import { strFromU8, unzip, Unzipped } from 'fflate'
 
@@ -38,6 +37,13 @@ export enum PlayerEvents {
   Ready = 'ready',
   Rendered = 'rendered',
   Stop = 'stop',
+}
+
+export interface LottieAssets {
+  id?: string;
+  p?: string;
+  e?: number;
+  layers?: [];
 }
 
 export interface LottieManifest {
@@ -83,7 +89,7 @@ export async function fetchPath(path: string): Promise<JSON> {
       lottieJson = await JSON.parse(lottieString as string)
 
     if ('assets' in lottieJson) {
-      Promise.all(lottieJson.assets.map((asset: any) => {
+      Promise.all(lottieJson.assets.map((asset: LottieAssets) => {
 
         const { p } = asset
 
@@ -93,7 +99,22 @@ export async function fetchPath(path: string): Promise<JSON> {
           const ext = p.split('.').pop(),
             assetB64 = Buffer.from(lottieAnimation?.[`images/${p}`])?.toString('base64')
 
-          asset.p = ext === 'svg' || ext === 'svg+xml' ? `data:image/svg+xmlbase64,${assetB64}` : `data:base64,${assetB64}`
+          switch (ext) {
+            case 'svg':
+            case 'svg+xml':
+              asset.p = `data:image/svg+xml;base64,${assetB64}`
+              break
+            case 'png':
+            case 'jpg':
+            case 'jpeg':
+            case 'gif':
+            case 'webp':
+              asset.p = `data:image/${ext};base64,${assetB64}`
+              break
+            default:
+              asset.p = `data:;base64,${assetB64}`
+          }
+
           asset.e = 1
 
           resolveAsset()
@@ -233,7 +254,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Configure and initialize lottie-web player instance.
    */
-  public async load(src: string | Record<string, any>, overrideRendererSettings?: Record<string, unknown>): Promise<void> {
+  public async load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void> {
     if (!this.shadowRoot) {
       return
     }
@@ -265,10 +286,6 @@ export class DotLottiePlayer extends LitElement {
       if (this._lottie) {
         this._lottie.destroy()
       }
-
-      // if (this.webworkers) {
-      //   useWebWorker(true)
-      // }
 
       // Initialize lottie player and load animation
       this._lottie = Lottie.loadAnimation({
