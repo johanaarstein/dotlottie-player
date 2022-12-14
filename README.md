@@ -1,4 +1,6 @@
-## dotlottie-player Web Component
+# dotLottie Player Web Component
+
+![Awesome Vector Animations](/readmeBanner.svg)
 
 This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 

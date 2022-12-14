@@ -9,3 +9,5 @@ node_modules
 *.pem
 
 packages/functional-tests/app/dotlottie-player.js
+
+readmeBanner.svg
