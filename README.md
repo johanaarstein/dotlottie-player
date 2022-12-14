@@ -1,6 +1,6 @@
 # dotLottie Player Web Component
 
-![Awesome Vector Animations](/readmeBanner.svg)
+![Awesome Vector Animations](/gitAssets/readmeBanner.svg)
 
 This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 
@@ -25,6 +25,18 @@ This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player
 ```html
 <script src="/node_modules/@johanaarstein/dotlottie-player/dist/dotlottie-player.js"></script>
 ```
+
+### WordPress Plugin
+
+<div style="display: flex; align-items: center">
+  <img
+    src="/gitAssets/wpIcon.svg"
+    alt="AM LottiePlayer"
+    style="display: inline-block; margin: 0; margin-right: 2em; max-width: 150px"
+  />
+
+  We've made a free WordPress plugin that works with Gutenberg Blocks and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. And it's lightweight!
+</div>
 
 #### In Javascript or TypeScript:
 
