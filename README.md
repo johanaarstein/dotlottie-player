@@ -27,16 +27,9 @@ This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player
 ```
 
 ### WordPress Plugin
+![AM LottiePlayer](/gitAssets/wpIcon.svg)
 
-<div style="display: flex; align-items: center">
-  <img
-    src="/gitAssets/wpIcon.svg"
-    alt="AM LottiePlayer"
-    style="display: inline-block; margin: 0; margin-right: 2em; max-width: 150px"
-  />
-
-  We've made a free WordPress plugin that works with Gutenberg Blocks and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. And it's lightweight!
-</div>
+We've made a free WordPress plugin that works with Gutenberg Blocks and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. And it's lightweight!
 
 #### In Javascript or TypeScript:
 
