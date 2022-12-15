@@ -2,8 +2,10 @@
 .history
 .idea
 .vscode
+tsconfig.json
 
 node_modules
+src
 
 .DS_Store
 *.pem
