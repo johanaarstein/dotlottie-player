@@ -28,6 +28,12 @@ export declare enum PlayerEvents {
     Rendered = "rendered",
     Stop = "stop"
 }
+export interface LottieAssets {
+    id?: string;
+    p?: string;
+    e?: number;
+    layers?: [];
+}
 export interface LottieManifest {
     animations: [Record<string, unknown>];
     version?: string;
@@ -126,7 +132,7 @@ export declare class DotLottiePlayer extends LitElement {
     /**
      * Configure and initialize lottie-web player instance.
      */
-    load(src: string | Record<string, any>, overrideRendererSettings?: Record<string, unknown>): Promise<void>;
+    load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void>;
     /**
      * Handle visibility change events.
      */

@@ -10,13 +10,18 @@ import typescript from '@rollup/plugin-typescript'
 
 import pkg from './package.json' assert { type: 'json' }
 
+//Node hack
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+global['__filename'] = __filename
+
 const production = !process.env.ROLLUP_WATCH,
   extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
   outputDir = './dist/'
 
 export default {
   input: './src/index.ts',
-  treeshake: false,
+  // treeshake: false,
   output: [
     {
       file: pkg.main,
