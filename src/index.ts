@@ -15,6 +15,7 @@ export enum PlayerState {
   Loading = 'loading',
   Paused = 'paused',
   Playing = 'playing',
+  Reversed = 'reversed',
   Stopped = 'stopped',
 }
 
@@ -440,8 +441,7 @@ export class DotLottiePlayer extends LitElement {
   public play() {
     if (!this._lottie) return
 
-    // if (this._lottie.currentFrame === this._lottie.totalFrames)
-    if (this.currentState === PlayerState.Completed && this.direction === 1) {
+    if (this.currentState === PlayerState.Completed) {
       this._lottie.stop()
     }
 
@@ -598,6 +598,10 @@ export class DotLottiePlayer extends LitElement {
   public setDirection(value: number): void {
     if (!this._lottie) {
       return
+    }
+
+    if (value === -1) {
+      this.currentState = PlayerState.Reversed
     }
 
     this._lottie.setDirection(value)
