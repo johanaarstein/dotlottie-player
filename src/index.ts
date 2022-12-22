@@ -730,7 +730,7 @@ export class DotLottiePlayer extends LitElement {
           min="0"
           step="1"
           max="100"
-          .value=${this.seeker}
+          value=${this.seeker}
           @input=${this._handleSeekChange}
           @mousedown=${() => {
             this._prevState = this.currentState
