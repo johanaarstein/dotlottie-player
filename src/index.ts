@@ -8,6 +8,7 @@ import styles from './index.styles'
 
 // Define valid player states
 export enum PlayerState {
+  Completed = 'completed',
   Destroyed = 'destroyed',
   Error = 'error',
   Frozen = 'frozen',
@@ -323,6 +324,7 @@ export class DotLottiePlayer extends LitElement {
 
         if (!this.loop || (this.count && this._counter >= this.count)) {
           this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
+          this.currentState = PlayerState.Completed
           return
         }
 
@@ -437,6 +439,11 @@ export class DotLottiePlayer extends LitElement {
    */
   public play() {
     if (!this._lottie) return
+
+    // if (this._lottie.currentFrame === this._lottie.totalFrames)
+    if (this.currentState === PlayerState.Completed) {
+      this._lottie.stop()
+    }
 
     this._lottie.play()
     this.currentState = PlayerState.Playing
@@ -726,12 +733,12 @@ export class DotLottiePlayer extends LitElement {
           .value=${this.seeker}
           @input=${this._handleSeekChange}
           @mousedown=${() => {
-        this._prevState = this.currentState
-        this.freeze()
-      }}
+            this._prevState = this.currentState
+            this.freeze()
+          }}
           @mouseup=${() => {
-        this._prevState === PlayerState.Playing && this.play()
-      }}
+            this._prevState === PlayerState.Playing && this.play()
+          }}
           aria-valuemin="1"
           aria-valuemax="100"
           role="slider"

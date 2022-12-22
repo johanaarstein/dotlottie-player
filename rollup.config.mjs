@@ -21,18 +21,17 @@ const production = !process.env.ROLLUP_WATCH,
 
 export default {
   input: './src/index.ts',
-  // treeshake: false,
   output: [
     {
       file: pkg.main,
       format: 'umd',
-      sourcemap: true,
+      // sourcemap: true,
       name: pkg.name
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true,
+      // sourcemap: true,
     }
   ],
   plugins: [
