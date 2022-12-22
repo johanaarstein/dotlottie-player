@@ -730,7 +730,7 @@ export class DotLottiePlayer extends LitElement {
           min="0"
           step="1"
           max="100"
-          value=${this.seeker}
+          value=${this.seeker ?? 0}
           @input=${this._handleSeekChange}
           @mousedown=${() => {
             this._prevState = this.currentState
@@ -742,7 +742,7 @@ export class DotLottiePlayer extends LitElement {
           aria-valuemin="1"
           aria-valuemax="100"
           role="slider"
-          aria-valuenow=${this.seeker}
+          aria-valuenow=${this.seeker ?? 0}
           tabindex="0"
           aria-label="lottie-seek-input"
         />
