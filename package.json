@@ -1,6 +1,6 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.2.27",
+  "version": "1.2.28",
   "description": "dotLottie animation player web component",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",

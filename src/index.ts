@@ -441,7 +441,7 @@ export class DotLottiePlayer extends LitElement {
     if (!this._lottie) return
 
     // if (this._lottie.currentFrame === this._lottie.totalFrames)
-    if (this.currentState === PlayerState.Completed) {
+    if (this.currentState === PlayerState.Completed && this.direction === 1) {
       this._lottie.stop()
     }
 
