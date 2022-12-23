@@ -81,7 +81,7 @@
     "component",
     "lit-element",
     "svg",
-    "vecgtor",
+    "vector",
     "player"
   ],
   "browserslist": [
