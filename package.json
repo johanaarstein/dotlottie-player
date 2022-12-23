@@ -71,15 +71,17 @@
   },
   "files": [
     "dist",
-    "package.json",
     "README.md"
   ],
   "keywords": [
+    "lottie",
     "dotlottie",
     "animation",
     "web component",
     "component",
     "lit-element",
+    "svg",
+    "vecgtor",
     "player"
   ],
   "browserslist": [
