@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
-import Lottie from 'lottie-web'
+import Lottie, { AnimationDirection, AnimationItem } from 'lottie-web'
 import { strFromU8, unzip, Unzipped } from 'fflate'
 
 import styles from './index.styles'
@@ -15,7 +15,6 @@ export enum PlayerState {
   Loading = 'loading',
   Paused = 'paused',
   Playing = 'playing',
-  Reversed = 'reversed',
   Stopped = 'stopped',
 }
 
@@ -180,7 +179,7 @@ export class DotLottiePlayer extends LitElement {
    * Direction of animation.
    */
   @property({ type: Number })
-  public direction = 1
+  public direction: AnimationDirection = 1
 
   /**
    * Whether to play on mouse hover
@@ -239,8 +238,8 @@ export class DotLottiePlayer extends LitElement {
   /**
   * Enable web workers
   */
-  @property({ type: Boolean })
-  public webworkers?: boolean
+  // @property({ type: Boolean })
+  // public webworkers?: boolean
 
   /**
    * Animation container.
@@ -249,7 +248,7 @@ export class DotLottiePlayer extends LitElement {
   protected container!: HTMLElement
 
   private _io: IntersectionObserver | undefined = undefined
-  private _lottie?: any
+  private _lottie: AnimationItem | null = null
   private _prevState?: any
   private _counter = 0
 
@@ -304,12 +303,13 @@ export class DotLottiePlayer extends LitElement {
     if (this._lottie) {
       // Calculate and save the current progress of the animation
       this._lottie.addEventListener('enterFrame', () => {
-        this.seeker = (this._lottie.currentFrame / this._lottie.totalFrames) * 100
+        const { currentFrame, totalFrames } = this._lottie as AnimationItem
+        this.seeker = (currentFrame / totalFrames) * 100
 
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
             detail: {
-              frame: this._lottie.currentFrame,
+              frame: this._lottie?.currentFrame,
               seeker: this.seeker,
             },
           }),
@@ -338,8 +338,8 @@ export class DotLottiePlayer extends LitElement {
             this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
 
             if (this.currentState === PlayerState.Playing) {
-              this._lottie.setDirection(this._lottie.playDirection * -1)
-              this._lottie.play()
+              this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
+              this._lottie?.play()
             }
           }, this.intermission)
         } else {
@@ -351,8 +351,8 @@ export class DotLottiePlayer extends LitElement {
             this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
 
             if (this.currentState === PlayerState.Playing) {
-              this._lottie.stop()
-              this._lottie.play()
+              this._lottie?.stop()
+              this._lottie?.play()
             }
           }, this.intermission)
         }
@@ -545,10 +545,7 @@ export class DotLottiePlayer extends LitElement {
    * user requested pauses and component instigated pauses.
    */
   private freeze(): void {
-    if (!this._lottie) {
-      return
-    }
-
+    if (!this._lottie) return
     this._lottie.pause()
     this.currentState = PlayerState.Frozen
 
@@ -560,13 +557,9 @@ export class DotLottiePlayer extends LitElement {
    *
    */
   public async reload(): Promise<void> {
-    if (!this._lottie) {
-      return
-    }
-
-    if (this._lottie) {
-      this._lottie.destroy()
-    }
+    if (!this._lottie) return
+    
+    this._lottie.destroy()
 
     if (this.src) {
       await this.load(this.src)
@@ -579,10 +572,7 @@ export class DotLottiePlayer extends LitElement {
    * @param value Playback speed.
    */
   public setSpeed(value = 1): void {
-    if (!this._lottie) {
-      return
-    }
-
+    if (!this._lottie) return
     this._lottie.setSpeed(value)
   }
 
@@ -592,15 +582,8 @@ export class DotLottiePlayer extends LitElement {
    * @param value Direction values.
    */
   public setDirection(value: number): void {
-    if (!this._lottie) {
-      return
-    }
-
-    if (value === -1) {
-      this.currentState = PlayerState.Reversed
-    }
-
-    this._lottie.setDirection(value)
+    if (!this._lottie) return
+    this._lottie.setDirection(value as AnimationDirection)
   }
 
   /**
@@ -615,14 +598,21 @@ export class DotLottiePlayer extends LitElement {
     }
   }
 
+  //this._lottie.goToAndPlay(frame, true)
+
   /**
    * Toggle playing state.
    */
   public togglePlay(): void {
+    if (!this._lottie) return
+    if (this.currentState === PlayerState.Playing) return this.pause()
     if (this.currentState === PlayerState.Completed) {
-      this._lottie.stop()
+      if (this._lottie?.playDirection !== -1) {
+        return this._lottie.goToAndPlay(0, true)
+      }
+      return this._lottie.goToAndPlay(this._lottie.totalFrames, true)
     }
-    return this.currentState === PlayerState.Playing ? this.pause() : this.play()
+    return this.play()
   }
 
   /**
