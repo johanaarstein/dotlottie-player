@@ -441,10 +441,6 @@ export class DotLottiePlayer extends LitElement {
   public play() {
     if (!this._lottie) return
 
-    if (this.currentState === PlayerState.Completed) {
-      this._lottie.stop()
-    }
-
     this._lottie.play()
     this.currentState = PlayerState.Playing
 
@@ -623,6 +619,9 @@ export class DotLottiePlayer extends LitElement {
    * Toggle playing state.
    */
   public togglePlay(): void {
+    if (this.currentState === PlayerState.Completed) {
+      this._lottie.stop()
+    }
     return this.currentState === PlayerState.Playing ? this.pause() : this.play()
   }
 
