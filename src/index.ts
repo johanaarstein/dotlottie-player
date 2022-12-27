@@ -167,13 +167,13 @@ export class DotLottiePlayer extends LitElement {
    * Player state.
    */
   @property({ type: String })
-  public currentState: PlayerState = PlayerState.Loading
+  public currentState?: PlayerState = PlayerState.Loading
  
   /**
    * Animation description for screen readers.
    */
   @property({ type: String })
-  public description = 'Lottie animation'
+  public description?: string = 'Lottie animation'
 
   /**
    * Direction of animation.
@@ -185,25 +185,25 @@ export class DotLottiePlayer extends LitElement {
    * Whether to play on mouse hover
    */
   @property({ type: Boolean })
-  public hover = false
+  public hover? = false
 
   /**
    * Intermission
    */
   @property()
-  public intermission = 1
+  public intermission? = 1
 
   /**
    * Whether to loop animation.
    */
   @property({ type: Boolean, reflect: true })
-  public loop = false
+  public loop? = false
 
   /**
    * Play mode
    */
   @property()
-  public mode: PlayMode = PlayMode.Normal
+  public mode?: PlayMode = PlayMode.Normal
 
   /**
    * Aspect ratio
@@ -221,19 +221,19 @@ export class DotLottiePlayer extends LitElement {
    * Seeker
    */
   @property()
-  public seeker: any
+  public seeker?: any
 
   /**
    * Animation speed.
    */
   @property({ type: Number })
-  public speed = 1
+  public speed?: number = 1
 
   /**
    * Bodymovin JSON data or URL to JSON.
    */
   @property({ type: String })
-  public src?: string
+  public src!: string
 
   /**
   * Enable web workers
