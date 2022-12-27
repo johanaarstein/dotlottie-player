@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { TemplateResult } from 'lit/html'
-import Lottie, { AnimationDirection, AnimationItem } from 'lottie-web'
+import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 import { strFromU8, unzip, Unzipped } from 'fflate'
 
 import styles from './index.styles'
@@ -215,7 +215,7 @@ export class DotLottiePlayer extends LitElement {
    * Renderer to use.
    */
   @property({ type: String })
-  public renderer = 'svg' as const
+  public renderer: RendererType = 'svg'
 
   /**
    * Seeker
