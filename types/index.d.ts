@@ -1,7 +1,9 @@
 import { LitElement } from 'lit';
 import { TemplateResult } from 'lit/html';
+import { AnimationDirection, RendererType } from 'lottie-web';
 import { Unzipped } from 'fflate';
 export declare enum PlayerState {
+    Completed = "completed",
     Destroyed = "destroyed",
     Error = "error",
     Frozen = "frozen",
@@ -72,31 +74,31 @@ export declare class DotLottiePlayer extends LitElement {
     /**
      * Player state.
      */
-    currentState: PlayerState;
+    currentState?: PlayerState;
     /**
      * Animation description for screen readers.
      */
-    description: string;
+    description?: string;
     /**
      * Direction of animation.
      */
-    direction: number;
+    direction: AnimationDirection;
     /**
      * Whether to play on mouse hover
      */
-    hover: boolean;
+    hover?: boolean | undefined;
     /**
      * Intermission
      */
-    intermission: number;
+    intermission?: number | undefined;
     /**
      * Whether to loop animation.
      */
-    loop: boolean;
+    loop?: boolean | undefined;
     /**
      * Play mode
      */
-    mode: PlayMode;
+    mode?: PlayMode;
     /**
      * Aspect ratio
     */
@@ -104,29 +106,28 @@ export declare class DotLottiePlayer extends LitElement {
     /**
      * Renderer to use.
      */
-    renderer: "svg";
+    renderer: RendererType;
     /**
      * Seeker
      */
-    seeker: any;
+    seeker?: any;
     /**
      * Animation speed.
      */
-    speed: number;
+    speed?: number;
     /**
      * Bodymovin JSON data or URL to JSON.
      */
-    src?: string;
+    src: string;
     /**
     * Enable web workers
     */
-    webworkers?: boolean;
     /**
      * Animation container.
      */
     protected container: HTMLElement;
-    private _io;
-    private _lottie?;
+    private _io?;
+    private _lottie;
     private _prevState?;
     private _counter;
     /**
