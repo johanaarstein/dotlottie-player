@@ -4,15 +4,9 @@
 
 This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 
-<!-- ## Documentation
-
-- [View full documentation](https://dotlottie.github.io/player-component/) -->
-
 ## Installation
 
-#### In HTML, import from CDN or from the local Installation:
-
-##### Lottie Player:
+### In HTML, import from CDN or from the local installation
 
 - Import from CDN.
 
@@ -29,7 +23,7 @@ This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player
 ### WordPress Plugin
 ![AM LottiePlayer](/gitAssets/wpIcon.svg) We've made a free WordPress plugin that works with Gutenberg Blocks and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. And it's lightweight!
 
-#### In Javascript or TypeScript:
+### In Javascript or TypeScript
 
 1. Install package using npm or yarn.
 
@@ -45,9 +39,9 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-### Lottie-Player
+### The player component
 
-Add the element `dotlottie-player` and set the `src` property to a URL pointing to a .lottie file.
+Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either LottieJSON or dotLottie.
 
 ```html
 <dotlottie-player
@@ -72,32 +66,9 @@ const player = document.querySelector('dotlottie-player')
 player.load('https://storage.googleapis.com/aarsteinmedia/intro.lottie')
 ```
 
-## Usage example in ReactJS
+### ReactJS
 
-1 - import the player and use as follows
-
-```javascript
-import '@johanaarstein/dotlottie-player'
-
-function App() {
-  return (
-    <div className="App">
-      <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
-        autoplay
-        loop
-        style={{ height: '100%', width: '100%' }}
-      />
-    </div>
-  )
-}
-
-export default App
-```
-
-## Usage example in ReactJS + Typescript
-
-1 - import as follows
+1. Import the player and use it like this:
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -118,7 +89,30 @@ function App() {
 export default App
 ```
 
-2 - create a global.d.ts file in your src folder and add the code below
+### ReactJS + Typescript
+
+1. Import like this:
+
+```javascript
+import '@johanaarstein/dotlottie-player'
+
+function App() {
+  return (
+    <div className="App">
+      <dotlottie-player
+        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+        autoplay
+        loop
+        style={{ height: '100%', width: '100%' }}
+      />
+    </div>
+  )
+}
+
+export default App
+```
+
+2. Create a global.d.ts file in your src folder and add the code below:
 
 ```javascript
 declare namespace JSX {
@@ -128,9 +122,9 @@ declare namespace JSX {
 }
 ```
 
-## Usage example in NextJS
+### NextJS
 
-1 - to avoid "window is not defined" import the module inside a useEffect hook, like so
+1. To avoid "window is not defined" import the module inside a useEffect hook, like so:
 
 ```javascript
 import { useEffect } from 'react'
@@ -156,21 +150,21 @@ function App() {
 export default App
 ```
 
-## Usage example in NuxtJS / VueJS
+### NuxtJS / VueJS
 
-1 - update the plugins array in nuxt.config.js file in your root as follows
+1. Update the array of plugins in nuxt.config.js file in your root.
 
 ```javascript
 plugins: [{ src: '~/plugins/lottie-player', mode: 'client' }]
 ```
 
-2 - create a folder plugins in your root if it doesnt already exist, add a file lottie-player.js with the following content
+2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js with the following content.
 
 ```javascript
 import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 ```
 
-3 - the component can now be used in your pages or components template tag as follows without any import necessary
+3. The component can now be used in your pages or components template tag like below – without any imports necessary.
 
 ```javascript
 <template>
@@ -181,7 +175,7 @@ export default {}
 </script>
 ```
 
-- note for vueJS the library/player must be declared as a client side plugin module.
+In VueJS the library/player must be declared as a client side plugin module.
 
 ## Properties
 
