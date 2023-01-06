@@ -196,124 +196,124 @@ In VueJS the library/player must be declared as a client side plugin module.
 
 ## Methods
 
-### `load(src: string) => void`
+**`load(src: string) => void`**
 
 Load (and play) a given Lottie animation.
 
-#### Parameters
+### Parameters
 
 | Name  | Type     | Description            |
 | ----- | -------- | ---------------------- |
 | `src` | `string` | URL to a .lottie file. |
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `pause() => void`
+**`pause() => void`**
 
 Pause animation play.
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `play() => void`
+**`play() => void`**
 
 Start playing animation.
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `setDirection(value: number) => void`
+**`setDirection(value: number) => void`**
 
 Animation play direction.
 
-#### Parameters
+### Parameters
 
 | Name    | Type     | Description       |
 | ------- | -------- | ----------------- |
 | `value` | `number` | Direction values. |
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `setLooping(value: boolean) => void`
+**`setLooping(value: boolean) => void`**
 
 Sets the looping of the animation.
 
-#### Parameters
+### Parameters
 
 | Name    | Type      | Description                                              |
 | ------- | --------- | -------------------------------------------------------- |
 | `value` | `boolean` | Whether to enable looping. Boolean true enables looping. |
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `setSpeed(value?: number) => void`
+**`setSpeed(value?: number) => void`**
 
 Sets animation play speed.
 
-#### Parameters
+### Parameters
 
 | Name    | Type     | Description     |
 | ------- | -------- | --------------- |
 | `value` | `number` | Playback speed. |
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `stop() => void`
+**`stop() => void`**
 
 Stops animation play.
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `seek(value: number | string) => void`
+**`seek(value: number | string) => void`**
 
 Seek to a given frame. Frame value can be a number or a percent string (e.g. 50%).
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `snapshot(download?: boolean) => string`
+**`snapshot(download?: boolean) => string`**
 
 Snapshot the current frame as SVG.
 If 'download' argument is boolean true, then a download is triggered in browser.
 
-#### Returns
+### Returns
 
 Type: `string`
 
-### `toggleLooping() => void`
+**`toggleLooping() => void`**
 
 Toggles animation looping.
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `togglePlay() => void`
+**`togglePlay() => void`**
 
 Toggle playing state.
 
-#### Returns
+### Returns
 
 Type: `void`
 
-### `reload() => void`
+**`reload() => void`**
 
 Reloads Lottie.
 
-#### Returns
+### Returns
 
 Type: `void`
 
