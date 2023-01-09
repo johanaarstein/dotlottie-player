@@ -4,13 +4,6 @@
 
 This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 
-## WordPress Plugin
-<img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg">
-
-We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
-
-It's also super lightweight – and only loads on pages where it's in use.
-
 ## Installation
 
 ### In HTML, import from CDN or from the local installation
@@ -383,6 +376,13 @@ By default there is also a mode:
 | --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #FFF                     |
 | --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(255, 255, 255, 0.6) |
 | --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                  |
+
+## WordPress Plugin
+<img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg">
+
+We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
+
+It's also super lightweight – and only loads on pages where it's in use.
 
 ## License
 
