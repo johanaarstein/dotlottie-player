@@ -10,13 +10,13 @@ This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player
 
 - Import from CDN.
 
-```html
+```xml
 <script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/dotlottie-player.js"></script>
 ```
 
 - Import from local node_modules directory.
 
-```html
+```xml
 <script src="/node_modules/@johanaarstein/dotlottie-player/dist/dotlottie-player.js"></script>
 ```
 
