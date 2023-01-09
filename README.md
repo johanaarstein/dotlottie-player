@@ -388,7 +388,7 @@ By default there is also a mode:
 | --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                  |
 
 ## WordPress Plugin
-<img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg">
+<img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg" style="margin-right: 20px" />
 
 We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
 
