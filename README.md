@@ -36,7 +36,8 @@ import '@johanaarstein/dotlottie-player'
 
 ## WordPress Plugin
 <img align="left" width="150" height="150" src="/gitAssets/wpIcon.svg">
-We've made a free WordPress plugin that works with Gutenberg Blocks and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. It's also super lightweight – and only loads on pages where it's in use.
+
+We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface. It's also super lightweight – and only loads on pages where it's in use.
 
 ## Usage
 
