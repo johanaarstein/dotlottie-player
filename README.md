@@ -55,7 +55,13 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
 You may set and load animations programmatically as well.
 
 ```xml
-<dotlottie-player autoplay controls loop mode="normal" style="width: 320px"> </dotlottie-player>
+<dotlottie-player
+  autoplay
+  controls
+  loop
+  style="width: 320px"
+>
+</dotlottie-player>
 ```
 
 ```javascript
