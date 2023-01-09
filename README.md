@@ -40,7 +40,7 @@ import '@johanaarstein/dotlottie-player'
 
 Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either LottieJSON or dotLottie.
 
-```html
+```xml
 <dotlottie-player
   autoplay
   controls
@@ -54,11 +54,11 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
 
 You may set and load animations programmatically as well.
 
-```html
+```xml
 <dotlottie-player autoplay controls loop mode="normal" style="width: 320px"> </dotlottie-player>
 ```
 
-```js
+```javascript
 const player = document.querySelector('dotlottie-player')
 player.load('https://storage.googleapis.com/aarsteinmedia/intro.lottie')
 ```
@@ -111,7 +111,7 @@ export default App
 
 2. Create a global.d.ts file in your src folder and add the code below:
 
-```javascript
+```typescript
 declare namespace JSX {
   interface IntrinsicElements {
     "dotlottie-player": any
@@ -163,12 +163,16 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 
 3. The component can now be used in your pages or components template tag like below – without any imports necessary.
 
-```javascript
+```xml
 <template>
-  <dotlottie-player src="https://storage.googleapis.com/aarsteinmedia/intro.lottie" autoplay loop />
+  <dotlottie-player
+    src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+    autoplay
+    loop
+  />
 </template>
 <script>
-export default {}
+  export default {}
 </script>
 ```
 
