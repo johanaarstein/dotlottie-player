@@ -4,6 +4,10 @@
 
 This a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties. It is however still a fork, so credit where credit's due.
 
+## Demo
+
+Here is a [working demo](https://www.aarstein.media/dev/dotlottie-player) of the package!
+
 ## Installation
 
 ### In HTML, import from CDN or from the local installation
@@ -46,7 +50,7 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
   controls
   loop
   mode="normal"
-  src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+  src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
   style="width: 320px"
 >
 </dotlottie-player>
@@ -66,7 +70,7 @@ You may set and load animations programmatically as well.
 
 ```javascript
 const player = document.querySelector('dotlottie-player')
-player.load('https://storage.googleapis.com/aarsteinmedia/intro.lottie')
+player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 ```
 
 ### ReactJS
@@ -80,7 +84,7 @@ function App() {
   return (
     <div className="App">
       <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay
         loop
         style={{ height: '100%', width: '100%' }}
@@ -103,7 +107,7 @@ function App() {
   return (
     <div className="App">
       <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay
         loop
         style={{ height: '100%', width: '100%' }}
@@ -141,7 +145,7 @@ function App() {
   return (
     <div className="App">
       <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay
         loop
         style={{ height: '100%', width: '100%' }}
