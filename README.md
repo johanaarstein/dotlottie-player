@@ -2,7 +2,7 @@
 
 ![Awesome Vector Animations](/gitAssets/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), made to address issues with canvas-rendering, aspect-ratio settings, updated Typescript configuration and more effective handlig of compressed dotLotties.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies, and tweaked some configurations, and in our humble opinion this is now the most comprehensive and most effective Lottie Web Component package out there.
 
 ## Demo
 
