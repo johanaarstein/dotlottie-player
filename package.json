@@ -12,7 +12,7 @@
       "types": "./dist/types/index.d.ts"
     }
   },
-  "homepage": "https://www.aarstein.media",
+  "homepage": "https://www.aarstein.media/en/dev/dotlottie-player",
   "repository": {
     "url": "https://github.com/johanaarstein/dotlottie-player.git",
     "type": "git"
