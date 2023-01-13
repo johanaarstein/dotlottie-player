@@ -2,7 +2,7 @@
 
 ![Awesome Vector Animations](/gitAssets/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies, and tweaked some configurations, and in our humble opinion this is now the most comprehensive and most effective Lottie Web Component package out there.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies, and tweaked some configurations, and in our humble opinion this is now the most versatile and effective Lottie Web Component package out there.
 
 ## Demo
 
@@ -382,7 +382,7 @@ The following events are exposed and can be listened to via `addEventListener` c
 | --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(0, 0, 0, 0.2)     |
 | --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                |
 
-By default there is also a mode:
+By default there is also a dark mode, triggered by @media (prefers-color-scheme: dark):
 | Custom property                              | Description               | Default                  |
 | -------------------------------------------- | ------------------------- | ------------------------ |
 | --dotlottie-player-toolbar-background-color  | Toolbar background color  | #000                     |

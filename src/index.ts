@@ -6,7 +6,6 @@ import { strFromU8, unzip, Unzipped } from 'fflate'
 
 import styles from './index.styles'
 
-// Define valid player states
 export enum PlayerState {
   Completed = 'completed',
   Destroyed = 'destroyed',
@@ -18,13 +17,11 @@ export enum PlayerState {
   Stopped = 'stopped',
 }
 
-// Define play modes
 export enum PlayMode {
   Bounce = 'bounce',
   Normal = 'normal',
 }
 
-// Define player events
 export enum PlayerEvents {
   Complete = 'complete',
   Destroyed = 'destroyed',
@@ -56,9 +53,6 @@ export interface LottieAnimation extends Unzipped {
   "manifest.json": Uint8Array
 }
 
-/**
- * Load a resource from a path URL
- */
 export async function fetchPath(path: string): Promise<JSON> {
   const ext: string | undefined = path.split('.').pop()?.toLowerCase()
 
@@ -75,7 +69,7 @@ export async function fetchPath(path: string): Promise<JSON> {
         })
       }),
 
-      //Todo: Hack for TypeScript
+      // TODO: Hack for TypeScript
       lottieAnimation = unzipped as LottieAnimation,
 
       manifestFile: string | undefined = strFromU8(lottieAnimation['manifest.json']),
@@ -131,7 +125,7 @@ export async function fetchPath(path: string): Promise<JSON> {
 }
 
 /**
- * DotLottiePlayer web component class
+ * dotLottie Player Web Component class
  *
  * @export
  * @class DotLottiePlayer
@@ -139,44 +133,45 @@ export async function fetchPath(path: string): Promise<JSON> {
  */
 @customElement('dotlottie-player')
 export class DotLottiePlayer extends LitElement {
+  
   /**
-   * Autoplay animation on load.
+   * Autoplay animation
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   public autoplay = false
 
   /**
-   * Background color.
+   * Background color
    */
   @property({ type: String, reflect: true })
   public background?: string = 'transparent'
 
   /**
-   * Show controls.
+   * Display controls
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   public controls = false
 
   /**
-   * Number of times to loop animation.
+   * Number of times to loop animation
    */
   @property({ type: Number })
   public count?: number
 
   /**
-   * Player state.
+   * Player state
    */
   @property({ type: String })
   public currentState?: PlayerState = PlayerState.Loading
  
   /**
-   * Animation description for screen readers.
+   * Animation description for screen readers
    */
   @property({ type: String })
   public description?: string = 'Lottie animation'
 
   /**
-   * Direction of animation.
+   * Direction of animation
    */
   @property({ type: Number })
   public direction: AnimationDirection = 1
@@ -194,10 +189,10 @@ export class DotLottiePlayer extends LitElement {
   public intermission? = 1
 
   /**
-   * Whether to loop animation.
+   * Whether to loop animation
    */
   @property({ type: Boolean, reflect: true })
-  public loop? = false
+  public loop = false
 
   /**
    * Play mode
@@ -212,7 +207,7 @@ export class DotLottiePlayer extends LitElement {
   public preserveAspectRatio = 'xMidYMid meet'
 
   /**
-   * Renderer to use.
+   * Renderer to use (svg, canvas or html)
    */
   @property({ type: String })
   public renderer: RendererType = 'svg'
@@ -224,25 +219,19 @@ export class DotLottiePlayer extends LitElement {
   public seeker?: any
 
   /**
-   * Animation speed.
+   * Animation speed
    */
   @property({ type: Number })
   public speed?: number = 1
 
   /**
-   * Bodymovin JSON data or URL to JSON.
+   * Bodymovin JSON data, URL to JSON or dotLottie
    */
   @property({ type: String })
   public src!: string
 
   /**
-  * Enable web workers
-  */
-  // @property({ type: Boolean })
-  // public webworkers?: boolean
-
-  /**
-   * Animation container.
+   * Animation container
    */
   @query('.animation')
   protected container!: HTMLElement
@@ -253,7 +242,7 @@ export class DotLottiePlayer extends LitElement {
   private _counter = 0
 
   /**
-   * Configure and initialize lottie-web player instance.
+   * Configure and initialize lottie-web player instance
    */
   public async load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void> {
     if (!this.shadowRoot) {
@@ -281,7 +270,7 @@ export class DotLottiePlayer extends LitElement {
 
       const srcParsed = typeof src === 'string' ? await fetchPath(src) : src
 
-      if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failing. Object is not a valid Lottie.')
+      if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failed. Object is not a valid Lottie.')
 
       // Clear previous animation, if any
       if (this._lottie) {
@@ -347,7 +336,7 @@ export class DotLottiePlayer extends LitElement {
             this._counter += 1
           }
 
-          window.setTimeout(() => {
+          setTimeout(() => {
             this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
 
             if (this.currentState === PlayerState.Playing) {
@@ -399,7 +388,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Handle visibility change events.
+   * Handle visibility change events
    */
   private _onVisibilityChange(): void {
     if (document.hidden && this.currentState === PlayerState.Playing) {
@@ -410,7 +399,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Handles click and drag actions on the progress track.
+   * Handles click and drag actions on the progress track
    */
   private _handleSeekChange(e: any): void {
     if (!this._lottie || isNaN(e.target.value)) {
@@ -429,14 +418,14 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Returns the lottie-web instance used in the component.
+   * Returns the lottie-web instance used in the component
    */
   public getLottie(): any {
     return this._lottie
   }
 
   /**
-   * Start playing animation.
+   * Play
    */
   public play() {
     if (!this._lottie) return
@@ -448,7 +437,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Pause animation play.
+   * Pause
    */
   public pause(): void {
     if (!this._lottie) return
@@ -460,7 +449,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Stops animation play.
+   * Stop
    */
   public stop(): void {
     if (!this._lottie) return
@@ -473,7 +462,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Destroy animation and lottie-player element.
+   * Destroy animation and lottie-player element
    */
   public destroy(): void {
     if (!this._lottie) return
@@ -486,7 +475,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Seek to a given frame.
+   * Seek to a given frame
    */
   public seek(value: number | string): void {
     if (!this._lottie) return
@@ -513,9 +502,9 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Snapshot the current frame as SVG.
+   * Snapshot the current frame as SVG
    *
-   * If 'download' argument is boolean true, then a download is triggered in browser.
+   * If 'download' argument is boolean true, then a download is triggered in browser
    */
   public snapshot(download = true): string | void {
     if (!this.shadowRoot) return
@@ -540,7 +529,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Freeze animation play.
+   * Freeze animation.
    * This internal state pauses animation and is used to differentiate between
    * user requested pauses and component instigated pauses.
    */
@@ -553,8 +542,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Reloads animation.
-   *
+   * Reload animation
    */
   public async reload(): Promise<void> {
     if (!this._lottie) return
@@ -567,7 +555,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Sets animation play speed.
+   * Set animation play speed
    *
    * @param value Playback speed.
    */
@@ -577,9 +565,9 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Animation play direction.
+   * Animation play direction
    *
-   * @param value Direction values.
+   * @param value AnimationDirection
    */
   public setDirection(value: number): void {
     if (!this._lottie) return
@@ -587,9 +575,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Sets the looping of the animation.
-   *
-   * @param value Whether to enable looping. Boolean true enables looping.
+   * Set loop
    */
   public setLooping(value: boolean): void {
     if (this._lottie) {
@@ -598,10 +584,8 @@ export class DotLottiePlayer extends LitElement {
     }
   }
 
-  //this._lottie.goToAndPlay(frame, true)
-
   /**
-   * Toggle playing state.
+   * Toggle playing state
    */
   public togglePlay(): void {
     if (!this._lottie) return
@@ -616,21 +600,21 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Toggles animation looping.
+   * Toggle loop
    */
   public toggleLooping(): void {
     this.setLooping(!this.loop)
   }
 
   /**
-   * Returns the styles for the component.
+   * Return the styles for the component
    */
   static get styles() {
     return styles
   }
 
   /**
-   * Initialize everything on component first render.
+   * Initialize everything on component first render
    */
   protected async firstUpdated(): Promise<void> {
     // Add intersection observer for detecting component being out-of-view.
@@ -661,16 +645,16 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Cleanup on component destroy.
+   * Cleanup on component destroy
    */
   public disconnectedCallback(): void {
-    // Remove intersection observer for detecting component being out-of-view.
+    // Remove intersection observer for detecting component being out-of-view
     if (this._io) {
       this._io.disconnect()
       this._io = undefined
     }
 
-    // Remove the attached Visibility API's change event listener.
+    // Remove the attached Visibility API's change event listener
     document.removeEventListener('visibilitychange', () => this._onVisibilityChange())
 
     // Destroy the animation instance and element
@@ -758,8 +742,9 @@ export class DotLottiePlayer extends LitElement {
   }
 
   render(): TemplateResult | void {
-    const className: string = this.controls ? 'main controls' : 'main'
-    const animationClass: string = this.controls ? 'animation controls' : 'animation'
+    const className: string = this.controls ? 'main controls' : 'main',
+      animationClass: string = this.controls ? 'animation controls' : 'animation'
+    
     return html`
       <div class=${'animation-container ' + className} lang="en" role="img" aria-label=${this.description}>
         <div class=${animationClass} style="background:${this.background}">
