@@ -6,7 +6,7 @@ This started as a fork of [@dotlottie/player-component](https://github.com/dotlo
 
 ## Demo
 
-Here is a [working demo](https://www.aarstein.media/dev/dotlottie-player) of the package!
+Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player) of the package!
 
 ## Installation
 

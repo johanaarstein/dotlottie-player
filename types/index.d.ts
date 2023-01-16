@@ -43,12 +43,9 @@ export interface LottieManifest {
 export interface LottieAnimation extends Unzipped {
     "manifest.json": Uint8Array;
 }
-/**
- * Load a resource from a path URL
- */
 export declare function fetchPath(path: string): Promise<JSON>;
 /**
- * DotLottiePlayer web component class
+ * dotLottie Player Web Component class
  *
  * @export
  * @class DotLottiePlayer
@@ -56,31 +53,31 @@ export declare function fetchPath(path: string): Promise<JSON>;
  */
 export declare class DotLottiePlayer extends LitElement {
     /**
-     * Autoplay animation on load.
+     * Autoplay animation
      */
     autoplay: boolean;
     /**
-     * Background color.
+     * Background color
      */
     background?: string;
     /**
-     * Show controls.
+     * Display controls
      */
     controls: boolean;
     /**
-     * Number of times to loop animation.
+     * Number of times to loop animation
      */
     count?: number;
     /**
-     * Player state.
+     * Player state
      */
     currentState?: PlayerState;
     /**
-     * Animation description for screen readers.
+     * Animation description for screen readers
      */
     description?: string;
     /**
-     * Direction of animation.
+     * Direction of animation
      */
     direction: AnimationDirection;
     /**
@@ -92,9 +89,9 @@ export declare class DotLottiePlayer extends LitElement {
      */
     intermission?: number | undefined;
     /**
-     * Whether to loop animation.
+     * Whether to loop animation
      */
-    loop?: boolean | undefined;
+    loop: boolean;
     /**
      * Play mode
      */
@@ -104,7 +101,7 @@ export declare class DotLottiePlayer extends LitElement {
     */
     preserveAspectRatio: string;
     /**
-     * Renderer to use.
+     * Renderer to use (svg, canvas or html)
      */
     renderer: RendererType;
     /**
@@ -112,18 +109,15 @@ export declare class DotLottiePlayer extends LitElement {
      */
     seeker?: any;
     /**
-     * Animation speed.
+     * Animation speed
      */
     speed?: number;
     /**
-     * Bodymovin JSON data or URL to JSON.
+     * Bodymovin JSON data, URL to JSON or dotLottie
      */
     src: string;
     /**
-    * Enable web workers
-    */
-    /**
-     * Animation container.
+     * Animation container
      */
     protected container: HTMLElement;
     private _io?;
@@ -131,95 +125,92 @@ export declare class DotLottiePlayer extends LitElement {
     private _prevState?;
     private _counter;
     /**
-     * Configure and initialize lottie-web player instance.
+     * Configure and initialize lottie-web player instance
      */
     load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void>;
     /**
-     * Handle visibility change events.
+     * Handle visibility change events
      */
     private _onVisibilityChange;
     /**
-     * Handles click and drag actions on the progress track.
+     * Handles click and drag actions on the progress track
      */
     private _handleSeekChange;
     private isLottie;
     /**
-     * Returns the lottie-web instance used in the component.
+     * Returns the lottie-web instance used in the component
      */
     getLottie(): any;
     /**
-     * Start playing animation.
+     * Play
      */
     play(): void;
     /**
-     * Pause animation play.
+     * Pause
      */
     pause(): void;
     /**
-     * Stops animation play.
+     * Stop
      */
     stop(): void;
     /**
-     * Destroy animation and lottie-player element.
+     * Destroy animation and lottie-player element
      */
     destroy(): void;
     /**
-     * Seek to a given frame.
+     * Seek to a given frame
      */
     seek(value: number | string): void;
     /**
-     * Snapshot the current frame as SVG.
+     * Snapshot the current frame as SVG
      *
-     * If 'download' argument is boolean true, then a download is triggered in browser.
+     * If 'download' argument is boolean true, then a download is triggered in browser
      */
     snapshot(download?: boolean): string | void;
     /**
-     * Freeze animation play.
+     * Freeze animation.
      * This internal state pauses animation and is used to differentiate between
      * user requested pauses and component instigated pauses.
      */
     private freeze;
     /**
-     * Reloads animation.
-     *
+     * Reload animation
      */
     reload(): Promise<void>;
     /**
-     * Sets animation play speed.
+     * Set animation play speed
      *
      * @param value Playback speed.
      */
     setSpeed(value?: number): void;
     /**
-     * Animation play direction.
+     * Animation play direction
      *
-     * @param value Direction values.
+     * @param value AnimationDirection
      */
     setDirection(value: number): void;
     /**
-     * Sets the looping of the animation.
-     *
-     * @param value Whether to enable looping. Boolean true enables looping.
+     * Set loop
      */
     setLooping(value: boolean): void;
     /**
-     * Toggle playing state.
+     * Toggle playing state
      */
     togglePlay(): void;
     /**
-     * Toggles animation looping.
+     * Toggle loop
      */
     toggleLooping(): void;
     /**
-     * Returns the styles for the component.
+     * Return the styles for the component
      */
     static get styles(): import("lit").CSSResult;
     /**
-     * Initialize everything on component first render.
+     * Initialize everything on component first render
      */
     protected firstUpdated(): Promise<void>;
     /**
-     * Cleanup on component destroy.
+     * Cleanup on component destroy
      */
     disconnectedCallback(): void;
     protected renderControls(): TemplateResult<1>;
