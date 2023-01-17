@@ -1,3 +1,4 @@
+import '@lit-labs/ssr/install-global-dom-shim.js';
 import { LitElement } from 'lit';
 import { TemplateResult } from 'lit/html';
 import { AnimationDirection, RendererType } from 'lottie-web';

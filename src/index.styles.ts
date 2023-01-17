@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from 'lit'
 
 export default css`
   * {
@@ -173,4 +173,4 @@ export default css`
     height: 100%;
     align-items: center;
   }
-`;
+`

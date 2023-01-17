@@ -1,9 +1,9 @@
-import babel from '@rollup/plugin-babel'
+import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import nodePolyfills from 'rollup-plugin-polyfill-node'
 import copy from 'rollup-plugin-copy'
 import filesize from 'rollup-plugin-filesize'
-import resolve from '@rollup/plugin-node-resolve'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import serve from 'rollup-plugin-serve'
 import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
@@ -25,18 +25,16 @@ export default {
     {
       file: pkg.main,
       format: 'umd',
-      // sourcemap: true,
       name: pkg.name
     },
     {
       file: pkg.module,
-      format: 'es',
-      // sourcemap: true,
+      format: 'es'
     }
   ],
   plugins: [
     nodePolyfills(),
-    resolve({
+    nodeResolve({
       extensions,
       jsnext: true,
       module: true,

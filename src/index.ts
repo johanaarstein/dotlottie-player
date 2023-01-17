@@ -1,6 +1,5 @@
-import { LitElement, html } from 'lit'
+import { html, LitElement, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import { TemplateResult } from 'lit/html'
 import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 import { strFromU8, unzip, Unzipped } from 'fflate'
 
