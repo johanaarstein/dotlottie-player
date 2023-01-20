@@ -235,9 +235,9 @@ export class DotLottiePlayer extends LitElement {
   @query('.animation')
   protected container!: HTMLElement
 
-  private _io?: IntersectionObserver = undefined
+  private _io?: IntersectionObserver
   private _lottie: AnimationItem | null = null
-  private _prevState?: any
+  private _prevState?: PlayerState
   private _counter = 0
 
   /**

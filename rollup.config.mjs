@@ -30,7 +30,11 @@ export default {
     {
       file: pkg.module,
       format: 'es'
-    }
+    },
+    // {
+    //   file: './dist/ssr.js',
+    //   format: 'cjs'
+    // }
   ],
   plugins: [
     nodePolyfills(),

@@ -1,5 +1,8 @@
 const plugins = [
-  ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
+  ['@babel/plugin-proposal-decorators', {
+    // version: 'legacy',
+    decoratorsBeforeExport: false
+  }],
   '@babel/plugin-proposal-class-properties',
 ]
 
