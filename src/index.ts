@@ -215,7 +215,7 @@ export class DotLottiePlayer extends LitElement {
    * Seeker
    */
   @property()
-  public seeker?: any
+  public seeker?: number
 
   /**
    * Animation speed
@@ -250,8 +250,8 @@ export class DotLottiePlayer extends LitElement {
 
     const options: any = {
       container: this.container,
-      loop: false,
-      autoplay: false,
+      loop: this.loop,
+      autoplay: this.autoplay,
       renderer: this.renderer,
       rendererSettings: overrideRendererSettings ? overrideRendererSettings : {
         preserveAspectRatio: this.preserveAspectRatio,
@@ -400,12 +400,12 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Handles click and drag actions on the progress track
    */
-  private _handleSeekChange(e: any): void {
-    if (!this._lottie || isNaN(e.target.value)) {
+  private _handleSeekChange(event: Event & { target: HTMLInputElement }): void {
+    if (!event.target || !this._lottie || isNaN(Number(event.target.value))) {
       return
     }
 
-    const frame: number = (e.target.value / 100) * this._lottie.totalFrames
+    const frame: number = (Number(event.target.value) / 100) * this._lottie.totalFrames
 
     this.seek(frame)
   }
@@ -419,7 +419,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Returns the lottie-web instance used in the component
    */
-  public getLottie(): any {
+  public getLottie(): AnimationItem | null {
     return this._lottie
   }
 
@@ -489,7 +489,7 @@ export class DotLottiePlayer extends LitElement {
     const frame = matches[2] === '%' ? (this._lottie.totalFrames * Number(matches[1])) / 100 : matches[1]
 
     // Set seeker to new frame number
-    this.seeker = frame
+    this.seeker = Number(frame)
 
     // Send lottie player to the new frame
     if (this.currentState === PlayerState.Playing) {

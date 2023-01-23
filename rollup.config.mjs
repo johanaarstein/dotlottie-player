@@ -1,12 +1,10 @@
-import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import nodePolyfills from 'rollup-plugin-polyfill-node'
 import copy from 'rollup-plugin-copy'
 import filesize from 'rollup-plugin-filesize'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import serve from 'rollup-plugin-serve'
-import terser from '@rollup/plugin-terser'
-import typescript from '@rollup/plugin-typescript'
+import { swc, minify } from 'rollup-plugin-swc3'
 
 import pkg from './package.json' assert { type: 'json' }
 
@@ -44,14 +42,6 @@ export default {
       module: true,
     }),
     commonjs(),
-    typescript({
-      tsconfig: './tsconfig.json'
-    }),
-    babel({
-      extensions,
-      exclude: ['./node_modules/**'],
-      babelHelpers: 'bundled'
-    }),
     !production &&
       copy({
         targets: [
@@ -65,6 +55,8 @@ export default {
           },
         ],
       }),
+    swc(),
+    production && minify(),
     filesize(),
     !production &&
       serve({
@@ -73,7 +65,5 @@ export default {
         host: 'localhost',
         port: 10000,
       }),
-
-    production && terser(),
   ],
 }
