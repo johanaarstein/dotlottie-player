@@ -24,7 +24,10 @@ const input = './src/index.ts',
   rollupPlugins = (ext = false) => {
     return [
       template(),
-      ext && externals(),
+      ext && externals({
+        deps: false,
+        include: 'lit'
+      }),
       nodeResolve({
         extensions,
         jsnext: true,
