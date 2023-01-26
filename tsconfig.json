@@ -19,9 +19,11 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "./dist",
+    "removeComments": true,
+    "rootDir": "./src",
     "strict": true,
+    "sourceMap": false,
     "target": "ES2020",
     "useDefineForClassFields": false
   },

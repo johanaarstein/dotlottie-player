@@ -4,7 +4,7 @@
   "description": "dotLottie Web Component for playing vectorized Lottie animations in you web app",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     "import": "./dist/index.esm.js",
     "node": "./dist/index.cjs.js",
