@@ -64,10 +64,6 @@ export default [
         file: pkg.module,
         format: 'es',
       },
-      {
-        file: pkg.exports.node,
-        format: 'cjs'
-      }
     ],
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return

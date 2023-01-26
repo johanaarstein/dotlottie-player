@@ -1,14 +1,12 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.3.3",
+  "version": "1.3.5",
   "description": "dotLottie Web Component for playing vectorized Lottie animations in you web app",
-  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
   "exports": {
     "import": "./dist/index.esm.js",
-    "node": "./dist/index.cjs.js",
     "require": "./dist/index.js"
   },
   "homepage": "https://www.aarstein.media/en/dev/dotlottie-player",
