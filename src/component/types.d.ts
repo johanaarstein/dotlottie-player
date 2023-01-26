@@ -39,10 +39,10 @@ export interface LottieAssets {
 }
 
 export interface LottieManifest {
-  animations: [Record<string, unknown>]
-  version?: string
+  animations: [Record<string, unknown>];
+  version?: string;
 }
 
 export interface LottieAnimation extends Unzipped {
-  "manifest.json": Uint8Array
+  "manifest.json": Uint8Array;
 }
