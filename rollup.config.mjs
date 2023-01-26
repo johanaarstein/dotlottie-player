@@ -1,10 +1,9 @@
 import commonjs from '@rollup/plugin-commonjs'
-import nodePolyfills from 'rollup-plugin-polyfill-node'
-import copy from 'rollup-plugin-copy'
+import { externals } from 'rollup-plugin-node-externals'
 import filesize from 'rollup-plugin-filesize'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import serve from 'rollup-plugin-serve'
 import { swc, minify } from 'rollup-plugin-swc3'
+import template from 'rollup-plugin-html-literals'
 
 import pkg from './package.json' assert { type: 'json' }
 
@@ -13,57 +12,64 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 global['__filename'] = __filename
 
-const production = !process.env.ROLLUP_WATCH,
+const input = './src/index.ts',
   extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
-  outputDir = './dist/'
+  globals = {
+    lit: 'lit',
+    'lit/decorators.js': 'decorators_js',
+    'lottie-web': 'Lottie',
+    fflate: 'fflate'
+  },
 
-export default {
-  input: './src/index.ts',
-  output: [
-    {
-      file: pkg.main,
-      format: 'umd',
-      name: pkg.name
-    },
-    {
-      file: pkg.module,
-      format: 'es'
-    },
-    // {
-    //   file: './dist/ssr.js',
-    //   format: 'cjs'
-    // }
-  ],
-  plugins: [
-    nodePolyfills(),
-    nodeResolve({
-      extensions,
-      jsnext: true,
-      module: true,
-    }),
-    commonjs(),
-    !production &&
-      copy({
-        targets: [
-          {
-            src: './node_modules/@webcomponents/webcomponentsjs/bundles/',
-            dest: outputDir,
-          },
-          {
-            src: './node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
-            dest: outputDir,
-          },
-        ],
+  rollupPlugins = (ext = false) => {
+    return [
+      template(),
+      ext && externals(),
+      nodeResolve({
+        extensions,
+        jsnext: true,
+        module: true,
       }),
-    swc(),
-    production && minify(),
-    filesize(),
-    !production &&
-      serve({
-        contentBase: [outputDir],
-        open: true,
-        host: 'localhost',
-        port: 10000,
-      }),
-  ],
-}
+      commonjs(),
+      swc(),
+      minify(),
+      filesize(),
+    ]
+  }
+
+export default [
+  {
+    input,
+    output: [
+      {
+        file: pkg.main,
+        format: 'umd',
+        name: pkg.name,
+        globals
+      }
+    ],
+    onwarn(warning, warn) {
+      if (warning.code === 'THIS_IS_UNDEFINED') return
+      warn(warning)
+    },
+    plugins: rollupPlugins(),
+  },
+  {
+    input,
+    output: [
+      {
+        file: pkg.module,
+        format: 'es',
+      },
+      {
+        file: pkg.exports.node,
+        format: 'cjs'
+      }
+    ],
+    onwarn(warning, warn) {
+      if (warning.code === 'THIS_IS_UNDEFINED') return
+      warn(warning)
+    },
+    plugins: rollupPlugins(true),
+  }
+]

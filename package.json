@@ -1,12 +1,13 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.2.38",
+  "version": "1.3.0",
   "description": "dotLottie Web Component for playing vectorized Lottie animations in you web app",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     "import": "./dist/index.esm.js",
+    "node": "./dist/index.cjs.js",
     "require": "./dist/index.js"
   },
   "homepage": "https://www.aarstein.media/en/dev/dotlottie-player",
@@ -32,27 +33,20 @@
   },
   "dependencies": {
     "fflate": "^0.7.4",
+    "lit": "^2.6.1",
     "lottie-web": "^5.9.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-decorators": "^7.10.5",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@swc/core": "^1.3.27",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
-    "@webcomponents/webcomponentsjs": "^2.7.0",
     "eslint": "^8.30.0",
-    "lit": "^2.6.1",
     "rollup": "^3.7.5",
-    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-polyfill-node": "^0.11.0",
-    "rollup-plugin-serve": "^2.0.0",
+    "rollup-plugin-html-literals": "^1.1.6",
+    "rollup-plugin-node-externals": "^5.1.0",
     "rollup-plugin-swc3": "^0.8.0",
     "shx": "^0.3.4",
     "typescript": "^4.9.4"
