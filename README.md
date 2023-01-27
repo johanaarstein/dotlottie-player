@@ -73,7 +73,7 @@ const player = document.querySelector('dotlottie-player')
 player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 ```
 
-### ReactJS / NextJS
+### ReactJS
 
 1. Import the player and use it like this:
 
@@ -96,7 +96,7 @@ function App() {
 export default App
 ```
 
-### ReactJS / NextJS + Typescript
+### ReactJS + Typescript
 
 1. Import like this:
 
@@ -129,6 +129,34 @@ declare namespace JSX {
 }
 ```
 
+### NextJS
+
+1. To avoid "window is not defined" import the module inside a useEffect hook, like so:
+
+```javascript
+import { useEffect } from 'react'
+
+function App() {
+
+  useEffect(() => {
+    import('@johanaarstein/dotlottie-player')
+  }, [])
+
+  return (
+    <div className="App">
+      <dotlottie-player
+        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
+        autoplay
+        loop
+        style={{ height: '100%', width: '100%' }}
+      />
+    </div>
+  )
+}
+
+export default App
+```
+
 ### NuxtJS / VueJS
 
 1. Update the array of plugins in nuxt.config.js file in your root.
@@ -157,6 +185,8 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
   export default {}
 </script>
 ```
+
+In VueJS the library/player must be declared as a client side plugin module.
 
 ## Properties
 

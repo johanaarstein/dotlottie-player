@@ -25,8 +25,9 @@ const input = './src/index.ts',
     return [
       template(),
       ext && externals({
-        deps: false,
-        include: 'lit'
+        // deps: false,
+        // include: 'lit'
+        exclude: 'lottie-web'
       }),
       nodeResolve({
         extensions,
