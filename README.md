@@ -203,7 +203,7 @@ In VueJS this library must be declared as a client side plugin module.
 | `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio                       | `string`                             | `'xMidYMid meet'` |
 | `renderer`            | `renderer`            | Renderer to use                    | `"svg"`                              | `'svg'`           |
 | `speed`               | `speed`               | Animation speed                    | `number`                             | `1`               |
-| `src` _(required)_    | `src`                 | URL to JSON or .lottie file        | `string`                             | `undefined`       |
+| `src` _(required)_    | `src`                 | URL to JSON or dotLottie file      | `string`                             | `undefined`       |
 
 ## Methods
 
@@ -215,9 +215,9 @@ Load a Lottie animation.
 
 #### Parameters
 
-| Name  | Type     | Description            |
-| ----- | -------- | ---------------------- |
-| `src` | `string` | URL to a .lottie file. |
+| Name  | Type     | Description                   |
+| ----- | -------- | ----------------------------- |
+| `src` | `string` | URL to JSON or dotLottie file |
 
 #### Returns
 
