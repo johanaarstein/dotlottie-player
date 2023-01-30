@@ -10,15 +10,15 @@ Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player) of 
 
 ## Installation
 
-### In HTML, import from CDN or from the local installation
+### In HTML, import from CDN or from local installation
 
-- Import from CDN.
+- Import from CDN:
 
 ```xml
 <script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/dotlottie-player.js"></script>
 ```
 
-- Import from local node_modules directory.
+- Import from local node_modules directory:
 
 ```xml
 <script src="/node_modules/@johanaarstein/dotlottie-player/dist/dotlottie-player.js"></script>
@@ -26,13 +26,13 @@ Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player) of 
 
 ### In Javascript or TypeScript
 
-1. Install package using npm or yarn.
+1. Install package using npm or yarn:
 
 ```shell
 npm install --save @johanaarstein/dotlottie-player
 ```
 
-2. Import package in your code.
+2. Import package in your code:
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -42,7 +42,7 @@ import '@johanaarstein/dotlottie-player'
 
 ### The player component
 
-Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either LottieJSON or dotLottie.
+Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either a LottieJSON or a dotLottie.
 
 ```xml
 <dotlottie-player
@@ -56,7 +56,7 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
 </dotlottie-player>
 ```
 
-You may set and load animations programmatically as well.
+You may set and load animations programmatically as well:
 
 ```xml
 <dotlottie-player
@@ -75,7 +75,7 @@ player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 
 ### ReactJS
 
-1. Import the player and use it like this:
+1. Import the player and use it:
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -98,7 +98,7 @@ export default App
 
 ### ReactJS + Typescript
 
-1. Import like this:
+1. Import and use like this:
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -119,7 +119,7 @@ function App() {
 export default App
 ```
 
-2. Create a global.d.ts file in your src folder and add the code below:
+2. Create a global.d.ts file in your src folder:
 
 ```typescript
 declare namespace JSX {
@@ -131,7 +131,7 @@ declare namespace JSX {
 
 ### NextJS
 
-1. To avoid "window is not defined" import the module inside a useEffect hook, like so:
+1. To avoid "window is not defined" import the module inside a useEffect hook:
 
 ```javascript
 import { useEffect } from 'react'
@@ -159,19 +159,19 @@ export default App
 
 ### NuxtJS / VueJS
 
-1. Update the array of plugins in nuxt.config.js file in your root.
+1. Update the array of plugins in nuxt.config.js file in your root:
 
 ```javascript
 plugins: [{ src: '~/plugins/lottie-player', mode: 'client' }]
 ```
 
-2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js with the following content.
+2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js:
 
 ```javascript
 import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 ```
 
-3. The component can now be used in your pages or components template tag like below – without any imports necessary.
+3. The component can now be used in your pages or components template tags – without the need for any imports:
 
 ```xml
 <template>
@@ -186,7 +186,7 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 </script>
 ```
 
-In VueJS the library/player must be declared as a client side plugin module.
+In VueJS this library must be declared as a client side plugin module.
 
 ## Properties
 
@@ -211,7 +211,7 @@ In VueJS the library/player must be declared as a client side plugin module.
 
 **`load(src: string) => void`**
 
-Load (and play) a given Lottie animation.
+Load a Lottie animation.
 
 #### Parameters
 
