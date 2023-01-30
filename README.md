@@ -176,7 +176,7 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 ```xml
 <template>
   <dotlottie-player
-    src="https://storage.googleapis.com/aarsteinmedia/intro.lottie"
+    src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
     autoplay
     loop
   />
@@ -192,18 +192,18 @@ In VueJS the library/player must be declared as a client side plugin module.
 
 | Property              | Attribute             | Description                        | Type                                 | Default           |
 | --------------------- | --------------------- | ---------------------------------- | ------------------------------------ | ----------------- |
-| `autoplay`            | `autoplay`            | Autoplay animation on load.        | `boolean`                            | `false`           |
-| `background`          | `background`          | Background color.                  | `string`                             | `undefined`       |
-| `controls`            | `controls`            | Show controls.                     | `boolean`                            | `false`           |
-| `count`               | `count`               | Number of times to loop animation. | `number`                             | `undefined`       |
-| `direction`           | `direction`           | Direction of animation.            | `number`                             | `1`               |
-| `hover`               | `hover`               | Whether to play on mouse hover.    | `boolean`                            | `false`           |
-| `loop`                | `loop`                | Whether to loop animation.         | `boolean`                            | `false`           |
-| `mode`                | `mode`                | Play mode.                         | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
-| `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio.                      | `string`                             | `'xMidYMid meet'` |
-| `renderer`            | `renderer`            | Renderer to use.                   | `"svg"`                              | `'svg'`           |
-| `speed`               | `speed`               | Animation speed.                   | `number`                             | `1`               |
-| `src` _(required)_    | `src`                 | URL to .lottie file.               | `string`                             | `undefined`       |
+| `autoplay`            | `autoplay`            | Autoplay animation on load         | `boolean`                            | `false`           |
+| `background`          | `background`          | Background color                   | `string`                             | `undefined`       |
+| `controls`            | `controls`            | Show controls                      | `boolean`                            | `false`           |
+| `count`               | `count`               | Number of times to loop animation  | `number`                             | `undefined`       |
+| `direction`           | `direction`           | Direction of animation             | `number`                             | `1`               |
+| `hover`               | `hover`               | Whether to play on mouse hover     | `boolean`                            | `false`           |
+| `loop`                | `loop`                | Whether to loop animation          | `boolean`                            | `false`           |
+| `mode`                | `mode`                | Play mode                          | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
+| `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio                       | `string`                             | `'xMidYMid meet'` |
+| `renderer`            | `renderer`            | Renderer to use                    | `"svg"`                              | `'svg'`           |
+| `speed`               | `speed`               | Animation speed                    | `number`                             | `1`               |
+| `src` _(required)_    | `src`                 | URL to JSON or .lottie file        | `string`                             | `undefined`       |
 
 ## Methods
 
@@ -227,7 +227,7 @@ Type: `void`
 
 **`pause() => void`**
 
-Pause animation play.
+Pause animation.
 
 #### Returns
 
@@ -237,7 +237,7 @@ Type: `void`
 
 **`play() => void`**
 
-Start playing animation.
+Play animation.
 
 #### Returns
 
@@ -247,13 +247,13 @@ Type: `void`
 
 **`setDirection(value: number) => void`**
 
-Animation play direction.
+Set animation direction.
 
 #### Parameters
 
 | Name    | Type     | Description       |
 | ------- | -------- | ----------------- |
-| `value` | `number` | Direction values. |
+| `value` | `number` | Direction values  |
 
 #### Returns
 
@@ -263,13 +263,13 @@ Type: `void`
 
 **`setLooping(value: boolean) => void`**
 
-Sets the looping of the animation.
+Set looping of animation.
 
 #### Parameters
 
-| Name    | Type      | Description                                              |
-| ------- | --------- | -------------------------------------------------------- |
-| `value` | `boolean` | Whether to enable looping. Boolean true enables looping. |
+| Name    | Type      | Description               |
+| ------- | --------- | --------------------------|
+| `value` | `boolean` | Whether to enable looping |
 
 #### Returns
 
@@ -279,13 +279,13 @@ Type: `void`
 
 **`setSpeed(value?: number) => void`**
 
-Sets animation play speed.
+Set animation speed.
 
 #### Parameters
 
 | Name    | Type     | Description     |
 | ------- | -------- | --------------- |
-| `value` | `number` | Playback speed. |
+| `value` | `number` | Playback speed  |
 
 #### Returns
 
@@ -295,7 +295,7 @@ Type: `void`
 
 **`stop() => void`**
 
-Stops animation play.
+Stop animation.
 
 #### Returns
 
@@ -305,7 +305,7 @@ Type: `void`
 
 **`seek(value: number | string) => void`**
 
-Seek to a given frame. Frame value can be a number or a percent string (e.g. 50%).
+Go to frame. Can be a number or a percentage string (e.g. 50%).
 
 #### Returns
 
@@ -315,8 +315,7 @@ Type: `void`
 
 **`snapshot(download?: boolean) => string`**
 
-Snapshot the current frame as SVG.
-If 'download' argument is boolean true, then a download is triggered in browser.
+Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.
 
 #### Returns
 
@@ -326,7 +325,7 @@ Type: `string`
 
 **`toggleLooping() => void`**
 
-Toggles animation looping.
+Toggle looping.
 
 #### Returns
 
@@ -336,7 +335,7 @@ Type: `void`
 
 **`togglePlay() => void`**
 
-Toggle playing state.
+Toggle playing.
 
 #### Returns
 
@@ -346,7 +345,7 @@ Type: `void`
 
 **`reload() => void`**
 
-Reloads Lottie.
+Reload Lottie.
 
 #### Returns
 
@@ -358,38 +357,17 @@ The following events are exposed and can be listened to via `addEventListener` c
 
 | Name       | Description                                                               |
 | ---------- | ------------------------------------------------------------------------- |
-| `complete` | Animation is complete (all loops completed).                              |
-| `destroyed`| Animation data is destroyed.                                              |
-| `error`    | An animation source cannot be parsed, fails to load or has format errors. |
-| `frame`    | A new frame is entered.                                                   |
-| `freeze`   | Animation is paused due to player being invisible.                        |
-| `load`     | Animation data is loaded.                                                 |
-| `loop`     | An animation loop is completed.                                           |
-| `play`     | Animation starts playing.                                                 |
-| `pause`    | Animation is paused.                                                      |
-| `ready`    | Animation data is loaded and player is ready.                             |
-| `stop`     | Animation is stopped.                                                     |
-
-## Styling
-
-| Custom property                              | Description               | Default                |
-| -------------------------------------------- | ------------------------- | ---------------------- |
-| --dotlottie-player-toolbar-height            | Toolbar height            | 35px                   |
-| --dotlottie-player-toolbar-background-color  | Toolbar background color  | #FFF                   |
-| --dotlottie-player-toolbar-icon-color        | Toolbar icon color        | #000                   |
-| --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #000                   |
-| --dotlottie-player-toolbar-icon-active-color | Toolbar icon active color | #4285f4                |
-| --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(0, 0, 0, 0.2)     |
-| --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                |
-
-By default there is also a dark mode, triggered by @media (prefers-color-scheme: dark):
-| Custom property                              | Description               | Default                  |
-| -------------------------------------------- | ------------------------- | ------------------------ |
-| --dotlottie-player-toolbar-background-color  | Toolbar background color  | #000                     |
-| --dotlottie-player-toolbar-icon-color        | Toolbar icon color        | #FFF                     |
-| --dotlottie-player-toolbar-icon-hover-color  | Toolbar icon hover color  | #FFF                     |
-| --dotlottie-player-seeker-track-color        | Seeker track color        | rgba(255, 255, 255, 0.6) |
-| --dotlottie-player-seeker-thumb-color        | Seeker thumb color        | #4285f4                  |
+| `complete` | Animation is complete – including all loops                               |
+| `destroyed`| Animation is destroyed                                                    |
+| `error`    | An animation source cannot be parsed, fails to load or has format errors  |
+| `frame`    | A new frame is entered                                                    |
+| `freeze`   | Animation is paused due to player being out of view                       |
+| `load`     | Animation is loaded                                                       |
+| `loop`     | A loop is completed                                                       |
+| `play`     | Animation has started plahing                                             |
+| `pause`    | Animation has paused                                                      |
+| `ready`    | Animation is loaded and player is ready                                   |
+| `stop`     | Animation has stopped                                                     |
 
 ## WordPress Plugin
 <img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg" style="padding-right: 20px" />

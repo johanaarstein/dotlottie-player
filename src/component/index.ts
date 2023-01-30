@@ -1,9 +1,10 @@
-import { html, LitElement, TemplateResult } from 'lit'
+import { html, LitElement, nothing, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types.d'
 import { fetchPath } from './functions'
+
 import styles from './styles'
 
 /**
@@ -558,17 +559,17 @@ export class DotLottiePlayer extends LitElement {
           tabindex="0"
           aria-label="play-pause"
         >
-          ${isPlaying
-        ? html`
-                <svg width="24" height="24" aria-hidden="true" focusable="false">
-                  <path d="M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z" />
-                </svg>
-              `
-        : html`
-                <svg width="24" height="24" aria-hidden="true" focusable="false">
-                  <path d="M8.016 5.016L18.985 12 8.016 18.984V5.015z" />
-                </svg>
-              `}
+        ${isPlaying ?
+        html`
+          <svg width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z" />
+          </svg>
+          ` :
+        html`
+          <svg width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M8.016 5.016L18.985 12 8.016 18.984V5.015z" />
+          </svg>
+        `}
         </button>
         <button
           name="lottie-stop-button"
@@ -628,14 +629,13 @@ export class DotLottiePlayer extends LitElement {
       animationClass: string = this.controls ? 'animation controls' : 'animation'
     
     return html`
-      <div class=${'animation-container ' + className} lang="en" role="img" aria-label=${this.description}>
+      <div class=${'animation-container ' + className} lang=${document?.documentElement?.lang} role="img" aria-label=${this.description}>
         <div class=${animationClass} style="background:${this.background}">
-          ${this.currentState === PlayerState.Error ? html`
-            <div class="error">⚠️</div>
-            ` : undefined
+          ${this.currentState === PlayerState.Error ?
+            html`<div class="error">⚠️</div>` : nothing
           }
         </div>
-        ${this.controls ? this.renderControls() : undefined}
+        ${this.controls ? this.renderControls() : nothing}
       </div>
     `
   }
