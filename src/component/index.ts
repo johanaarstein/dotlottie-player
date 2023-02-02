@@ -45,13 +45,13 @@ export class DotLottiePlayer extends LitElement {
    * Player state
    */
   @property({ type: String })
-  public currentState?: PlayerState = PlayerState.Loading
+  public currentState: PlayerState = PlayerState.Loading
  
   /**
    * Animation description for screen readers
    */
   @property({ type: String })
-  public description?: string = 'Lottie animation'
+  public description?: string
 
   /**
    * Direction of animation
@@ -629,7 +629,11 @@ export class DotLottiePlayer extends LitElement {
       animationClass: string = this.controls ? 'animation controls' : 'animation'
     
     return html`
-      <div class=${'animation-container ' + className} lang=${document?.documentElement?.lang} role="img" aria-label=${this.description}>
+      <div
+        class=${'animation-container ' + className}
+        lang=${this.description ? document?.documentElement?.lang : 'en'}
+        role="img" aria-label=${this.description ?? 'Lottie animation'}
+      >
         <div class=${animationClass} style="background:${this.background}">
           ${this.currentState === PlayerState.Error ?
             html`<div class="error">⚠️</div>` : nothing
