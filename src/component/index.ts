@@ -2,8 +2,8 @@ import { html, LitElement, nothing, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 
-import { playerVerion, webVersion } from './versions'
-import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'
+// import { playerVerion, webVersion } from './versions'
+import { PlayMode, PlayerEvents, PlayerState } from './types.d'
 import { fetchPath } from './functions'
 
 import styles from './styles'
@@ -310,12 +310,12 @@ export class DotLottiePlayer extends LitElement {
     return this._lottie
   }
 
-  public getVersions(): Versions {
-    return {
-      lottieWebVersion: webVersion,
-      dotLottiePlayerVersion: playerVerion,
-    };
-  }
+  // public getVersions(): Versions {
+  //   return {
+  //     lottieWebVersion: webVersion,
+  //     dotLottiePlayerVersion: playerVerion,
+  //   };
+  // }
 
   /**
    * Play
