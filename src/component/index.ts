@@ -118,7 +118,7 @@ export class DotLottiePlayer extends LitElement {
    * Animation container
    */
   @query('.animation')
-  protected container!: HTMLElement | null
+  protected container!: HTMLElement
 
   private _io?: IntersectionObserver
   private _lottie: AnimationItem | null = null
@@ -533,7 +533,7 @@ export class DotLottiePlayer extends LitElement {
         }
       })
 
-      this._io.observe(this.container as HTMLElement)
+      this._io.observe(this.container)
     }
     
     // Setup lottie player
@@ -557,8 +557,6 @@ export class DotLottiePlayer extends LitElement {
 
     // Remove the attached Visibility API's change event listener
     document.removeEventListener('visibilitychange', () => this._onVisibilityChange())
-
-    this.container = null
 
     // Destroy the animation instance and element
     this.destroy()
