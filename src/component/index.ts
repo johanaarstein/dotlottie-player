@@ -499,6 +499,17 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Initialize everything on component first render
    */
+
+  connectedCallback(): void {
+    super.connectedCallback()
+  
+    // Add listener for Visibility API's change event.
+    if (typeof document.hidden !== 'undefined') {
+      document.addEventListener('visibilitychange', () => this._onVisibilityChange())
+    }
+
+  }
+
   protected async firstUpdated(): Promise<void> {
     // Add intersection observer for detecting component being out-of-view.
     if ('IntersectionObserver' in window) {
@@ -514,12 +525,7 @@ export class DotLottiePlayer extends LitElement {
 
       this._io.observe(this.container)
     }
-
-    // Add listener for Visibility API's change event.
-    if (typeof document.hidden !== 'undefined') {
-      document.addEventListener('visibilitychange', () => this._onVisibilityChange())
-    }
-
+    
     // Setup lottie player
     if (this.src) {
       await this.load(this.src)
@@ -530,9 +536,9 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Cleanup on component destroy
    */
-  public disconnectedCallback(): void {
+  disconnectedCallback(): void {
     super.disconnectedCallback()
-    
+
     // Remove intersection observer for detecting component being out-of-view
     if (this._io) {
       this._io.disconnect()
@@ -552,14 +558,14 @@ export class DotLottiePlayer extends LitElement {
     const isStopped: boolean = this.currentState === PlayerState.Stopped
 
     return html`
-      <div class="lottie-controls toolbar" aria-label="lottie-animation-controls" class="toolbar">
+      <div class="lottie-controls toolbar" aria-label="Lottie Animation Controls" class="toolbar">
         <button
           name="lottie-play-button"
           @click=${this.togglePlay}
           class=${isPlaying || isPaused ? 'active' : ''}
           style="align-items:center"
           tabindex="0"
-          aria-label="play-pause"
+          aria-label="Toggle Play/Pause"
         >
         ${isPlaying ?
         html`
@@ -579,7 +585,7 @@ export class DotLottiePlayer extends LitElement {
           class=${isStopped ? 'active' : ''}
           style="align-items:center"
           tabindex="0"
-          aria-label="stop"
+          aria-label="Stop"
         >
           <svg width="24" height="24" aria-hidden="true" focusable="false">
             <path d="M6 6h12v12H6V6z" />
@@ -606,7 +612,7 @@ export class DotLottiePlayer extends LitElement {
           role="slider"
           aria-valuenow=${this.seeker ?? 0}
           tabindex="0"
-          aria-label="lottie-seek-input"
+          aria-label="Slider for search"
         />
         <button
           name="lottie-loop-toggle"
@@ -614,7 +620,7 @@ export class DotLottiePlayer extends LitElement {
           class=${this.loop ? 'active' : ''}
           style="align-items:center"
           tabindex="0"
-          aria-label="loop-toggle"
+          aria-label="Toggle Looping"
         >
           <svg width="24" height="24" aria-hidden="true" focusable="false">
             <path
