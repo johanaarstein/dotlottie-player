@@ -2,7 +2,8 @@ import { html, LitElement, nothing, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 
-import { PlayMode, PlayerEvents, PlayerState } from './types.d'
+import { playerVerion, webVersion } from './versions'
+import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'
 import { fetchPath } from './functions'
 
 import styles from './styles'
@@ -117,7 +118,7 @@ export class DotLottiePlayer extends LitElement {
    * Animation container
    */
   @query('.animation')
-  protected container!: HTMLElement
+  protected container!: HTMLElement | null
 
   private _io?: IntersectionObserver
   private _lottie: AnimationItem | null = null
@@ -247,17 +248,19 @@ export class DotLottiePlayer extends LitElement {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Error))
       })
 
-      // Set handlers to auto play animation on hover if enabled
-      this.container.addEventListener('mouseenter', () => {
-        if (this.hover && this.currentState !== PlayerState.Playing) {
-          this.play()
-        }
-      })
-      this.container.addEventListener('mouseleave', () => {
-        if (this.hover && this.currentState === PlayerState.Playing) {
-          this.stop()
-        }
-      })
+      if (this.container) {
+        // Set handlers to auto play animation on hover if enabled
+        this.container.addEventListener('mouseenter', () => {
+          if (this.hover && this.currentState !== PlayerState.Playing) {
+            this.play()
+          }
+        })
+        this.container.addEventListener('mouseleave', () => {
+          if (this.hover && this.currentState === PlayerState.Playing) {
+            this.stop()
+          }
+        })
+      }
 
       // Set initial playback speed and direction
       this.setSpeed(this.speed)
@@ -305,6 +308,13 @@ export class DotLottiePlayer extends LitElement {
    */
   public getLottie(): AnimationItem | null {
     return this._lottie
+  }
+
+  public getVersions(): Versions {
+    return {
+      lottieWebVersion: webVersion,
+      dotLottiePlayerVersion: playerVerion,
+    };
   }
 
   /**
@@ -523,7 +533,7 @@ export class DotLottiePlayer extends LitElement {
         }
       })
 
-      this._io.observe(this.container)
+      this._io.observe(this.container as HTMLElement)
     }
     
     // Setup lottie player
@@ -547,6 +557,8 @@ export class DotLottiePlayer extends LitElement {
 
     // Remove the attached Visibility API's change event listener
     document.removeEventListener('visibilitychange', () => this._onVisibilityChange())
+
+    this.container = null
 
     // Destroy the animation instance and element
     this.destroy()

@@ -1,4 +1,5 @@
 import { Unzipped } from 'fflate'
+import { SemVer } from 'semver'
 
 export enum PlayerState {
   Completed = 'completed',
@@ -45,4 +46,9 @@ export interface LottieManifest {
 
 export interface LottieAnimation extends Unzipped {
   "manifest.json": Uint8Array;
+}
+
+export type Versions = {
+  lottieWebVersion: SemVer;
+  dotLottiePlayerVersion: SemVer;
 }

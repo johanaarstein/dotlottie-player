@@ -101,3 +101,7 @@ declare global {
     'dotlottie-player': DotLottiePlayer;
   }
 }
+export type Versions = {
+  lottieWebVersion: SemVer;
+  dotLottiePlayerVersion: SemVer;
+}
