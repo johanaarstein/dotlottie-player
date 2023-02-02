@@ -1,5 +1,6 @@
 {
   "jsc": {
+    "keepClassNames": true,
     "parser": {
       "syntax": "typescript",
       "decorators": true,
@@ -7,7 +8,8 @@
     },
     "target": "es2020",
     "transform": {
-      "legacyDecorator": true
+      "legacyDecorator": true,
+      "decoratorMetadata": true
     }
   },
   "module": {
