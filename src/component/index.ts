@@ -531,6 +531,8 @@ export class DotLottiePlayer extends LitElement {
    * Cleanup on component destroy
    */
   public disconnectedCallback(): void {
+    super.disconnectedCallback()
+    
     // Remove intersection observer for detecting component being out-of-view
     if (this._io) {
       this._io.disconnect()
