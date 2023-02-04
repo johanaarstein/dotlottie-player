@@ -1,6 +1,6 @@
 import { html, LitElement, nothing, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
+import Lottie, { AnimationConfig, AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 
 import { playerVerion, webVersion } from './versions'
 import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'
@@ -128,42 +128,42 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Configure and initialize lottie-web player instance
    */
-  public async load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void> {
+  public async load(src: string | Record<string, unknown>): Promise<void> {
     if (!this.shadowRoot) {
       return
     }
 
-    const options: any = {
+    const options: AnimationConfig = {
       container: this.container,
       loop: this.loop,
       autoplay: this.autoplay,
-      renderer: this.renderer,
-      rendererSettings: overrideRendererSettings ? overrideRendererSettings : {
-        preserveAspectRatio: this.preserveAspectRatio,
-        clearCanvas: false,
-        progressiveLoad: true,
-        hideOnTransparent: true,
+      rendererSettings : {
+        [this.renderer]: {
+          preserveAspectRatio: this.preserveAspectRatio,
+          clearCanvas: this.renderer === 'canvas' ?? null,
+          progressiveLoad: this.renderer === 'svg' || this.renderer === 'canvas' ? true : null,
+          hideOnTransparent: this.renderer === 'svg' || this.renderer === 'html' ? true : null,
+        }
       }
     }
 
     // Load the resource information
     try {
       if (typeof src !== 'string' && typeof src !== 'object') {
-        throw new Error('[dotLottie] No animation to load, or the file is corrupted.')
+        throw new Error('No Lottie animation to load, or the file is corrupted.')
       }
 
       const srcParsed = typeof src === 'string' ? await fetchPath(src) : src
 
-      if (!this.isLottie(srcParsed)) throw new Error('[dotLottie] Load method failed. Object is not a valid Lottie.')
+      if (!this.isLottie(srcParsed)) throw new Error('dotLottie: Load method failed. Object is not a valid Lottie.')
 
       // Clear previous animation, if any
-      if (this._lottie) {
-        this._lottie.destroy()
-      }
+      if (this._lottie) this._lottie.destroy()
 
       // Initialize lottie player and load animation
       this._lottie = Lottie.loadAnimation({
         ...options,
+        renderer: this.renderer,
         animationData: srcParsed,
       })
     } catch (err) {
@@ -267,9 +267,7 @@ export class DotLottiePlayer extends LitElement {
       this.setDirection(this.direction)
 
       // Start playing if autoplay is enabled
-      if (this.autoplay) {
-        this.play()
-      }
+      if (this.autoplay) this.play()
     }
   }
 
@@ -515,7 +513,7 @@ export class DotLottiePlayer extends LitElement {
   
     // Add listener for Visibility API's change event.
     if (typeof document.hidden !== 'undefined') {
-      document.addEventListener('visibilitychange', () => this._onVisibilityChange())
+      document.addEventListener('visibilitychange', this._onVisibilityChange)
     }
 
   }
@@ -555,11 +553,11 @@ export class DotLottiePlayer extends LitElement {
       this._io = undefined
     }
 
+    // Destroy the animation instance
+    if (this._lottie) this._lottie.destroy()
+
     // Remove the attached Visibility API's change event listener
     document.removeEventListener('visibilitychange', () => this._onVisibilityChange())
-
-    // Destroy the animation instance and element
-    this.destroy()
   }
 
   protected renderControls() {
@@ -650,7 +648,8 @@ export class DotLottiePlayer extends LitElement {
       <div
         class=${'animation-container ' + className}
         lang=${this.description ? document?.documentElement?.lang : 'en'}
-        role="img" aria-label=${this.description ?? 'Lottie animation'}
+        role="img"
+        aria-label=${this.description ?? 'Lottie animation'}
       >
         <div class=${animationClass} style="background:${this.background}">
           ${this.currentState === PlayerState.Error ?

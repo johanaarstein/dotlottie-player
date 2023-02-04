@@ -1,5 +1,5 @@
 
-import { LitElement, TemplateResult } from 'lit';
+import { CSSResult, LitElement, TemplateResult } from 'lit';
 import { AnimationDirection, AnimationItem, RendererType } from 'lottie-web';
 import { Unzipped } from 'fflate';
 
@@ -50,6 +50,11 @@ export interface LottieAnimation extends Unzipped {
   "manifest.json": Uint8Array;
 }
 
+export type Versions = {
+  lottieWebVersion: string;
+  dotLottiePlayerVersion: string;
+}
+
 export declare class DotLottiePlayer extends LitElement {
   autoplay: boolean;
   background?: string;
@@ -90,7 +95,8 @@ export declare class DotLottiePlayer extends LitElement {
   setLooping(value: boolean): void;
   togglePlay(): void;
   toggleLooping(): void;
-  static get styles(): import("lit").CSSResult;
+  static get styles(): CSSResult;
+  connectedCallback(): void;
   protected firstUpdated(): Promise<void>;
   disconnectedCallback(): void;
   protected renderControls(): TemplateResult<1>;
@@ -100,8 +106,4 @@ declare global {
   interface HTMLElementTagNameMap {
     'dotlottie-player': DotLottiePlayer;
   }
-}
-export type Versions = {
-  lottieWebVersion: SemVer;
-  dotLottiePlayerVersion: SemVer;
 }

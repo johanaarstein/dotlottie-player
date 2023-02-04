@@ -24,9 +24,7 @@ const input = './src/index.ts',
   rollupPlugins = (ext = false) => {
     return [
       template(),
-      ext && externals({
-        exclude: 'lottie-web'
-      }),
+      ext && externals(),
       nodeResolve({
         extensions,
         jsnext: true,
@@ -42,14 +40,12 @@ const input = './src/index.ts',
 export default [
   {
     input,
-    output: [
-      {
-        file: pkg.main,
-        format: 'umd',
-        name: pkg.name,
-        globals
-      }
-    ],
+    output: {
+      file: pkg.main,
+      format: 'umd',
+      name: pkg.name,
+      globals
+    },
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
@@ -63,6 +59,10 @@ export default [
         file: pkg.module,
         format: 'es',
       },
+      {
+        file: pkg.exports.node,
+        format: 'cjs'
+      }
     ],
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
