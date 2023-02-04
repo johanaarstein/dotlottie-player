@@ -677,9 +677,3 @@ export class DotLottiePlayer extends LitElement {
     `
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'dotlottie-player': DotLottiePlayer;
-  }
-}
