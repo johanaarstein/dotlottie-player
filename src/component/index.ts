@@ -1,6 +1,6 @@
 import { html, LitElement, nothing, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import Lottie, { AnimationConfig, AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
+import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
 
 import { playerVerion, webVersion } from './versions'
 import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'
@@ -133,18 +133,35 @@ export class DotLottiePlayer extends LitElement {
       return
     }
 
-    const options: AnimationConfig = {
+    let rendererSettings
+    
+    switch (this.renderer) {
+      case 'canvas':
+        rendererSettings = {
+          clearCanvas: true,
+          preserveAspectRatio: this.preserveAspectRatio,
+          progressiveLoad: true,
+        }
+        break
+      case 'html':
+        rendererSettings = {
+          hideOnTransparent: true
+        }
+        break
+      default:
+        rendererSettings = {
+          hideOnTransparent: true,
+          preserveAspectRatio: this.preserveAspectRatio,
+          progressiveLoad: true,
+        }
+    }
+
+    const options: any = {
       container: this.container,
       loop: this.loop,
       autoplay: this.autoplay,
-      rendererSettings : {
-        [this.renderer]: {
-          preserveAspectRatio: this.preserveAspectRatio,
-          clearCanvas: this.renderer === 'canvas' ?? null,
-          progressiveLoad: this.renderer === 'svg' || this.renderer === 'canvas' ? true : null,
-          hideOnTransparent: this.renderer === 'svg' || this.renderer === 'html' ? true : null,
-        }
-      }
+      renderer: this.renderer,
+      rendererSettings
     }
 
     // Load the resource information
@@ -163,7 +180,6 @@ export class DotLottiePlayer extends LitElement {
       // Initialize lottie player and load animation
       this._lottie = Lottie.loadAnimation({
         ...options,
-        renderer: this.renderer,
         animationData: srcParsed,
       })
     } catch (err) {
