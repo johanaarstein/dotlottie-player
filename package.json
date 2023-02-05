@@ -1,6 +1,6 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "dotLottie Web Component for playing vectorized Lottie animations in your web app",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -75,6 +75,6 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 7.6.0"
+    "node": ">= 12.17.0"
   }
 }

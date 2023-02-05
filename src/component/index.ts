@@ -111,7 +111,7 @@ export class DotLottiePlayer extends LitElement {
   public speed?: number = 1
 
   /**
-   * Bodymovin JSON data, URL to JSON or dotLottie
+   * JSON/dotLottie data or URL to JSON/dotLottie
    */
   @property({ type: String })
   public src!: string
@@ -128,42 +128,39 @@ export class DotLottiePlayer extends LitElement {
   private _counter = 0
 
   /**
-   * Configure and initialize lottie-web player instance
+   * Initialize lottie-web player
    */
   public async load(src: string | Record<string, unknown>): Promise<void> {
     if (!this.shadowRoot) {
       return
     }
 
-    let rendererSettings
+    const { preserveAspectRatio } = this,
     
-    switch (this.renderer) {
-      case 'canvas':
-        rendererSettings = {
-          clearCanvas: true,
-          preserveAspectRatio: this.preserveAspectRatio,
-          progressiveLoad: true,
-        }
-        break
-      case 'html':
-        rendererSettings = {
-          hideOnTransparent: true
-        }
-        break
-      default:
-        rendererSettings = {
-          hideOnTransparent: true,
-          preserveAspectRatio: this.preserveAspectRatio,
-          progressiveLoad: true,
-        }
-    }
-
-    const options: any = {
+      options: any = {
       container: this.container,
       loop: this.loop,
       autoplay: this.autoplay,
       renderer: this.renderer,
-      rendererSettings
+      rendererSettings: {
+        hideOnTransparent: true,
+        preserveAspectRatio,
+        progressiveLoad: true,
+      }
+    }
+    
+    switch (this.renderer) {
+      case 'canvas':
+        options.rendererSettings = {
+          clearCanvas: true,
+          preserveAspectRatio,
+          progressiveLoad: true,
+        }
+        break
+      case 'html':
+        options.rendererSettings = {
+          hideOnTransparent: true
+        }
     }
 
     // Load the resource information

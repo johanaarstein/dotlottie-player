@@ -1,27 +1,29 @@
 # dotLottie Player Web Component
 
-![Awesome Vector Animations](/gitAssets/readmeBanner.svg)
+![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies here and tweaked some configurations there. This component is now SSR compatible, and is a fraction of the size it had when we started out. In our humble opinion this is now the most versatile and effective Lottie Web Component package out there.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Web Component package out there – in our humble opinion. The component is SSR compatible, and it weighs a fraction of what it did when we started out.
 
 ## Demo
 
-Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player) of the package!
+Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player)!
 
 ## Installation
 
 ### In HTML, import from CDN or from local installation
 
+There are two files in this package: `index.js` is an UMD where all the dependencies are bundled, while `index.mjs` is an ESM where none of the dependencies are bundled. If you don't use a package library or a tool like npm or yarn, go for the UMD. Otherwise we reccommend the ESM. 
+
 - Import from CDN:
 
 ```xml
-<script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/dotlottie-player.js"></script>
+<script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/index.js"></script>
 ```
 
 - Import from local node_modules directory:
 
 ```xml
-<script src="/node_modules/@johanaarstein/dotlottie-player/dist/dotlottie-player.js"></script>
+<script src="/node_modules/@johanaarstein/dotlottie-player/dist/index.mjs"></script>
 ```
 
 ### In Javascript or TypeScript
@@ -42,7 +44,7 @@ import '@johanaarstein/dotlottie-player'
 
 ### The player component
 
-Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either a LottieJSON or a dotLottie.
+Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either LottieJSON or dotLottie.
 
 ```xml
 <dotlottie-player
@@ -75,8 +77,6 @@ player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 
 ### ReactJS
 
-1. Import the player and use it:
-
 ```javascript
 import '@johanaarstein/dotlottie-player'
 
@@ -98,28 +98,7 @@ export default App
 
 ### ReactJS + Typescript
 
-1. Import and use like this:
-
-```javascript
-import '@johanaarstein/dotlottie-player'
-
-function App() {
-  return (
-    <div className="App">
-      <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-        autoplay
-        loop
-        style={{ height: '100%', width: '100%' }}
-      />
-    </div>
-  )
-}
-
-export default App
-```
-
-2. Create a global.d.ts file in your src folder:
+Same as above, but you also need to create a global.d.ts file in your src folder, to avoid a TypeScript error.
 
 ```typescript
 declare namespace JSX {
@@ -131,19 +110,19 @@ declare namespace JSX {
 
 ### NuxtJS / VueJS
 
-1. Update the array of plugins in nuxt.config.js file in your root:
+1. Update the array of plugins in nuxt.config.js file in your root.
 
 ```javascript
 plugins: [{ src: '~/plugins/lottie-player', mode: 'client' }]
 ```
 
-2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js:
+2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js.
 
 ```javascript
 import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 ```
 
-3. The component can now be used in your pages or components template tags – without the need for any imports:
+3. The component can now be used in your pages or components template tags – without the need for any imports.
 
 ```xml
 <template>
@@ -162,16 +141,16 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 
 | Property              | Attribute             | Description                        | Type                                 | Default           |
 | --------------------- | --------------------- | ---------------------------------- | ------------------------------------ | ----------------- |
-| `autoplay`            | `autoplay`            | Autoplay animation on load         | `boolean`                            | `false`           |
+| `autoplay`            | `autoplay`            | Play animation on load             | `boolean`                            | `false`           |
 | `background`          | `background`          | Background color                   | `string`                             | `undefined`       |
 | `controls`            | `controls`            | Show controls                      | `boolean`                            | `false`           |
 | `count`               | `count`               | Number of times to loop animation  | `number`                             | `undefined`       |
-| `direction`           | `direction`           | Direction of animation             | `number`                             | `1`               |
+| `direction`           | `direction`           | Direction of animation             | `1 \| -1`                            | `1`               |
 | `hover`               | `hover`               | Whether to play on mouse hover     | `boolean`                            | `false`           |
 | `loop`                | `loop`                | Whether to loop animation          | `boolean`                            | `false`           |
-| `mode`                | `mode`                | Play mode                          | `PlayMode.Bounce \| PlayMode.Normal` | `PlayMode.Normal` |
+| `mode`                | `mode`                | Play mode                          | `"normal" \| "bounce"`               | `normal`          |
 | `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio                       | `string`                             | `'xMidYMid meet'` |
-| `renderer`            | `renderer`            | Renderer to use                    | `"svg"`                              | `'svg'`           |
+| `renderer`            | `renderer`            | Renderer to use                    | `"svg" \| "canvas" \| "html"`        | `'svg'`           |
 | `speed`               | `speed`               | Animation speed                    | `number`                             | `1`               |
 | `src` _(required)_    | `src`                 | URL to JSON or dotLottie file      | `string`                             | `undefined`       |
 
@@ -181,43 +160,29 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 
 **`load(src: string) => void`**
 
-Load a Lottie animation.
-
 ### Pause
 
 **`pause() => void`**
-
-Pause animation.
 
 ### Play
 
 **`play() => void`**
 
-Play animation.
-
 ### Set Direction
 
 **`setDirection(value: 1 | -1) => void`**
-
-Set animation direction.
 
 ### Set Looping
 
 **`setLooping(value: boolean) => void`**
 
-Set looping of animation.
-
 ### Set speed
 
 **`setSpeed(value?: number) => void`**
 
-Set animation speed.
-
 ### Stop
 
 **`stop() => void`**
-
-Stop animation.
 
 ### Seek
 
@@ -235,19 +200,13 @@ Snapshot the current frame as SVG. If 'download' is set to true, a download is t
 
 **`toggleLooping() => void`**
 
-Toggle looping.
-
 ### Toggle play
 
 **`togglePlay() => void`**
 
-Toggle playing.
-
 ### Reload
 
 **`reload() => void`**
-
-Reload Lottie.
 
 ## Events
 
@@ -262,13 +221,13 @@ The following events are exposed and can be listened to via `addEventListener` c
 | `freeze`   | Animation is paused due to player being out of view                       |
 | `load`     | Animation is loaded                                                       |
 | `loop`     | A loop is completed                                                       |
-| `play`     | Animation has started plahing                                             |
+| `play`     | Animation has started playing                                             |
 | `pause`    | Animation has paused                                                      |
 | `ready`    | Animation is loaded and player is ready                                   |
 | `stop`     | Animation has stopped                                                     |
 
 ## WordPress Plugin
-<img align="left" width="110" height="110" src="/gitAssets/wpIcon.svg" style="padding-right: 20px" />
+<img align="left" width="110" height="110" src="/.github/wpIcon.svg" />
 
 We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
 

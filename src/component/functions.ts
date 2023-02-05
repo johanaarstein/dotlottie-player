@@ -39,7 +39,7 @@ export async function fetchPath(path: string): Promise<JSON> {
 
         if (!p || !lottieAnimation?.[`images/${p}`]) return
 
-        return new Promise<void>((resolveAsset) => {
+        return new Promise<void>(resolveAsset => {
           const ext = p.split('.').pop(),
             assetB64 = Buffer.from(lottieAnimation?.[`images/${p}`])?.toString('base64')
 

@@ -5,6 +5,7 @@
     "declarationDir": "./types",
     "declarationMap": true,
     "experimentalDecorators": true,
+    "isolatedModules": true,
     "lib": [
       "DOM",
       "ESNext.array",
