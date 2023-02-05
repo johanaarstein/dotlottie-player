@@ -10,7 +10,7 @@ Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player)!
 
 ## Installation
 
-### In HTML, import from CDN or from local installation
+### In HTML
 
 There are two files in this package: `index.js` is an UMD where all the dependencies are bundled, while `index.mjs` is an ESM where none of the dependencies are bundled. If you don't use a package library or a tool like npm or yarn, go for the UMD. Otherwise we reccommend the ESM. 
 
