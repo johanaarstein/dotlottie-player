@@ -1,6 +1,8 @@
-import { html, LitElement, nothing, TemplateResult } from 'lit'
+import { html, LitElement, nothing } from 'lit'
+import type { TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import Lottie, { AnimationDirection, AnimationItem, RendererType } from 'lottie-web'
+import Lottie from 'lottie-web'
+import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
 
 import { playerVerion, webVersion } from './versions'
 import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'

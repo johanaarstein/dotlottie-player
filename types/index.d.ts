@@ -1,7 +1,11 @@
 
 import { CSSResult, LitElement, TemplateResult } from 'lit';
-import { AnimationDirection, AnimationItem, RendererType } from 'lottie-web';
+import { AnimationItem, RendererType } from 'lottie-web';
 import { Unzipped } from 'fflate';
+
+export type AnimationDirection = 1 | -1;
+
+export type RendererType = 'svg' | 'canvas' | 'html';
 
 export enum PlayerState {
   Completed = 'completed',

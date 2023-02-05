@@ -54,10 +54,17 @@ export default [
   },
   {
     input,
-    output: {
-      file: pkg.module,
-      format: 'es',
-    },
+    output: [
+      {
+        file: pkg.module,
+        format: 'es',
+      },
+      // {
+      //   file: pkg.exports.node,
+      //   format: 'cjs',
+      //   exports: 'named'
+      // }
+    ],
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
