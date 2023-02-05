@@ -139,20 +139,20 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 
 ## Properties
 
-| Property              | Attribute             | Description                        | Type                                 | Default           |
-| --------------------- | --------------------- | ---------------------------------- | ------------------------------------ | ----------------- |
-| `autoplay`            | `autoplay`            | Play animation on load             | `boolean`                            | `false`           |
-| `background`          | `background`          | Background color                   | `string`                             | `undefined`       |
-| `controls`            | `controls`            | Show controls                      | `boolean`                            | `false`           |
-| `count`               | `count`               | Number of times to loop animation  | `number`                             | `undefined`       |
-| `direction`           | `direction`           | Direction of animation             | `1 \| -1`                            | `1`               |
-| `hover`               | `hover`               | Whether to play on mouse hover     | `boolean`                            | `false`           |
-| `loop`                | `loop`                | Whether to loop animation          | `boolean`                            | `false`           |
-| `mode`                | `mode`                | Play mode                          | `"normal" \| "bounce"`               | `normal`          |
-| `preserveAspectRatio` | `preserveAspectRatio` | Aspect ratio                       | `string`                             | `'xMidYMid meet'` |
-| `renderer`            | `renderer`            | Renderer to use                    | `"svg" \| "canvas" \| "html"`        | `'svg'`           |
-| `speed`               | `speed`               | Animation speed                    | `number`                             | `1`               |
-| `src` _(required)_    | `src`                 | URL to JSON or dotLottie file      | `string`                             | `undefined`       |
+| Property / Attribute  | Description                        | Type                            | Default           |
+| --------------------- | ---------------------------------- | ------------------------------- | ----------------- |
+| `autoplay`            | Play animation on load             | `boolean`                       | `false`           |
+| `background`          | Background color                   | `string`                        | `undefined`       |
+| `controls`            | Show controls                      | `boolean`                       | `false`           |
+| `count`               | Number of times to loop animation  | `number`                        | `undefined`       |
+| `direction`           | Direction of animation             | `1 \| -1`                       | `1`               |
+| `hover`               | Whether to play on mouse hover     | `boolean`                       | `false`           |
+| `loop`                | Whether to loop animation          | `boolean`                       | `false`           |
+| `mode`                | Play mode                          | `"normal" \| "bounce"`          | `normal`          |
+| `preserveAspectRatio` | Aspect ratio                       | `string`                        | `'xMidYMid meet'` |
+| `renderer`            | Renderer to use                    | `"svg" \| "canvas" \| "html"`   | `'svg'`           |
+| `speed`               | Animation speed                    | `number`                        | `1`               |
+| `src` _(required)_    | URL to JSON or dotLottie file      | `string`                        | `undefined`       |
 
 ## Methods
 
@@ -212,19 +212,19 @@ Snapshot the current frame as SVG. If 'download' is set to true, a download is t
 
 The following events are exposed and can be listened to via `addEventListener` calls.
 
-| Name       | Description                                                               |
-| ---------- | ------------------------------------------------------------------------- |
-| `complete` | Animation is complete – including all loops                               |
-| `destroyed`| Animation is destroyed                                                    |
-| `error`    | An animation source cannot be parsed, fails to load or has format errors  |
-| `frame`    | A new frame is entered                                                    |
-| `freeze`   | Animation is paused due to player being out of view                       |
-| `load`     | Animation is loaded                                                       |
-| `loop`     | A loop is completed                                                       |
-| `play`     | Animation has started playing                                             |
-| `pause`    | Animation has paused                                                      |
-| `ready`    | Animation is loaded and player is ready                                   |
-| `stop`     | Animation has stopped                                                     |
+| Name       | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+| `complete` | Animation is complete – including all loops                      |
+| `destroyed`| Animation is destroyed                                           |
+| `error`    | The source cannot be parsed, fails to load or has format errors  |
+| `frame`    | A new frame is entered                                           |
+| `freeze`   | Animation is paused due to player being out of view              |
+| `load`     | Animation is loaded                                              |
+| `loop`     | A loop is completed                                              |
+| `play`     | Animation has started playing                                    |
+| `pause`    | Animation has paused                                             |
+| `ready`    | Animation is loaded and player is ready                          |
+| `stop`     | Animation has stopped                                            |
 
 ## WordPress Plugin
 <img align="left" width="110" height="110" src="/.github/wpIcon.svg" />
