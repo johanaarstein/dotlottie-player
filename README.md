@@ -2,7 +2,7 @@
 
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Web Component package out there – in our humble opinion. The component is SSR compatible, and it weighs a fraction of what it did when we started out.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Web Component package out there – in our humble opinion! The component is SSR compatible, and weighs a fraction of what it did when we started out.
 
 ## Demo
 
@@ -12,7 +12,7 @@ Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player)!
 
 ### In HTML
 
-There are two files in this package: `index.js` is an UMD where all the dependencies are bundled, while `index.mjs` is an ESM where none of the dependencies are bundled. If you don't use a package library or a tool like npm or yarn, go for the UMD. Otherwise we reccommend the ESM. 
+There are two files in this package. The first, `index.js`, is an UMD where all the dependencies are bundled within, while `index.mjs` is an ESM where all the dependencies are external. If you don't use a package library or a tool like npm or yarn, go for the UMD. Otherwise we reccommend the ESM. 
 
 - Import from CDN:
 
