@@ -2,7 +2,7 @@
 
 ![Awesome Vector Animations](/gitAssets/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies, and tweaked some configurations, and in our humble opinion this is now the most versatile and effective Lottie Web Component package out there.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with canvas-rendering and aspect-ratio settings. We've since added some functionalies here and tweaked some configurations there. This component is now SSR compatible, and is a fraction of the size it had when we started out. In our humble opinion this is now the most versatile and effective Lottie Web Component package out there.
 
 ## Demo
 
@@ -129,34 +129,6 @@ declare namespace JSX {
 }
 ```
 
-### NextJS
-
-1. To avoid "window is not defined" import the module inside a useEffect hook:
-
-```javascript
-import { useEffect } from 'react'
-
-function App() {
-
-  useEffect(() => {
-    import('@johanaarstein/dotlottie-player')
-  }, [])
-
-  return (
-    <div className="App">
-      <dotlottie-player
-        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-        autoplay
-        loop
-        style={{ height: '100%', width: '100%' }}
-      />
-    </div>
-  )
-}
-
-export default App
-```
-
 ### NuxtJS / VueJS
 
 1. Update the array of plugins in nuxt.config.js file in your root:
@@ -186,8 +158,6 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 </script>
 ```
 
-In VueJS this library must be declared as a client side plugin module.
-
 ## Properties
 
 | Property              | Attribute             | Description                        | Type                                 | Default           |
@@ -213,25 +183,11 @@ In VueJS this library must be declared as a client side plugin module.
 
 Load a Lottie animation.
 
-#### Parameters
-
-| Name  | Type     | Description                   |
-| ----- | -------- | ----------------------------- |
-| `src` | `string` | URL to JSON or dotLottie file |
-
-#### Returns
-
-Type: `void`
-
 ### Pause
 
 **`pause() => void`**
 
 Pause animation.
-
-#### Returns
-
-Type: `void`
 
 ### Play
 
@@ -239,25 +195,11 @@ Type: `void`
 
 Play animation.
 
-#### Returns
-
-Type: `void`
-
 ### Set Direction
 
-**`setDirection(value: number) => void`**
+**`setDirection(value: 1 | -1) => void`**
 
 Set animation direction.
-
-#### Parameters
-
-| Name    | Type     | Description       |
-| ------- | -------- | ----------------- |
-| `value` | `number` | Direction values  |
-
-#### Returns
-
-Type: `void`
 
 ### Set Looping
 
@@ -265,31 +207,11 @@ Type: `void`
 
 Set looping of animation.
 
-#### Parameters
-
-| Name    | Type      | Description               |
-| ------- | --------- | --------------------------|
-| `value` | `boolean` | Whether to enable looping |
-
-#### Returns
-
-Type: `void`
-
 ### Set speed
 
 **`setSpeed(value?: number) => void`**
 
 Set animation speed.
-
-#### Parameters
-
-| Name    | Type     | Description     |
-| ------- | -------- | --------------- |
-| `value` | `number` | Playback speed  |
-
-#### Returns
-
-Type: `void`
 
 ### Stop
 
@@ -297,19 +219,11 @@ Type: `void`
 
 Stop animation.
 
-#### Returns
-
-Type: `void`
-
 ### Seek
 
 **`seek(value: number | string) => void`**
 
 Go to frame. Can be a number or a percentage string (e.g. 50%).
-
-#### Returns
-
-Type: `void`
 
 ### Snapshot
 
@@ -317,19 +231,11 @@ Type: `void`
 
 Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.
 
-#### Returns
-
-Type: `string`
-
 ### Toggle looping
 
 **`toggleLooping() => void`**
 
 Toggle looping.
-
-#### Returns
-
-Type: `void`
 
 ### Toggle play
 
@@ -337,19 +243,11 @@ Type: `void`
 
 Toggle playing.
 
-#### Returns
-
-Type: `void`
-
 ### Reload
 
 **`reload() => void`**
 
 Reload Lottie.
-
-#### Returns
-
-Type: `void`
 
 ## Events
 

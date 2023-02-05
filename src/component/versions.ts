@@ -3,7 +3,7 @@
 //   playerVerion = pkg.version,
 //   webVersion = pkg.dependencies['lottie-web']
 
-const playerVerion = '1.3.13',
+const playerVerion = '1.4.0',
   webVersion = '5.10.2'
 
 export {
