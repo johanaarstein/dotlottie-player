@@ -4,6 +4,7 @@
     "parser": {
       "syntax": "typescript",
       "decorators": true,
+      "decoratorsBeforeExport": true,
       "dynamicImport": true
     },
     "target": "es2020",
