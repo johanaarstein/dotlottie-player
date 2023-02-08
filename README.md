@@ -157,19 +157,19 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 ## Methods
 
 | Function                                                                                                                                    | Method                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| Load                                                                                                                                        | `load(src: string) => void`               |
-| Pause                                                                                                                                       | `pause() => void`                         |
-| Play                                                                                                                                        | `play() => void`                          |
-| Reload                                                                                                                                      | `reload() => void`                        |
-| Seek<br><sub><sup>Go to frame. Can be a number or a percentage string (e.g. 50%).</sup></sub>                                               | `seek(value: number \| string) => void`   |
-| Set Direction                                                                                                                               | `setDirection(value: 1 \| -1) => void`    |
-| Set Looping                                                                                                                                 | `setLooping(value: boolean) => void`      |
-| Set Speed                                                                                                                                   | `setSpeed(value?: number) => void`        |
-| Snapshot<br><sub><sup>Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.</sup></sub>  | `snapshot(download?: boolean) => string`  |
-| Stop                                                                                                                                        | `stop() => void`                          |
-| Toggle looping                                                                                                                              | `toggleLooping() => void`                 |
-| Toggle play                                                                                                                                 | `togglePlay() => void`                    |
+| --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Load                                                                                                                  | `load(src: string) => void`               |
+| Pause                                                                                                                 | `pause() => void`                         |
+| Play                                                                                                                  | `play() => void`                          |
+| Reload                                                                                                                | `reload() => void`                        |
+| Seek<br>Go to frame. Can be a number or a percentage string (e.g. 50%).                                               | `seek(value: number \| string) => void`   |
+| Set Direction                                                                                                         | `setDirection(value: 1 \| -1) => void`    |
+| Set Looping                                                                                                           | `setLooping(value: boolean) => void`      |
+| Set Speed                                                                                                             | `setSpeed(value?: number) => void`        |
+| Snapshot<br>Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  | `snapshot(download?: boolean) => string`  |
+| Stop                                                                                                                  | `stop() => void`                          |
+| Toggle looping                                                                                                        | `toggleLooping() => void`                 |
+| Toggle play                                                                                                           | `togglePlay() => void`                    |
 
 ## Events
 
