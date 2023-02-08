@@ -162,8 +162,8 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 | Pause           | `pause() => void`                         |                                                                                                           |
 | Play            | `play() => void`                          |                                                                                                           |
 | Reload          | `reload() => void`                        |                                                                                                           |
-| Seek            | `seek(value: number | string) => void`    | Go to frame. Can be a number or a percentage string (e.g. 50%).                                           |
-| Set Direction   | `setDirection(value: 1 | -1) => void`     |                                                                                                           |
+| Seek            | `seek(value: number \| string) => void`   | Go to frame. Can be a number or a percentage string (e.g. 50%).                                           |
+| Set Direction   | `setDirection(value: 1 \| -1) => void`    |                                                                                                           |
 | Set Looping     | `setLooping(value: boolean) => void`      |                                                                                                           |
 | Set Speed       | `setSpeed(value?: number) => void`        |                                                                                                           |
 | Snapshot        | `snapshot(download?: boolean) => string`  | Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  |
