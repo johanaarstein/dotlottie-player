@@ -28,13 +28,13 @@ There are two files in this package. The first, `index.js`, is an UMD where all 
 
 ### In Javascript or TypeScript
 
-1. Install package using npm or yarn:
+1. Install using npm or yarn:
 
 ```shell
 npm install --save @johanaarstein/dotlottie-player
 ```
 
-2. Import package in your code:
+2. Import in your app:
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -58,7 +58,7 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
 </dotlottie-player>
 ```
 
-You may set and load animations programmatically as well:
+You may load animations programmatically as well:
 
 ```xml
 <dotlottie-player
@@ -139,74 +139,37 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 
 ## Properties
 
-| Property / Attribute  | Description                        | Type                            | Default           |
-| --------------------- | ---------------------------------- | ------------------------------- | ----------------- |
-| `autoplay`            | Play animation on load             | `boolean`                       | `false`           |
-| `background`          | Background color                   | `string`                        | `undefined`       |
-| `controls`            | Show controls                      | `boolean`                       | `false`           |
-| `count`               | Number of times to loop animation  | `number`                        | `undefined`       |
-| `direction`           | Direction of animation             | `1 \| -1`                       | `1`               |
-| `hover`               | Whether to play on mouse hover     | `boolean`                       | `false`           |
-| `loop`                | Whether to loop animation          | `boolean`                       | `false`           |
-| `mode`                | Play mode                          | `"normal" \| "bounce"`          | `normal`          |
-| `preserveAspectRatio` | Aspect ratio                       | `string`                        | `'xMidYMid meet'` |
-| `renderer`            | Renderer to use                    | `"svg" \| "canvas" \| "html"`   | `'svg'`           |
-| `speed`               | Animation speed                    | `number`                        | `1`               |
-| `src` _(required)_    | URL to JSON or dotLottie file      | `string`                        | `undefined`       |
+| Property / Attribute  | Description                        | Type                                     | Default           |
+| --------------------- | ---------------------------------- | ---------------------------------------- | ----------------- |
+| `autoplay`            | Play animation on load             | `boolean`                                | `false`           |
+| `background`          | Background color                   | `string`                                 | `undefined`       |
+| `controls`            | Show controls                      | `boolean`                                | `false`           |
+| `count`               | Number of times to loop animation  | `number`                                 | `undefined`       |
+| `direction`           | Direction of animation             | `1 \| -1`                                | `1`               |
+| `hover`               | Whether to play on mouse hover     | `boolean`                                | `false`           |
+| `loop`                | Whether to loop animation          | `boolean`                                | `false`           |
+| `mode`                | Play mode                          | `normal` \| `bounce`                     | `normal`          |
+| `objectfit`           | Resizing of animation              | `contain` \| `cover` \| `fill` \| `none` | `contain`         |
+| `renderer`            | Renderer to use                    | `svg` \| `canvas` \| `html`              | `'svg'`           |
+| `speed`               | Animation speed                    | `number`                                 | `1`               |
+| `src` _(required)_    | URL to LottieJSON or dotLottie     | `string`                                 | `undefined`       |
 
 ## Methods
 
-### Load
-
-**`load(src: string) => void`**
-
-### Pause
-
-**`pause() => void`**
-
-### Play
-
-**`play() => void`**
-
-### Set Direction
-
-**`setDirection(value: 1 | -1) => void`**
-
-### Set Looping
-
-**`setLooping(value: boolean) => void`**
-
-### Set speed
-
-**`setSpeed(value?: number) => void`**
-
-### Stop
-
-**`stop() => void`**
-
-### Seek
-
-**`seek(value: number | string) => void`**
-
-Go to frame. Can be a number or a percentage string (e.g. 50%).
-
-### Snapshot
-
-**`snapshot(download?: boolean) => string`**
-
-Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.
-
-### Toggle looping
-
-**`toggleLooping() => void`**
-
-### Toggle play
-
-**`togglePlay() => void`**
-
-### Reload
-
-**`reload() => void`**
+| Name            | Method                                    | Description                                                                                               |
+| --------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Load            | `load(src: string) => void`               |                                                                                                           |
+| Pause           | `pause() => void`                         |                                                                                                           |
+| Play            | `play() => void`                          |                                                                                                           |
+| Reload          | `reload() => void`                        |                                                                                                           |
+| Seek            | `seek(value: number | string) => void`    | Go to frame. Can be a number or a percentage string (e.g. 50%).                                           |
+| Set Direction   | `setDirection(value: 1 | -1) => void`     |                                                                                                           |
+| Set Looping     | `setLooping(value: boolean) => void`      |                                                                                                           |
+| Set Speed       | `setSpeed(value?: number) => void`        |                                                                                                           |
+| Snapshot        | `snapshot(download?: boolean) => string`  | Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  |
+| Stop            | `stop() => void`                          |                                                                                                           |
+| Toggle looping  | `toggleLooping() => void`                 |                                                                                                           |
+| Toggle play     | `togglePlay() => void`                    |                                                                                                           |
 
 ## Events
 
@@ -229,7 +192,7 @@ The following events are exposed and can be listened to via `addEventListener` c
 ## WordPress Plugin
 <img align="left" width="110" height="110" src="/.github/wpIcon.svg" />
 
-We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor and Divi Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
+We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor, Divi Builder and Flatsome UX Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
 
 It's also super lightweight – and only loads on pages where it's in use.
 

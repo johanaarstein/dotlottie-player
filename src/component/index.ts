@@ -5,8 +5,10 @@ import Lottie from 'lottie-web'
 import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
 
 import { playerVerion, webVersion } from './versions'
-import { PlayMode, PlayerEvents, PlayerState, Versions } from './types.d'
-import { fetchPath } from './functions'
+import { PlayMode, PlayerEvents, PlayerState } from './types.d'
+import type { ObjectFit, PreserveAspectRatio, Versions } from './types.d'
+
+import { aspectRatio, fetchPath } from './functions'
 
 import styles from './styles'
 
@@ -84,13 +86,19 @@ export class DotLottiePlayer extends LitElement {
    * Play mode
    */
   @property()
-  public mode?: PlayMode = PlayMode.Normal
+  public mode: PlayMode = PlayMode.Normal
 
   /**
-   * Aspect ratio
+   * Resizing to container
   */
   @property({ type: String })
-  public preserveAspectRatio = 'xMidYMid meet'
+  public objectfit: ObjectFit = 'contain'
+
+  /**
+   * Resizing to container (Deprecated)
+  */
+  @property({ type: String })
+  public preserveAspectRatio?: PreserveAspectRatio
 
   /**
    * Renderer to use (svg, canvas or html)
@@ -135,7 +143,7 @@ export class DotLottiePlayer extends LitElement {
       return
     }
 
-    const { preserveAspectRatio } = this,
+    const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit),
     
       options: any = {
       container: this.container,
