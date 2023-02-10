@@ -1,12 +1,12 @@
 import { html, LitElement, nothing } from 'lit'
-import type { TemplateResult } from 'lit'
+import type { CSSResult, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
-import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
+import type { AnimationItem, AnimationDirection,  RendererType } from 'lottie-web'
 
 import { playerVerion, webVersion } from './versions'
-import { PlayMode, PlayerEvents, PlayerState } from './types.d'
-import type { ObjectFit, PreserveAspectRatio, Versions } from './types.d'
+import { PlayMode, PlayerEvents, PlayerState } from './types'
+import type { ObjectFit, PreserveAspectRatio, Versions } from './types'
 
 import { aspectRatio, fetchPath } from './functions'
 
@@ -26,103 +26,103 @@ export class DotLottiePlayer extends LitElement {
    * Autoplay animation
    */
   @property({ type: Boolean, reflect: true })
-  public autoplay = false
+  autoplay = false
 
   /**
    * Background color
    */
   @property({ type: String })
-  public background?: string = 'transparent'
+  background?: string = 'transparent'
 
   /**
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
-  public controls = false
+  controls = false
 
   /**
    * Number of times to loop animation
    */
   @property({ type: Number })
-  public count?: number
+  count?: number
 
   /**
    * Player state
    */
   @property({ type: String })
-  public currentState: PlayerState = PlayerState.Loading
+  currentState: PlayerState = PlayerState.Loading
  
   /**
    * Animation description for screen readers
    */
   @property({ type: String })
-  public description?: string
+  description?: string
 
   /**
    * Direction of animation
    */
   @property({ type: Number })
-  public direction: AnimationDirection = 1
+  direction: AnimationDirection = 1
 
   /**
    * Whether to play on mouse hover
    */
   @property({ type: Boolean })
-  public hover? = false
+  hover = false
 
   /**
    * Intermission
    */
   @property()
-  public intermission? = 1
+  intermission = 1
 
   /**
    * Whether to loop animation
    */
   @property({ type: Boolean, reflect: true })
-  public loop = false
+  loop = false
 
   /**
    * Play mode
    */
   @property()
-  public mode: PlayMode = PlayMode.Normal
+  mode: PlayMode = PlayMode.Normal
 
   /**
    * Resizing to container
   */
   @property({ type: String })
-  public objectfit: ObjectFit = 'contain'
+  objectfit: ObjectFit = 'contain'
 
   /**
    * Resizing to container (Deprecated)
   */
   @property({ type: String })
-  public preserveAspectRatio?: PreserveAspectRatio
+  preserveAspectRatio?: PreserveAspectRatio
 
   /**
    * Renderer to use (svg, canvas or html)
    */
   @property({ type: String })
-  public renderer: RendererType = 'svg'
+  renderer: RendererType = 'svg'
 
   /**
    * Seeker
    */
   @property()
-  public seeker?: number
+  seeker?: number
 
   /**
    * Animation speed
    */
   @property({ type: Number })
-  public speed?: number = 1
+  speed?: number = 1
 
   /**
    * JSON/dotLottie data or URL to JSON/dotLottie
    */
   @property({ type: String })
-  public src!: string
+  src!: string
 
   /**
    * Animation container
@@ -146,16 +146,16 @@ export class DotLottiePlayer extends LitElement {
     const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit),
     
       options: any = {
-      container: this.container,
-      loop: this.loop,
-      autoplay: this.autoplay,
-      renderer: this.renderer,
-      rendererSettings: {
-        hideOnTransparent: true,
-        preserveAspectRatio,
-        progressiveLoad: true,
+        container: this.container,
+        loop: this.loop,
+        autoplay: this.autoplay,
+        renderer: this.renderer,
+        rendererSettings: {
+          hideOnTransparent: true,
+          preserveAspectRatio,
+          progressiveLoad: true,
+        }
       }
-    }
     
     switch (this.renderer) {
       case 'canvas':
@@ -205,7 +205,7 @@ export class DotLottiePlayer extends LitElement {
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
             detail: {
-              frame: this._lottie?.currentFrame,
+              frame: currentFrame, //this._lottie?.
               seeker: this.seeker,
             },
           }),
@@ -309,9 +309,7 @@ export class DotLottiePlayer extends LitElement {
    * Handles click and drag actions on the progress track
    */
   private _handleSeekChange(event: Event & { target: HTMLInputElement }): void {
-    if (!event.target || !this._lottie || isNaN(Number(event.target.value))) {
-      return
-    }
+    if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return
 
     const frame: number = (Number(event.target.value) / 100) * this._lottie.totalFrames
 
@@ -418,7 +416,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Snapshot the current frame as SVG
    *
-   * If 'download' argument is boolean true, then a download is triggered in browser
+   * If 'download' argument is true, a download is triggered in the browser
    */
   public snapshot(download = true): string | void {
     if (!this.shadowRoot) return
@@ -470,7 +468,6 @@ export class DotLottiePlayer extends LitElement {
 
   /**
    * Set animation play speed
-   *
    * @param value Playback speed.
    */
   public setSpeed(value = 1): void {
@@ -480,7 +477,6 @@ export class DotLottiePlayer extends LitElement {
 
   /**
    * Animation play direction
-   *
    * @param value AnimationDirection
    */
   public setDirection(value: number): void {
@@ -523,14 +519,13 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Return the styles for the component
    */
-  static get styles() {
+  static get styles(): CSSResult {
     return styles
   }
 
   /**
    * Initialize everything on component first render
    */
-
   connectedCallback(): void {
     super.connectedCallback()
   

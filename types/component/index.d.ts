@@ -1,19 +1,22 @@
-import { LitElement, TemplateResult } from 'lit';
-import { AnimationDirection, AnimationItem, RendererType } from 'lottie-web';
-import { PlayMode, PlayerState } from './types.d';
+import { LitElement } from 'lit';
+import type { CSSResult, TemplateResult } from 'lit';
+import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web';
+import { PlayMode, PlayerState } from './types';
+import type { ObjectFit, PreserveAspectRatio, Versions } from './types';
 export declare class DotLottiePlayer extends LitElement {
     autoplay: boolean;
     background?: string;
     controls: boolean;
     count?: number;
-    currentState?: PlayerState;
+    currentState: PlayerState;
     description?: string;
     direction: AnimationDirection;
-    hover?: boolean | undefined;
-    intermission?: number | undefined;
+    hover: boolean;
+    intermission: number;
     loop: boolean;
-    mode?: PlayMode;
-    preserveAspectRatio: string;
+    mode: PlayMode;
+    objectfit: ObjectFit;
+    preserveAspectRatio?: PreserveAspectRatio;
     renderer: RendererType;
     seeker?: number;
     speed?: number;
@@ -23,11 +26,12 @@ export declare class DotLottiePlayer extends LitElement {
     private _lottie;
     private _prevState?;
     private _counter;
-    load(src: string | Record<string, unknown>, overrideRendererSettings?: Record<string, unknown>): Promise<void>;
+    load(src: string | Record<string, unknown>): Promise<void>;
     private _onVisibilityChange;
     private _handleSeekChange;
     private isLottie;
     getLottie(): AnimationItem | null;
+    getVersions(): Versions;
     play(): void;
     pause(): void;
     stop(): void;
@@ -41,15 +45,11 @@ export declare class DotLottiePlayer extends LitElement {
     setLooping(value: boolean): void;
     togglePlay(): void;
     toggleLooping(): void;
-    static get styles(): import("lit").CSSResult;
+    static get styles(): CSSResult;
+    connectedCallback(): void;
     protected firstUpdated(): Promise<void>;
     disconnectedCallback(): void;
     protected renderControls(): TemplateResult<1>;
-    render(): TemplateResult | void;
-}
-declare global {
-    interface HTMLElementTagNameMap {
-        'dotlottie-player': DotLottiePlayer;
-    }
+    protected render(): TemplateResult | void;
 }
 //# sourceMappingURL=index.d.ts.map

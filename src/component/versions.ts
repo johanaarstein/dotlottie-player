@@ -1,4 +1,4 @@
-const playerVerion = '1.4.1',
+const playerVerion = '1.4.5',
   webVersion = '5.10.2'
 
 export {

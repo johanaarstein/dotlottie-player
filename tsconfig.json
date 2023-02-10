@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "declaration": true,
     "declarationDir": "./types",
     "declarationMap": true,

@@ -1,5 +1,6 @@
 import commonjs from '@rollup/plugin-commonjs'
 import { externals } from 'rollup-plugin-node-externals'
+import dts from 'rollup-plugin-dts'
 import filesize from 'rollup-plugin-filesize'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { swc, minify } from 'rollup-plugin-swc3'
@@ -39,6 +40,16 @@ const input = './src/index.ts',
 
 export default [
   {
+    input: './types/index.d.ts',
+    output: {
+      file: './dist/index.d.ts',
+      format: 'es'
+    },
+    plugins: [
+      dts(),
+    ]
+  },
+  {
     input,
     output: {
       file: pkg.main,
@@ -54,17 +65,10 @@ export default [
   },
   {
     input,
-    output: [
-      {
-        file: pkg.module,
-        format: 'es',
-      },
-      // {
-      //   file: pkg.exports.node,
-      //   format: 'cjs',
-      //   exports: 'named'
-      // }
-    ],
+    output: {
+      file: pkg.module,
+      format: 'es',
+    },
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)

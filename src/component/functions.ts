@@ -1,7 +1,7 @@
 import { strFromU8, unzip } from 'fflate'
 
-import { LottieAnimation, LottieAssets, LottieManifest } from './types.d'
-import type { ObjectFit } from './types.d'
+import { LottieAnimation, LottieAssets, LottieManifest } from './types'
+import type { ObjectFit } from './types'
 
 const aspectRatio = (objectFit: ObjectFit) => {
   switch (objectFit) {
