@@ -100,7 +100,7 @@ export declare class DotLottiePlayer extends LitElement {
   protected firstUpdated(): Promise<void>;
   disconnectedCallback(): void;
   protected renderControls(): TemplateResult<1>;
-  render(): TemplateResult | void;
+  protected render(): TemplateResult | void;
 }
 declare global {
   interface HTMLElementTagNameMap {

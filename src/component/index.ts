@@ -663,7 +663,7 @@ export class DotLottiePlayer extends LitElement {
     `
   }
 
-  render(): TemplateResult | void {
+  protected render(): TemplateResult | void {
     const className: string = this.controls ? 'main controls' : 'main',
       animationClass: string = this.controls ? 'animation controls' : 'animation'
     
