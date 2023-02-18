@@ -15,8 +15,5 @@
       "legacyDecorator": true,
       "decoratorMetadata": true
     }
-  },
-  "module": {
-    "type": "es6"
   }
 }

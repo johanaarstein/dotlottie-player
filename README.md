@@ -12,18 +12,16 @@ Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), built with
 
 ### In HTML
 
-There are two files in this package. The first, `index.js`, is an UMD where all the dependencies are bundled within, while `index.mjs` is an ESM where all the dependencies are external. If you don't use a package library or a tool like npm or yarn, go for the UMD. Otherwise we reccommend the ESM. 
-
 - Import from CDN:
 
 ```xml
 <script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/index.js"></script>
 ```
 
-- Import from local node_modules directory:
+- Import from node_modules directory:
 
 ```xml
-<script src="/node_modules/@johanaarstein/dotlottie-player/dist/index.mjs"></script>
+<script src="/node_modules/@johanaarstein/dotlottie-player/dist/index.js"></script>
 ```
 
 ### In JavaScript or TypeScript
@@ -42,9 +40,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-### The player component
-
-Add the element `dotlottie-player` and set the `src` property to a URL pointing to a Lottie file – either LottieJSON or dotLottie.
+Add the element `dotlottie-player` to your code and point `src` to a Lottie file of your choice.
 
 ```xml
 <dotlottie-player
@@ -58,7 +54,7 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
 </dotlottie-player>
 ```
 
-You may load animations programmatically as well:
+You may load animations programmatically:
 
 ```javascript
 const player = document.querySelector('dotlottie-player')
@@ -87,22 +83,6 @@ function App() {
 }
 
 export default App
-```
-
-### React.js / Next.js + TypeScript
-
-Same as above, but you also need to create a global.d.ts file in your source folder. This is to avoid a TypeScript error, as well as providing useful type safety.
-
-```typescript
-import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'dotlottie-player': Partial<DotLottiePlayer>
-    }
-  }
-}
 ```
 
 ### Nuxt.js / Vue.js
@@ -196,7 +176,7 @@ The following events are exposed and can be listened to via `addEventListener` c
 
 We've made a free WordPress plugin that works with Gutenberg Blocks, Elementor, Divi Builder and Flatsome UX Builder: [AM LottiePlayer](https://wordpress.org/plugins/am-lottieplayer/). It has all the functionality of this package, with a helpful user interface.
 
-It's also super lightweight – and only loads on pages where it's in use.
+It's super lightweight – and only loads on pages where animations are used.
 
 ## License
 

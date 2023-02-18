@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url)
 global['__filename'] = __filename
 
 const input = './src/index.ts',
-  extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
+  extensions = ['.js', '.ts'],
   globals = {
     lit: 'lit',
     'lit/decorators.js': 'decorators_js',
@@ -65,10 +65,16 @@ export default [
   },
   {
     input,
-    output: {
-      file: pkg.module,
-      format: 'es',
-    },
+    output: [
+      {
+        file: pkg.module,
+        format: 'es',
+      },
+      {
+        file: pkg.exports.require,
+        format: 'cjs'
+      }
+    ],
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)

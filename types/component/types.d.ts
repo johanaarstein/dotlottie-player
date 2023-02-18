@@ -1,4 +1,5 @@
 import { Unzipped } from 'fflate';
+import { DotLottiePlayer } from '.';
 export declare enum PlayerState {
     Completed = "completed",
     Destroyed = "destroyed",
@@ -46,4 +47,11 @@ export type Versions = {
 };
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
 export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin slice' | 'none';
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            'dotlottie-player': Partial<DotLottiePlayer>;
+        }
+    }
+}
 //# sourceMappingURL=types.d.ts.map
