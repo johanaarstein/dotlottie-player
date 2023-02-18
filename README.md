@@ -53,22 +53,12 @@ Add the element `dotlottie-player` and set the `src` property to a URL pointing 
   loop
   mode="normal"
   src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-  style="width: 320px"
+  style="width: 320px; margin: auto;"
 >
 </dotlottie-player>
 ```
 
 You may load animations programmatically as well:
-
-```xml
-<dotlottie-player
-  autoplay
-  controls
-  loop
-  style="width: 320px"
->
-</dotlottie-player>
-```
 
 ```javascript
 const player = document.querySelector('dotlottie-player')
@@ -87,7 +77,10 @@ function App() {
         src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay
         loop
-        style={{ height: '100%', width: '100%' }}
+        style={{
+          width: '320px',
+          margin: 'auto'
+        }}
       />
     </div>
   )
@@ -98,12 +91,16 @@ export default App
 
 ### React.js / Next.js + TypeScript
 
-Same as above, but you also need to create a global.d.ts file in your src folder, to avoid a TypeScript error.
+Same as above, but you also need to create a global.d.ts file in your source folder. This is to avoid a TypeScript error, as well as providing useful type safety.
 
 ```typescript
-declare namespace JSX {
-  interface IntrinsicElements {
-    "dotlottie-player": any
+import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'dotlottie-player': Partial<DotLottiePlayer>
+    }
   }
 }
 ```
@@ -113,7 +110,12 @@ declare namespace JSX {
 1. Update the array of plugins in nuxt.config.js file in your root.
 
 ```javascript
-plugins: [{ src: '~/plugins/lottie-player', mode: 'client' }]
+plugins: [
+  {
+    src: '~/plugins/lottie-player',
+    mode: 'client'
+  }
+]
 ```
 
 2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js.
