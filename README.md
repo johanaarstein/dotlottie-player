@@ -68,7 +68,7 @@ import '@johanaarstein/dotlottie-player'
 
 function App() {
   return (
-    <div className="App">
+    <>
       <dotlottie-player
         src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay
@@ -78,7 +78,7 @@ function App() {
           margin: 'auto'
         }}
       />
-    </div>
+    </>
   )
 }
 
