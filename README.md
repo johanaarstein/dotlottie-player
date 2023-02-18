@@ -6,7 +6,7 @@ This started as a fork of [@dotlottie/player-component](https://github.com/dotlo
 
 ## Demo
 
-Here is a [working demo](https://www.aarstein.media/en/dev/dotlottie-player)!
+Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), built with Next.js.
 
 ## Installation
 
@@ -26,7 +26,7 @@ There are two files in this package. The first, `index.js`, is an UMD where all 
 <script src="/node_modules/@johanaarstein/dotlottie-player/dist/index.mjs"></script>
 ```
 
-### In Javascript or TypeScript
+### In JavaScript or TypeScript
 
 1. Install using npm or yarn:
 
@@ -75,7 +75,7 @@ const player = document.querySelector('dotlottie-player')
 player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 ```
 
-### ReactJS
+### React.js / Next.js
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -96,7 +96,7 @@ function App() {
 export default App
 ```
 
-### ReactJS + Typescript
+### React.js / Next.js + TypeScript
 
 Same as above, but you also need to create a global.d.ts file in your src folder, to avoid a TypeScript error.
 
@@ -108,7 +108,7 @@ declare namespace JSX {
 }
 ```
 
-### NuxtJS / VueJS
+### Nuxt.js / Vue.js
 
 1. Update the array of plugins in nuxt.config.js file in your root.
 
@@ -149,7 +149,7 @@ import * as LottiePlayer from '@johanaarstein/dotlottie-player'
 | `hover`               | Whether to play on mouse hover     | `boolean`                                | `false`           |
 | `loop`                | Whether to loop animation          | `boolean`                                | `false`           |
 | `mode`                | Play mode                          | `normal` \| `bounce`                     | `normal`          |
-| `objectfit`           | Resizing of animation              | `contain` \| `cover` \| `fill` \| `none` | `contain`         |
+| `objectfit`           | Resizing of animation in container | `contain` \| `cover` \| `fill` \| `none` | `contain`         |
 | `renderer`            | Renderer to use                    | `svg` \| `canvas` \| `html`              | `'svg'`           |
 | `speed`               | Animation speed                    | `number`                                 | `1`               |
 | `src` _(required)_    | URL to LottieJSON or dotLottie     | `string`                                 | `undefined`       |
