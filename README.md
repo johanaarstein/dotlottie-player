@@ -63,6 +63,8 @@ player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 
 ### React.js / Next.js
 
+Easy peasy lemon squeezy – just import it and use it. If you've already imported it in a parent component, there's no need to import it again. The component is SSR compatible, so you won't have any issues there. However, you may want to set reflective booleans to an empty string to suppress hydration warnings.
+
 ```javascript
 import '@johanaarstein/dotlottie-player'
 
@@ -71,8 +73,9 @@ function App() {
     <>
       <dotlottie-player
         src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-        autoplay
-        loop
+        autoplay=""
+        controls=""
+        loop=""
         style={{
           width: '320px',
           margin: 'auto'
@@ -87,7 +90,9 @@ export default App
 
 ### Vue.js / Nuxt.js (using Vite.js)
 
-1. Add the dotlottie-player tag as a custom element.
+Compared to React there's a couple of extra steps.
+
+1. Declare the dotlottie-player tag as a custom element, to skip component resolution.
 
 #### Vue.js
 `vite.config.ts`:
@@ -105,7 +110,7 @@ export default defineConfig({
         }
       }
     })
-  ],
+  ]
 })
 ```
 
@@ -117,7 +122,7 @@ export default defineNuxtConfig({
   vue: {
     compilerOptions: {
       isCustomElement: (tag: string) => ['dotlottie-player'].includes(tag),
-    },
+    }
   }
 })
 ```
@@ -137,7 +142,7 @@ app.component('DotLottiePlayer', DotLottiePlayer)
 ```
 
 #### Nuxt.js
-Create a `plugins` folder in your root if it doesnt exist already, add a file named `dotlottie-player.js`:
+Create a `plugins` folder in your root if it doesn't exist already, add a file named `dotlottie-player.js`:
 
 ```javascript
 import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
@@ -153,9 +158,9 @@ export default defineNuxtPlugin(({ vueApp }) => {
 <template>
   <dotlottie-player
     src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-    autoplay
-    loop
-    controls
+    autoplay=""
+    controls=""
+    loop=""
     style="width: 320px; margin: auto;"
   />
 </template>
