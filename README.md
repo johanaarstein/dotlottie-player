@@ -2,11 +2,11 @@
 
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Player Web Component package out there – in our humble opinion. The component is plug and play, it's SSR compatible, and weighs a fraction of what it did when we started out.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and this is now the most versatile Lottie Player Web Component out there – in our humble opinion, of course – and we still managed to trim off some significant weight. The component is built with Lit and compiled with Rust, it's compatible with server side rendering, and like any good web component it's framework agnostic.
 
 ## Demo
 
-Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), built with Next.js.
+Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), running on Next.js.
 
 ## Installation
 
@@ -90,7 +90,7 @@ export default App
 1. Add the dotlottie-player tag as a custom element.
 
 #### Vue.js
-`vite.config.ts`
+`vite.config.ts`:
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -110,7 +110,7 @@ export default defineConfig({
 ```
 
 #### Nuxt.js
-`nuxt.config.ts`
+`nuxt.config.ts`:
 
 ```typescript
 export default defineNuxtConfig({
@@ -125,7 +125,7 @@ export default defineNuxtConfig({
 2. Import the component.
 
 #### Vue.js
-`main.ts`
+`main.ts`:
 
 ```typescript
 import { createApp } from 'vue'
@@ -137,7 +137,7 @@ app.component('DotLottiePlayer', DotLottiePlayer)
 ```
 
 #### Nuxt.js
-Create a plugin folder in your root if it doesnt exist already, add a file named `dotlottie-player.js`.
+Create a `plugins` folder in your root if it doesnt exist already, add a file named `dotlottie-player.js`:
 
 ```javascript
 import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
