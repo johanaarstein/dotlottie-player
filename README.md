@@ -1,8 +1,8 @@
-# dotLottie Player Web Component
+# Lottie Player Web Component
 
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Web Component package out there – in our humble opinion! The component is SSR compatible, and weighs a fraction of what it did when we started out.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalies here and tweaked some configurations there, and now this is the most versatile and effective Lottie Player Web Component package out there – in our humble opinion. The component is plug and play, it's SSR compatible, and weighs a fraction of what it did when we started out.
 
 ## Demo
 
@@ -85,38 +85,80 @@ function App() {
 export default App
 ```
 
-### Nuxt.js / Vue.js
+### Vue.js / Nuxt.js (using Vite.js)
 
-1. Update the array of plugins in nuxt.config.js file in your root.
+1. Add the dotlottie-player tag as a custom element.
 
-```javascript
-plugins: [
-  {
-    src: '~/plugins/lottie-player',
-    mode: 'client'
+#### Vue.js
+`vite.config.ts`
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag: string) => ['dotlottie-player'].includes(tag),
+        }
+      }
+    })
+  ],
+})
+```
+
+#### Nuxt.js
+`nuxt.config.ts`
+
+```typescript
+export default defineNuxtConfig({
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => ['dotlottie-player'].includes(tag),
+    },
   }
-]
+})
 ```
 
-2. Create a plugin folder in your root if it doesnt exist already, add a file named e. g. lottie-player.js.
+2. Import the component.
+
+#### Vue.js
+`main.ts`
+
+```typescript
+import { createApp } from 'vue'
+import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
+import App from './App.vue'
+
+const app = createApp(App)
+app.component('DotLottiePlayer', DotLottiePlayer)
+```
+
+#### Nuxt.js
+Create a plugin folder in your root if it doesnt exist already, add a file named `dotlottie-player.js`.
 
 ```javascript
-import * as LottiePlayer from '@johanaarstein/dotlottie-player'
+import { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
+
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.component('DotLottiePlayer', DotLottiePlayer)
+})
 ```
 
-3. The component can now be used in your pages or components template tags – without the need for any imports.
+3. The component can now be used in your pages or components template tags.
 
-```xml
+```vue
 <template>
   <dotlottie-player
     src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
     autoplay
     loop
+    controls
+    style="width: 320px; margin: auto;"
   />
 </template>
-<script>
-  export default {}
-</script>
 ```
 
 ## Properties
