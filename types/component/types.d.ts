@@ -41,10 +41,6 @@ export interface LottieManifest {
 export interface LottieAnimation extends Unzipped {
     "manifest.json": Uint8Array;
 }
-export type Versions = {
-    lottieWebVersion: string;
-    dotLottiePlayerVersion: string;
-};
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
 export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin slice' | 'none';
 declare global {

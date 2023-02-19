@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import type { CSSResult, TemplateResult } from 'lit';
 import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web';
 import { PlayMode, PlayerState } from './types';
-import type { ObjectFit, PreserveAspectRatio, Versions } from './types';
+import type { ObjectFit, PreserveAspectRatio } from './types';
 export declare class DotLottiePlayer extends LitElement {
     autoplay: boolean;
     background?: string;
@@ -31,7 +31,6 @@ export declare class DotLottiePlayer extends LitElement {
     private _handleSeekChange;
     private isLottie;
     getLottie(): AnimationItem | null;
-    getVersions(): Versions;
     play(): void;
     pause(): void;
     stop(): void;

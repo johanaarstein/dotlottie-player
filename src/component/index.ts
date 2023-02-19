@@ -4,9 +4,8 @@ import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
 import type { AnimationItem, AnimationDirection,  RendererType } from 'lottie-web'
 
-import { playerVerion, webVersion } from './versions'
 import { PlayMode, PlayerEvents, PlayerState } from './types'
-import type { ObjectFit, PreserveAspectRatio, Versions } from './types'
+import type { ObjectFit, PreserveAspectRatio } from './types'
 
 import { aspectRatio, fetchPath } from './functions'
 
@@ -327,13 +326,6 @@ export class DotLottiePlayer extends LitElement {
    */
   public getLottie(): AnimationItem | null {
     return this._lottie
-  }
-
-  public getVersions(): Versions {
-    return {
-      lottieWebVersion: webVersion,
-      dotLottiePlayerVersion: playerVerion,
-    };
   }
 
   /**

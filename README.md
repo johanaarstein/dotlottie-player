@@ -116,7 +116,7 @@ export default defineConfig({
 export default defineNuxtConfig({
   vue: {
     compilerOptions: {
-      isCustomElement: tag => ['dotlottie-player'].includes(tag),
+      isCustomElement: (tag: string) => ['dotlottie-player'].includes(tag),
     },
   }
 })
