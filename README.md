@@ -40,7 +40,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your code and point `src` to a Lottie file of your choice.
+Add the element `dotlottie-player` to your code and point `src` to a Lottie animation of your choice.
 
 ```xml
 <dotlottie-player
@@ -63,7 +63,7 @@ player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 
 ### React.js / Next.js
 
-Easy peasy lemon squeezy – just import it and use it. If you've already imported it in a parent component, there's no need to import it again. The component is SSR compatible, so you won't have any issues there. However, you may want to set reflective booleans to an empty string to suppress hydration warnings.
+Easy peasy lemon squeezy – just import it and use it. If you've already imported it in a parent component, you don't need to import it again in the child. The component is SSR compatible, so you won't have any issues there – however, you may want to set reflective booleans to an empty string to suppress hydration warnings.
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -88,13 +88,33 @@ function App() {
 export default App
 ```
 
+### Angular
+
+1. Import the component in `app.component.ts`.
+
+```typescript
+import { Component } from '@angular/core'
+import '@johanaarstein/dotlottie-player'
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  title = 'your-app-name';
+}
+```
+
+2. Add the player to your html template.
+
 ### Vue.js / Nuxt.js (using Vite.js)
 
-Compared to React there's a couple of extra steps.
+Compared to React and Angular there's a couple of extra steps, but surely nothing too daunting.
 
-1. Declare the dotlottie-player tag as a custom element, to skip component resolution.
+1. Declare the dotlottie-player tag as a custom element, to prevent Vue from attempting to resolve it.
 
-#### Vue.js
+#### In Vue.js
 `vite.config.ts`:
 
 ```typescript
@@ -114,7 +134,7 @@ export default defineConfig({
 })
 ```
 
-#### Nuxt.js
+#### In Nuxt.js
 `nuxt.config.ts`:
 
 ```typescript
@@ -127,9 +147,9 @@ export default defineNuxtConfig({
 })
 ```
 
-2. Import the component.
+2. Import/initiate the component.
 
-#### Vue.js
+#### In Vue.js
 `main.ts`:
 
 ```typescript
@@ -141,7 +161,7 @@ const app = createApp(App)
 app.component('DotLottiePlayer', DotLottiePlayer)
 ```
 
-#### Nuxt.js
+#### In Nuxt.js
 Create a `plugins` folder in your root if it doesn't exist already, add a file named `dotlottie-player.js`:
 
 ```javascript
