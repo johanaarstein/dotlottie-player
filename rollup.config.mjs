@@ -1,5 +1,4 @@
 import commonjs from '@rollup/plugin-commonjs'
-import { externals } from 'rollup-plugin-node-externals'
 import dts from 'rollup-plugin-dts'
 import filesize from 'rollup-plugin-filesize'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
@@ -8,24 +7,17 @@ import template from 'rollup-plugin-html-literals'
 
 import pkg from './package.json' assert { type: 'json' }
 
-//Node hack
-import { fileURLToPath } from 'url'
-const __filename = fileURLToPath(import.meta.url)
-global['__filename'] = __filename
-
 const input = './src/index.ts',
   extensions = ['.js', '.ts'],
-  globals = {
-    lit: 'lit',
-    'lit/decorators.js': 'decorators_js',
-    'lottie-web': 'Lottie',
-    fflate: 'fflate'
-  },
-
-  rollupPlugins = (ext = false) => {
+  external = [
+    'lit',
+    'lit/decorators.js',
+    'lottie-web',
+    'fflate'
+  ],
+  plugins = () => {
     return [
       template(),
-      ext && externals(),
       nodeResolve({
         extensions,
         jsnext: true,
@@ -55,16 +47,16 @@ export default [
       file: pkg.main,
       format: 'umd',
       name: pkg.name,
-      globals
     },
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
     },
-    plugins: rollupPlugins(),
+    plugins: plugins(),
   },
   {
     input,
+    external,
     output: [
       {
         file: pkg.module,
@@ -79,6 +71,6 @@ export default [
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
     },
-    plugins: rollupPlugins(true),
+    plugins: plugins(),
   }
 ]

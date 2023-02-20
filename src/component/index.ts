@@ -2,7 +2,7 @@ import { html, LitElement, nothing } from 'lit'
 import type { CSSResult, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
-import type { AnimationItem, AnimationDirection,  RendererType } from 'lottie-web'
+import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types'
 import type { ObjectFit, PreserveAspectRatio } from './types'
@@ -22,7 +22,7 @@ import styles from './styles'
 export class DotLottiePlayer extends LitElement {
   
   /**
-   * Autoplay animation
+   * Autoplay
    */
   @property({ type: Boolean, reflect: true })
   autoplay = false
@@ -40,7 +40,7 @@ export class DotLottiePlayer extends LitElement {
   controls = false
 
   /**
-   * Number of times to loop animation
+   * Number of times to loop
    */
   @property({ type: Number })
   count?: number
@@ -52,7 +52,7 @@ export class DotLottiePlayer extends LitElement {
   currentState: PlayerState = PlayerState.Loading
  
   /**
-   * Animation description for screen readers
+   * Description for screen readers
    */
   @property({ type: String })
   description?: string
@@ -64,7 +64,7 @@ export class DotLottiePlayer extends LitElement {
   direction: AnimationDirection = 1
 
   /**
-   * Whether to play on mouse hover
+   * Whether to play on mouseover
    */
   @property({ type: Boolean })
   hover = false
@@ -76,7 +76,7 @@ export class DotLottiePlayer extends LitElement {
   intermission = 1
 
   /**
-   * Whether to loop animation
+   * Whether to loop
    */
   @property({ type: Boolean, reflect: true })
   loop = false
@@ -112,19 +112,19 @@ export class DotLottiePlayer extends LitElement {
   seeker?: number
 
   /**
-   * Animation speed
+   * Speed
    */
   @property({ type: Number })
   speed?: number = 1
 
   /**
-   * JSON/dotLottie data or URL to JSON/dotLottie
+   * JSON/dotLottie data or URL
    */
   @property({ type: String })
   src!: string
 
   /**
-   * Animation container
+   * Container
    */
   @query('.animation')
   protected container!: HTMLElement
@@ -135,7 +135,7 @@ export class DotLottiePlayer extends LitElement {
   private _counter = 0
 
   /**
-   * Initialize lottie-web player
+   * Initialize Lottie Web player
    */
   public async load(src: string | Record<string, unknown>): Promise<void> {
     if (!this.shadowRoot) {
@@ -170,7 +170,7 @@ export class DotLottiePlayer extends LitElement {
         }
     }
 
-    // Load the resource information
+    // Load the resource
     try {
       if (typeof src !== 'string' && typeof src !== 'object') {
         throw new Error('No Lottie animation to load, or the file is corrupted.')
@@ -204,7 +204,7 @@ export class DotLottiePlayer extends LitElement {
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
             detail: {
-              frame: currentFrame, //this._lottie?.
+              frame: currentFrame,
               seeker: this.seeker,
             },
           }),
@@ -366,7 +366,7 @@ export class DotLottiePlayer extends LitElement {
   }
 
   /**
-   * Destroy animation and lottie-player element
+   * Destroy animation and element
    */
   public destroy(): void {
     if (!this._lottie) return
@@ -408,7 +408,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Snapshot the current frame as SVG
    *
-   * If 'download' argument is true, a download is triggered in the browser
+   * If 'download' is true, a download is triggered in the browser
    */
   public snapshot(download = true): string | void {
     if (!this.shadowRoot) return
