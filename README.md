@@ -63,7 +63,7 @@ player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 
 ### React.js / Next.js
 
-Easy peasy lemon squeezy – just import it and use it. If you've already imported it in a parent component, you don't need to import it again in the child. The component is SSR compatible, so you won't have any issues there – however, you may want to set reflective booleans to an empty string to suppress hydration warnings.
+Easy peasy lemon squeezy, right? Just import it and use it. If you've already imported the library in a parent component, you don't need to import it again in the child. The component is SSR compatible, so you won't have any issues there – however, you may want to set reflective booleans to an empty string to suppress hydration warnings.
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
