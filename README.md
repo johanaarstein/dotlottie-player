@@ -40,30 +40,49 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your code and point `src` to a Lottie animation of your choice.
+Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice.
 
 ```xml
 <dotlottie-player
-  autoplay
-  controls
-  loop
-  mode="normal"
+  autoplay=""
+  controls=""
+  loop=""
   src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
   style="width: 320px; margin: auto;"
 >
 </dotlottie-player>
 ```
 
-You may load animations programmatically:
+To set animations programmatically, use the `load()` method.
 
 ```javascript
 const player = document.querySelector('dotlottie-player')
 player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 ```
 
+### Angular
+
+1. Import the component in `app.component.ts`.
+
+```typescript
+import { Component } from '@angular/core'
+import '@johanaarstein/dotlottie-player'
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  title = 'your-app-name';
+}
+```
+
+2. Add the player to your html template.
+
 ### React.js / Next.js
 
-Easy peasy lemon squeezy, right? Just import it and use it. If you've already imported the library in a parent component, you don't need to import it again in the child. The component is SSR compatible, so you won't have any issues there – however, you may want to set reflective booleans to an empty string to suppress hydration warnings.
+Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in a child.
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -87,26 +106,6 @@ function App() {
 
 export default App
 ```
-
-### Angular
-
-1. Import the component in `app.component.ts`.
-
-```typescript
-import { Component } from '@angular/core'
-import '@johanaarstein/dotlottie-player'
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
-  title = 'your-app-name';
-}
-```
-
-2. Add the player to your html template.
 
 ### Vue.js / Nuxt.js (using Vite.js)
 
