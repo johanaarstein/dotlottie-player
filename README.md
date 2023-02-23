@@ -40,7 +40,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice.
+Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. It's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true`, to mimic how the browser treats them. This way you avoid hydration errors, if you're working in SSR environments like Next.js or Nuxt.js.
 
 ```xml
 <dotlottie-player
@@ -56,8 +56,8 @@ Add the element `dotlottie-player` to your markup and point `src` to a Lottie an
 To set animations programmatically, use the `load()` method.
 
 ```javascript
-const player = document.querySelector('dotlottie-player')
-player.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
+const lottiePlayer = document.querySelector('dotlottie-player')
+lottiePlayer.load('https://storage.googleapis.com/aarsteinmedia/am.lottie')
 ```
 
 ### Angular
@@ -82,7 +82,7 @@ export class AppComponent {
 
 ### React.js / Next.js
 
-Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in a child.
+Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in child components. If you want to assign the element a class, note that you need to use the `class` namespace, and not `className`, since this is a custom element.
 
 ```javascript
 import '@johanaarstein/dotlottie-player'
@@ -91,6 +91,7 @@ function App() {
   return (
     <>
       <dotlottie-player
+        class="your-class-name"
         src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
         autoplay=""
         controls=""
