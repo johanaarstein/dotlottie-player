@@ -2,7 +2,9 @@
 
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and this is now the most versatile Lottie Player Web Component out there – in our humble opinion, of course – and we still managed to trim off some significant weight. The component is built with Lit and compiled with Rust, it's compatible with server side rendering, and like any good web component it's framework agnostic.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and now this is the most versatile Lottie Player Web Component out there, in our humble opinion. And we still managed to trim off some significant weight.
+
+The component is built with Lit and compiled with Rust, it's compatible with server side rendering and like any good web component it's framework agnostic.
 
 ## Demo
 
