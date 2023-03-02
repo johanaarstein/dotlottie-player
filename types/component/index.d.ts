@@ -4,16 +4,16 @@ import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web
 import { PlayMode, PlayerState } from './types';
 import type { ObjectFit, PreserveAspectRatio } from './types';
 export declare class DotLottiePlayer extends LitElement {
-    autoplay: boolean;
+    autoplay: boolean | string;
     background?: string;
-    controls: boolean;
+    controls: boolean | string;
     count?: number;
     currentState: PlayerState;
     description?: string;
     direction: AnimationDirection;
     hover: boolean;
     intermission: number;
-    loop: boolean;
+    loop: boolean | string;
     mode: PlayMode;
     objectfit: ObjectFit;
     preserveAspectRatio?: PreserveAspectRatio;

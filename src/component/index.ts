@@ -25,7 +25,7 @@ export class DotLottiePlayer extends LitElement {
    * Autoplay
    */
   @property({ type: Boolean, reflect: true })
-  autoplay = false
+  autoplay: boolean | string = false
 
   /**
    * Background color
@@ -37,7 +37,7 @@ export class DotLottiePlayer extends LitElement {
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
-  controls = false
+  controls: boolean | string = false
 
   /**
    * Number of times to loop
@@ -79,7 +79,7 @@ export class DotLottiePlayer extends LitElement {
    * Whether to loop
    */
   @property({ type: Boolean, reflect: true })
-  loop = false
+  loop: boolean | string = false
 
   /**
    * Play mode
