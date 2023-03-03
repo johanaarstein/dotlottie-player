@@ -5,7 +5,7 @@ import Lottie from 'lottie-web'
 import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types'
-import type { ObjectFit, PreserveAspectRatio } from './types'
+import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio } from './types'
 
 import { aspectRatio, fetchPath } from './functions'
 
@@ -25,7 +25,7 @@ export class DotLottiePlayer extends LitElement {
    * Autoplay
    */
   @property({ type: Boolean, reflect: true })
-  autoplay: boolean | string = false
+  autoplay: Autoplay = false
 
   /**
    * Background color
@@ -37,7 +37,7 @@ export class DotLottiePlayer extends LitElement {
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
-  controls: boolean | string = false
+  controls: Controls = false
 
   /**
    * Number of times to loop
@@ -79,7 +79,7 @@ export class DotLottiePlayer extends LitElement {
    * Whether to loop
    */
   @property({ type: Boolean, reflect: true })
-  loop: boolean | string = false
+  loop: Loop = false
 
   /**
    * Play mode
