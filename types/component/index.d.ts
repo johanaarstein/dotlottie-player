@@ -26,7 +26,7 @@ export declare class DotLottiePlayer extends LitElement {
     private _lottie;
     private _prevState?;
     private _counter;
-    load(src: string | Record<string, unknown>): Promise<void>;
+    load(src: string | Record<string, any>): Promise<void>;
     private _onVisibilityChange;
     private _handleSeekChange;
     private isLottie;

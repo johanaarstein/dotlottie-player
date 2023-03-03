@@ -137,7 +137,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Initialize Lottie Web player
    */
-  public async load(src: string | Record<string, unknown>): Promise<void> {
+  public async load(src: string | Record<string, any>): Promise<void> {
     if (!this.shadowRoot) {
       return
     }
@@ -315,7 +315,7 @@ export class DotLottiePlayer extends LitElement {
     this.seek(frame)
   }
 
-  private isLottie(json: Record<string, any>): boolean {
+  private isLottie(json: Record<string, number | undefined>): boolean {
     const mandatory: string[] = ['v', 'ip', 'op', 'layers', 'fr', 'w', 'h']
 
     return mandatory.every((field: string) => Object.prototype.hasOwnProperty.call(json, field))
