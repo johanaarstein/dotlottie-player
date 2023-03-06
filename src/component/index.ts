@@ -100,6 +100,12 @@ export class DotLottiePlayer extends LitElement {
   preserveAspectRatio?: PreserveAspectRatio
 
   /**
+   * For type support in React
+  */
+  @property()
+  ref?: any
+
+  /**
    * Renderer to use (svg, canvas or html)
    */
   @property({ type: String })
