@@ -207,20 +207,20 @@ export default defineNuxtPlugin(({ vueApp }) => {
 
 ## Methods
 
-| Function                                                                                                                                    | Method                                    |
-| --------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| Load                                                                                                      | `load(src: string) => void`               |
-| Pause                                                                                                     | `pause() => void`                         |
-| Play                                                                                                      | `play() => void`                          |
-| Reload                                                                                                    | `reload() => void`                        |
-| Go to frame. Can be a number or a percentage string (e.g. 50%).                                           | `seek(value: number \| string) => void`   |
-| Set Direction                                                                                             | `setDirection(value: 1 \| -1) => void`    |
-| Set Looping                                                                                               | `setLooping(value: boolean) => void`      |
-| Set Speed                                                                                                 | `setSpeed(value?: number) => void`        |
-| Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  | `snapshot(download?: boolean) => string`  |
-| Stop                                                                                                      | `stop() => void`                          |
-| Toggle looping                                                                                            | `toggleLooping() => void`                 |
-| Toggle play                                                                                               | `togglePlay() => void`                    |
+| Method                                    | Function
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `load(src: string) => void`               | Load                                                                                                      |
+| `pause() => void`                         | Pause                                                                                                     |
+| `play() => void`                          | Play                                                                                                      |
+| `reload() => void`                        | Reload                                                                                                    |
+| `seek(value: number \| string) => void`   | Go to frame. Can be a number or a percentage string (e.g. 50%).                                           |
+| `setDirection(value: 1 \| -1) => void`    | Set Direction                                                                                             |
+| `setLooping(value: boolean) => void`      | Set Looping                                                                                               |
+| `setSpeed(value?: number) => void`        | Set Speed                                                                                                 |
+| `snapshot(download?: boolean) => string`  | Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  |
+| `stop() => void`                          | Stop                                                                                                      |
+| `toggleLooping() => void`                 | Toggle looping                                                                                            |
+| `togglePlay() => void`                    | Toggle play                                                                                               |
 
 ## Events
 
