@@ -130,6 +130,12 @@ export class DotLottiePlayer extends LitElement {
   src!: string
 
   /**
+   * Adding support for style attribute
+   */
+  @property()
+  style: any
+
+  /**
    * Container
    */
   @query('.animation')

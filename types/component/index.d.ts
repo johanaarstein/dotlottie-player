@@ -22,6 +22,7 @@ export declare class DotLottiePlayer extends LitElement {
     seeker?: number;
     speed?: number;
     src: string;
+    style: any;
     protected container: HTMLElement;
     private _io?;
     private _lottie;
