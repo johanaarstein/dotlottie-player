@@ -42,7 +42,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. It's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true`, to mimic how the browser treats them. This way you avoid hydration errors, if you're working in SSR environments like Next.js or Nuxt.js.
+Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. If you're working in SSR environments like Next.js or Nuxt.js it's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true`, to mimic how the browser treats them. This way you avoid hydration errors.
 
 ```xml
 <dotlottie-player
