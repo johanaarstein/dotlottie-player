@@ -86,7 +86,7 @@ export class AppComponent {
 
 Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in child components. If you want to assign the element a class, note that you need to use the `class` namespace, and not `className`, since this is a custom element.
 
-```javascript
+```jsx
 import '@johanaarstein/dotlottie-player'
 
 function App() {
@@ -112,7 +112,7 @@ export default App
 
 If you're using TypeScript and want to assign the component a `ref`, you can do it like this:
 
-```typescript
+```tsx
 import { useRef } from 'react'
 import '@johanaarstein/dotlottie-player'
 import type { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
