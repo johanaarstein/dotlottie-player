@@ -42,7 +42,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. If you're working in SSR environments like Next.js or Nuxt.js it's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true`, to mimic how the browser treats them. This way you avoid hydration errors.
+Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. If you're working in SSR environments like Next.js or Nuxt.js, it's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true` – to mimic how modern browsers treats these values in markup, as opposed to how Node.js treats them. This way you avoid hydration errors.
 
 ```xml
 <dotlottie-player
@@ -84,7 +84,7 @@ export class AppComponent {
 
 ### React.js / Next.js
 
-Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in child components. If you want to assign the element a class, note that you need to use the `class` namespace, and not `className`, since this is a custom element.
+Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in children of that component. If you want to assign the element a class note that you need to use the `class` namespace, and not `className`.
 
 ```jsx
 import '@johanaarstein/dotlottie-player'
