@@ -8,7 +8,7 @@ The component is built with Lit and compiled with Rust, it's compatible with ser
 
 ## Demo
 
-Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), running on Next.js.
+Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), running on Next.js 13 using TypeScript.
 
 ## Installation
 
@@ -102,6 +102,28 @@ function App() {
           width: '320px',
           margin: 'auto'
         }}
+      />
+    </>
+  )
+}
+
+export default App
+```
+
+If you're using TypeScript and want to assign the component a `ref`, you can do it like this:
+
+```typescript
+import { useRef } from 'react'
+import '@johanaarstein/dotlottie-player'
+import type { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
+
+function App() {
+  const animation = useRef<DotLottiePlayer | null>(null)
+  return (
+    <>
+      <dotlottie-player
+        ref={animation}
+        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
       />
     </>
   )
