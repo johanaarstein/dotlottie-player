@@ -91,19 +91,17 @@ import '@johanaarstein/dotlottie-player'
 
 function App() {
   return (
-    <>
-      <dotlottie-player
-        class="your-class-name"
-        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-        autoplay=""
-        controls=""
-        loop=""
-        style={{
-          width: '320px',
-          margin: 'auto'
-        }}
-      />
-    </>
+    <dotlottie-player
+      class="your-class-name"
+      src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
+      autoplay=""
+      controls=""
+      loop=""
+      style={{
+        width: '320px',
+        margin: 'auto'
+      }}
+    />
   )
 }
 
@@ -120,12 +118,10 @@ import type { DotLottiePlayer } from '@johanaarstein/dotlottie-player'
 function App() {
   const animation = useRef<DotLottiePlayer | null>(null)
   return (
-    <>
-      <dotlottie-player
-        ref={animation}
-        src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
-      />
-    </>
+    <dotlottie-player
+      ref={animation}
+      src="https://storage.googleapis.com/aarsteinmedia/am.lottie"
+    />
   )
 }
 
