@@ -1,6 +1,8 @@
 {
   "env": {
-    "targets": "> 0.25%, not dead"
+    "mode": "entry",
+    "targets": "> 0.25%, not dead",
+    "coreJs": "3.29"
   },
   "jsc": {
     "keepClassNames": true,

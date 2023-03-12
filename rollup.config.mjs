@@ -44,9 +44,9 @@ export default [
   {
     input,
     output: {
-      file: pkg.main,
-      format: 'umd',
-      name: pkg.name,
+      file: pkg.browser,
+      format: 'iife',
+      name: 'dotlottiePlayer',
     },
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
