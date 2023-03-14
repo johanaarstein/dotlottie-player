@@ -6,6 +6,7 @@ import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio } from '.
 export declare class DotLottiePlayer extends LitElement {
     autoplay: Autoplay;
     background?: string;
+    class?: string;
     controls: Controls;
     count?: number;
     currentState: PlayerState;

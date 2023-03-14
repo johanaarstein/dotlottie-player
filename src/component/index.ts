@@ -34,6 +34,12 @@ export class DotLottiePlayer extends LitElement {
   background?: string = 'transparent'
 
   /**
+   * Class
+   */
+  @property({ type: String})
+  class?: string
+
+  /**
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
