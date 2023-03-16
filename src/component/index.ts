@@ -34,12 +34,6 @@ export class DotLottiePlayer extends LitElement {
   background?: string = 'transparent'
 
   /**
-   * Class
-   */
-  // @property({ type: String})
-  // class?: string
-
-  /**
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
@@ -108,8 +102,8 @@ export class DotLottiePlayer extends LitElement {
   /**
    * For type support in React
   */
-  // @property()
-  // ref?: any
+  @property()
+  ref?: any
 
   /**
    * Renderer to use (svg, canvas or html)
@@ -138,8 +132,8 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Adding support for style attribute
    */
-  // @property()
-  // style?: CSSStyleDeclaration
+  @property()
+  style: any
 
   /**
    * Container
@@ -559,7 +553,7 @@ export class DotLottiePlayer extends LitElement {
         }
       })
 
-      if (this.container instanceof HTMLElement) this._io.observe(this.container)
+      this._io.observe(this.container)
     }
     
     // Setup lottie player
