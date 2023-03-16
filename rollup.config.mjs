@@ -63,7 +63,7 @@ export default [
         format: 'es',
       },
       {
-        file: pkg.exports.require,
+        file: pkg.exports['.'].require,
         format: 'cjs'
       }
     ],
