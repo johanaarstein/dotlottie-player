@@ -1,16 +1,19 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.4.31",
+  "version": "1.4.32",
   "description": "Web Component for playing Lottie animations in your web app",
-  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "browser": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "node": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "browser": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "exports": {
-    "import": "./dist/index.mjs",
-    "node": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
-  },
   "homepage": "https://www.aarstein.media/en/dev/dotlottie-player",
   "repository": {
     "url": "https://github.com/johanaarstein/dotlottie-player.git",
@@ -40,7 +43,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@swc/core": "^1.3.27",
+    "@swc/core": "1.3.39",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "browserslist": "^4.21.5",
@@ -48,8 +51,8 @@
     "eslint": "^8.30.0",
     "rollup": "^3.7.5",
     "rollup-plugin-dts": "^5.1.1",
-    "rollup-plugin-filesize": "^9.0.2",
     "rollup-plugin-html-literals": "^1.1.6",
+    "rollup-plugin-summary": "^2.0.0",
     "rollup-plugin-swc3": "^0.8.0",
     "shx": "^0.3.4",
     "typescript": "^4.9.4"
