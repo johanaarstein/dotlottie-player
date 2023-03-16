@@ -36,8 +36,8 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Class
    */
-  @property({ type: String})
-  class?: string
+  // @property({ type: String})
+  // class?: string
 
   /**
    * Display controls
@@ -108,8 +108,8 @@ export class DotLottiePlayer extends LitElement {
   /**
    * For type support in React
   */
-  @property()
-  ref?: any
+  // @property()
+  // ref?: any
 
   /**
    * Renderer to use (svg, canvas or html)
@@ -138,8 +138,8 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Adding support for style attribute
    */
-  @property()
-  style: any
+  // @property()
+  // style?: CSSStyleDeclaration
 
   /**
    * Container
@@ -559,7 +559,7 @@ export class DotLottiePlayer extends LitElement {
         }
       })
 
-      this._io.observe(this.container)
+      if (this.container instanceof HTMLElement) this._io.observe(this.container)
     }
     
     // Setup lottie player
