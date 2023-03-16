@@ -34,7 +34,7 @@ export default [
   {
     input: './types/index.d.ts',
     output: {
-      file: pkg.types,
+      file: './dist/index.d.ts',
       format: 'es'
     },
     plugins: [
@@ -63,7 +63,7 @@ export default [
         format: 'es',
       },
       {
-        file: pkg.exports['.'].require,
+        file: pkg.exports.require,
         format: 'cjs'
       }
     ],

@@ -1,19 +1,15 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.4.25",
+  "version": "1.4.26",
   "description": "Web Component for playing Lottie animations in your web app",
   "main": "./dist/index.cjs",
   "browser": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "browser": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "node": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
+    "import": "./dist/index.mjs",
+    "node": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
   },
   "homepage": "https://www.aarstein.media/en/dev/dotlottie-player",
   "repository": {
