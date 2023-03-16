@@ -25,7 +25,7 @@ export class DotLottiePlayer extends LitElement {
    * Autoplay
    */
   @property({ type: Boolean, reflect: true })
-  autoplay: Autoplay = false
+  autoplay?: Autoplay = false
 
   /**
    * Background color
@@ -37,7 +37,7 @@ export class DotLottiePlayer extends LitElement {
    * Display controls
    */
   @property({ type: Boolean, reflect: true })
-  controls: Controls = false
+  controls?: Controls = false
 
   /**
    * Number of times to loop
@@ -49,7 +49,7 @@ export class DotLottiePlayer extends LitElement {
    * Player state
    */
   @property({ type: String })
-  currentState: PlayerState = PlayerState.Loading
+  currentState?: PlayerState = PlayerState.Loading
  
   /**
    * Description for screen readers
@@ -61,37 +61,37 @@ export class DotLottiePlayer extends LitElement {
    * Direction of animation
    */
   @property({ type: Number })
-  direction: AnimationDirection = 1
+  direction?: AnimationDirection = 1
 
   /**
    * Whether to play on mouseover
    */
   @property({ type: Boolean })
-  hover = false
+  hover? = false
 
   /**
    * Intermission
    */
   @property()
-  intermission = 1
+  intermission? = 1
 
   /**
    * Whether to loop
    */
   @property({ type: Boolean, reflect: true })
-  loop: Loop = false
+  loop?: Loop = false
 
   /**
    * Play mode
    */
   @property()
-  mode: PlayMode = PlayMode.Normal
+  mode?: PlayMode = PlayMode.Normal
 
   /**
    * Resizing to container
   */
   @property({ type: String })
-  objectfit: ObjectFit = 'contain'
+  objectfit?: ObjectFit = 'contain'
 
   /**
    * Resizing to container (Deprecated)
@@ -100,16 +100,10 @@ export class DotLottiePlayer extends LitElement {
   preserveAspectRatio?: PreserveAspectRatio
 
   /**
-   * For type support in React
-  */
-  @property()
-  ref?: any
-
-  /**
    * Renderer to use (svg, canvas or html)
    */
   @property({ type: String })
-  renderer: RendererType = 'svg'
+  renderer?: RendererType = 'svg'
 
   /**
    * Seeker
@@ -130,12 +124,6 @@ export class DotLottiePlayer extends LitElement {
   src!: string
 
   /**
-   * Adding support for style attribute
-   */
-  @property()
-  style: any
-
-  /**
    * Container
    */
   @query('.animation')
@@ -154,7 +142,7 @@ export class DotLottiePlayer extends LitElement {
       return
     }
 
-    const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit),
+    const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit as ObjectFit),
     
       options: any = {
         container: this.container,
@@ -298,7 +286,7 @@ export class DotLottiePlayer extends LitElement {
 
       // Set initial playback speed and direction
       this.setSpeed(this.speed)
-      this.setDirection(this.direction)
+      this.setDirection(this.direction as number)
 
       // Start playing if autoplay is enabled
       if (this.autoplay) this.play()

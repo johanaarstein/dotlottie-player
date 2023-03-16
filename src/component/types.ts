@@ -1,5 +1,5 @@
-import { Unzipped } from 'fflate'
-import { DotLottiePlayer } from '.';
+import type { Unzipped } from 'fflate'
+import type { DotLottiePlayer } from '.';
 
 export enum PlayerState {
   Completed = 'completed',
@@ -56,11 +56,17 @@ export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none'
 
 export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin slice' | 'none'
 
+interface ReactLottiePlayer extends Partial<DotLottiePlayer> {
+  class?: string
+  ref?: any
+  style?: any
+}
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'dotlottie-player': Partial<DotLottiePlayer>
+      'dotlottie-player': ReactLottiePlayer
     }
   }
 }
