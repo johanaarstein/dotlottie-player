@@ -1,6 +1,6 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.4.32",
+  "version": "1.4.33",
   "description": "Web Component for playing Lottie animations in your web app",
   "exports": {
     ".": {

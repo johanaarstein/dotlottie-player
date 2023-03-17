@@ -48,9 +48,9 @@ export interface LottieAnimation extends Unzipped {
   "manifest.json": Uint8Array;
 }
 
-export type Autoplay = boolean | '' | 'autoplay'
-export type Controls = boolean | '' | 'controls'
-export type Loop = boolean | '' | 'loop'
+export type Autoplay = boolean | '' | 'autoplay' | null
+export type Controls = boolean | '' | 'controls' | null
+export type Loop = boolean | '' | 'loop' | null
 
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none'
 
