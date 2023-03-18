@@ -286,7 +286,7 @@ export class DotLottiePlayer extends LitElement {
 
       // Set initial playback speed and direction
       this.setSpeed(this.speed)
-      this.setDirection(this.direction as number)
+      this.setDirection(this.direction as AnimationDirection)
 
       // Start playing if autoplay is enabled
       if (this.autoplay) this.play()
@@ -414,8 +414,10 @@ export class DotLottiePlayer extends LitElement {
     if (!this.shadowRoot) return
 
     // Get SVG element and serialize markup
-    const svgElement = this.shadowRoot.querySelector('.animation svg') as Node
-    const data = new XMLSerializer().serializeToString(svgElement)
+    const svgElement = this.shadowRoot.querySelector('.animation svg')
+    const data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null
+
+    if (!data) return
 
     // Trigger file download
     if (download) {
@@ -471,9 +473,9 @@ export class DotLottiePlayer extends LitElement {
    * Animation play direction
    * @param value AnimationDirection
    */
-  public setDirection(value: number): void {
+  public setDirection(value: AnimationDirection): void {
     if (!this._lottie) return
-    this._lottie.setDirection(value as AnimationDirection)
+    this._lottie.setDirection(value)
   }
 
   /**
