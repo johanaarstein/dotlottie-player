@@ -1,0 +1,935 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "dev/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "dotlottie-player",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "/src"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "./component"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayMode",
+          "declaration": {
+            "name": "PlayMode",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerEvents",
+          "declaration": {
+            "name": "PlayerEvents",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerState",
+          "declaration": {
+            "name": "PlayerState",
+            "module": "./component/types"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "./component"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayMode",
+          "declaration": {
+            "name": "PlayMode",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerEvents",
+          "declaration": {
+            "name": "PlayerEvents",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerState",
+          "declaration": {
+            "name": "PlayerState",
+            "module": "./component/types"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/component/functions.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "aspectRatio",
+          "parameters": [
+            {
+              "name": "objectFit"
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "fetchPath"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "aspectRatio",
+          "declaration": {
+            "name": "aspectRatio",
+            "module": "dist/component/functions.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "fetchPath",
+          "declaration": {
+            "name": "fetchPath",
+            "module": "dist/component/functions.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/component/index.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "DotLottiePlayer",
+          "default": "class DotLottiePlayer extends LitElement {\n    constructor() {\n        super(...arguments);\n        this.autoplay = false;\n        this.background = 'transparent';\n        this.controls = false;\n        this.currentState = PlayerState.Loading;\n        this.direction = 1;\n        this.hover = false;\n        this.intermission = 0;\n        this.loop = false;\n        this.mode = PlayMode.Normal;\n        this.objectfit = 'contain';\n        this.renderer = 'svg';\n        this.speed = 1;\n        this._lottie = null;\n        this._counter = 0;\n    }\n    async load(src) {\n        if (!this.shadowRoot) {\n            return;\n        }\n        const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit), options = {\n            container: this.container,\n            loop: this.loop,\n            autoplay: this.autoplay,\n            renderer: this.renderer,\n            rendererSettings: {\n                hideOnTransparent: true,\n                preserveAspectRatio,\n                progressiveLoad: true,\n            }\n        };\n        switch (this.renderer) {\n            case 'canvas':\n                options.rendererSettings = {\n                    clearCanvas: true,\n                    preserveAspectRatio,\n                    progressiveLoad: true,\n                };\n                break;\n            case 'html':\n                options.rendererSettings = {\n                    hideOnTransparent: true\n                };\n        }\n        try {\n            if (typeof src !== 'string' && typeof src !== 'object') {\n                throw new Error('No Lottie animation to load, or the file is corrupted.');\n            }\n            const srcParsed = typeof src === 'string' ? await fetchPath(src) : src;\n            if (!this.isLottie(srcParsed))\n                throw new Error('dotLottie: Load method failed. Object is not a valid Lottie.');\n            if (this._lottie)\n                this._lottie.destroy();\n            this._lottie = Lottie.loadAnimation({\n                ...options,\n                animationData: srcParsed,\n            });\n        }\n        catch (err) {\n            this.currentState = PlayerState.Error;\n            this.dispatchEvent(new CustomEvent(PlayerEvents.Error));\n            return;\n        }\n        if (this._lottie) {\n            this._lottie.addEventListener('enterFrame', () => {\n                const { currentFrame, totalFrames } = this._lottie;\n                this.seeker = (currentFrame / totalFrames) * 100;\n                this.dispatchEvent(new CustomEvent(PlayerEvents.Frame, {\n                    detail: {\n                        frame: currentFrame,\n                        seeker: this.seeker,\n                    },\n                }));\n            });\n            this._lottie.addEventListener('complete', () => {\n                if (this.currentState !== PlayerState.Playing) {\n                    this.dispatchEvent(new CustomEvent(PlayerEvents.Complete));\n                    return;\n                }\n                if (!this.loop || (!!this.count && this._counter >= this.count)) {\n                    this.dispatchEvent(new CustomEvent(PlayerEvents.Complete));\n                    this.currentState = PlayerState.Completed;\n                    return;\n                }\n                if (this.mode === PlayMode.Bounce) {\n                    if (this.count) {\n                        this._counter += 0.5;\n                    }\n                    setTimeout(() => {\n                        this.dispatchEvent(new CustomEvent(PlayerEvents.Loop));\n                        if (this.currentState === PlayerState.Playing) {\n                            this._lottie?.setDirection(this._lottie.playDirection * -1);\n                            this._lottie?.play();\n                        }\n                    }, this.intermission ?? 0);\n                }\n                else {\n                    if (this.count) {\n                        this._counter += 1;\n                    }\n                    setTimeout(() => {\n                        this.dispatchEvent(new CustomEvent(PlayerEvents.Loop));\n                        if (this.currentState === PlayerState.Playing) {\n                            this._lottie?.stop();\n                            this._lottie?.play();\n                        }\n                    }, this.intermission ?? 0);\n                }\n            });\n            this._lottie.addEventListener('DOMLoaded', () => {\n                this.dispatchEvent(new CustomEvent(PlayerEvents.Ready));\n            });\n            this._lottie.addEventListener('data_ready', () => {\n                this.dispatchEvent(new CustomEvent(PlayerEvents.Load));\n            });\n            this._lottie.addEventListener('data_failed', () => {\n                this.currentState = PlayerState.Error;\n                this.dispatchEvent(new CustomEvent(PlayerEvents.Error));\n            });\n            if (this.container) {\n                this.container.addEventListener('mouseenter', () => {\n                    if (this.hover && this.currentState !== PlayerState.Playing) {\n                        this.play();\n                    }\n                });\n                this.container.addEventListener('mouseleave', () => {\n                    if (this.hover && this.currentState === PlayerState.Playing) {\n                        this.stop();\n                    }\n                });\n            }\n            this.setSpeed(this.speed);\n            this.setDirection(this.direction);\n            if (this.autoplay)\n                this.play();\n        }\n    }\n    _onVisibilityChange() {\n        if (document.hidden && this.currentState === PlayerState.Playing) {\n            this.freeze();\n        }\n        else if (this.currentState === PlayerState.Frozen) {\n            this.play();\n        }\n    }\n    _handleSeekChange(event) {\n        if (!event.target || !this._lottie || isNaN(Number(event.target.value)))\n            return;\n        const frame = (Number(event.target.value) / 100) * this._lottie.totalFrames;\n        this.seek(frame);\n    }\n    isLottie(json) {\n        const mandatory = ['v', 'ip', 'op', 'layers', 'fr', 'w', 'h'];\n        return mandatory.every((field) => Object.prototype.hasOwnProperty.call(json, field));\n    }\n    getLottie() {\n        return this._lottie;\n    }\n    play() {\n        if (!this._lottie)\n            return;\n        this._lottie.play();\n        this.currentState = PlayerState.Playing;\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Play));\n    }\n    pause() {\n        if (!this._lottie)\n            return;\n        this._lottie.pause();\n        this.currentState = PlayerState.Paused;\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Pause));\n    }\n    stop() {\n        if (!this._lottie)\n            return;\n        this._counter = 0;\n        this._lottie.stop();\n        this.currentState = PlayerState.Stopped;\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Stop));\n    }\n    destroy() {\n        if (!this._lottie)\n            return;\n        this._lottie.destroy();\n        this._lottie = null;\n        this.currentState = PlayerState.Destroyed;\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Destroyed));\n        this.remove();\n    }\n    seek(value) {\n        if (!this._lottie)\n            return;\n        const matches = value.toString().match(/^([0-9]+)(%?)$/);\n        if (!matches) {\n            return;\n        }\n        const frame = matches[2] === '%' ? (this._lottie.totalFrames * Number(matches[1])) / 100 : matches[1];\n        this.seeker = Number(frame);\n        if (this.currentState === PlayerState.Playing) {\n            this._lottie.goToAndPlay(frame, true);\n        }\n        else {\n            this._lottie.goToAndStop(frame, true);\n            this._lottie.pause();\n        }\n    }\n    snapshot(download = true) {\n        if (!this.shadowRoot)\n            return;\n        const svgElement = this.shadowRoot.querySelector('.animation svg');\n        const data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null;\n        if (!data)\n            return;\n        if (download) {\n            const element = document.createElement('a');\n            element.href = 'data:image/svg+xmlcharset=utf-8,' + encodeURIComponent(data);\n            element.download = 'download_' + this.seeker + '.svg';\n            document.body.appendChild(element);\n            element.click();\n            document.body.removeChild(element);\n        }\n        return data;\n    }\n    freeze() {\n        if (!this._lottie)\n            return;\n        this._lottie.pause();\n        this.currentState = PlayerState.Frozen;\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Freeze));\n    }\n    async reload() {\n        if (!this._lottie)\n            return;\n        this._lottie.destroy();\n        if (this.src) {\n            await this.load(this.src);\n        }\n    }\n    setSpeed(value = 1) {\n        if (!this._lottie)\n            return;\n        this._lottie.setSpeed(value);\n    }\n    setDirection(value) {\n        if (!this._lottie)\n            return;\n        this._lottie.setDirection(value);\n    }\n    setLooping(value) {\n        if (this._lottie) {\n            this.loop = value;\n            this._lottie.loop = value;\n        }\n    }\n    togglePlay() {\n        if (!this._lottie)\n            return;\n        if (this.currentState === PlayerState.Playing)\n            return this.pause();\n        if (this.currentState === PlayerState.Completed) {\n            if (this._lottie?.playDirection !== -1) {\n                return this._lottie.goToAndPlay(0, true);\n            }\n            return this._lottie.goToAndPlay(this._lottie.totalFrames, true);\n        }\n        return this.play();\n    }\n    toggleLooping() {\n        this.setLooping(!this.loop);\n    }\n    static get styles() {\n        return styles;\n    }\n    connectedCallback() {\n        super.connectedCallback();\n        if (typeof document.hidden !== 'undefined') {\n            document.addEventListener('visibilitychange', this._onVisibilityChange);\n        }\n    }\n    async firstUpdated() {\n        if ('IntersectionObserver' in window) {\n            this._io = new IntersectionObserver((entries) => {\n                if (entries[0].isIntersecting) {\n                    if (this.currentState === PlayerState.Frozen) {\n                        this.play();\n                    }\n                }\n                else if (this.currentState === PlayerState.Playing) {\n                    this.freeze();\n                }\n            });\n            this._io.observe(this.container);\n        }\n        if (this.src) {\n            await this.load(this.src);\n        }\n        this.dispatchEvent(new CustomEvent(PlayerEvents.Rendered));\n    }\n    disconnectedCallback() {\n        super.disconnectedCallback();\n        if (this._io) {\n            this._io.disconnect();\n            this._io = undefined;\n        }\n        if (this._lottie)\n            this._lottie.destroy();\n        document.removeEventListener('visibilitychange', () => this._onVisibilityChange());\n    }\n    renderControls() {\n        const isPlaying = this.currentState === PlayerState.Playing;\n        const isPaused = this.currentState === PlayerState.Paused;\n        const isStopped = this.currentState === PlayerState.Stopped;\n        return html `\n      <div class=\"lottie-controls toolbar\" aria-label=\"Lottie Animation Controls\" class=\"toolbar\">\n        <button\n          name=\"lottie-play-button\"\n          @click=${this.togglePlay}\n          class=${isPlaying || isPaused ? 'active' : ''}\n          style=\"align-items:center\"\n          tabindex=\"0\"\n          aria-label=\"Toggle Play/Pause\"\n        >\n        ${isPlaying ?\n            html `\n          <svg width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\">\n            <path d=\"M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z\" />\n          </svg>\n          ` :\n            html `\n          <svg width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\">\n            <path d=\"M8.016 5.016L18.985 12 8.016 18.984V5.015z\" />\n          </svg>\n        `}\n        </button>\n        <button\n          name=\"lottie-stop-button\"\n          @click=${this.stop}\n          class=${isStopped ? 'active' : ''}\n          style=\"align-items:center\"\n          tabindex=\"0\"\n          aria-label=\"Stop\"\n        >\n          <svg width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\">\n            <path d=\"M6 6h12v12H6V6z\" />\n          </svg>\n        </button>\n        <input\n          name=\"lottie-seeker-input\"\n          class=\"seeker\"\n          type=\"range\"\n          min=\"0\"\n          step=\"1\"\n          max=\"100\"\n          value=${this.seeker ?? 0}\n          @input=${this._handleSeekChange}\n          @mousedown=${() => {\n            this._prevState = this.currentState;\n            this.freeze();\n        }}\n          @mouseup=${() => {\n            this._prevState === PlayerState.Playing && this.play();\n        }}\n          aria-valuemin=\"1\"\n          aria-valuemax=\"100\"\n          role=\"slider\"\n          aria-valuenow=${this.seeker ?? 0}\n          tabindex=\"0\"\n          aria-label=\"Slider for search\"\n        />\n        <button\n          name=\"lottie-loop-toggle\"\n          @click=${this.toggleLooping}\n          class=${this.loop ? 'active' : ''}\n          style=\"align-items:center\"\n          tabindex=\"0\"\n          aria-label=\"Toggle Looping\"\n        >\n          <svg width=\"24\" height=\"24\" aria-hidden=\"true\" focusable=\"false\">\n            <path\n              d=\"M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z\"\n            />\n          </svg>\n        </button>\n      </div>\n    `;\n    }\n    render() {\n        const className = this.controls ? 'main controls' : 'main', animationClass = this.controls ? 'animation controls' : 'animation';\n        return html `\n      <div\n        class=${'animation-container ' + className}\n        lang=${this.description ? document?.documentElement?.lang : 'en'}\n        role=\"img\"\n        aria-label=${this.description ?? 'Lottie animation'}\n      >\n        <div class=${animationClass} style=\"background:${this.background}\">\n          ${this.currentState === PlayerState.Error ?\n            html `<div class=\"error\">⚠️</div>` : nothing}\n        </div>\n        ${this.controls ? this.renderControls() : nothing}\n      </div>\n    `;\n    }\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "dist/component/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/component/styles.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "dist/component/styles.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/component/types.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "PlayerState"
+        },
+        {
+          "kind": "variable",
+          "name": "PlayMode"
+        },
+        {
+          "kind": "variable",
+          "name": "PlayerEvents"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PlayerState",
+          "declaration": {
+            "name": "PlayerState",
+            "module": "dist/component/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayMode",
+          "declaration": {
+            "name": "PlayMode",
+            "module": "dist/component/types.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerEvents",
+          "declaration": {
+            "name": "PlayerEvents",
+            "module": "dist/component/types.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/component/functions.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "aspectRatio",
+          "parameters": [
+            {
+              "name": "objectFit",
+              "type": {
+                "text": "ObjectFit"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "fetchPath"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "aspectRatio",
+          "declaration": {
+            "name": "aspectRatio",
+            "module": "src/component/functions.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "fetchPath",
+          "declaration": {
+            "name": "fetchPath",
+            "module": "src/component/functions.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/component/index.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "dotLottie Player Web Component class",
+          "name": "DotLottiePlayer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "autoplay",
+              "type": {
+                "text": "Autoplay | undefined"
+              },
+              "default": "false",
+              "description": "Autoplay",
+              "attribute": "autoplay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "background",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "'transparent'",
+              "description": "Background color",
+              "attribute": "background"
+            },
+            {
+              "kind": "field",
+              "name": "controls",
+              "type": {
+                "text": "Controls | undefined"
+              },
+              "default": "false",
+              "description": "Display controls",
+              "attribute": "controls",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Number of times to loop",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "currentState",
+              "type": {
+                "text": "PlayerState | undefined"
+              },
+              "description": "Player state",
+              "attribute": "currentState"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Description for screen readers",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "AnimationDirection | undefined"
+              },
+              "default": "1",
+              "description": "Direction of animation",
+              "attribute": "direction"
+            },
+            {
+              "kind": "field",
+              "name": "hover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether to play on mouseover",
+              "attribute": "hover"
+            },
+            {
+              "kind": "field",
+              "name": "intermission",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Intermission",
+              "attribute": "intermission"
+            },
+            {
+              "kind": "field",
+              "name": "loop",
+              "type": {
+                "text": "Loop | undefined"
+              },
+              "default": "false",
+              "description": "Whether to loop",
+              "attribute": "loop",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "PlayMode | undefined"
+              },
+              "description": "Play mode",
+              "attribute": "mode"
+            },
+            {
+              "kind": "field",
+              "name": "objectfit",
+              "type": {
+                "text": "ObjectFit | undefined"
+              },
+              "default": "'contain'",
+              "description": "Resizing to container",
+              "attribute": "objectfit"
+            },
+            {
+              "kind": "field",
+              "name": "preserveAspectRatio",
+              "type": {
+                "text": "PreserveAspectRatio | undefined"
+              },
+              "description": "Resizing to container (Deprecated)",
+              "attribute": "preserveAspectRatio"
+            },
+            {
+              "kind": "field",
+              "name": "renderer",
+              "type": {
+                "text": "RendererType | undefined"
+              },
+              "default": "'svg'",
+              "description": "Renderer to use (svg, canvas or html)",
+              "attribute": "renderer"
+            },
+            {
+              "kind": "field",
+              "name": "seeker",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Seeker",
+              "attribute": "seeker"
+            },
+            {
+              "kind": "field",
+              "name": "speed",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "1",
+              "description": "Speed",
+              "attribute": "speed"
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "JSON/dotLottie data or URL",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "container",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "protected",
+              "description": "Container"
+            },
+            {
+              "kind": "field",
+              "name": "_io",
+              "type": {
+                "text": "IntersectionObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_lottie",
+              "type": {
+                "text": "AnimationItem | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_prevState",
+              "type": {
+                "text": "PlayerState | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_counter",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "method",
+              "name": "load",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "src",
+                  "type": {
+                    "text": "string | Record<string, any>"
+                  }
+                }
+              ],
+              "description": "Initialize Lottie Web player"
+            },
+            {
+              "kind": "method",
+              "name": "_onVisibilityChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Handle visibility change events"
+            },
+            {
+              "kind": "method",
+              "name": "_handleSeekChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event & { target: HTMLInputElement }"
+                  }
+                }
+              ],
+              "description": "Handles click and drag actions on the progress track"
+            },
+            {
+              "kind": "method",
+              "name": "isLottie",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "json",
+                  "type": {
+                    "text": "Record<string, number | undefined>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getLottie",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "AnimationItem | null"
+                }
+              },
+              "description": "Returns the lottie-web instance used in the component"
+            },
+            {
+              "kind": "method",
+              "name": "play",
+              "privacy": "public",
+              "description": "Play"
+            },
+            {
+              "kind": "method",
+              "name": "pause",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Pause"
+            },
+            {
+              "kind": "method",
+              "name": "stop",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Stop"
+            },
+            {
+              "kind": "method",
+              "name": "destroy",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Destroy animation and element"
+            },
+            {
+              "kind": "method",
+              "name": "seek",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "number | string"
+                  }
+                }
+              ],
+              "description": "Seek to a given frame"
+            },
+            {
+              "kind": "method",
+              "name": "snapshot",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "string | void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "download",
+                  "default": "true"
+                }
+              ],
+              "description": "Snapshot the current frame as SVG\n\nIf 'download' is true, a download is triggered in the browser"
+            },
+            {
+              "kind": "method",
+              "name": "freeze",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Freeze animation.\nThis internal state pauses animation and is used to differentiate between\nuser requested pauses and component instigated pauses."
+            },
+            {
+              "kind": "method",
+              "name": "reload",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "description": "Reload animation"
+            },
+            {
+              "kind": "method",
+              "name": "setSpeed",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "default": "1",
+                  "description": "Playback speed."
+                }
+              ],
+              "description": "Set animation play speed"
+            },
+            {
+              "kind": "method",
+              "name": "setDirection",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "AnimationDirection"
+                  },
+                  "description": "AnimationDirection"
+                }
+              ],
+              "description": "Animation play direction"
+            },
+            {
+              "kind": "method",
+              "name": "setLooping",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "Set loop"
+            },
+            {
+              "kind": "method",
+              "name": "togglePlay",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Toggle playing state"
+            },
+            {
+              "kind": "method",
+              "name": "toggleLooping",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Toggle loop"
+            },
+            {
+              "kind": "method",
+              "name": "renderControls",
+              "privacy": "protected"
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "autoplay",
+              "type": {
+                "text": "Autoplay | undefined"
+              },
+              "default": "false",
+              "description": "Autoplay",
+              "fieldName": "autoplay"
+            },
+            {
+              "name": "background",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "'transparent'",
+              "description": "Background color",
+              "fieldName": "background"
+            },
+            {
+              "name": "controls",
+              "type": {
+                "text": "Controls | undefined"
+              },
+              "default": "false",
+              "description": "Display controls",
+              "fieldName": "controls"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Number of times to loop",
+              "fieldName": "count"
+            },
+            {
+              "name": "currentState",
+              "type": {
+                "text": "PlayerState | undefined"
+              },
+              "description": "Player state",
+              "fieldName": "currentState"
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Description for screen readers",
+              "fieldName": "description"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "AnimationDirection | undefined"
+              },
+              "default": "1",
+              "description": "Direction of animation",
+              "fieldName": "direction"
+            },
+            {
+              "name": "hover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether to play on mouseover",
+              "fieldName": "hover"
+            },
+            {
+              "name": "intermission",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Intermission",
+              "fieldName": "intermission"
+            },
+            {
+              "name": "loop",
+              "type": {
+                "text": "Loop | undefined"
+              },
+              "default": "false",
+              "description": "Whether to loop",
+              "fieldName": "loop"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "PlayMode | undefined"
+              },
+              "description": "Play mode",
+              "fieldName": "mode"
+            },
+            {
+              "name": "objectfit",
+              "type": {
+                "text": "ObjectFit | undefined"
+              },
+              "default": "'contain'",
+              "description": "Resizing to container",
+              "fieldName": "objectfit"
+            },
+            {
+              "name": "preserveAspectRatio",
+              "type": {
+                "text": "PreserveAspectRatio | undefined"
+              },
+              "description": "Resizing to container (Deprecated)",
+              "fieldName": "preserveAspectRatio"
+            },
+            {
+              "name": "renderer",
+              "type": {
+                "text": "RendererType | undefined"
+              },
+              "default": "'svg'",
+              "description": "Renderer to use (svg, canvas or html)",
+              "fieldName": "renderer"
+            },
+            {
+              "name": "seeker",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Seeker",
+              "fieldName": "seeker"
+            },
+            {
+              "name": "speed",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "1",
+              "description": "Speed",
+              "fieldName": "speed"
+            },
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "JSON/dotLottie data or URL",
+              "fieldName": "src"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dotlottie-player",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "src/component/index.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dotlottie-player",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "src/component/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/component/styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/component/styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/component/types.ts",
+      "declarations": [],
+      "exports": []
+    }
+  ]
+}

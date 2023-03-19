@@ -40,7 +40,7 @@ export declare class DotLottiePlayer extends LitElement {
     private freeze;
     reload(): Promise<void>;
     setSpeed(value?: number): void;
-    setDirection(value: number): void;
+    setDirection(value: AnimationDirection): void;
     setLooping(value: boolean): void;
     togglePlay(): void;
     toggleLooping(): void;

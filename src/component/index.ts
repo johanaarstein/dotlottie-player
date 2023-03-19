@@ -73,7 +73,7 @@ export class DotLottiePlayer extends LitElement {
    * Intermission
    */
   @property()
-  intermission? = 1
+  intermission? = 0
 
   /**
    * Whether to loop
@@ -218,7 +218,7 @@ export class DotLottiePlayer extends LitElement {
           return
         }
 
-        if (!this.loop || (this.count && this._counter >= this.count)) {
+        if (!this.loop || (!!this.count && this._counter >= this.count)) {
           this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
           this.currentState = PlayerState.Completed
           return
@@ -236,7 +236,7 @@ export class DotLottiePlayer extends LitElement {
               this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
               this._lottie?.play()
             }
-          }, this.intermission)
+          }, this.intermission ?? 0)
         } else {
           if (this.count) {
             this._counter += 1
@@ -249,7 +249,7 @@ export class DotLottiePlayer extends LitElement {
               this._lottie?.stop()
               this._lottie?.play()
             }
-          }, this.intermission)
+          }, this.intermission ?? 0)
         }
       })
 
@@ -513,14 +513,14 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Return the styles for the component
    */
-  static get styles(): CSSResult {
+  static override get styles(): CSSResult {
     return styles
   }
 
   /**
    * Initialize everything on component first render
    */
-  connectedCallback(): void {
+  override connectedCallback(): void {
     super.connectedCallback()
   
     // Add listener for Visibility API's change event.
@@ -530,7 +530,7 @@ export class DotLottiePlayer extends LitElement {
 
   }
 
-  protected async firstUpdated(): Promise<void> {
+  protected override async firstUpdated(): Promise<void> {
     // Add intersection observer for detecting component being out-of-view.
     if ('IntersectionObserver' in window) {
       this._io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
@@ -556,7 +556,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Cleanup on component destroy
    */
-  disconnectedCallback(): void {
+  override disconnectedCallback(): void {
     super.disconnectedCallback()
 
     // Remove intersection observer for detecting component being out-of-view
@@ -652,7 +652,7 @@ export class DotLottiePlayer extends LitElement {
     `
   }
 
-  protected render(): TemplateResult | void {
+  protected override render(): TemplateResult | void {
     const className: string = this.controls ? 'main controls' : 'main',
       animationClass: string = this.controls ? 'animation controls' : 'animation'
     

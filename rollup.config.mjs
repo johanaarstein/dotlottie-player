@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import summary from 'rollup-plugin-summary'
 import { swc, minify } from 'rollup-plugin-swc3'
 import template from 'rollup-plugin-html-literals'
@@ -18,6 +19,10 @@ const input = './src/index.ts',
   plugins = () => {
     return [
       template(),
+      replace({
+        preventAssignment: false,
+        'Reflect.decorate': 'undefined'
+      }),
       nodeResolve({
         extensions,
         jsnext: true,
@@ -35,7 +40,7 @@ export default [
     input: './types/index.d.ts',
     output: {
       file: pkg.types,
-      format: 'es'
+      format: 'esm'
     },
     plugins: [
       dts(),
@@ -60,7 +65,7 @@ export default [
     output: [
       {
         file: pkg.module,
-        format: 'es',
+        format: 'esm',
       },
       {
         file: pkg.exports['.'].require,
