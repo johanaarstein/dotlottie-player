@@ -1,5 +1,6 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild'
 import { legacyPlugin } from '@web/dev-server-legacy'
+
 import { fileURLToPath } from 'url'
 
 const mode = process.env.MODE || 'dev'
@@ -8,6 +9,7 @@ if (!['dev', 'prod'].includes(mode)) {
 }
 
 export default {
+  rootDir: './dev',
   nodeResolve: { exportConditions: mode === 'dev' ? ['development'] : [] },
   preserveSymlinks: true,
   plugins: [
