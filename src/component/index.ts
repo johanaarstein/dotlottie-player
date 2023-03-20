@@ -73,7 +73,7 @@ export class DotLottiePlayer extends LitElement {
    * Intermission
    */
   @property()
-  intermission? = 0
+  intermission? = 1
 
   /**
    * Whether to loop
@@ -189,7 +189,8 @@ export class DotLottiePlayer extends LitElement {
         animationData: srcParsed,
       })
     } catch (err) {
-      // console.log(err)
+      console.error(err)
+      
       this.currentState = PlayerState.Error
 
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error))
@@ -197,10 +198,45 @@ export class DotLottiePlayer extends LitElement {
     }
 
     if (this._lottie) {
+
+      //Loop
+      const loop = (): void => {
+        if (this.count) {
+          this._counter += 1
+        }
+
+        setTimeout(() => {
+          this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
+
+          if (this.currentState === PlayerState.Playing) {
+            this._lottie?.stop()
+            this._lottie?.play()
+          }
+        }, this.intermission ?? 0)
+      }
+
+      //Boomerangfunction
+      const boomerang = (): void => {
+        if (this.count) {
+          this._counter += 0.5
+        }
+
+        setTimeout(() => {
+          this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
+
+          if (this.currentState === PlayerState.Playing) {
+            this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
+            this._lottie?.play()
+          }
+        }, this.intermission)
+      }
+
+      let flag = false
+
       // Calculate and save the current progress of the animation
       this._lottie.addEventListener('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
-        this.seeker = (currentFrame / totalFrames) * 100
+        this.seeker = (currentFrame / (totalFrames - 1)) * 100
 
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
@@ -210,47 +246,39 @@ export class DotLottiePlayer extends LitElement {
             },
           }),
         )
+
+        if (this.mode === PlayMode.Bounce) {
+          if (Math.round(currentFrame) === totalFrames) {
+            boomerang()
+            flag = true
+          }
+          if (flag && currentFrame < .5) {
+            boomerang()
+          }
+        } else {
+          if (this.loop) {
+            if (Math.round(currentFrame) === totalFrames) {
+              loop()
+            }
+          }
+        }
       })
 
       // Handle animation play complete
       this._lottie.addEventListener('complete', () => {
-        if (this.currentState !== PlayerState.Playing) {
-          this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
-          return
-        }
 
-        if (!this.loop || (!!this.count && this._counter >= this.count)) {
+        if (this.currentState !== PlayerState.Playing ||
+            !this.loop ||
+            (!!this.count && this._counter >= this.count)) {
           this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
           this.currentState = PlayerState.Completed
           return
         }
 
         if (this.mode === PlayMode.Bounce) {
-          if (this.count) {
-            this._counter += 0.5
-          }
-
-          setTimeout(() => {
-            this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
-
-            if (this.currentState === PlayerState.Playing) {
-              this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
-              this._lottie?.play()
-            }
-          }, this.intermission ?? 0)
+          boomerang()
         } else {
-          if (this.count) {
-            this._counter += 1
-          }
-
-          setTimeout(() => {
-            this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
-
-            if (this.currentState === PlayerState.Playing) {
-              this._lottie?.stop()
-              this._lottie?.play()
-            }
-          }, this.intermission ?? 0)
+          loop()
         }
       })
 
@@ -290,7 +318,10 @@ export class DotLottiePlayer extends LitElement {
       this.setDirection(this.direction as AnimationDirection)
 
       // Start playing if autoplay is enabled
-      if (this.autoplay) this.play()
+      if (this.autoplay) {
+        if (this.direction === -1) this.seek('100%')
+        this.play()
+      }
     }
   }
 
@@ -570,7 +601,7 @@ export class DotLottiePlayer extends LitElement {
     if (this._lottie) this._lottie.destroy()
 
     // Remove the attached Visibility API's change event listener
-    document.removeEventListener('visibilitychange', () => this._onVisibilityChange())
+    document.removeEventListener('visibilitychange', this._onVisibilityChange)
   }
 
   protected renderControls() {

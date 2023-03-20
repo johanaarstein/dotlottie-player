@@ -5,6 +5,9 @@
     "coreJs": "3.29"
   },
   "jsc": {
+    "assumptions": {
+      "setPublicClassFields": true
+    },
     "keepClassNames": true,
     "parser": {
       "syntax": "typescript",

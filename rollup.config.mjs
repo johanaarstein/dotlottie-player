@@ -9,6 +9,7 @@ import template from 'rollup-plugin-html-literals'
 import pkg from './package.json' assert { type: 'json' }
 
 const input = './src/index.ts',
+  dev = './dev/index.js',
   extensions = ['.js', '.ts'],
   external = [
     'lit',
@@ -16,7 +17,7 @@ const input = './src/index.ts',
     'lottie-web',
     'fflate'
   ],
-  plugins = () => {
+  plugins = ( s = false ) => {
     return [
       template(),
       replace({
@@ -27,11 +28,12 @@ const input = './src/index.ts',
         extensions,
         jsnext: true,
         module: true,
+        browser: true
       }),
       commonjs(),
       swc(),
-      minify(),
-      summary(),
+      s && minify(),
+      s && summary(),
     ]
   }
 
@@ -49,15 +51,30 @@ export default [
   {
     input,
     output: {
+      extend: true,
       file: pkg.browser,
       format: 'iife',
-      name: 'dotlottiePlayer',
+      name: pkg.name,
     },
     onwarn(warning, warn) {
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
     },
     plugins: plugins(),
+  },
+  {
+    input,
+    output: {
+      extend: true,
+      file: dev,
+      format: 'iife',
+      name: pkg.name,
+    },
+    onwarn(warning, warn) {
+      if (warning.code === 'THIS_IS_UNDEFINED') return
+      warn(warning)
+    },
+    plugins: plugins(true),
   },
   {
     input,
