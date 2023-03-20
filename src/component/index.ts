@@ -133,6 +133,7 @@ export class DotLottiePlayer extends LitElement {
   private _lottie: AnimationItem | null = null
   private _prevState?: PlayerState
   private _counter = 0
+  private _bounce = false
 
   /**
    * Initialize Lottie Web player
@@ -231,9 +232,6 @@ export class DotLottiePlayer extends LitElement {
         }, this.intermission)
       }
 
-      // Check if animation has played once.
-      let flag = false
-
       // Calculate and save the current progress of the animation + trigger loop/boomerang
       this._lottie.addEventListener('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
@@ -251,9 +249,12 @@ export class DotLottiePlayer extends LitElement {
         if (this.mode === PlayMode.Bounce) {
           if (Math.round(currentFrame) === totalFrames) {
             boomerang()
-            flag = true
+            this._bounce = true
           }
-          if (flag && currentFrame < .5) {
+          if (this.currentState !== PlayerState.Playing) {
+            this._bounce = false
+          }
+          if (this._bounce && currentFrame < .5) {
             boomerang()
           }
         } else {
@@ -267,19 +268,12 @@ export class DotLottiePlayer extends LitElement {
 
       // Handle animation play complete
       this._lottie.addEventListener('complete', () => {
-
         if (this.currentState !== PlayerState.Playing ||
             !this.loop ||
             (!!this.count && this._counter >= this.count)) {
-          this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
           this.currentState = PlayerState.Completed
+          this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
           return
-        }
-
-        if (this.mode === PlayMode.Bounce) {
-          boomerang()
-        } else {
-          loop()
         }
       })
 
@@ -367,8 +361,8 @@ export class DotLottiePlayer extends LitElement {
   public play() {
     if (!this._lottie) return
 
-    this._lottie.play()
     this.currentState = PlayerState.Playing
+    this._lottie.play()
 
     this.dispatchEvent(new CustomEvent(PlayerEvents.Play))
   }
@@ -379,8 +373,8 @@ export class DotLottiePlayer extends LitElement {
   public pause(): void {
     if (!this._lottie) return
 
-    this._lottie.pause()
     this.currentState = PlayerState.Paused
+    this._lottie.pause()
 
     this.dispatchEvent(new CustomEvent(PlayerEvents.Pause))
   }
@@ -391,9 +385,10 @@ export class DotLottiePlayer extends LitElement {
   public stop(): void {
     if (!this._lottie) return
 
+    this.currentState = PlayerState.Stopped
+
     this._counter = 0
     this._lottie.stop()
-    this.currentState = PlayerState.Stopped
 
     this.dispatchEvent(new CustomEvent(PlayerEvents.Stop))
   }
@@ -404,9 +399,10 @@ export class DotLottiePlayer extends LitElement {
   public destroy(): void {
     if (!this._lottie) return
 
+    this.currentState = PlayerState.Destroyed
+
     this._lottie.destroy()
     this._lottie = null
-    this.currentState = PlayerState.Destroyed
     this.dispatchEvent(new CustomEvent(PlayerEvents.Destroyed))
     this.remove()
   }
@@ -474,8 +470,9 @@ export class DotLottiePlayer extends LitElement {
    */
   private freeze(): void {
     if (!this._lottie) return
-    this._lottie.pause()
+
     this.currentState = PlayerState.Frozen
+    this._lottie.pause()
 
     this.dispatchEvent(new CustomEvent(PlayerEvents.Freeze))
   }
@@ -526,12 +523,18 @@ export class DotLottiePlayer extends LitElement {
    */
   public togglePlay(): void {
     if (!this._lottie) return
+    const { currentFrame, playDirection, totalFrames } = this._lottie
     if (this.currentState === PlayerState.Playing) return this.pause()
     if (this.currentState === PlayerState.Completed) {
-      if (this._lottie?.playDirection !== -1) {
-        return this._lottie.goToAndPlay(0, true)
+      this.currentState = PlayerState.Playing
+      if (this.mode === PlayMode.Bounce) {
+        this.setDirection(playDirection * -1 as AnimationDirection)
+        return this._lottie.goToAndPlay(currentFrame, true)
       }
-      return this._lottie.goToAndPlay(this._lottie.totalFrames, true)
+      if (playDirection === -1) {
+        return this._lottie.goToAndPlay(totalFrames, true)
+      }
+      return this._lottie.goToAndPlay(0, true)
     }
     return this.play()
   }
@@ -542,6 +545,17 @@ export class DotLottiePlayer extends LitElement {
   public toggleLooping(): void {
     this.setLooping(!this.loop)
   }
+
+  /**
+   * Toggle Boomerang
+   */
+  public toggleBoomerang(): void {
+    if (this.mode === PlayMode.Normal) {
+      this.mode = PlayMode.Bounce
+    } else {
+      this.mode = PlayMode.Normal
+    }
+  }  
 
   /**
    * Return the styles for the component
@@ -613,7 +627,6 @@ export class DotLottiePlayer extends LitElement {
     return html`
       <div class="lottie-controls toolbar" aria-label="Lottie Animation Controls" class="toolbar">
         <button
-          name="lottie-play-button"
           @click=${this.togglePlay}
           class=${isPlaying || isPaused ? 'active' : ''}
           style="align-items:center"
@@ -633,7 +646,6 @@ export class DotLottiePlayer extends LitElement {
         `}
         </button>
         <button
-          name="lottie-stop-button"
           @click=${this.stop}
           class=${isStopped ? 'active' : ''}
           style="align-items:center"
@@ -645,11 +657,9 @@ export class DotLottiePlayer extends LitElement {
           </svg>
         </button>
         <input
-          name="lottie-seeker-input"
           class="seeker"
           type="range"
           min="0"
-          step="1"
           max="100"
           value=${this.seeker ?? 0}
           @input=${this._handleSeekChange}
@@ -660,7 +670,7 @@ export class DotLottiePlayer extends LitElement {
           @mouseup=${() => {
             this._prevState === PlayerState.Playing && this.play()
           }}
-          aria-valuemin="1"
+          aria-valuemin="0"
           aria-valuemax="100"
           role="slider"
           aria-valuenow=${this.seeker ?? 0}
@@ -668,16 +678,28 @@ export class DotLottiePlayer extends LitElement {
           aria-label="Slider for search"
         />
         <button
-          name="lottie-loop-toggle"
           @click=${this.toggleLooping}
           class=${this.loop ? 'active' : ''}
           style="align-items:center"
           tabindex="0"
-          aria-label="Toggle Looping"
+          aria-label="Toggle looping"
         >
           <svg width="24" height="24" aria-hidden="true" focusable="false">
             <path
               d="M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z"
+            />
+          </svg>
+        </button>
+        <button
+          @click=${this.toggleBoomerang}
+          class=${this.mode === PlayMode.Bounce ? 'active' : ''}
+          aria-label="Toggle boomerang"
+          style="align-items:center"
+          tabindex="0"
+        >
+          <svg width="24" height="24" aria-hidden="true" focusable="false">
+            <path
+              d="m11.8 13.2-.3.3c-.5.5-1.1 1.1-1.7 1.5-.5.4-1 .6-1.5.8-.5.2-1.1.3-1.6.3s-1-.1-1.5-.3c-.6-.2-1-.5-1.4-1-.5-.6-.8-1.2-.9-1.9-.2-.9-.1-1.8.3-2.6.3-.7.8-1.2 1.3-1.6.3-.2.6-.4 1-.5.2-.2.5-.2.8-.3.3 0 .7-.1 1 0 .3 0 .6.1.9.2.9.3 1.7.9 2.4 1.5.4.4.8.7 1.1 1.1l.1.1.4-.4c.6-.6 1.2-1.2 1.9-1.6.5-.3 1-.6 1.5-.7.4-.1.7-.2 1-.2h.9c1 .1 1.9.5 2.6 1.4.4.5.7 1.1.8 1.8.2.9.1 1.7-.2 2.5-.4.9-1 1.5-1.8 2-.4.2-.7.4-1.1.4-.4.1-.8.1-1.2.1-.5 0-.9-.1-1.3-.3-.8-.3-1.5-.9-2.1-1.5-.4-.4-.8-.7-1.1-1.1h-.3zm-1.1-1.1c-.1-.1-.1-.1 0 0-.3-.3-.6-.6-.8-.9-.5-.5-1-.9-1.6-1.2-.4-.3-.8-.4-1.3-.4-.4 0-.8 0-1.1.2-.5.2-.9.6-1.1 1-.2.3-.3.7-.3 1.1 0 .3 0 .6.1.9.1.5.4.9.8 1.2.5.4 1.1.5 1.7.5.5 0 1-.2 1.5-.5.6-.4 1.1-.8 1.6-1.3.1-.3.3-.5.5-.6zM13 12c.5.5 1 1 1.5 1.4.5.5 1.1.9 1.9 1 .4.1.8 0 1.2-.1.3-.1.6-.3.9-.5.4-.4.7-.9.8-1.4.1-.5 0-.9-.1-1.4-.3-.8-.8-1.2-1.7-1.4-.4-.1-.8-.1-1.2 0-.5.1-1 .4-1.4.7-.5.4-1 .8-1.4 1.2-.2.2-.4.3-.5.5z"
             />
           </svg>
         </button>

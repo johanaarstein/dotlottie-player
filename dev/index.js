@@ -20914,19 +20914,21 @@
 	}
 	function _templateObject2() {
 	    var data = _taggedTemplateLiteral([
-	        '<div class="lottie-controls toolbar" aria-label="Lottie Animation Controls" class="toolbar"><button name="lottie-play-button" @click="',
+	        '<div class="lottie-controls toolbar" aria-label="Lottie Animation Controls" class="toolbar"><button @click="',
 	        '" class="',
 	        '" style="align-items:center" tabindex="0" aria-label="Toggle Play/Pause">',
-	        '</button> <button name="lottie-stop-button" @click="',
+	        '</button> <button @click="',
 	        '" class="',
-	        '" style="align-items:center" tabindex="0" aria-label="Stop"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6h12v12H6V6z"/></svg></button> <input name="lottie-seeker-input" class="seeker" type="range" min="0" step="1" max="100" value="',
+	        '" style="align-items:center" tabindex="0" aria-label="Stop"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6h12v12H6V6z"/></svg></button> <input class="seeker" type="range" min="0" max="100" value="',
 	        '" @input="',
 	        '" @mousedown="',
 	        '" @mouseup="',
-	        '" aria-valuemin="1" aria-valuemax="100" role="slider" aria-valuenow="',
-	        '" tabindex="0" aria-label="Slider for search"> <button name="lottie-loop-toggle" @click="',
+	        '" aria-valuemin="0" aria-valuemax="100" role="slider" aria-valuenow="',
+	        '" tabindex="0" aria-label="Slider for search"> <button @click="',
 	        '" class="',
-	        '" style="align-items:center" tabindex="0" aria-label="Toggle Looping"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z"/></svg></button></div>'
+	        '" style="align-items:center" tabindex="0" aria-label="Toggle looping"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z"/></svg></button> <button @click="',
+	        '" class="',
+	        '" aria-label="Toggle boomerang" style="align-items:center" tabindex="0"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="m11.8 13.2-.3.3c-.5.5-1.1 1.1-1.7 1.5-.5.4-1 .6-1.5.8-.5.2-1.1.3-1.6.3s-1-.1-1.5-.3c-.6-.2-1-.5-1.4-1-.5-.6-.8-1.2-.9-1.9-.2-.9-.1-1.8.3-2.6.3-.7.8-1.2 1.3-1.6.3-.2.6-.4 1-.5.2-.2.5-.2.8-.3.3 0 .7-.1 1 0 .3 0 .6.1.9.2.9.3 1.7.9 2.4 1.5.4.4.8.7 1.1 1.1l.1.1.4-.4c.6-.6 1.2-1.2 1.9-1.6.5-.3 1-.6 1.5-.7.4-.1.7-.2 1-.2h.9c1 .1 1.9.5 2.6 1.4.4.5.7 1.1.8 1.8.2.9.1 1.7-.2 2.5-.4.9-1 1.5-1.8 2-.4.2-.7.4-1.1.4-.4.1-.8.1-1.2.1-.5 0-.9-.1-1.3-.3-.8-.3-1.5-.9-2.1-1.5-.4-.4-.8-.7-1.1-1.1h-.3zm-1.1-1.1c-.1-.1-.1-.1 0 0-.3-.3-.6-.6-.8-.9-.5-.5-1-.9-1.6-1.2-.4-.3-.8-.4-1.3-.4-.4 0-.8 0-1.1.2-.5.2-.9.6-1.1 1-.2.3-.3.7-.3 1.1 0 .3 0 .6.1.9.1.5.4.9.8 1.2.5.4 1.1.5 1.7.5.5 0 1-.2 1.5-.5.6-.4 1.1-.8 1.6-1.3.1-.3.3-.5.5-.6zM13 12c.5.5 1 1 1.5 1.4.5.5 1.1.9 1.9 1 .4.1.8 0 1.2-.1.3-.1.6-.3.9-.5.4-.4.7-.9.8-1.4.1-.5 0-.9-.1-1.4-.3-.8-.8-1.2-1.7-1.4-.4-.1-.8-.1-1.2 0-.5.1-1 .4-1.4.7-.5.4-1 .8-1.4 1.2-.2.2-.4.3-.5.5z"/></svg></button></div>'
 	    ]);
 	    _templateObject2 = function _templateObject2() {
 	        return data;
@@ -21000,6 +21002,7 @@
 	   */ _this.speed = 1;
 	        _this._lottie = null;
 	        _this._counter = 0;
+	        _this._bounce = false;
 	        return _this;
 	    }
 	    _createClass(DotLottiePlayer, [
@@ -21010,7 +21013,7 @@
 	   */ function load(src) {
 	                var _this = this;
 	                return _asyncToGenerator(function() {
-	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, loop, boomerang, flag;
+	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, loop, boomerang;
 	                    return __generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
@@ -21121,7 +21124,6 @@
 	                                            }
 	                                        }, _this.intermission);
 	                                    };
-	                                    flag = false;
 	                                    // Calculate and save the current progress of the animation + trigger loop/boomerang
 	                                    _this._lottie.addEventListener('enterFrame', function() {
 	                                        var _this__lottie = _this._lottie, currentFrame = _this__lottie.currentFrame, totalFrames = _this__lottie.totalFrames;
@@ -21135,9 +21137,12 @@
 	                                        if (_this.mode === exports.PlayMode.Bounce) {
 	                                            if (Math.round(currentFrame) === totalFrames) {
 	                                                boomerang();
-	                                                flag = true;
+	                                                _this._bounce = true;
 	                                            }
-	                                            if (flag && currentFrame < .5) {
+	                                            if (_this.currentState !== exports.PlayerState.Playing) {
+	                                                _this._bounce = false;
+	                                            }
+	                                            if (_this._bounce && currentFrame < .5) {
 	                                                boomerang();
 	                                            }
 	                                        } else {
@@ -21151,14 +21156,9 @@
 	                                    // Handle animation play complete
 	                                    _this._lottie.addEventListener('complete', function() {
 	                                        if (_this.currentState !== exports.PlayerState.Playing || !_this.loop || !!_this.count && _this._counter >= _this.count) {
-	                                            _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
 	                                            _this.currentState = exports.PlayerState.Completed;
+	                                            _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
 	                                            return;
-	                                        }
-	                                        if (_this.mode === exports.PlayMode.Bounce) {
-	                                            boomerang();
-	                                        } else {
-	                                            loop();
 	                                        }
 	                                    });
 	                                    // Handle lottie-web ready event
@@ -21257,8 +21257,8 @@
 	   * Play
 	   */ function play() {
 	                if (!this._lottie) return;
-	                this._lottie.play();
 	                this.currentState = exports.PlayerState.Playing;
+	                this._lottie.play();
 	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Play));
 	            }
 	        },
@@ -21268,8 +21268,8 @@
 	   * Pause
 	   */ function pause() {
 	                if (!this._lottie) return;
-	                this._lottie.pause();
 	                this.currentState = exports.PlayerState.Paused;
+	                this._lottie.pause();
 	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Pause));
 	            }
 	        },
@@ -21279,9 +21279,9 @@
 	   * Stop
 	   */ function stop() {
 	                if (!this._lottie) return;
+	                this.currentState = exports.PlayerState.Stopped;
 	                this._counter = 0;
 	                this._lottie.stop();
-	                this.currentState = exports.PlayerState.Stopped;
 	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Stop));
 	            }
 	        },
@@ -21291,9 +21291,9 @@
 	   * Destroy animation and element
 	   */ function destroy() {
 	                if (!this._lottie) return;
+	                this.currentState = exports.PlayerState.Destroyed;
 	                this._lottie.destroy();
 	                this._lottie = null;
-	                this.currentState = exports.PlayerState.Destroyed;
 	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Destroyed));
 	                this.remove();
 	            }
@@ -21355,8 +21355,8 @@
 	   * user requested pauses and component instigated pauses.
 	   */ function freeze() {
 	                if (!this._lottie) return;
-	                this._lottie.pause();
 	                this.currentState = exports.PlayerState.Frozen;
+	                this._lottie.pause();
 	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Freeze));
 	            }
 	        },
@@ -21432,13 +21432,18 @@
 	   * Toggle playing state
 	   */ function togglePlay() {
 	                if (!this._lottie) return;
+	                var _this__lottie = this._lottie, currentFrame = _this__lottie.currentFrame, playDirection = _this__lottie.playDirection, totalFrames = _this__lottie.totalFrames;
 	                if (this.currentState === exports.PlayerState.Playing) return this.pause();
 	                if (this.currentState === exports.PlayerState.Completed) {
-	                    var _this__lottie;
-	                    if (((_this__lottie = this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.playDirection) !== -1) {
-	                        return this._lottie.goToAndPlay(0, true);
+	                    this.currentState = exports.PlayerState.Playing;
+	                    if (this.mode === exports.PlayMode.Bounce) {
+	                        this.setDirection(playDirection * -1);
+	                        return this._lottie.goToAndPlay(currentFrame, true);
 	                    }
-	                    return this._lottie.goToAndPlay(this._lottie.totalFrames, true);
+	                    if (playDirection === -1) {
+	                        return this._lottie.goToAndPlay(totalFrames, true);
+	                    }
+	                    return this._lottie.goToAndPlay(0, true);
 	                }
 	                return this.play();
 	            }
@@ -21449,6 +21454,18 @@
 	   * Toggle loop
 	   */ function toggleLooping() {
 	                this.setLooping(!this.loop);
+	            }
+	        },
+	        {
+	            key: "toggleBoomerang",
+	            value: /**
+	   * Toggle Boomerang
+	   */ function toggleBoomerang() {
+	                if (this.mode === exports.PlayMode.Normal) {
+	                    this.mode = exports.PlayMode.Bounce;
+	                } else {
+	                    this.mode = exports.PlayMode.Normal;
+	                }
 	            }
 	        },
 	        {
@@ -21535,7 +21552,7 @@
 	                    _this.freeze();
 	                }, function() {
 	                    _this._prevState === exports.PlayerState.Playing && _this.play();
-	                }, (_this_seeker1 = this.seeker) !== null && _this_seeker1 !== void 0 ? _this_seeker1 : 0, this.toggleLooping, this.loop ? 'active' : '');
+	                }, (_this_seeker1 = this.seeker) !== null && _this_seeker1 !== void 0 ? _this_seeker1 : 0, this.toggleLooping, this.loop ? 'active' : '', this.toggleBoomerang, this.mode === exports.PlayMode.Bounce ? 'active' : '');
 	            }
 	        },
 	        {
