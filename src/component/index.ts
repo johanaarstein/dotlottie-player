@@ -231,9 +231,10 @@ export class DotLottiePlayer extends LitElement {
         }, this.intermission)
       }
 
+      // Check if animation has played once.
       let flag = false
 
-      // Calculate and save the current progress of the animation
+      // Calculate and save the current progress of the animation + trigger loop/boomerang
       this._lottie.addEventListener('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
         this.seeker = (currentFrame / (totalFrames - 1)) * 100
