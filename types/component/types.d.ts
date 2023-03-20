@@ -52,6 +52,11 @@ interface ReactLottiePlayer extends Partial<DotLottiePlayer> {
     style?: any;
 }
 declare global {
+    interface HTMLElementTagNameMap {
+        'dotlottie-player': DotLottiePlayer;
+    }
+}
+declare global {
     namespace JSX {
         interface IntrinsicElements {
             'dotlottie-player': ReactLottiePlayer;

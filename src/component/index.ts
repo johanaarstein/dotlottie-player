@@ -25,7 +25,7 @@ export class DotLottiePlayer extends LitElement {
    * Autoplay
    */
   @property({ type: Boolean, reflect: true })
-  autoplay?: Autoplay = false
+  autoplay?: Autoplay
 
   /**
    * Background color
@@ -189,6 +189,7 @@ export class DotLottiePlayer extends LitElement {
         animationData: srcParsed,
       })
     } catch (err) {
+      // console.log(err)
       this.currentState = PlayerState.Error
 
       this.dispatchEvent(new CustomEvent(PlayerEvents.Error))

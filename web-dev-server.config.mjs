@@ -1,5 +1,9 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild'
 import { legacyPlugin } from '@web/dev-server-legacy'
+// import { fromRollup } from '@web/dev-server-rollup'
+
+// import commonjs from '@rollup/plugin-commonjs'
+// import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 import { fileURLToPath } from 'url'
 
@@ -10,11 +14,15 @@ if (!['dev', 'prod'].includes(mode)) {
 
 export default {
   rootDir: './dev',
-  nodeResolve: { exportConditions: mode === 'dev' ? ['development'] : [] },
+  nodeResolve: {
+    exportConditions: mode === 'dev' ? ['development'] : [],
+  },
   preserveSymlinks: true,
   plugins: [
     esbuildPlugin({
       ts: true,
+      // module: 'ESNext',
+      // target: 'ES2020',
       tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
     }),
     legacyPlugin({
@@ -30,5 +38,6 @@ export default {
         ],
       },
     }),
+    // fromRollup(commonjs),
   ],
 }

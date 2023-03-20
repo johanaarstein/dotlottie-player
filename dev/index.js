@@ -1,3 +1,5 @@
 import { DotLottiePlayer } from '../src'
 
-window.customElements.define('dotlottie-player', DotLottiePlayer)
+if (!customElements.get('dotlottie-player')) {
+  customElements.define('dotlottie-player', DotLottiePlayer)
+}
