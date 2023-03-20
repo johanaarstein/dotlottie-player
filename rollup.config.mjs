@@ -32,8 +32,8 @@ const input = './src/index.ts',
       }),
       commonjs(),
       swc(),
-      s && minify(),
-      s && summary(),
+      !s && minify(),
+      !s && summary(),
     ]
   }
 
