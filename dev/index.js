@@ -20984,7 +20984,7 @@
 	   */ _this.hover = false;
 	        /**
 	   * Intermission
-	   */ _this.intermission = 1;
+	   */ _this.intermission = 0;
 	        /**
 	   * Whether to loop
 	   */ _this.loop = false;
@@ -21002,18 +21002,18 @@
 	   */ _this.speed = 1;
 	        _this._lottie = null;
 	        _this._counter = 0;
-	        _this._bounce = false;
 	        return _this;
 	    }
 	    _createClass(DotLottiePlayer, [
 	        {
 	            key: "load",
-	            value: /**
+	            value: // private _bounce = false
+	            /**
 	   * Initialize Lottie Web player
 	   */ function load(src) {
 	                var _this = this;
 	                return _asyncToGenerator(function() {
-	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, loop, boomerang;
+	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, _loopComplete;
 	                    return __generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
@@ -21022,7 +21022,7 @@
 	                                        2
 	                                    ];
 	                                }
-	                                preserveAspectRatio = (_this_preserveAspectRatio = _this.preserveAspectRatio) !== null && _this_preserveAspectRatio !== void 0 ? _this_preserveAspectRatio : aspectRatio(_this.objectfit), options = {
+	                                preserveAspectRatio = (_this_preserveAspectRatio = _this.preserveAspectRatio) !== null && _this_preserveAspectRatio !== void 0 ? _this_preserveAspectRatio : _this.objectfit && aspectRatio(_this.objectfit), options = {
 	                                    container: _this.container,
 	                                    loop: _this.loop,
 	                                    autoplay: _this.autoplay,
@@ -21097,70 +21097,96 @@
 	                                ];
 	                            case 6:
 	                                if (_this._lottie) {
-	                                    loop = function() {
-	                                        if (_this.count) {
-	                                            _this._counter += 1;
-	                                        }
-	                                        var _this_intermission;
-	                                        setTimeout(function() {
-	                                            _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Loop));
-	                                            if (_this.currentState === exports.PlayerState.Playing) {
-	                                                var _this__lottie, _this__lottie1;
-	                                                (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.stop();
-	                                                (_this__lottie1 = _this._lottie) === null || _this__lottie1 === void 0 ? void 0 : _this__lottie1.play();
-	                                            }
-	                                        }, (_this_intermission = _this.intermission) !== null && _this_intermission !== void 0 ? _this_intermission : 0);
-	                                    };
-	                                    boomerang = function() {
-	                                        if (_this.count) {
-	                                            _this._counter += 0.5;
-	                                        }
-	                                        setTimeout(function() {
-	                                            _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Loop));
-	                                            if (_this.currentState === exports.PlayerState.Playing) {
-	                                                var _this__lottie, _this__lottie1;
-	                                                (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.setDirection(_this._lottie.playDirection * -1);
-	                                                (_this__lottie1 = _this._lottie) === null || _this__lottie1 === void 0 ? void 0 : _this__lottie1.play();
-	                                            }
-	                                        }, _this.intermission);
-	                                    };
+	                                    // //Loop
+	                                    // const loop = (): void => {
+	                                    //   if (this.count) {
+	                                    //     this._counter += 1
+	                                    //   }
+	                                    //   setTimeout(() => {
+	                                    //     this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
+	                                    //     if (this.currentState === PlayerState.Playing) {
+	                                    //       this._lottie?.stop()
+	                                    //       this._lottie?.play()
+	                                    //     }
+	                                    //   }, this.intermission ?? 0)
+	                                    // }
+	                                    // //Boomerangfunction
+	                                    // const boomerang = (): void => {
+	                                    //   if (this.count) {
+	                                    //     this._counter += 0.5
+	                                    //   }
+	                                    //   setTimeout(() => {
+	                                    //     this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
+	                                    //     if (this.currentState === PlayerState.Playing) {
+	                                    //       this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
+	                                    //       this._lottie?.play()
+	                                    //     }
+	                                    //   }, this.intermission)
+	                                    // }
 	                                    // Calculate and save the current progress of the animation + trigger loop/boomerang
 	                                    _this._lottie.addEventListener('enterFrame', function() {
 	                                        var _this__lottie = _this._lottie, currentFrame = _this__lottie.currentFrame, totalFrames = _this__lottie.totalFrames;
-	                                        _this.seeker = currentFrame / (totalFrames - 1) * 100;
+	                                        _this.seeker = currentFrame / totalFrames * 100;
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Frame, {
 	                                            detail: {
 	                                                frame: currentFrame,
 	                                                seeker: _this.seeker
 	                                            }
 	                                        }));
-	                                        if (_this.mode === exports.PlayMode.Bounce) {
-	                                            if (Math.round(currentFrame) === totalFrames) {
-	                                                boomerang();
-	                                                _this._bounce = true;
-	                                            }
-	                                            if (_this.currentState !== exports.PlayerState.Playing) {
-	                                                _this._bounce = false;
-	                                            }
-	                                            if (_this._bounce && currentFrame < .5) {
-	                                                boomerang();
-	                                            }
-	                                        } else {
-	                                            if (_this.loop) {
-	                                                if (Math.round(currentFrame) === totalFrames) {
-	                                                    loop();
-	                                                }
-	                                            }
-	                                        }
+	                                    // if (this.mode === PlayMode.Bounce) {
+	                                    //   if (Math.round(currentFrame) === totalFrames) {
+	                                    //     boomerang()
+	                                    //     this._bounce = true
+	                                    //   }
+	                                    //   if (this.currentState !== PlayerState.Playing) {
+	                                    //     this._bounce = false
+	                                    //   }
+	                                    //   if (this._bounce && currentFrame < .5) {
+	                                    //     boomerang()
+	                                    //   }
+	                                    // } else {
+	                                    //   if (this.loop) {
+	                                    //     if (Math.round(currentFrame) === totalFrames) {
+	                                    //       loop()
+	                                    //     }
+	                                    //   }
+	                                    // }
 	                                    });
 	                                    // Handle animation play complete
 	                                    _this._lottie.addEventListener('complete', function() {
-	                                        if (_this.currentState !== exports.PlayerState.Playing || !_this.loop || !!_this.count && _this._counter >= _this.count) {
-	                                            _this.currentState = exports.PlayerState.Completed;
-	                                            _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
-	                                            return;
-	                                        }
+	                                        _this.currentState = exports.PlayerState.Completed;
+	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
 	                                    });
+	                                    _loopComplete = function() {
+	                                        var _this__lottie;
+	                                        var _this__lottie1 = _this._lottie, // currentFrame,
+	                                        firstFrame = _this__lottie1.firstFrame, totalFrames = _this__lottie1.totalFrames, playDirection = _this__lottie1.playDirection;
+	                                        if (_this.count) {
+	                                            _this.mode === exports.PlayMode.Bounce ? _this._counter += 1 : _this._counter += 0.5;
+	                                            if (_this._counter >= _this.count) {
+	                                                _this.setLooping(false);
+	                                                _this.currentState = exports.PlayerState.Completed;
+	                                                _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
+	                                                return;
+	                                            }
+	                                        }
+	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Loop));
+	                                        if (_this.mode === exports.PlayMode.Bounce) {
+	                                            var _this__lottie2, _this__lottie3;
+	                                            (_this__lottie2 = _this._lottie) === null || _this__lottie2 === void 0 ? void 0 : _this__lottie2.goToAndStop(playDirection === -1 ? firstFrame : totalFrames * .99, true);
+	                                            (_this__lottie3 = _this._lottie) === null || _this__lottie3 === void 0 ? void 0 : _this__lottie3.setDirection(playDirection * -1);
+	                                            return setTimeout(function() {
+	                                                var _this__lottie;
+	                                                (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.play();
+	                                            }, _this.intermission);
+	                                        }
+	                                        (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.goToAndStop(playDirection === -1 ? totalFrames * .99 : firstFrame, true);
+	                                        return setTimeout(function() {
+	                                            var _this__lottie;
+	                                            (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.play();
+	                                        }, _this.intermission);
+	                                    };
+	                                    _this._lottie.addEventListener('loopComplete', _loopComplete);
 	                                    // Handle lottie-web ready event
 	                                    _this._lottie.addEventListener('DOMLoaded', function() {
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Ready));

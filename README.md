@@ -2,9 +2,9 @@
 
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
 
-This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and now this is the most versatile Lottie Player Web Component out there, in our humble opinion. And we still managed to trim off some significant weight.
+This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and now this is the most versatile Lottie Player Web Component out there!
 
-The component is built with Lit and compiled with Rust, it's compatible with server side rendering and like any good web component it's framework agnostic.
+The component is built with Lit and compiled with Rust. It's compatible with server side rendering, and like any good web component it's framework agnostic.
 
 ## Demo
 
@@ -42,7 +42,7 @@ import '@johanaarstein/dotlottie-player'
 
 ## Usage
 
-Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. If you're working in SSR environments like Next.js or Nuxt.js, it's good practice to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true` – to mimic how modern browsers treats these values in markup, as opposed to how Node.js treats them. This way you avoid hydration errors.
+Add the element `dotlottie-player` to your markup and point `src` to a Lottie animation of your choice. If you're working in SSR environments like Next.js or Nuxt.js, it might be a good idea to set reflective booleans (like `autoplay`, `controls` and `loop`) to an empty string instead of `true` – to mimic how modern browsers treats these values in markup, as opposed to how Node.js treats them. This way you avoid hydration errors.
 
 ```xml
 <dotlottie-player
@@ -84,7 +84,7 @@ export class AppComponent {
 
 ### React.js / Next.js
 
-Easy peasy lemon squeezy! If you've already imported the library in a parent component, you don't need to import it again in children of that component. If you want to assign the element a class note that you need to use the `class` namespace, and not `className`.
+If you've already imported the library in a parent component, you don't need to import it again in children of that component. If you want to assign the element a class note that you need to use the `class` namespace, and not `className`.
 
 ```jsx
 import '@johanaarstein/dotlottie-player'

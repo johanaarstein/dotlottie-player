@@ -2,7 +2,13 @@ import { html, LitElement, nothing } from 'lit'
 import type { CSSResult, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
-import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web'
+import type {
+  AnimationConfig,
+  AnimationEventName,
+  AnimationItem,
+  AnimationDirection,
+  RendererType
+} from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types'
 import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio } from './types'
@@ -73,7 +79,7 @@ export class DotLottiePlayer extends LitElement {
    * Intermission
    */
   @property()
-  intermission? = 1
+  intermission? = 0
 
   /**
    * Whether to loop
@@ -133,23 +139,23 @@ export class DotLottiePlayer extends LitElement {
   private _lottie: AnimationItem | null = null
   private _prevState?: PlayerState
   private _counter = 0
-  private _bounce = false
+  // private _bounce = false
 
   /**
    * Initialize Lottie Web player
    */
-  public async load(src: string | Record<string, any>): Promise<void> {
+  public async load(src: string | Record<string, number | undefined> | JSON): Promise<void> {
     if (!this.shadowRoot) {
       return
     }
 
-    const preserveAspectRatio = this.preserveAspectRatio ?? aspectRatio(this.objectfit as ObjectFit),
+    const preserveAspectRatio = this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
     
-      options: any = {
+      options: AnimationConfig<'svg' | 'canvas' | 'html'> = {
         container: this.container,
-        loop: this.loop,
-        autoplay: this.autoplay,
-        renderer: this.renderer,
+        loop: this.loop as boolean,
+        autoplay: this.autoplay as boolean,
+        renderer: this.renderer as 'svg',
         rendererSettings: {
           hideOnTransparent: true,
           preserveAspectRatio,
@@ -159,7 +165,7 @@ export class DotLottiePlayer extends LitElement {
     
     switch (this.renderer) {
       case 'canvas':
-        options.rendererSettings = {
+        options.rendererSettings  = {
           clearCanvas: true,
           preserveAspectRatio,
           progressiveLoad: true,
@@ -200,42 +206,10 @@ export class DotLottiePlayer extends LitElement {
 
     if (this._lottie) {
 
-      //Loop
-      const loop = (): void => {
-        if (this.count) {
-          this._counter += 1
-        }
-
-        setTimeout(() => {
-          this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
-
-          if (this.currentState === PlayerState.Playing) {
-            this._lottie?.stop()
-            this._lottie?.play()
-          }
-        }, this.intermission ?? 0)
-      }
-
-      //Boomerangfunction
-      const boomerang = (): void => {
-        if (this.count) {
-          this._counter += 0.5
-        }
-
-        setTimeout(() => {
-          this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
-
-          if (this.currentState === PlayerState.Playing) {
-            this._lottie?.setDirection(this._lottie.playDirection * -1 as AnimationDirection)
-            this._lottie?.play()
-          }
-        }, this.intermission)
-      }
-
       // Calculate and save the current progress of the animation + trigger loop/boomerang
-      this._lottie.addEventListener('enterFrame', () => {
+      this._lottie.addEventListener<AnimationEventName>('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
-        this.seeker = (currentFrame / (totalFrames - 1)) * 100
+        this.seeker = (currentFrame / totalFrames) * 100
 
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
@@ -245,52 +219,68 @@ export class DotLottiePlayer extends LitElement {
             },
           }),
         )
-
-        if (this.mode === PlayMode.Bounce) {
-          if (Math.round(currentFrame) === totalFrames) {
-            boomerang()
-            this._bounce = true
-          }
-          if (this.currentState !== PlayerState.Playing) {
-            this._bounce = false
-          }
-          if (this._bounce && currentFrame < .5) {
-            boomerang()
-          }
-        } else {
-          if (this.loop) {
-            if (Math.round(currentFrame) === totalFrames) {
-              loop()
-            }
-          }
-        }
       })
 
       // Handle animation play complete
-      this._lottie.addEventListener('complete', () => {
-        if (this.currentState !== PlayerState.Playing ||
-            !this.loop ||
-            (!!this.count && this._counter >= this.count)) {
-          this.currentState = PlayerState.Completed
-          this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
-          return
-        }
+      this._lottie.addEventListener<AnimationEventName>('complete', () => {          
+        this.currentState = PlayerState.Completed
+        this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
       })
 
+      const _loopComplete = () => {
+        const {
+          firstFrame,
+          totalFrames,
+          playDirection,
+        } = this._lottie as AnimationItem
+
+        if (this.count) {
+
+          this.mode === PlayMode.Bounce ?
+            this._counter += 1 : this._counter += 0.5
+
+          if (this._counter >= this.count) {
+            this.setLooping(false)
+
+            this.currentState = PlayerState.Completed
+            this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
+
+            return
+          }
+        }
+
+        this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
+
+        if (this.mode === PlayMode.Bounce) {
+          this._lottie?.goToAndStop(playDirection === -1 ? firstFrame : totalFrames * .99, true)
+          this._lottie?.setDirection(playDirection * -1 as AnimationDirection)
+          return setTimeout(() => {
+            this._lottie?.play()
+          }, this.intermission)
+        }
+        
+        this._lottie?.goToAndStop(playDirection === -1 ? totalFrames * .99 : firstFrame, true)
+        return setTimeout(() => {
+          this._lottie?.play()
+        }, this.intermission)
+      }
+
+      this._lottie.addEventListener<AnimationEventName>('loopComplete', _loopComplete)
+
       // Handle lottie-web ready event
-      this._lottie.addEventListener('DOMLoaded', () => {
+      this._lottie.addEventListener<AnimationEventName>('DOMLoaded', () => {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Ready))
       })
 
       // Handle animation data load complete
-      this._lottie.addEventListener('data_ready', () => {
+      this._lottie.addEventListener<AnimationEventName>('data_ready', () => {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Load))
       })
 
       // Set error state when animation load fail event triggers
-      this._lottie.addEventListener('data_failed', () => {
+      this._lottie.addEventListener<AnimationEventName>('data_failed', () => {
+        
         this.currentState = PlayerState.Error
-
         this.dispatchEvent(new CustomEvent(PlayerEvents.Error))
       })
 
@@ -314,7 +304,7 @@ export class DotLottiePlayer extends LitElement {
 
       // Start playing if autoplay is enabled
       if (this.autoplay) {
-        if (this.direction === -1) this.seek('100%')
+        if (this.direction === -1) this.seek('99%')
         this.play()
       }
     }
@@ -342,7 +332,7 @@ export class DotLottiePlayer extends LitElement {
     this.seek(frame)
   }
 
-  private isLottie(json: Record<string, number | undefined>): boolean {
+  private isLottie(json: Record<string, number | undefined> | JSON): boolean {
     const mandatory: string[] = ['v', 'ip', 'op', 'layers', 'fr', 'w', 'h']
 
     return mandatory.every((field: string) => Object.prototype.hasOwnProperty.call(json, field))
@@ -523,6 +513,7 @@ export class DotLottiePlayer extends LitElement {
    */
   public togglePlay(): void {
     if (!this._lottie) return
+    
     const { currentFrame, playDirection, totalFrames } = this._lottie
     if (this.currentState === PlayerState.Playing) return this.pause()
     if (this.currentState === PlayerState.Completed) {
