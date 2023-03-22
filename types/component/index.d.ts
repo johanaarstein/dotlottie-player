@@ -26,7 +26,7 @@ export declare class DotLottiePlayer extends LitElement {
     private _lottie;
     private _prevState?;
     private _counter;
-    load(src: string | Record<string, any>): Promise<void>;
+    load(src: string | Record<string, number | undefined> | JSON): Promise<void>;
     private _onVisibilityChange;
     private _handleSeekChange;
     private isLottie;
@@ -44,6 +44,7 @@ export declare class DotLottiePlayer extends LitElement {
     setLooping(value: boolean): void;
     togglePlay(): void;
     toggleLooping(): void;
+    toggleBoomerang(): void;
     static get styles(): CSSResult;
     connectedCallback(): void;
     protected firstUpdated(): Promise<void>;

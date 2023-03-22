@@ -1,6 +1,6 @@
 import { strFromU8, unzip } from 'fflate'
 
-import { LottieAnimation, LottieAssets, LottieManifest } from './types'
+import type { LottieAnimation, LottieAssets, LottieManifest } from './types'
 import type { ObjectFit } from './types'
 
 const aspectRatio = (objectFit: ObjectFit) => {
@@ -23,22 +23,19 @@ const aspectRatio = (objectFit: ObjectFit) => {
     const ext: string | undefined = path.split('.').pop()?.toLowerCase()
 
     try {
-      const result: Response = await fetch(path)
+      const result = await fetch(path)
 
       if (ext === 'json') return await result.json()
 
       const buffer = new Uint8Array(await result.arrayBuffer()),
-        unzipped = await new Promise((resolve, reject) => {
+        unzipped = await new Promise<LottieAnimation>((resolve, reject) => {
           unzip(buffer, (err, file) => {
             if (err) reject(err)
-            resolve(file)
+            resolve(file as LottieAnimation)
           })
         }),
 
-        // TODO: Hack for TypeScript
-        lottieAnimation = unzipped as LottieAnimation,
-
-        manifestFile: string | undefined = strFromU8(lottieAnimation['manifest.json']),
+        manifestFile: string | undefined = strFromU8(unzipped['manifest.json']),
         manifest: LottieManifest = JSON.parse(manifestFile as string)
 
       if (!('animations' in manifest)) throw new Error('Manifest not found')
@@ -46,7 +43,7 @@ const aspectRatio = (objectFit: ObjectFit) => {
 
       const { id } = manifest.animations[0],
 
-        lottieString = strFromU8(lottieAnimation?.[`animations/${id}.json`]),
+        lottieString = strFromU8(unzipped?.[`animations/${id}.json`]),
         lottieJson = await JSON.parse(lottieString as string)
 
       if ('assets' in lottieJson) {
@@ -54,11 +51,11 @@ const aspectRatio = (objectFit: ObjectFit) => {
 
           const { p } = asset
 
-          if (!p || !lottieAnimation?.[`images/${p}`]) return
+          if (!p || !unzipped?.[`images/${p}`]) return
 
           return new Promise<void>(resolveAsset => {
             const ext = p.split('.').pop(),
-              assetB64 = Buffer.from(lottieAnimation?.[`images/${p}`])?.toString('base64')
+              assetB64 = Buffer.from(unzipped?.[`images/${p}`])?.toString('base64')
 
             switch (ext) {
               case 'svg':
