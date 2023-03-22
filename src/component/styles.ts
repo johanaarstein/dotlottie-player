@@ -83,19 +83,24 @@ export default css`
     display: none;
   }
 
+  .seeker, .seeker::-webkit-slider-runnable-track, .seeker::-webkit-slider-thumb {
+    --webkit-appearance: none;
+    outline: none;
+  }
+
   .seeker {
     -webkit-appearance: none;
     width: 95%;
-    outline: none;
     background-color: var(--lottie-player-toolbar-background-color);
     display: var(--lottie-player-seeker-display);
+    color: var(--lottie-player-seeker-thumb-color);
   }
 
   .seeker::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
-    background: var(--lottie-player-seeker-track-color);
+    background-color: var(--lottie-player-seeker-track-color);
     border-radius: 3px;
   }
   .seeker::-webkit-progress-value {

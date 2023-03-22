@@ -4,9 +4,10 @@ import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
 import type {
   AnimationConfig,
+  AnimationDirection,
   AnimationEventName,
   AnimationItem,
-  AnimationDirection,
+  AnimationSegment,
   RendererType
 } from 'lottie-web'
 
@@ -78,7 +79,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Intermission
    */
-  @property()
+  @property({ type: Number })
   intermission? = 0
 
   /**
@@ -90,7 +91,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Play mode
    */
-  @property()
+  @property({ type: String })
   mode?: PlayMode = PlayMode.Normal
 
   /**
@@ -112,9 +113,15 @@ export class DotLottiePlayer extends LitElement {
   renderer?: RendererType = 'svg'
 
   /**
+   * Segment
+   */
+  @property({ type: Array })
+  segment?: AnimationSegment
+
+  /**
    * Seeker
    */
-  @property()
+  @property({ type: Number })
   seeker?: number
 
   /**
@@ -128,6 +135,12 @@ export class DotLottiePlayer extends LitElement {
    */
   @property({ type: String })
   src!: string
+
+  /**
+   * Subframe
+   */
+  @property({ type: Boolean })
+  subframe? = false
 
   /**
    * Container
@@ -153,19 +166,27 @@ export class DotLottiePlayer extends LitElement {
     
       options: AnimationConfig<'svg' | 'canvas' | 'html'> = {
         container: this.container,
-        loop: this.loop as boolean,
-        autoplay: this.autoplay as boolean,
-        renderer: this.renderer as 'svg',
+        loop: !!this.loop,
+        autoplay: !!this.autoplay,
+        renderer: this.renderer,
+        initialSegment: this.segment,
         rendererSettings: {
-          hideOnTransparent: true,
-          preserveAspectRatio,
-          progressiveLoad: true,
+          imagePreserveAspectRatio: preserveAspectRatio,
         }
       }
     
     switch (this.renderer) {
+      case 'svg':
+        options.rendererSettings = {
+          ...options.rendererSettings,
+          hideOnTransparent: true,
+          preserveAspectRatio,
+          progressiveLoad: true,
+        }
+        break
       case 'canvas':
         options.rendererSettings  = {
+          ...options.rendererSettings,
           clearCanvas: true,
           preserveAspectRatio,
           progressiveLoad: true,
@@ -173,6 +194,7 @@ export class DotLottiePlayer extends LitElement {
         break
       case 'html':
         options.rendererSettings = {
+          ...options.rendererSettings,
           hideOnTransparent: true
         }
     }
@@ -301,6 +323,9 @@ export class DotLottiePlayer extends LitElement {
       // Set initial playback speed and direction
       this.setSpeed(this.speed)
       this.setDirection(this.direction as AnimationDirection)
+      this.setSubframe(!!this.subframe)
+
+      console.log(this._lottie.isSubframeEnabled)
 
       // Start playing if autoplay is enabled
       if (this.autoplay) {
@@ -453,6 +478,12 @@ export class DotLottiePlayer extends LitElement {
     return data
   }
 
+  public setSubframe(value: boolean): void {
+    if (!this._lottie) return
+    this.subframe = value
+    this._lottie.setSubframe(value)
+  }
+
   /**
    * Freeze animation.
    * This internal state pauses animation and is used to differentiate between
@@ -486,6 +517,7 @@ export class DotLottiePlayer extends LitElement {
    */
   public setSpeed(value = 1): void {
     if (!this._lottie) return
+    this.speed = value
     this._lottie.setSpeed(value)
   }
 
@@ -495,6 +527,7 @@ export class DotLottiePlayer extends LitElement {
    */
   public setDirection(value: AnimationDirection): void {
     if (!this._lottie) return
+    this.direction = value
     this._lottie.setDirection(value)
   }
 
@@ -504,7 +537,7 @@ export class DotLottiePlayer extends LitElement {
   public setLooping(value: boolean): void {
     if (this._lottie) {
       this.loop = value
-      this._lottie.loop = value
+      this._lottie.setLoop(value)
     }
   }
 
@@ -704,7 +737,7 @@ export class DotLottiePlayer extends LitElement {
     
     return html`
       <div
-        class=${'animation-container ' + className}
+        class=${`animation-container ${className}`}
         lang=${this.description ? document?.documentElement?.lang : 'en'}
         role="img"
         aria-label=${this.description ?? 'Lottie animation'}

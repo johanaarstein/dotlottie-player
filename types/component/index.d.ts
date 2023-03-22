@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import type { CSSResult, TemplateResult } from 'lit';
-import type { AnimationItem, AnimationDirection, RendererType } from 'lottie-web';
+import type { AnimationDirection, AnimationItem, AnimationSegment, RendererType } from 'lottie-web';
 import { PlayMode, PlayerState } from './types';
 import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio } from './types';
 export declare class DotLottiePlayer extends LitElement {
@@ -18,9 +18,11 @@ export declare class DotLottiePlayer extends LitElement {
     objectfit?: ObjectFit;
     preserveAspectRatio?: PreserveAspectRatio;
     renderer?: RendererType;
+    segment?: AnimationSegment;
     seeker?: number;
     speed?: number;
     src: string;
+    subframe?: boolean | undefined;
     protected container: HTMLElement;
     private _io?;
     private _lottie;
@@ -37,6 +39,7 @@ export declare class DotLottiePlayer extends LitElement {
     destroy(): void;
     seek(value: number | string): void;
     snapshot(download?: boolean): string | void;
+    setSubframe(value: boolean): void;
     private freeze;
     reload(): Promise<void>;
     setSpeed(value?: number): void;
