@@ -162,7 +162,8 @@ export class DotLottiePlayer extends LitElement {
       return
     }
 
-    const preserveAspectRatio = this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
+    const preserveAspectRatio =
+      this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
     
       options: AnimationConfig<'svg' | 'canvas' | 'html'> = {
         container: this.container,
@@ -228,7 +229,7 @@ export class DotLottiePlayer extends LitElement {
 
     if (this._lottie) {
 
-      // Calculate and save the current progress of the animation + trigger loop/boomerang
+      // Calculate and save the current progress of the animation
       this._lottie.addEventListener<AnimationEventName>('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
         this.seeker = (currentFrame / totalFrames) * 100
@@ -249,6 +250,7 @@ export class DotLottiePlayer extends LitElement {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Complete))
       })
 
+      //Handle complete loop
       const _loopComplete = () => {
         const {
           firstFrame,
@@ -274,14 +276,21 @@ export class DotLottiePlayer extends LitElement {
         this.dispatchEvent(new CustomEvent(PlayerEvents.Loop))
 
         if (this.mode === PlayMode.Bounce) {
-          this._lottie?.goToAndStop(playDirection === -1 ? firstFrame : totalFrames * .99, true)
+            this._lottie?.goToAndStop(
+            playDirection === -1 ? firstFrame : totalFrames * .99, true
+          )
+          
           this._lottie?.setDirection(playDirection * -1 as AnimationDirection)
+          
           return setTimeout(() => {
             this._lottie?.play()
           }, this.intermission)
         }
         
-        this._lottie?.goToAndStop(playDirection === -1 ? totalFrames * .99 : firstFrame, true)
+        this._lottie?.goToAndStop(
+          playDirection === -1 ? totalFrames * .99 : firstFrame, true
+        )
+
         return setTimeout(() => {
           this._lottie?.play()
         }, this.intermission)
@@ -325,8 +334,6 @@ export class DotLottiePlayer extends LitElement {
       this.setDirection(this.direction as AnimationDirection)
       this.setSubframe(!!this.subframe)
 
-      console.log(this._lottie.isSubframeEnabled)
-
       // Start playing if autoplay is enabled
       if (this.autoplay) {
         if (this.direction === -1) this.seek('99%')
@@ -352,7 +359,8 @@ export class DotLottiePlayer extends LitElement {
   private _handleSeekChange(event: Event & { target: HTMLInputElement }): void {
     if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return
 
-    const frame: number = (Number(event.target.value) / 100) * this._lottie.totalFrames
+    const frame: number =
+      (Number(event.target.value) / 100) * this._lottie.totalFrames
 
     this.seek(frame)
   }
@@ -360,7 +368,8 @@ export class DotLottiePlayer extends LitElement {
   private isLottie(json: Record<string, number | undefined> | JSON): boolean {
     const mandatory: string[] = ['v', 'ip', 'op', 'layers', 'fr', 'w', 'h']
 
-    return mandatory.every((field: string) => Object.prototype.hasOwnProperty.call(json, field))
+    return mandatory.every((field: string) =>
+      Object.prototype.hasOwnProperty.call(json, field))
   }
 
   /**
@@ -435,7 +444,8 @@ export class DotLottiePlayer extends LitElement {
     }
 
     // Calculate and set the frame number
-    const frame = matches[2] === '%' ? (this._lottie.totalFrames * Number(matches[1])) / 100 : matches[1]
+    const frame =
+      matches[2] === '%' ? (this._lottie.totalFrames * Number(matches[1])) / 100 : matches[1]
 
     // Set seeker to new frame number
     this.seeker = Number(frame)
@@ -459,7 +469,9 @@ export class DotLottiePlayer extends LitElement {
 
     // Get SVG element and serialize markup
     const svgElement = this.shadowRoot.querySelector('.animation svg')
-    const data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null
+    const data =
+      svgElement instanceof Node ?
+        new XMLSerializer().serializeToString(svgElement) : null
 
     if (!data) return
 

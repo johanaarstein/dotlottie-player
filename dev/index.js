@@ -21180,7 +21180,6 @@
 	                                    _this.setSpeed(_this.speed);
 	                                    _this.setDirection(_this.direction);
 	                                    _this.setSubframe(!!_this.subframe);
-	                                    console.log(_this._lottie.isSubframeEnabled);
 	                                    // Start playing if autoplay is enabled
 	                                    if (_this.autoplay) {
 	                                        if (_this.direction === -1) _this.seek('99%');
