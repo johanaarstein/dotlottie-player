@@ -208,20 +208,22 @@ export default defineNuxtPlugin(({ vueApp }) => {
 
 ## Properties
 
-| Property / Attribute  | Description                        | Type                                     | Default           |
-| --------------------- | ---------------------------------- | ---------------------------------------- | ----------------- |
-| `autoplay`            | Play animation on load             | `boolean`                                | `false`           |
-| `background`          | Background color                   | `string`                                 | `undefined`       |
-| `controls`            | Show controls                      | `boolean`                                | `false`           |
-| `count`               | Number of times to loop animation  | `number`                                 | `undefined`       |
-| `direction`           | Direction of animation             | `1 \| -1`                                | `1`               |
-| `hover`               | Whether to play on mouse hover     | `boolean`                                | `false`           |
-| `loop`                | Whether to loop animation          | `boolean`                                | `false`           |
-| `mode`                | Play mode                          | `normal` \| `bounce`                     | `normal`          |
-| `objectfit`           | Resizing of animation in container | `contain` \| `cover` \| `fill` \| `none` | `contain`         |
-| `renderer`            | Renderer to use                    | `svg` \| `canvas` \| `html`              | `'svg'`           |
-| `speed`               | Animation speed                    | `number`                                 | `1`               |
-| `src` _(required)_    | URL to LottieJSON or dotLottie     | `string`                                 | `undefined`       |
+| Property / Attribute  | Description                                                                                             | Type                                     | Default           |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ----------------- |
+| `autoplay`            | Play animation on load                                                                                  | `boolean`                                | `false`           |
+| `background`          | Background color                                                                                        | `string`                                 | `undefined`       |
+| `controls`            | Show controls                                                                                           | `boolean`                                | `false`           |
+| `count`               | Number of times to loop animation                                                                       | `number`                                 | `undefined`       |
+| `direction`           | Direction of animation                                                                                  | `1` \| `-1`                              | `1`               |
+| `hover`               | Whether to play on mouse hover                                                                          | `boolean`                                | `false`           |
+| `loop`                | Whether to loop animation                                                                               | `boolean`                                | `false`           |
+| `mode`                | Play mode                                                                                               | `normal` \| `bounce`                     | `normal`          |
+| `objectfit`           | Resizing of animation in container                                                                      | `contain` \| `cover` \| `fill` \| `none` | `contain`         |
+| `renderer`            | Renderer to use                                                                                         | `svg` \| `canvas` \| `html`              | `svg`             |
+| `segment`             | Play only part of an animation. E. g. from frame 10 to frame 60 would be `[10, 60]`                     | `[number, number]`                       | `undefined`       |
+| `speed`               | Animation speed                                                                                         | `number`                                 | `1`               |
+| `src` _(required)_    | URL to LottieJSON or dotLottie                                                                          | `string`                                 | `undefined`       |
+| `subframe`            | When enabled this can help to reduce flicker on some animations, especially on Safari and iOS devices.  | `boolean`                                | `false`           |
 
 ## Methods
 
@@ -231,12 +233,14 @@ export default defineNuxtPlugin(({ vueApp }) => {
 | `pause() => void`                         | Pause                                                                                                     |
 | `play() => void`                          | Play                                                                                                      |
 | `reload() => void`                        | Reload                                                                                                    |
-| `seek(value: number \| string) => void`   | Go to frame. Can be a number or a percentage string (e.g. 50%).                                           |
+| `seek(value: number \| string) => void`   | Go to frame. Can be a number or a percentage string (e. g. 50%).                                          |
 | `setDirection(value: 1 \| -1) => void`    | Set Direction                                                                                             |
 | `setLooping(value: boolean) => void`      | Set Looping                                                                                               |
 | `setSpeed(value?: number) => void`        | Set Speed                                                                                                 |
+| `setSubframe(value: boolean) => void`     | Set subframe                                                                                              |
 | `snapshot(download?: boolean) => string`  | Snapshot the current frame as SVG. If 'download' is set to true, a download is triggered in the browser.  |
 | `stop() => void`                          | Stop                                                                                                      |
+| `toggleBoomerang() => void`               | Toggle between `bounce` and `normal`                                                                      |
 | `toggleLooping() => void`                 | Toggle looping                                                                                            |
 | `togglePlay() => void`                    | Toggle play                                                                                               |
 
