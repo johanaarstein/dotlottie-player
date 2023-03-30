@@ -21105,7 +21105,7 @@
 	                                ];
 	                            case 6:
 	                                if (_this._lottie) {
-	                                    // Calculate and save the current progress of the animation + trigger loop/boomerang
+	                                    // Calculate and save the current progress of the animation
 	                                    _this._lottie.addEventListener('enterFrame', function() {
 	                                        var _this__lottie = _this._lottie, currentFrame = _this__lottie.currentFrame, totalFrames = _this__lottie.totalFrames;
 	                                        _this.seeker = currentFrame / totalFrames * 100;
