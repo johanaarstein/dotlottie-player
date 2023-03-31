@@ -51,6 +51,7 @@ export interface LottieAnimation extends Unzipped {
 export type Autoplay = boolean | '' | 'autoplay' | null
 export type Controls = boolean | '' | 'controls' | null
 export type Loop = boolean | '' | 'loop' | null
+export type Subframe = boolean | '' | null
 
 export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none'
 

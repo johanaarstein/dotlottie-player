@@ -12,7 +12,7 @@ import type {
 } from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types'
-import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio } from './types'
+import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio, Subframe } from './types'
 
 import { aspectRatio, fetchPath } from './functions'
 
@@ -140,7 +140,7 @@ export class DotLottiePlayer extends LitElement {
    * Subframe
    */
   @property({ type: Boolean })
-  subframe? = false
+  subframe?: Subframe = false
 
   /**
    * Container
@@ -164,6 +164,10 @@ export class DotLottiePlayer extends LitElement {
 
     const preserveAspectRatio =
       this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
+      
+      // segment =
+      //   typeof this.segment === 'string' ?
+      //     (this.segment as string).split(',', 2).map(Number) : this.segment,
     
       options: AnimationConfig<'svg' | 'canvas' | 'html'> = {
         container: this.container,

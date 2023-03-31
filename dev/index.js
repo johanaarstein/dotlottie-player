@@ -21015,7 +21015,10 @@
 	   */ function load(src) {
 	                var _this = this;
 	                return _asyncToGenerator(function() {
-	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, _loopComplete;
+	                    var _this_preserveAspectRatio, preserveAspectRatio, // segment =
+	                    //   typeof this.segment === 'string' ?
+	                    //     (this.segment as string).split(',', 2).map(Number) : this.segment,
+	                    options, srcParsed, _tmp, err, _loopComplete;
 	                    return __generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
@@ -21688,7 +21691,8 @@
 	__decorate([
 	    e({
 	        type: Boolean
-	    })
+	    }),
+	    __metadata("design:type", typeof Subframe === "undefined" ? Object : Subframe)
 	], exports.DotLottiePlayer.prototype, "subframe", void 0);
 	__decorate([
 	    i$1('.animation'),
