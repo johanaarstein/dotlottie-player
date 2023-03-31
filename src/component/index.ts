@@ -12,11 +12,18 @@ import type {
 } from 'lottie-web'
 
 import { PlayMode, PlayerEvents, PlayerState } from './types'
-import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio, Subframe } from './types'
+import type {
+  Autoplay,
+  Controls,
+  Loop,
+  ObjectFit,
+  PreserveAspectRatio,
+  Subframe
+} from './types'
 
-import { aspectRatio, fetchPath } from './functions'
+import { aspectRatio, fetchPath } from '@functions'
 
-import styles from './styles'
+import styles from '@styles'
 
 /**
  * dotLottie Player Web Component class
