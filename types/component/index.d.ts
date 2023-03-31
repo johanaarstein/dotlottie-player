@@ -18,7 +18,7 @@ export declare class DotLottiePlayer extends LitElement {
     objectfit?: ObjectFit;
     preserveAspectRatio?: PreserveAspectRatio;
     renderer?: RendererType;
-    segment?: AnimationSegment;
+    segment?: AnimationSegment | string;
     seeker?: number;
     speed?: number;
     src: string;

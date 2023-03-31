@@ -116,7 +116,7 @@ export class DotLottiePlayer extends LitElement {
    * Segment
    */
   @property({ type: Array })
-  segment?: AnimationSegment
+  segment?: AnimationSegment | string
 
   /**
    * Seeker
@@ -174,7 +174,7 @@ export class DotLottiePlayer extends LitElement {
         loop: !!this.loop,
         autoplay: !!this.autoplay,
         renderer: this.renderer,
-        initialSegment: this.segment,
+        initialSegment: this.segment as AnimationSegment,
         rendererSettings: {
           imagePreserveAspectRatio: preserveAspectRatio,
         }

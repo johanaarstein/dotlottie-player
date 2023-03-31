@@ -21668,7 +21668,7 @@
 	    e({
 	        type: Array
 	    }),
-	    __metadata("design:type", typeof AnimationSegment === "undefined" ? Object : AnimationSegment)
+	    __metadata("design:type", Object)
 	], exports.DotLottiePlayer.prototype, "segment", void 0);
 	__decorate([
 	    e({
