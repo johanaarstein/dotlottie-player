@@ -84,12 +84,14 @@ export default css`
   }
 
   .seeker, .seeker::-webkit-slider-runnable-track, .seeker::-webkit-slider-thumb {
-    --webkit-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     outline: none;
   }
 
   .seeker {
     -webkit-appearance: none;
+    appearance: none;
     width: 95%;
     background-color: var(--lottie-player-toolbar-background-color);
     display: var(--lottie-player-seeker-display);
