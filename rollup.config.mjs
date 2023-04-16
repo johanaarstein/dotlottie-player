@@ -54,7 +54,7 @@ export default [
     input,
     output: {
       extend: true,
-      file: './dist/index.js',
+      file: pkg.main,
       format: 'iife',
       name: pkg.name,
     },

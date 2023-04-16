@@ -62,11 +62,11 @@
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-	var lottieExports = {};
-	var lottie = {
-	  get exports(){ return lottieExports; },
-	  set exports(v){ lottieExports = v; },
-	};
+	function getDefaultExportFromCjs (x) {
+		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	}
+
+	var lottie = {exports: {}};
 
 	(function (module, exports) {
 		(typeof navigator !== "undefined") && (function (global, factory) {
@@ -19698,10 +19698,11 @@
 
 		  return lottie;
 
-		}));
-	} (lottie, lottieExports));
+		})); 
+	} (lottie, lottie.exports));
 
-	var Lottie = lottieExports;
+	var lottieExports = lottie.exports;
+	var Lottie = /*@__PURE__*/getDefaultExportFromCjs(lottieExports);
 
 	exports.PlayerState = void 0;
 	(function(PlayerState) {
