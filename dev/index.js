@@ -20401,7 +20401,7 @@
 	        });
 	    };
 	}
-	var __generator$1 = undefined && undefined.__generator || function(thisArg, body) {
+	function _ts_generator$1(thisArg, body) {
 	    var f, y, t, g, _ = {
 	        label: 0,
 	        sent: function() {
@@ -20495,7 +20495,7 @@
 	            done: true
 	        };
 	    }
-	};
+	}
 	var aspectRatio = function(objectFit) {
 	    switch(objectFit){
 	        case 'contain':
@@ -20513,7 +20513,7 @@
 	}, fetchPath = function() {
 	    var _ref = _async_to_generator$1(function(path) {
 	        var _path_split_pop, ext, result, buffer, unzipped, manifestFile, manifest, _, id, lottieString, lottieJson;
-	        return __generator$1(this, function(_state) {
+	        return _ts_generator$1(this, function(_state) {
 	            switch(_state.label){
 	                case 0:
 	                    ext = (_path_split_pop = path.split('.').pop()) === null || _path_split_pop === void 0 ? void 0 : _path_split_pop.toLowerCase();
@@ -20841,13 +20841,13 @@
 	        return _possible_constructor_return(this, result);
 	    };
 	}
-	var __decorate = undefined && undefined.__decorate || function(decorators, target, key, desc) {
+	function _ts_decorate(decorators, target, key, desc) {
 	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
 	    if (typeof Reflect === "object" && typeof undefined === "function") r = undefined(decorators, target, key, desc);
 	    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
 	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __generator = undefined && undefined.__generator || function(thisArg, body) {
+	}
+	function _ts_generator(thisArg, body) {
 	    var f, y, t, g, _ = {
 	        label: 0,
 	        sent: function() {
@@ -20941,10 +20941,10 @@
 	            done: true
 	        };
 	    }
-	};
-	var __metadata = undefined && undefined.__metadata || function(k, v) {
+	}
+	function _ts_metadata(k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
+	}
 	function _templateObject() {
 	    var data = _tagged_template_literal([
 	        '<svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z"/></svg>'
@@ -21071,7 +21071,7 @@
 	                    //   typeof this.segment === 'string' ?
 	                    //     (this.segment as string).split(',', 2).map(Number) : this.segment,
 	                    options, srcParsed, _tmp, err, _loopComplete;
-	                    return __generator(this, function(_state) {
+	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
 	                                if (!_this.shadowRoot) {
@@ -21420,7 +21420,7 @@
 	   */ function reload() {
 	                var _this = this;
 	                return _async_to_generator(function() {
-	                    return __generator(this, function(_state) {
+	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
 	                                if (!_this._lottie) return [
@@ -21540,7 +21540,7 @@
 	            value: function firstUpdated() {
 	                var _this = this;
 	                return _async_to_generator(function() {
-	                    return __generator(this, function(_state) {
+	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
 	                                // Add intersection observer for detecting component being out-of-view.
@@ -21631,126 +21631,126 @@
 	    ]);
 	    return DotLottiePlayer;
 	}(s);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Boolean,
 	        reflect: true
 	    }),
-	    __metadata("design:type", typeof Autoplay === "undefined" ? Object : Autoplay)
+	    _ts_metadata("design:type", typeof Autoplay === "undefined" ? Object : Autoplay)
 	], exports.DotLottiePlayer.prototype, "autoplay", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", String)
+	    _ts_metadata("design:type", String)
 	], exports.DotLottiePlayer.prototype, "background", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Boolean,
 	        reflect: true
 	    }),
-	    __metadata("design:type", typeof Controls === "undefined" ? Object : Controls)
+	    _ts_metadata("design:type", typeof Controls === "undefined" ? Object : Controls)
 	], exports.DotLottiePlayer.prototype, "controls", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Number
 	    }),
-	    __metadata("design:type", Number)
+	    _ts_metadata("design:type", Number)
 	], exports.DotLottiePlayer.prototype, "count", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", typeof exports.PlayerState === "undefined" ? Object : exports.PlayerState)
+	    _ts_metadata("design:type", typeof exports.PlayerState === "undefined" ? Object : exports.PlayerState)
 	], exports.DotLottiePlayer.prototype, "currentState", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", String)
+	    _ts_metadata("design:type", String)
 	], exports.DotLottiePlayer.prototype, "description", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Number
 	    }),
-	    __metadata("design:type", typeof AnimationDirection === "undefined" ? Object : AnimationDirection)
+	    _ts_metadata("design:type", typeof AnimationDirection === "undefined" ? Object : AnimationDirection)
 	], exports.DotLottiePlayer.prototype, "direction", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Boolean
 	    })
 	], exports.DotLottiePlayer.prototype, "hover", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Number
 	    })
 	], exports.DotLottiePlayer.prototype, "intermission", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Boolean,
 	        reflect: true
 	    }),
-	    __metadata("design:type", typeof Loop === "undefined" ? Object : Loop)
+	    _ts_metadata("design:type", typeof Loop === "undefined" ? Object : Loop)
 	], exports.DotLottiePlayer.prototype, "loop", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", typeof exports.PlayMode === "undefined" ? Object : exports.PlayMode)
+	    _ts_metadata("design:type", typeof exports.PlayMode === "undefined" ? Object : exports.PlayMode)
 	], exports.DotLottiePlayer.prototype, "mode", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", typeof ObjectFit === "undefined" ? Object : ObjectFit)
+	    _ts_metadata("design:type", typeof ObjectFit === "undefined" ? Object : ObjectFit)
 	], exports.DotLottiePlayer.prototype, "objectfit", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", typeof PreserveAspectRatio === "undefined" ? Object : PreserveAspectRatio)
+	    _ts_metadata("design:type", typeof PreserveAspectRatio === "undefined" ? Object : PreserveAspectRatio)
 	], exports.DotLottiePlayer.prototype, "preserveAspectRatio", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", typeof RendererType === "undefined" ? Object : RendererType)
+	    _ts_metadata("design:type", typeof RendererType === "undefined" ? Object : RendererType)
 	], exports.DotLottiePlayer.prototype, "renderer", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Array
 	    }),
-	    __metadata("design:type", Object)
+	    _ts_metadata("design:type", Object)
 	], exports.DotLottiePlayer.prototype, "segment", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Number
 	    }),
-	    __metadata("design:type", Number)
+	    _ts_metadata("design:type", Number)
 	], exports.DotLottiePlayer.prototype, "seeker", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Number
 	    }),
-	    __metadata("design:type", Number)
+	    _ts_metadata("design:type", Number)
 	], exports.DotLottiePlayer.prototype, "speed", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: String
 	    }),
-	    __metadata("design:type", String)
+	    _ts_metadata("design:type", String)
 	], exports.DotLottiePlayer.prototype, "src", void 0);
-	__decorate([
+	_ts_decorate([
 	    e({
 	        type: Boolean
 	    }),
-	    __metadata("design:type", typeof Subframe === "undefined" ? Object : Subframe)
+	    _ts_metadata("design:type", typeof Subframe === "undefined" ? Object : Subframe)
 	], exports.DotLottiePlayer.prototype, "subframe", void 0);
-	__decorate([
+	_ts_decorate([
 	    i$1('.animation'),
-	    __metadata("design:type", typeof HTMLElement === "undefined" ? Object : HTMLElement)
+	    _ts_metadata("design:type", typeof HTMLElement === "undefined" ? Object : HTMLElement)
 	], exports.DotLottiePlayer.prototype, "container", void 0);
-	exports.DotLottiePlayer = __decorate([
+	exports.DotLottiePlayer = _ts_decorate([
 	    e$1('dotlottie-player')
 	], exports.DotLottiePlayer);
 
