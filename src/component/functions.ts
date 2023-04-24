@@ -1,4 +1,5 @@
 import { strFromU8, unzip } from 'fflate'
+import { Buffer } from 'buffer'
 
 import type { LottieAnimation, LottieAssets, LottieManifest } from './types'
 import type { ObjectFit } from './types'

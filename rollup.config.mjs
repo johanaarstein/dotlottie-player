@@ -18,7 +18,7 @@ const input = './src/index.ts',
     'lottie-web',
     'fflate'
   ],
-  plugins = ( s = false ) => {
+  plugins = ( a = false, b = true ) => {
     return [
       template(),
       replace({
@@ -30,12 +30,13 @@ const input = './src/index.ts',
         extensions,
         jsnext: true,
         module: true,
-        browser: true
+        browser: true,
+        preferBuiltins: b
       }),
       commonjs(),
       swc(),
-      !s && minify(),
-      !s && summary(),
+      !a && minify(),
+      !a && summary(),
     ]
   }
 
@@ -62,7 +63,7 @@ export default [
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
     },
-    plugins: plugins(),
+    plugins: plugins(false, false),
   },
   {
     input,
@@ -76,7 +77,7 @@ export default [
       if (warning.code === 'THIS_IS_UNDEFINED') return
       warn(warning)
     },
-    plugins: plugins(true),
+    plugins: plugins(true, false),
   },
   {
     input,
