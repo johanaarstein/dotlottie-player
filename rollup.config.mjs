@@ -18,7 +18,7 @@ const input = './src/index.ts',
     'lottie-web',
     'fflate'
   ],
-  plugins = ( a = false, b = true ) => {
+  plugins = ( dev = false, preferBuiltins = true ) => {
     return [
       template(),
       replace({
@@ -31,12 +31,12 @@ const input = './src/index.ts',
         jsnext: true,
         module: true,
         browser: true,
-        preferBuiltins: b
+        preferBuiltins
       }),
       commonjs(),
       swc(),
-      !a && minify(),
-      !a && summary(),
+      !dev && minify(),
+      !dev && summary(),
     ]
   }
 
