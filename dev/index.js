@@ -23410,8 +23410,7 @@
 	    _create_class(DotLottiePlayer, [
 	        {
 	            key: "load",
-	            value: // private _bounce = false
-	            /**
+	            value: /**
 	   * Initialize Lottie Web player
 	   */ function load(src) {
 	                var _this = this;

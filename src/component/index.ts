@@ -159,7 +159,6 @@ export class DotLottiePlayer extends LitElement {
   private _lottie: AnimationItem | null = null
   private _prevState?: PlayerState
   private _counter = 0
-  // private _bounce = false
 
   /**
    * Initialize Lottie Web player

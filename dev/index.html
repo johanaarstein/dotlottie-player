@@ -11,6 +11,8 @@
   <div style="margin: 40px auto; width: 80%; max-width: 800px;">
     <h1>DotLottie Player Demo</h1>
     <dotlottie-player
+      id="player-element"
+      autoplay
       controls
       subframe
       src="./am.lottie"
@@ -21,5 +23,10 @@
   <script src="./polyfill-support.js"></script>
   <script src="./index.js"></script>
 </body>
-
+<script>
+  const player = document.getElementById('player-element')
+  if (player) {
+    player.addEventListener('ready', () => console.log(player.getLottie()?.totalFrames))
+  }
+</script>
 </html>
