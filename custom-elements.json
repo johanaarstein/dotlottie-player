@@ -73,7 +73,7 @@
         },
         {
           "kind": "variable",
-          "name": "G"
+          "name": "U"
         },
         {
           "kind": "function",
@@ -154,7 +154,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -255,7 +255,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -306,13 +306,13 @@
               "name": "O"
             },
             {
+              "name": "U"
+            },
+            {
               "name": "G"
             },
             {
               "name": "W"
-            },
-            {
-              "name": "U"
             }
           ]
         },
@@ -339,13 +339,13 @@
               "name": "O"
             },
             {
+              "name": "U"
+            },
+            {
               "name": "G"
             },
             {
               "name": "W"
-            },
-            {
-              "name": "U"
             }
           ]
         },
@@ -357,13 +357,13 @@
               "name": "O"
             },
             {
+              "name": "U"
+            },
+            {
               "name": "G"
             },
             {
               "name": "W"
-            },
-            {
-              "name": "U"
             },
             {
               "name": "Y"
@@ -421,7 +421,7 @@
         },
         {
           "kind": "function",
-          "name": "G"
+          "name": "U"
         },
         {
           "kind": "function",
@@ -473,7 +473,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -482,7 +482,7 @@
               "name": "O"
             },
             {
-              "name": "G"
+              "name": "U"
             }
           ]
         },
@@ -506,7 +506,7 @@
         },
         {
           "kind": "function",
-          "name": "G"
+          "name": "U"
         },
         {
           "kind": "function",
@@ -541,11 +541,11 @@
         },
         {
           "kind": "function",
-          "name": "G"
+          "name": "U"
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -575,7 +575,7 @@
         },
         {
           "kind": "function",
-          "name": "G"
+          "name": "U"
         },
         {
           "kind": "function",
@@ -606,7 +606,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -648,7 +648,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -664,15 +664,15 @@
           "parameters": [
             {
               "name": "O"
+            },
+            {
+              "name": "U"
             },
             {
               "name": "G"
             },
             {
               "name": "W"
-            },
-            {
-              "name": "U"
             }
           ]
         },
@@ -690,7 +690,7 @@
               "name": "O"
             },
             {
-              "name": "G"
+              "name": "U"
             }
           ]
         },
@@ -720,7 +720,7 @@
               "name": "O"
             },
             {
-              "name": "G"
+              "name": "U"
             }
           ]
         },
@@ -735,13 +735,13 @@
               "name": "O"
             },
             {
-              "name": "G"
+              "name": "U"
             }
           ]
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -756,7 +756,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -765,7 +765,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -774,7 +774,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -783,7 +783,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -792,7 +792,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -801,7 +801,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -810,7 +810,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -819,7 +819,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -828,7 +828,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "F"
@@ -846,7 +846,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -915,7 +915,7 @@
         },
         {
           "kind": "function",
-          "name": "G",
+          "name": "U",
           "parameters": [
             {
               "name": "D"
@@ -936,7 +936,7 @@
           "kind": "custom-element-definition",
           "name": "O",
           "declaration": {
-            "name": "G",
+            "name": "U",
             "module": "dist/index.js"
           }
         },
