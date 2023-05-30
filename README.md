@@ -6,6 +6,8 @@ This started as a fork of [@dotlottie/player-component](https://github.com/dotlo
 
 The component is built with Lit and compiled with Rust. It's compatible with server side rendering, and like any good web component it's framework agnostic.
 
+If you only need to render animations as SVG we've made light version: [@johanaarstein/dotlottie-player-light](https://www.npmjs.com/package/@johanaarstein/dotlottie-player-light).
+
 ## Demo
 
 Here is [a demo](https://www.aarstein.media/en/dev/dotlottie-player), running on Next.js 13 using TypeScript.
