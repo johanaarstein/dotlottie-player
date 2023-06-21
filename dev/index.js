@@ -23865,10 +23865,7 @@
 	   */ function load(src) {
 	                var _this = this;
 	                return _async_to_generator(function() {
-	                    var _this_preserveAspectRatio, preserveAspectRatio, // segment =
-	                    //   typeof this.segment === 'string' ?
-	                    //     (this.segment as string).split(',', 2).map(Number) : this.segment,
-	                    options, srcParsed, _tmp, err, _loopComplete;
+	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, _loopComplete;
 	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
@@ -24345,7 +24342,7 @@
 	                                if ('IntersectionObserver' in window) {
 	                                    _this._io = new IntersectionObserver(function(entries) {
 	                                        if (entries[0].isIntersecting) {
-	                                            if (_this.currentState === exports.PlayerState.Frozen) {
+	                                            if (!document.hidden && _this.currentState === exports.PlayerState.Frozen) {
 	                                                _this.play();
 	                                            }
 	                                        } else if (_this.currentState === exports.PlayerState.Playing) {

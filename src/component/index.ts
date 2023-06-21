@@ -170,10 +170,6 @@ export class DotLottiePlayer extends LitElement {
 
     const preserveAspectRatio =
       this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
-      
-      // segment =
-      //   typeof this.segment === 'string' ?
-      //     (this.segment as string).split(',', 2).map(Number) : this.segment,
     
       options: AnimationConfig<'svg' | 'canvas' | 'html'> = {
         container: this.container,
@@ -628,7 +624,7 @@ export class DotLottiePlayer extends LitElement {
     if ('IntersectionObserver' in window) {
       this._io = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) {
-          if (this.currentState === PlayerState.Frozen) {
+          if (!document.hidden && this.currentState === PlayerState.Frozen) {
             this.play()
           }
         } else if (this.currentState === PlayerState.Playing) {
