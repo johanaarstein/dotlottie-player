@@ -21,9 +21,9 @@ import type {
   Subframe
 } from './types'
 
-import { aspectRatio, fetchPath } from '@functions'
+import { aspectRatio, fetchPath } from './functions'
 
-import styles from '@styles'
+import styles from './styles'
 
 /**
  * dotLottie Player Web Component class

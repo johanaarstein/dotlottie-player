@@ -4,7 +4,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import summary from 'rollup-plugin-summary'
 import { swc, minify } from 'rollup-plugin-swc3'
-import tsConfigPaths from 'rollup-plugin-tsconfig-paths'
+
 import template from 'rollup-plugin-html-literals'
 
 import pkg from './package.json' assert { type: 'json' }
@@ -25,7 +25,6 @@ const input = './src/index.ts',
         preventAssignment: false,
         'Reflect.decorate': 'undefined'
       }),
-      tsConfigPaths(),
       nodeResolve({
         extensions,
         jsnext: true,

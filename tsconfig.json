@@ -23,14 +23,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "./dist",
-    "paths": {
-      "@functions": [
-        "./src/component/functions"
-      ],
-      "@styles": [
-        "./src/component/styles"
-      ],
-    },
     "plugins": [
       {
         "name": "ts-lit-plugin",
