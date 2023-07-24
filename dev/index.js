@@ -23508,7 +23508,7 @@
 	    }
 	    return obj;
 	}
-	function _get(target, property, receiver) {
+	function _get(target, property1, receiver) {
 	    if (typeof Reflect !== "undefined" && Reflect.get) {
 	        _get = Reflect.get;
 	    } else {
@@ -23522,7 +23522,7 @@
 	            return desc.value;
 	        };
 	    }
-	    return _get(target, property, receiver || target);
+	    return _get(target, property1, receiver || target);
 	}
 	function _get_prototype_of(o) {
 	    _get_prototype_of = Object.setPrototypeOf ? Object.getPrototypeOf : function getPrototypeOf(o) {
@@ -23595,8 +23595,8 @@
 	    };
 	    return _set_prototype_of(o, p);
 	}
-	function _super_prop_base(object, property) {
-	    while(!Object.prototype.hasOwnProperty.call(object, property)){
+	function _super_prop_base(object, property1) {
+	    while(!Object.prototype.hasOwnProperty.call(object, property1)){
 	        object = _get_prototype_of(object);
 	        if (object === null) break;
 	    }
@@ -23810,8 +23810,8 @@
 	    };
 	    return data;
 	}
-	exports.DotLottiePlayer = /*#__PURE__*/ function(LitElement) {
-	    _inherits(DotLottiePlayer, LitElement);
+	exports.DotLottiePlayer = /*#__PURE__*/ function(LitElement1) {
+	    _inherits(DotLottiePlayer, LitElement1);
 	    var _super = _create_super(DotLottiePlayer);
 	    function DotLottiePlayer() {
 	        _class_call_check(this, DotLottiePlayer);
