@@ -24150,7 +24150,7 @@
 	                    return;
 	                }
 	                // Calculate and set the frame number
-	                var frame = matches[2] === '%' ? this._lottie.totalFrames * Number(matches[1]) / 100 : matches[1];
+	                var frame = matches[2] === '%' ? this._lottie.totalFrames * Number(matches[1]) / 100 : Number(matches[1]);
 	                // Set seeker to new frame number
 	                this.seeker = Number(frame);
 	                // Send lottie player to the new frame

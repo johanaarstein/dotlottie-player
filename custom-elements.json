@@ -48,45 +48,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DotLottiePlayer",
-          "declaration": {
-            "name": "DotLottiePlayer",
-            "module": "./component"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayMode",
-          "declaration": {
-            "name": "PlayMode",
-            "module": "./component/types"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayerEvents",
-          "declaration": {
-            "name": "PlayerEvents",
-            "module": "./component/types"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayerState",
-          "declaration": {
-            "name": "PlayerState",
-            "module": "./component/types"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "dist/index.js",
       "declarations": [
         {
@@ -982,6 +943,107 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "./component"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayMode",
+          "declaration": {
+            "name": "PlayMode",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerEvents",
+          "declaration": {
+            "name": "PlayerEvents",
+            "module": "./component/types"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerState",
+          "declaration": {
+            "name": "PlayerState",
+            "module": "./component/types"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/cjs/index.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/esm/index.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "PlayerState"
+        },
+        {
+          "kind": "variable",
+          "name": "PlayMode"
+        },
+        {
+          "kind": "variable",
+          "name": "PlayerEvents"
+        },
+        {
+          "kind": "variable",
+          "name": "DotLottiePlayer"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DotLottiePlayer",
+          "declaration": {
+            "name": "DotLottiePlayer",
+            "module": "dist/esm/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayMode",
+          "declaration": {
+            "name": "PlayMode",
+            "module": "dist/esm/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerEvents",
+          "declaration": {
+            "name": "PlayerEvents",
+            "module": "dist/esm/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PlayerState",
+          "declaration": {
+            "name": "PlayerState",
+            "module": "dist/esm/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/component/functions.ts",
       "declarations": [
         {
@@ -1596,68 +1658,6 @@
       "path": "src/component/types.ts",
       "declarations": [],
       "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/cjs/index.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/esm/index.js",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "PlayerState"
-        },
-        {
-          "kind": "variable",
-          "name": "PlayMode"
-        },
-        {
-          "kind": "variable",
-          "name": "PlayerEvents"
-        },
-        {
-          "kind": "variable",
-          "name": "DotLottiePlayer"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DotLottiePlayer",
-          "declaration": {
-            "name": "DotLottiePlayer",
-            "module": "dist/esm/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayMode",
-          "declaration": {
-            "name": "PlayMode",
-            "module": "dist/esm/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayerEvents",
-          "declaration": {
-            "name": "PlayerEvents",
-            "module": "dist/esm/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "PlayerState",
-          "declaration": {
-            "name": "PlayerState",
-            "module": "dist/esm/index.js"
-          }
-        }
-      ]
     }
   ]
 }
