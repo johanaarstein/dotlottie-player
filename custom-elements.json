@@ -1215,7 +1215,7 @@
               "kind": "field",
               "name": "segment",
               "type": {
-                "text": "AnimationSegment | string | undefined"
+                "text": "AnimationSegment | undefined"
               },
               "description": "Segment"
             },
@@ -1297,14 +1297,17 @@
               "default": "0"
             },
             {
+              "kind": "field",
+              "name": "_error",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private"
+            },
+            {
               "kind": "method",
               "name": "load",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              },
               "parameters": [
                 {
                   "name": "src",
@@ -1319,22 +1322,12 @@
               "kind": "method",
               "name": "_onVisibilityChange",
               "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Handle visibility change events"
             },
             {
               "kind": "method",
               "name": "_handleSeekChange",
               "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "event",
@@ -1349,11 +1342,6 @@
               "kind": "method",
               "name": "isLottie",
               "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              },
               "parameters": [
                 {
                   "name": "json",
@@ -1384,44 +1372,24 @@
               "kind": "method",
               "name": "pause",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Pause"
             },
             {
               "kind": "method",
               "name": "stop",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Stop"
             },
             {
               "kind": "method",
               "name": "destroy",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Destroy animation and element"
             },
             {
               "kind": "method",
               "name": "seek",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "value",
@@ -1453,11 +1421,6 @@
               "kind": "method",
               "name": "setSubframe",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "value",
@@ -1471,11 +1434,6 @@
               "kind": "method",
               "name": "freeze",
               "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Freeze animation.\nThis internal state pauses animation and is used to differentiate between\nuser requested pauses and component instigated pauses."
             },
             {
@@ -1493,11 +1451,6 @@
               "kind": "method",
               "name": "setSpeed",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "value",
@@ -1511,11 +1464,6 @@
               "kind": "method",
               "name": "setDirection",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "value",
@@ -1531,11 +1479,6 @@
               "kind": "method",
               "name": "setLooping",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "parameters": [
                 {
                   "name": "value",
@@ -1550,33 +1493,18 @@
               "kind": "method",
               "name": "togglePlay",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Toggle playing state"
             },
             {
               "kind": "method",
               "name": "toggleLooping",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Toggle loop"
             },
             {
               "kind": "method",
               "name": "toggleBoomerang",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
               "description": "Toggle Boomerang"
             },
             {
@@ -1591,12 +1519,7 @@
             {
               "kind": "method",
               "name": "firstUpdated",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",

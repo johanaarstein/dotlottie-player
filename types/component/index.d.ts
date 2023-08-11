@@ -18,7 +18,7 @@ export declare class DotLottiePlayer extends LitElement {
     objectfit?: ObjectFit;
     preserveAspectRatio?: PreserveAspectRatio;
     renderer?: RendererType;
-    segment?: AnimationSegment | string;
+    segment?: AnimationSegment;
     seeker?: number;
     speed?: number;
     src: string;
@@ -28,6 +28,7 @@ export declare class DotLottiePlayer extends LitElement {
     private _lottie;
     private _prevState?;
     private _counter;
+    private _error?;
     load(src: string | Record<string, number | undefined> | JSON): Promise<void>;
     private _onVisibilityChange;
     private _handleSeekChange;
