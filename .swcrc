@@ -2,7 +2,7 @@
   "env": {
     "mode": "entry",
     "targets": "> 0.25%, not dead",
-    "coreJs": "3.29"
+    "coreJs": "3.32"
   },
   "jsc": {
     "assumptions": {

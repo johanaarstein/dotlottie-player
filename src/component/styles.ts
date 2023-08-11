@@ -56,6 +56,11 @@ export default css`
     border-radius: 5px;
   }
 
+  .toolbar.has-error {
+    pointer-events: none;
+    opacity: .5;
+  }
+
   .toolbar button {
     cursor: pointer;
     fill: var(--lottie-player-toolbar-icon-color);
@@ -179,5 +184,10 @@ export default css`
     justify-content: center;
     height: 100%;
     align-items: center;
+  }
+
+  .error svg {
+    width: 100%;
+    height: auto;
   }
 `

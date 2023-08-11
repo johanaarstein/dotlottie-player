@@ -84,7 +84,7 @@ const aspectRatio = (objectFit: ObjectFit) => {
       return lottieJson
 
     } catch (err) {
-      throw new Error('Error loading Lottie file.')
+      throw new Error('Unable to load file')
     }
   }
 
