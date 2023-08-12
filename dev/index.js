@@ -12,7 +12,7 @@
 	 * @license
 	 * Copyright 2017 Google LLC
 	 * SPDX-License-Identifier: BSD-3-Clause
-	 */var s$2;const e$3=window,r$1=e$3.trustedTypes,h$1=r$1?r$1.emptyScript:"",o$3=e$3.reactiveElementPolyfillSupport,n$4={toAttribute(t,i){switch(i){case Boolean:t=t?h$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,i){let s=t;switch(i){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t);}catch(t){s=null;}}return s}},a$1=(t,i)=>i!==t&&(i==i||t==t),l$2={attribute:!0,type:String,converter:n$4,reflect:!1,hasChanged:a$1},d$1="finalized";let u$1 = class u extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this.u();}static addInitializer(t){var i;this.finalize(),(null!==(i=this.h)&&void 0!==i?i:this.h=[]).push(t);}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((i,s)=>{const e=this._$Ep(s,i);void 0!==e&&(this._$Ev.set(e,s),t.push(e));})),t}static createProperty(t,i=l$2){if(i.state&&(i.attribute=!1),this.finalize(),this.elementProperties.set(t,i),!i.noAccessor&&!this.prototype.hasOwnProperty(t)){const s="symbol"==typeof t?Symbol():"__"+t,e=this.getPropertyDescriptor(t,s,i);void 0!==e&&Object.defineProperty(this.prototype,t,e);}}static getPropertyDescriptor(t,i,s){return {get(){return this[i]},set(e){const r=this[t];this[i]=e,this.requestUpdate(t,r,s);},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||l$2}static finalize(){if(this.hasOwnProperty(d$1))return !1;this[d$1]=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,i=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const s of i)this.createProperty(s,t[s]);}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(i){const s=[];if(Array.isArray(i)){const e=new Set(i.flat(1/0).reverse());for(const i of e)s.unshift(c$1(i));}else void 0!==i&&s.push(c$1(i));return s}static _$Ep(t,i){const s=i.attribute;return !1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}u(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)));}addController(t){var i,s;(null!==(i=this._$ES)&&void 0!==i?i:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(s=t.hostConnected)||void 0===s||s.call(t));}removeController(t){var i;null===(i=this._$ES)||void 0===i||i.splice(this._$ES.indexOf(t)>>>0,1);}_$Eg(){this.constructor.elementProperties.forEach(((t,i)=>{this.hasOwnProperty(i)&&(this._$Ei.set(i,this[i]),delete this[i]);}));}createRenderRoot(){var t;const s=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return S$1(s,this.constructor.elementStyles),s}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostConnected)||void 0===i?void 0:i.call(t)}));}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostDisconnected)||void 0===i?void 0:i.call(t)}));}attributeChangedCallback(t,i,s){this._$AK(t,s);}_$EO(t,i,s=l$2){var e;const r=this.constructor._$Ep(t,s);if(void 0!==r&&!0===s.reflect){const h=(void 0!==(null===(e=s.converter)||void 0===e?void 0:e.toAttribute)?s.converter:n$4).toAttribute(i,s.type);this._$El=t,null==h?this.removeAttribute(r):this.setAttribute(r,h),this._$El=null;}}_$AK(t,i){var s;const e=this.constructor,r=e._$Ev.get(t);if(void 0!==r&&this._$El!==r){const t=e.getPropertyOptions(r),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(s=t.converter)||void 0===s?void 0:s.fromAttribute)?t.converter:n$4;this._$El=r,this[r]=h.fromAttribute(i,t.type),this._$El=null;}}requestUpdate(t,i,s){let e=!0;void 0!==t&&(((s=s||this.constructor.getPropertyOptions(t)).hasChanged||a$1)(this[t],i)?(this._$AL.has(t)||this._$AL.set(t,i),!0===s.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,s))):e=!1),!this.isUpdatePending&&e&&(this._$E_=this._$Ej());}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,i)=>this[i]=t)),this._$Ei=void 0);let i=!1;const s=this._$AL;try{i=this.shouldUpdate(s),i?(this.willUpdate(s),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostUpdate)||void 0===i?void 0:i.call(t)})),this.update(s)):this._$Ek();}catch(t){throw i=!1,this._$Ek(),t}i&&this._$AE(s);}willUpdate(t){}_$AE(t){var i;null===(i=this._$ES)||void 0===i||i.forEach((t=>{var i;return null===(i=t.hostUpdated)||void 0===i?void 0:i.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t);}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return !0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,i)=>this._$EO(i,this[i],t))),this._$EC=void 0),this._$Ek();}updated(t){}firstUpdated(t){}};u$1[d$1]=!0,u$1.elementProperties=new Map,u$1.elementStyles=[],u$1.shadowRootOptions={mode:"open"},null==o$3||o$3({ReactiveElement:u$1}),(null!==(s$2=e$3.reactiveElementVersions)&&void 0!==s$2?s$2:e$3.reactiveElementVersions=[]).push("1.6.2");
+	 */var s$2;const e$3=window,r$1=e$3.trustedTypes,h$1=r$1?r$1.emptyScript:"",o$3=e$3.reactiveElementPolyfillSupport,n$4={toAttribute(t,i){switch(i){case Boolean:t=t?h$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,i){let s=t;switch(i){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t);}catch(t){s=null;}}return s}},a$1=(t,i)=>i!==t&&(i==i||t==t),l$2={attribute:!0,type:String,converter:n$4,reflect:!1,hasChanged:a$1},d$1="finalized";let u$1 = class u extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this._$Eu();}static addInitializer(t){var i;this.finalize(),(null!==(i=this.h)&&void 0!==i?i:this.h=[]).push(t);}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((i,s)=>{const e=this._$Ep(s,i);void 0!==e&&(this._$Ev.set(e,s),t.push(e));})),t}static createProperty(t,i=l$2){if(i.state&&(i.attribute=!1),this.finalize(),this.elementProperties.set(t,i),!i.noAccessor&&!this.prototype.hasOwnProperty(t)){const s="symbol"==typeof t?Symbol():"__"+t,e=this.getPropertyDescriptor(t,s,i);void 0!==e&&Object.defineProperty(this.prototype,t,e);}}static getPropertyDescriptor(t,i,s){return {get(){return this[i]},set(e){const r=this[t];this[i]=e,this.requestUpdate(t,r,s);},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||l$2}static finalize(){if(this.hasOwnProperty(d$1))return !1;this[d$1]=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,i=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const s of i)this.createProperty(s,t[s]);}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(i){const s=[];if(Array.isArray(i)){const e=new Set(i.flat(1/0).reverse());for(const i of e)s.unshift(c$1(i));}else void 0!==i&&s.push(c$1(i));return s}static _$Ep(t,i){const s=i.attribute;return !1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}_$Eu(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)));}addController(t){var i,s;(null!==(i=this._$ES)&&void 0!==i?i:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(s=t.hostConnected)||void 0===s||s.call(t));}removeController(t){var i;null===(i=this._$ES)||void 0===i||i.splice(this._$ES.indexOf(t)>>>0,1);}_$Eg(){this.constructor.elementProperties.forEach(((t,i)=>{this.hasOwnProperty(i)&&(this._$Ei.set(i,this[i]),delete this[i]);}));}createRenderRoot(){var t;const s=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return S$1(s,this.constructor.elementStyles),s}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostConnected)||void 0===i?void 0:i.call(t)}));}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostDisconnected)||void 0===i?void 0:i.call(t)}));}attributeChangedCallback(t,i,s){this._$AK(t,s);}_$EO(t,i,s=l$2){var e;const r=this.constructor._$Ep(t,s);if(void 0!==r&&!0===s.reflect){const h=(void 0!==(null===(e=s.converter)||void 0===e?void 0:e.toAttribute)?s.converter:n$4).toAttribute(i,s.type);this._$El=t,null==h?this.removeAttribute(r):this.setAttribute(r,h),this._$El=null;}}_$AK(t,i){var s;const e=this.constructor,r=e._$Ev.get(t);if(void 0!==r&&this._$El!==r){const t=e.getPropertyOptions(r),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(s=t.converter)||void 0===s?void 0:s.fromAttribute)?t.converter:n$4;this._$El=r,this[r]=h.fromAttribute(i,t.type),this._$El=null;}}requestUpdate(t,i,s){let e=!0;void 0!==t&&(((s=s||this.constructor.getPropertyOptions(t)).hasChanged||a$1)(this[t],i)?(this._$AL.has(t)||this._$AL.set(t,i),!0===s.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,s))):e=!1),!this.isUpdatePending&&e&&(this._$E_=this._$Ej());}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,i)=>this[i]=t)),this._$Ei=void 0);let i=!1;const s=this._$AL;try{i=this.shouldUpdate(s),i?(this.willUpdate(s),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostUpdate)||void 0===i?void 0:i.call(t)})),this.update(s)):this._$Ek();}catch(t){throw i=!1,this._$Ek(),t}i&&this._$AE(s);}willUpdate(t){}_$AE(t){var i;null===(i=this._$ES)||void 0===i||i.forEach((t=>{var i;return null===(i=t.hostUpdated)||void 0===i?void 0:i.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t);}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return !0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,i)=>this._$EO(i,this[i],t))),this._$EC=void 0),this._$Ek();}updated(t){}firstUpdated(t){}};u$1[d$1]=!0,u$1.elementProperties=new Map,u$1.elementStyles=[],u$1.shadowRootOptions={mode:"open"},null==o$3||o$3({ReactiveElement:u$1}),(null!==(s$2=e$3.reactiveElementVersions)&&void 0!==s$2?s$2:e$3.reactiveElementVersions=[]).push("1.6.3");
 
 	/**
 	 * @license
@@ -25,7 +25,7 @@
 	 * @license
 	 * Copyright 2017 Google LLC
 	 * SPDX-License-Identifier: BSD-3-Clause
-	 */var l,o$1;class s extends u$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(i,this.renderRoot,this.renderOptions);}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!0);}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!1);}render(){return T}}s.finalized=!0,s._$litElement$=!0,null===(l=globalThis.litElementHydrateSupport)||void 0===l||l.call(globalThis,{LitElement:s});const n$2=globalThis.litElementPolyfillSupport;null==n$2||n$2({LitElement:s});(null!==(o$1=globalThis.litElementVersions)&&void 0!==o$1?o$1:globalThis.litElementVersions=[]).push("3.3.2");
+	 */var l,o$1;class s extends u$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(i,this.renderRoot,this.renderOptions);}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!0);}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!1);}render(){return T}}s.finalized=!0,s._$litElement$=!0,null===(l=globalThis.litElementHydrateSupport)||void 0===l||l.call(globalThis,{LitElement:s});const n$2=globalThis.litElementPolyfillSupport;null==n$2||n$2({LitElement:s});(null!==(o$1=globalThis.litElementVersions)&&void 0!==o$1?o$1:globalThis.litElementVersions=[]).push("3.3.3");
 
 	/**
 	 * @license
@@ -23138,131 +23138,7 @@
 		} 
 	} (buffer));
 
-	function asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, key, arg) {
-	    try {
-	        var info = gen[key](arg);
-	        var value = info.value;
-	    } catch (error) {
-	        reject(error);
-	        return;
-	    }
-	    if (info.done) {
-	        resolve(value);
-	    } else {
-	        Promise.resolve(value).then(_next, _throw);
-	    }
-	}
-	function _async_to_generator$1(fn) {
-	    return function() {
-	        var self = this, args = arguments;
-	        return new Promise(function(resolve, reject) {
-	            var gen = fn.apply(self, args);
-	            function _next(value) {
-	                asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "next", value);
-	            }
-	            function _throw(err) {
-	                asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "throw", err);
-	            }
-	            _next(undefined);
-	        });
-	    };
-	}
-	function _ts_generator$1(thisArg, body) {
-	    var f, y, t, g, _ = {
-	        label: 0,
-	        sent: function() {
-	            if (t[0] & 1) throw t[1];
-	            return t[1];
-	        },
-	        trys: [],
-	        ops: []
-	    };
-	    return g = {
-	        next: verb(0),
-	        "throw": verb(1),
-	        "return": verb(2)
-	    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
-	        return this;
-	    }), g;
-	    function verb(n) {
-	        return function(v) {
-	            return step([
-	                n,
-	                v
-	            ]);
-	        };
-	    }
-	    function step(op) {
-	        if (f) throw new TypeError("Generator is already executing.");
-	        while(_)try {
-	            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-	            if (y = 0, t) op = [
-	                op[0] & 2,
-	                t.value
-	            ];
-	            switch(op[0]){
-	                case 0:
-	                case 1:
-	                    t = op;
-	                    break;
-	                case 4:
-	                    _.label++;
-	                    return {
-	                        value: op[1],
-	                        done: false
-	                    };
-	                case 5:
-	                    _.label++;
-	                    y = op[1];
-	                    op = [
-	                        0
-	                    ];
-	                    continue;
-	                case 7:
-	                    op = _.ops.pop();
-	                    _.trys.pop();
-	                    continue;
-	                default:
-	                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-	                        _ = 0;
-	                        continue;
-	                    }
-	                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-	                        _.label = op[1];
-	                        break;
-	                    }
-	                    if (op[0] === 6 && _.label < t[1]) {
-	                        _.label = t[1];
-	                        t = op;
-	                        break;
-	                    }
-	                    if (t && _.label < t[2]) {
-	                        _.label = t[2];
-	                        _.ops.push(op);
-	                        break;
-	                    }
-	                    if (t[2]) _.ops.pop();
-	                    _.trys.pop();
-	                    continue;
-	            }
-	            op = body.call(thisArg, _);
-	        } catch (e) {
-	            op = [
-	                6,
-	                e
-	            ];
-	            y = 0;
-	        } finally{
-	            f = t = 0;
-	        }
-	        if (op[0] & 5) throw op[1];
-	        return {
-	            value: op[0] ? op[1] : void 0,
-	            done: true
-	        };
-	    }
-	}
-	var aspectRatio = function(objectFit) {
+	const aspectRatio = (objectFit)=>{
 	    switch(objectFit){
 	        case 'contain':
 	        case 'scale-down':
@@ -23276,123 +23152,57 @@
 	        default:
 	            return 'xMidYMid meet';
 	    }
-	}, fetchPath = function() {
-	    var _ref = _async_to_generator$1(function(path) {
-	        var _path_split_pop, ext, status, _unzipped, result, buffer$1, unzipped, manifestFile, manifest, _, id, lottieString, lottieJson;
-	        return _ts_generator$1(this, function(_state) {
-	            switch(_state.label){
-	                case 0:
-	                    ext = (_path_split_pop = path.split('.').pop()) === null || _path_split_pop === void 0 ? void 0 : _path_split_pop.toLowerCase();
-	                    status = 200;
-	                    _state.label = 1;
-	                case 1:
-	                    _state.trys.push([
-	                        1,
-	                        8,
-	                        ,
-	                        9
-	                    ]);
-	                    return [
-	                        4,
-	                        fetch(path)
-	                    ];
-	                case 2:
-	                    result = _state.sent();
-	                    status = result.status;
-	                    if (!(ext === 'json')) return [
-	                        3,
-	                        4
-	                    ];
-	                    return [
-	                        4,
-	                        result.json()
-	                    ];
-	                case 3:
-	                    return [
-	                        2,
-	                        _state.sent()
-	                    ];
-	                case 4:
-	                    _ = Uint8Array.bind;
-	                    return [
-	                        4,
-	                        result.arrayBuffer()
-	                    ];
-	                case 5:
-	                    buffer$1 = new (_.apply(Uint8Array, [
-	                        void 0,
-	                        _state.sent()
-	                    ]));
-	                    return [
-	                        4,
-	                        new Promise(function(resolve, reject) {
-	                            unzip(buffer$1, function(err, file) {
-	                                if (err) reject(err);
-	                                resolve(file);
-	                            });
-	                        })
-	                    ];
-	                case 6:
-	                    unzipped = _state.sent(), manifestFile = strFromU8(unzipped['manifest.json']), manifest = JSON.parse(manifestFile);
-	                    if (!('animations' in manifest)) throw new Error('Manifest not found');
-	                    if (!manifest.animations.length) throw new Error('No animations listed in manifest');
-	                    id = manifest.animations[0].id, lottieString = strFromU8((_unzipped = unzipped) === null || _unzipped === void 0 ? void 0 : _unzipped["animations/".concat(id, ".json")]);
-	                    return [
-	                        4,
-	                        JSON.parse(lottieString)
-	                    ];
-	                case 7:
-	                    lottieJson = _state.sent();
-	                    if ('assets' in lottieJson) {
-	                        Promise.all(lottieJson.assets.map(function(asset) {
-	                            var _unzipped;
-	                            var p = asset.p;
-	                            if (!p || !((_unzipped = unzipped) === null || _unzipped === void 0 ? void 0 : _unzipped["images/".concat(p)])) return;
-	                            return new Promise(function(resolveAsset) {
-	                                var _Buffer_from, _unzipped;
-	                                var ext = p.split('.').pop(), assetB64 = (_Buffer_from = buffer.Buffer.from((_unzipped = unzipped) === null || _unzipped === void 0 ? void 0 : _unzipped["images/".concat(p)])) === null || _Buffer_from === void 0 ? void 0 : _Buffer_from.toString('base64');
-	                                switch(ext){
-	                                    case 'svg':
-	                                    case 'svg+xml':
-	                                        asset.p = "data:image/svg+xml;base64,".concat(assetB64);
-	                                        break;
-	                                    case 'png':
-	                                    case 'jpg':
-	                                    case 'jpeg':
-	                                    case 'gif':
-	                                    case 'webp':
-	                                        asset.p = "data:image/".concat(ext, ";base64,").concat(assetB64);
-	                                        break;
-	                                    default:
-	                                        asset.p = "data:;base64,".concat(assetB64);
-	                                }
-	                                asset.e = 1;
-	                                resolveAsset();
-	                            });
-	                        }));
+	}, fetchPath = async (path)=>{
+	    const ext = path.split('.').pop()?.toLowerCase();
+	    let status = 200;
+	    try {
+	        const result = await fetch(path);
+	        status = result.status;
+	        if (ext === 'json') return await result.json();
+	        const buffer$1 = new Uint8Array(await result.arrayBuffer()), unzipped = await new Promise((resolve, reject)=>{
+	            unzip(buffer$1, (err, file)=>{
+	                if (err) reject(err);
+	                resolve(file);
+	            });
+	        }), manifestFile = strFromU8(unzipped['manifest.json']), manifest = JSON.parse(manifestFile);
+	        if (!('animations' in manifest)) throw new Error('Manifest not found');
+	        if (!manifest.animations.length) throw new Error('No animations listed in manifest');
+	        const { id } = manifest.animations[0], lottieString = strFromU8(unzipped?.[`animations/${id}.json`]), lottieJson = await JSON.parse(lottieString);
+	        if ('assets' in lottieJson) {
+	            Promise.all(lottieJson.assets.map((asset)=>{
+	                const { p } = asset;
+	                if (!p || !unzipped?.[`images/${p}`]) return;
+	                return new Promise((resolveAsset)=>{
+	                    const ext = p.split('.').pop(), assetB64 = buffer.Buffer.from(unzipped?.[`images/${p}`])?.toString('base64');
+	                    switch(ext){
+	                        case 'svg':
+	                        case 'svg+xml':
+	                            asset.p = `data:image/svg+xml;base64,${assetB64}`;
+	                            break;
+	                        case 'png':
+	                        case 'jpg':
+	                        case 'jpeg':
+	                        case 'gif':
+	                        case 'webp':
+	                            asset.p = `data:image/${ext};base64,${assetB64}`;
+	                            break;
+	                        default:
+	                            asset.p = `data:;base64,${assetB64}`;
 	                    }
-	                    return [
-	                        2,
-	                        lottieJson
-	                    ];
-	                case 8:
-	                    _state.sent();
-	                    if (status === 404) {
-	                        throw new Error('File not found');
-	                    } else {
-	                        throw new Error('Unable to load file');
-	                    }
-	                case 9:
-	                    return [
-	                        2
-	                    ];
-	            }
-	        });
-	    });
-	    return function fetchPath(path) {
-	        return _ref.apply(this, arguments);
-	    };
-	}();
+	                    asset.e = 1;
+	                    resolveAsset();
+	                });
+	            }));
+	        }
+	        return lottieJson;
+	    } catch (err) {
+	        if (status === 404) {
+	            throw new Error('File not found');
+	        } else {
+	            throw new Error('Unable to load file');
+	        }
+	    }
+	};
 
 	exports.PlayerState = void 0;
 	(function(PlayerState) {
@@ -23426,964 +23236,390 @@
 	    PlayerEvents["Stop"] = 'stop';
 	})(exports.PlayerEvents || (exports.PlayerEvents = {}));
 
-	function _tagged_template_literal$1(strings, raw) {
-	    if (!raw) {
-	        raw = strings.slice(0);
-	    }
-	    return Object.freeze(Object.defineProperties(strings, {
-	        raw: {
-	            value: Object.freeze(raw)
-	        }
-	    }));
-	}
-	function _templateObject$1() {
-	    var data = _tagged_template_literal$1([
-	        "*{box-sizing:border-box}:host{--lottie-player-toolbar-height:35px;--lottie-player-toolbar-background-color:#FFF;--lottie-player-toolbar-icon-color:#000;--lottie-player-toolbar-icon-hover-color:#000;--lottie-player-toolbar-icon-active-color:#4285f4;--lottie-player-seeker-track-color:rgba(0, 0, 0, 0.2);--lottie-player-seeker-thumb-color:#4285f4;--lottie-player-seeker-display:block;display:block;width:100%;height:100%}@media (prefers-color-scheme:dark){:host{--lottie-player-toolbar-background-color:#000;--lottie-player-toolbar-icon-color:#FFF;--lottie-player-toolbar-icon-hover-color:#FFF;--lottie-player-seeker-track-color:rgba(255, 255, 255, 0.6)}}.main{display:flex;flex-direction:column;height:100%;width:100%}.animation{width:100%;height:100%;display:flex}.animation.controls{height:calc(100% - 35px)}.toolbar{display:flex;align-items:center;justify-items:center;background:var(--lottie-player-toolbar-background-color);margin:0 5px;height:35px;padding:5px;border-radius:5px}.toolbar.has-error{pointer-events:none;opacity:.5}.toolbar button{cursor:pointer;fill:var(--lottie-player-toolbar-icon-color);display:flex;background:0 0;border:0;padding:0;outline:0;height:100%}.toolbar button.active{fill:var(--lottie-player-toolbar-icon-active-color)}.toolbar button:focus{outline:0}.toolbar button svg>*{fill:inherit}.toolbar button.disabled svg{display:none}.seeker,.seeker::-webkit-slider-runnable-track,.seeker::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;outline:0}.seeker{-webkit-appearance:none;appearance:none;width:95%;background-color:var(--lottie-player-toolbar-background-color);display:var(--lottie-player-seeker-display);color:var(--lottie-player-seeker-thumb-color)}.seeker::-webkit-slider-runnable-track{width:100%;height:5px;cursor:pointer;background-color:var(--lottie-player-seeker-track-color);border-radius:3px}.seeker::-webkit-progress-value{background-color:var(--lottie-player-seeker-thumb-color)}.seeker::-webkit-slider-thumb{height:15px;width:15px;border-radius:50%;background-color:var(--lottie-player-seeker-thumb-color);cursor:pointer;-webkit-appearance:none;appearance:none;margin-top:-5px}.seeker:focus::-webkit-slider-runnable-track{background-color:var(--lottie-player-seeker-track-color)}.seeker::-moz-range-track{width:100%;height:5px;cursor:pointer;background-color:var(--lottie-player-seeker-track-color);border-radius:3px;border:0}.seeker::-moz-range-progress{background-color:var(--lottie-player-seeker-thumb-color);height:5px;border-radius:3px}.seeker::-moz-range-thumb{height:15px;width:15px;border-radius:50%;background-color:var(--lottie-player-seeker-thumb-color);border:0;cursor:pointer}.seeker::-ms-track{width:100%;height:5px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.seeker::-ms-fill-upper{background:var(--lottie-player-seeker-track-color);border-radius:3px}.seeker::-ms-fill-lower{background-color:var(--lottie-player-seeker-thumb-color);border-radius:3px}.seeker::-ms-thumb{border:0;height:15px;width:15px;border-radius:50%;background:var(--lottie-player-seeker-thumb-color);cursor:pointer}.seeker:focus::-ms-fill-lower{background:var(--lottie-player-seeker-track-color)}.seeker:focus::-ms-fill-upper{background:var(--lottie-player-seeker-track-color)}.error{display:flex;margin:auto;justify-content:center;height:100%;align-items:center}.error svg{width:100%;height:auto}"
-	    ]);
-	    _templateObject$1 = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	var styles = i$5(_templateObject$1());
+	var styles = i$5`*{box-sizing:border-box}:host{--lottie-player-toolbar-height:35px;--lottie-player-toolbar-background-color:#FFF;--lottie-player-toolbar-icon-color:#000;--lottie-player-toolbar-icon-hover-color:#000;--lottie-player-toolbar-icon-active-color:#4285f4;--lottie-player-seeker-track-color:rgba(0, 0, 0, 0.2);--lottie-player-seeker-thumb-color:#4285f4;--lottie-player-seeker-display:block;display:block;width:100%;height:100%}@media (prefers-color-scheme:dark){:host{--lottie-player-toolbar-background-color:#000;--lottie-player-toolbar-icon-color:#FFF;--lottie-player-toolbar-icon-hover-color:#FFF;--lottie-player-seeker-track-color:rgba(255, 255, 255, 0.6)}}.main{display:flex;flex-direction:column;height:100%;width:100%}.animation{width:100%;height:100%;display:flex}.animation.controls{height:calc(100% - 35px)}.toolbar{display:flex;align-items:center;justify-items:center;background:var(--lottie-player-toolbar-background-color);margin:0 5px;height:35px;padding:5px;border-radius:5px}.toolbar.has-error{pointer-events:none;opacity:.5}.toolbar button{cursor:pointer;fill:var(--lottie-player-toolbar-icon-color);display:flex;background:0 0;border:0;padding:0;outline:0;height:100%}.toolbar button.active{fill:var(--lottie-player-toolbar-icon-active-color)}.toolbar button:focus{outline:0}.toolbar button svg>*{fill:inherit}.toolbar button.disabled svg{display:none}.seeker,.seeker::-webkit-slider-runnable-track,.seeker::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;outline:0}.seeker{-webkit-appearance:none;appearance:none;width:95%;background-color:var(--lottie-player-toolbar-background-color);display:var(--lottie-player-seeker-display);color:var(--lottie-player-seeker-thumb-color)}.seeker::-webkit-slider-runnable-track{width:100%;height:5px;cursor:pointer;background-color:var(--lottie-player-seeker-track-color);border-radius:3px}.seeker::-webkit-progress-value{background-color:var(--lottie-player-seeker-thumb-color)}.seeker::-webkit-slider-thumb{height:15px;width:15px;border-radius:50%;background-color:var(--lottie-player-seeker-thumb-color);cursor:pointer;-webkit-appearance:none;appearance:none;margin-top:-5px}.seeker:focus::-webkit-slider-runnable-track{background-color:var(--lottie-player-seeker-track-color)}.seeker::-moz-range-track{width:100%;height:5px;cursor:pointer;background-color:var(--lottie-player-seeker-track-color);border-radius:3px;border:0}.seeker::-moz-range-progress{background-color:var(--lottie-player-seeker-thumb-color);height:5px;border-radius:3px}.seeker::-moz-range-thumb{height:15px;width:15px;border-radius:50%;background-color:var(--lottie-player-seeker-thumb-color);border:0;cursor:pointer}.seeker::-ms-track{width:100%;height:5px;cursor:pointer;background:0 0;border-color:transparent;color:transparent}.seeker::-ms-fill-upper{background:var(--lottie-player-seeker-track-color);border-radius:3px}.seeker::-ms-fill-lower{background-color:var(--lottie-player-seeker-thumb-color);border-radius:3px}.seeker::-ms-thumb{border:0;height:15px;width:15px;border-radius:50%;background:var(--lottie-player-seeker-thumb-color);cursor:pointer}.seeker:focus::-ms-fill-lower{background:var(--lottie-player-seeker-track-color)}.seeker:focus::-ms-fill-upper{background:var(--lottie-player-seeker-track-color)}.error{display:flex;margin:auto;justify-content:center;height:100%;align-items:center}.error svg{width:100%;height:auto}`;
 
-	function _assert_this_initialized(self) {
-	    if (self === void 0) {
-	        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	    }
-	    return self;
-	}
-	function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-	    try {
-	        var info = gen[key](arg);
-	        var value = info.value;
-	    } catch (error) {
-	        reject(error);
-	        return;
-	    }
-	    if (info.done) {
-	        resolve(value);
-	    } else {
-	        Promise.resolve(value).then(_next, _throw);
-	    }
-	}
-	function _async_to_generator(fn) {
-	    return function() {
-	        var self = this, args = arguments;
-	        return new Promise(function(resolve, reject) {
-	            var gen = fn.apply(self, args);
-	            function _next(value) {
-	                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-	            }
-	            function _throw(err) {
-	                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-	            }
-	            _next(undefined);
-	        });
-	    };
-	}
-	function _class_call_check(instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	        throw new TypeError("Cannot call a class as a function");
-	    }
-	}
-	function _defineProperties(target, props) {
-	    for(var i = 0; i < props.length; i++){
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	}
-	function _create_class(Constructor, protoProps, staticProps) {
-	    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-	    if (staticProps) _defineProperties(Constructor, staticProps);
-	    return Constructor;
-	}
-	function _define_property(obj, key, value) {
-	    if (key in obj) {
-	        Object.defineProperty(obj, key, {
-	            value: value,
-	            enumerable: true,
-	            configurable: true,
-	            writable: true
-	        });
-	    } else {
-	        obj[key] = value;
-	    }
-	    return obj;
-	}
-	function _get(target, property1, receiver) {
-	    if (typeof Reflect !== "undefined" && Reflect.get) {
-	        _get = Reflect.get;
-	    } else {
-	        _get = function get(target, property, receiver) {
-	            var base = _super_prop_base(target, property);
-	            if (!base) return;
-	            var desc = Object.getOwnPropertyDescriptor(base, property);
-	            if (desc.get) {
-	                return desc.get.call(receiver || target);
-	            }
-	            return desc.value;
-	        };
-	    }
-	    return _get(target, property1, receiver || target);
-	}
-	function _get_prototype_of(o) {
-	    _get_prototype_of = Object.setPrototypeOf ? Object.getPrototypeOf : function getPrototypeOf(o) {
-	        return o.__proto__ || Object.getPrototypeOf(o);
-	    };
-	    return _get_prototype_of(o);
-	}
-	function _inherits(subClass, superClass) {
-	    if (typeof superClass !== "function" && superClass !== null) {
-	        throw new TypeError("Super expression must either be null or a function");
-	    }
-	    subClass.prototype = Object.create(superClass && superClass.prototype, {
-	        constructor: {
-	            value: subClass,
-	            writable: true,
-	            configurable: true
-	        }
-	    });
-	    if (superClass) _set_prototype_of(subClass, superClass);
-	}
-	function _object_spread(target) {
-	    for(var i = 1; i < arguments.length; i++){
-	        var source = arguments[i] != null ? arguments[i] : {};
-	        var ownKeys = Object.keys(source);
-	        if (typeof Object.getOwnPropertySymbols === "function") {
-	            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-	                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-	            }));
-	        }
-	        ownKeys.forEach(function(key) {
-	            _define_property(target, key, source[key]);
-	        });
-	    }
-	    return target;
-	}
-	function ownKeys(object, enumerableOnly) {
-	    var keys = Object.keys(object);
-	    if (Object.getOwnPropertySymbols) {
-	        var symbols = Object.getOwnPropertySymbols(object);
-	        if (enumerableOnly) {
-	            symbols = symbols.filter(function(sym) {
-	                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	            });
-	        }
-	        keys.push.apply(keys, symbols);
-	    }
-	    return keys;
-	}
-	function _object_spread_props(target, source) {
-	    source = source != null ? source : {};
-	    if (Object.getOwnPropertyDescriptors) {
-	        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-	    } else {
-	        ownKeys(Object(source)).forEach(function(key) {
-	            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-	        });
-	    }
-	    return target;
-	}
-	function _possible_constructor_return(self, call) {
-	    if (call && (_type_of(call) === "object" || typeof call === "function")) {
-	        return call;
-	    }
-	    return _assert_this_initialized(self);
-	}
-	function _set_prototype_of(o, p) {
-	    _set_prototype_of = Object.setPrototypeOf || function setPrototypeOf(o, p) {
-	        o.__proto__ = p;
-	        return o;
-	    };
-	    return _set_prototype_of(o, p);
-	}
-	function _super_prop_base(object, property1) {
-	    while(!Object.prototype.hasOwnProperty.call(object, property1)){
-	        object = _get_prototype_of(object);
-	        if (object === null) break;
-	    }
-	    return object;
-	}
-	function _tagged_template_literal(strings, raw) {
-	    if (!raw) {
-	        raw = strings.slice(0);
-	    }
-	    return Object.freeze(Object.defineProperties(strings, {
-	        raw: {
-	            value: Object.freeze(raw)
-	        }
-	    }));
-	}
-	function _type_of(obj) {
-	    "@swc/helpers - typeof";
-	    return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
-	}
-	function _is_native_reflect_construct() {
-	    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-	    if (Reflect.construct.sham) return false;
-	    if (typeof Proxy === "function") return true;
-	    try {
-	        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
-	        return true;
-	    } catch (e) {
-	        return false;
-	    }
-	}
-	function _create_super(Derived) {
-	    var hasNativeReflectConstruct = _is_native_reflect_construct();
-	    return function _createSuperInternal() {
-	        var Super = _get_prototype_of(Derived), result;
-	        if (hasNativeReflectConstruct) {
-	            var NewTarget = _get_prototype_of(this).constructor;
-	            result = Reflect.construct(Super, arguments, NewTarget);
-	        } else {
-	            result = Super.apply(this, arguments);
-	        }
-	        return _possible_constructor_return(this, result);
-	    };
-	}
 	function _ts_decorate(decorators, target, key, desc) {
 	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
 	    if (typeof Reflect === "object" && typeof undefined === "function") r = undefined(decorators, target, key, desc);
 	    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
 	    return c > 3 && r && Object.defineProperty(target, key, r), r;
 	}
-	function _ts_generator(thisArg, body) {
-	    var f, y, t, g, _ = {
-	        label: 0,
-	        sent: function() {
-	            if (t[0] & 1) throw t[1];
-	            return t[1];
-	        },
-	        trys: [],
-	        ops: []
-	    };
-	    return g = {
-	        next: verb(0),
-	        "throw": verb(1),
-	        "return": verb(2)
-	    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
-	        return this;
-	    }), g;
-	    function verb(n) {
-	        return function(v) {
-	            return step([
-	                n,
-	                v
-	            ]);
-	        };
-	    }
-	    function step(op) {
-	        if (f) throw new TypeError("Generator is already executing.");
-	        while(_)try {
-	            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-	            if (y = 0, t) op = [
-	                op[0] & 2,
-	                t.value
-	            ];
-	            switch(op[0]){
-	                case 0:
-	                case 1:
-	                    t = op;
-	                    break;
-	                case 4:
-	                    _.label++;
-	                    return {
-	                        value: op[1],
-	                        done: false
-	                    };
-	                case 5:
-	                    _.label++;
-	                    y = op[1];
-	                    op = [
-	                        0
-	                    ];
-	                    continue;
-	                case 7:
-	                    op = _.ops.pop();
-	                    _.trys.pop();
-	                    continue;
-	                default:
-	                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-	                        _ = 0;
-	                        continue;
-	                    }
-	                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-	                        _.label = op[1];
-	                        break;
-	                    }
-	                    if (op[0] === 6 && _.label < t[1]) {
-	                        _.label = t[1];
-	                        t = op;
-	                        break;
-	                    }
-	                    if (t && _.label < t[2]) {
-	                        _.label = t[2];
-	                        _.ops.push(op);
-	                        break;
-	                    }
-	                    if (t[2]) _.ops.pop();
-	                    _.trys.pop();
-	                    continue;
+	exports.DotLottiePlayer = class DotLottiePlayer extends s {
+	    async load(src) {
+	        if (!this.shadowRoot) return;
+	        const preserveAspectRatio = this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)), options = {
+	            container: this.container,
+	            loop: !!this.loop,
+	            autoplay: !!this.autoplay,
+	            renderer: this.renderer,
+	            initialSegment: this.segment,
+	            rendererSettings: {
+	                imagePreserveAspectRatio: preserveAspectRatio
 	            }
-	            op = body.call(thisArg, _);
-	        } catch (e) {
-	            op = [
-	                6,
-	                e
-	            ];
-	            y = 0;
-	        } finally{
-	            f = t = 0;
+	        };
+	        switch(this.renderer){
+	            case 'svg':
+	                options.rendererSettings = {
+	                    ...options.rendererSettings,
+	                    hideOnTransparent: true,
+	                    preserveAspectRatio,
+	                    progressiveLoad: true
+	                };
+	                break;
+	            case 'canvas':
+	                options.rendererSettings = {
+	                    ...options.rendererSettings,
+	                    clearCanvas: true,
+	                    preserveAspectRatio,
+	                    progressiveLoad: true
+	                };
+	                break;
+	            case 'html':
+	                options.rendererSettings = {
+	                    ...options.rendererSettings,
+	                    hideOnTransparent: true
+	                };
 	        }
-	        if (op[0] & 5) throw op[1];
-	        return {
-	            value: op[0] ? op[1] : void 0,
-	            done: true
-	        };
-	    }
-	}
-	function _ts_metadata(k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	}
-	function _templateObject() {
-	    var data = _tagged_template_literal([
-	        '<svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z"/></svg>'
-	    ]);
-	    _templateObject = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	function _templateObject1() {
-	    var data = _tagged_template_literal([
-	        '<svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M8.016 5.016L18.985 12 8.016 18.984V5.015z"/></svg>'
-	    ]);
-	    _templateObject1 = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	function _templateObject2() {
-	    var data = _tagged_template_literal([
-	        '<div class="',
-	        '" aria-label="Lottie Animation Controls"><button @click="',
-	        '" class="',
-	        '" style="align-items:center" tabindex="0" aria-label="Toggle Play/Pause">',
-	        '</button> <button @click="',
-	        '" class="',
-	        '" style="align-items:center" tabindex="0" aria-label="Stop"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6h12v12H6V6z"/></svg></button> <input class="seeker" type="range" min="0" max="100" value="',
-	        '" @input="',
-	        '" @mousedown="',
-	        '" @mouseup="',
-	        '" aria-valuemin="0" aria-valuemax="100" role="slider" aria-valuenow="',
-	        '" tabindex="0" aria-label="Slider for search"> <button @click="',
-	        '" class="',
-	        '" style="align-items:center" tabindex="0" aria-label="Toggle looping"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z"/></svg></button> <button @click="',
-	        '" class="',
-	        '" aria-label="Toggle boomerang" style="align-items:center" tabindex="0"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="m11.8 13.2-.3.3c-.5.5-1.1 1.1-1.7 1.5-.5.4-1 .6-1.5.8-.5.2-1.1.3-1.6.3s-1-.1-1.5-.3c-.6-.2-1-.5-1.4-1-.5-.6-.8-1.2-.9-1.9-.2-.9-.1-1.8.3-2.6.3-.7.8-1.2 1.3-1.6.3-.2.6-.4 1-.5.2-.2.5-.2.8-.3.3 0 .7-.1 1 0 .3 0 .6.1.9.2.9.3 1.7.9 2.4 1.5.4.4.8.7 1.1 1.1l.1.1.4-.4c.6-.6 1.2-1.2 1.9-1.6.5-.3 1-.6 1.5-.7.4-.1.7-.2 1-.2h.9c1 .1 1.9.5 2.6 1.4.4.5.7 1.1.8 1.8.2.9.1 1.7-.2 2.5-.4.9-1 1.5-1.8 2-.4.2-.7.4-1.1.4-.4.1-.8.1-1.2.1-.5 0-.9-.1-1.3-.3-.8-.3-1.5-.9-2.1-1.5-.4-.4-.8-.7-1.1-1.1h-.3zm-1.1-1.1c-.1-.1-.1-.1 0 0-.3-.3-.6-.6-.8-.9-.5-.5-1-.9-1.6-1.2-.4-.3-.8-.4-1.3-.4-.4 0-.8 0-1.1.2-.5.2-.9.6-1.1 1-.2.3-.3.7-.3 1.1 0 .3 0 .6.1.9.1.5.4.9.8 1.2.5.4 1.1.5 1.7.5.5 0 1-.2 1.5-.5.6-.4 1.1-.8 1.6-1.3.1-.3.3-.5.5-.6zM13 12c.5.5 1 1 1.5 1.4.5.5 1.1.9 1.9 1 .4.1.8 0 1.2-.1.3-.1.6-.3.9-.5.4-.4.7-.9.8-1.4.1-.5 0-.9-.1-1.4-.3-.8-.8-1.2-1.7-1.4-.4-.1-.8-.1-1.2 0-.5.1-1 .4-1.4.7-.5.4-1 .8-1.4 1.2-.2.2-.4.3-.5.5z"/></svg></button></div>'
-	    ]);
-	    _templateObject2 = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	function _templateObject3() {
-	    var data = _tagged_template_literal([
-	        '<div class="error"><svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1920" height="1080" viewBox="0 0 1920 1080"><path fill="#fff" d="M0 0h1920v1080H0z"/><path fill="#3a6d8b" d="M1190.2 531 1007 212.4c-22-38.2-77.2-38-98.8.5L729.5 531.3c-21.3 37.9 6.1 84.6 49.5 84.6l361.9.3c43.7 0 71.1-47.3 49.3-85.2zM937.3 288.7c.2-7.5 3.3-23.9 23.2-23.9 16.3 0 23 16.1 23 23.5 0 55.3-10.7 197.2-12.2 214.5-.1 1-.9 1.7-1.9 1.7h-18.3c-1 0-1.8-.7-1.9-1.7-1.4-17.5-13.4-162.9-11.9-214.1zm24.2 283.8c-13.1 0-23.7-10.6-23.7-23.7s10.6-23.7 23.7-23.7 23.7 10.6 23.7 23.7-10.6 23.7-23.7 23.7zM722.1 644h112.6v34.4h-70.4V698h58.8v31.7h-58.8v22.6h72.4v36.2H722.1V644zm162 57.1h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5h36.4v15.6zm78.9 0h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5H963v15.6zm39.5 36.2c0-31.3 22.2-54.8 56.6-54.8 34.4 0 56.2 23.5 56.2 54.8s-21.8 54.6-56.2 54.6c-34.4-.1-56.6-23.3-56.6-54.6zm74 0c0-17.4-6.1-29.1-17.8-29.1-11.7 0-17.4 11.7-17.4 29.1 0 17.4 5.7 29.1 17.4 29.1s17.8-11.8 17.8-29.1zm83.1-36.2h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5h36.4v15.6z"/><path fill="none" d="M718.9 807.7h645v285.4h-645z"/><text fill="#3a6d8b" style="text-align:center;position:absolute;left:100%;font-size:47px;font-family:system-ui,-apple-system,BlinkMacSystemFont,\'.SFNSText-Regular\',sans-serif" x="50%" y="848.017" text-anchor="middle">',
-	        "</text></svg></div>"
-	    ]);
-	    _templateObject3 = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	function _templateObject4() {
-	    var data = _tagged_template_literal([
-	        '<div class="',
-	        '" lang="',
-	        '" role="img" aria-label="',
-	        '"><div class="',
-	        '" style="background:',
-	        '">',
-	        "</div>",
-	        "</div>"
-	    ]);
-	    _templateObject4 = function _templateObject() {
-	        return data;
-	    };
-	    return data;
-	}
-	exports.DotLottiePlayer = function(LitElement1) {
-	    _inherits(DotLottiePlayer, LitElement1);
-	    var _super = _create_super(DotLottiePlayer);
-	    function DotLottiePlayer() {
-	        _class_call_check(this, DotLottiePlayer);
-	        var _this;
-	        _this = _super.apply(this, arguments);
-	        _this.background = 'transparent';
-	        _this.controls = false;
-	        _this.currentState = exports.PlayerState.Loading;
-	        _this.direction = 1;
-	        _this.hover = false;
-	        _this.intermission = 0;
-	        _this.loop = false;
-	        _this.mode = exports.PlayMode.Normal;
-	        _this.objectfit = 'contain';
-	        _this.renderer = 'svg';
-	        _this.speed = 1;
-	        _this.subframe = false;
-	        _this._lottie = null;
-	        _this._counter = 0;
-	        _this._error = 'Something went wrong';
-	        return _this;
-	    }
-	    _create_class(DotLottiePlayer, [
-	        {
-	            key: "load",
-	            value: function load(src) {
-	                var _this = this;
-	                return _async_to_generator(function() {
-	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, _err, _loopComplete;
-	                    return _ts_generator(this, function(_state) {
-	                        switch(_state.label){
-	                            case 0:
-	                                if (!_this.shadowRoot) return [
-	                                    2
-	                                ];
-	                                preserveAspectRatio = (_this_preserveAspectRatio = _this.preserveAspectRatio) !== null && _this_preserveAspectRatio !== void 0 ? _this_preserveAspectRatio : _this.objectfit && aspectRatio(_this.objectfit), options = {
-	                                    container: _this.container,
-	                                    loop: !!_this.loop,
-	                                    autoplay: !!_this.autoplay,
-	                                    renderer: _this.renderer,
-	                                    initialSegment: _this.segment,
-	                                    rendererSettings: {
-	                                        imagePreserveAspectRatio: preserveAspectRatio
-	                                    }
-	                                };
-	                                switch(_this.renderer){
-	                                    case 'svg':
-	                                        options.rendererSettings = _object_spread_props(_object_spread({}, options.rendererSettings), {
-	                                            hideOnTransparent: true,
-	                                            preserveAspectRatio: preserveAspectRatio,
-	                                            progressiveLoad: true
-	                                        });
-	                                        break;
-	                                    case 'canvas':
-	                                        options.rendererSettings = _object_spread_props(_object_spread({}, options.rendererSettings), {
-	                                            clearCanvas: true,
-	                                            preserveAspectRatio: preserveAspectRatio,
-	                                            progressiveLoad: true
-	                                        });
-	                                        break;
-	                                    case 'html':
-	                                        options.rendererSettings = _object_spread_props(_object_spread({}, options.rendererSettings), {
-	                                            hideOnTransparent: true
-	                                        });
-	                                }
-	                                _state.label = 1;
-	                            case 1:
-	                                _state.trys.push([
-	                                    1,
-	                                    5,
-	                                    ,
-	                                    6
-	                                ]);
-	                                if (typeof src !== 'string' && typeof src !== 'object') {
-	                                    throw new Error('Broken file or invalid file format');
-	                                }
-	                                if (!(typeof src === 'string')) return [
-	                                    3,
-	                                    3
-	                                ];
-	                                return [
-	                                    4,
-	                                    fetchPath(src)
-	                                ];
-	                            case 2:
-	                                _tmp = _state.sent();
-	                                return [
-	                                    3,
-	                                    4
-	                                ];
-	                            case 3:
-	                                _tmp = src;
-	                                _state.label = 4;
-	                            case 4:
-	                                srcParsed = _tmp;
-	                                if (!_this.isLottie(srcParsed)) {
-	                                    throw new Error('Broken or corrupted file');
-	                                }
-	                                if (_this._lottie) _this._lottie.destroy();
-	                                _this._lottie = Lottie.loadAnimation(_object_spread_props(_object_spread({}, options), {
-	                                    animationData: srcParsed
-	                                }));
-	                                return [
-	                                    3,
-	                                    6
-	                                ];
-	                            case 5:
-	                                err = _state.sent();
-	                                console.error(err);
-	                                if (err instanceof Error) _this._error = (_err = err) === null || _err === void 0 ? void 0 : _err.message;
-	                                _this.currentState = exports.PlayerState.Error;
-	                                _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
-	                                return [
-	                                    2
-	                                ];
-	                            case 6:
-	                                if (_this._lottie) {
-	                                    _this._lottie.addEventListener('enterFrame', function() {
-	                                        var _this__lottie = _this._lottie, currentFrame = _this__lottie.currentFrame, totalFrames = _this__lottie.totalFrames;
-	                                        _this.seeker = currentFrame / totalFrames * 100;
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Frame, {
-	                                            detail: {
-	                                                frame: currentFrame,
-	                                                seeker: _this.seeker
-	                                            }
-	                                        }));
-	                                    });
-	                                    _this._lottie.addEventListener('complete', function() {
-	                                        _this.currentState = exports.PlayerState.Completed;
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
-	                                    });
-	                                    _loopComplete = function() {
-	                                        var _this__lottie;
-	                                        var _this__lottie1 = _this._lottie, firstFrame = _this__lottie1.firstFrame, totalFrames = _this__lottie1.totalFrames, playDirection = _this__lottie1.playDirection;
-	                                        if (_this.count) {
-	                                            _this.mode === exports.PlayMode.Bounce ? _this._counter += 1 : _this._counter += 0.5;
-	                                            if (_this._counter >= _this.count) {
-	                                                _this.setLooping(false);
-	                                                _this.currentState = exports.PlayerState.Completed;
-	                                                _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
-	                                                return;
-	                                            }
-	                                        }
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Loop));
-	                                        if (_this.mode === exports.PlayMode.Bounce) {
-	                                            var _this__lottie2, _this__lottie3;
-	                                            (_this__lottie2 = _this._lottie) === null || _this__lottie2 === void 0 ? void 0 : _this__lottie2.goToAndStop(playDirection === -1 ? firstFrame : totalFrames * .99, true);
-	                                            (_this__lottie3 = _this._lottie) === null || _this__lottie3 === void 0 ? void 0 : _this__lottie3.setDirection(playDirection * -1);
-	                                            return setTimeout(function() {
-	                                                var _this__lottie;
-	                                                (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.play();
-	                                            }, _this.intermission);
-	                                        }
-	                                        (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.goToAndStop(playDirection === -1 ? totalFrames * .99 : firstFrame, true);
-	                                        return setTimeout(function() {
-	                                            var _this__lottie;
-	                                            (_this__lottie = _this._lottie) === null || _this__lottie === void 0 ? void 0 : _this__lottie.play();
-	                                        }, _this.intermission);
-	                                    };
-	                                    _this._lottie.addEventListener('loopComplete', _loopComplete);
-	                                    _this._lottie.addEventListener('DOMLoaded', function() {
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Ready));
-	                                    });
-	                                    _this._lottie.addEventListener('data_ready', function() {
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Load));
-	                                    });
-	                                    _this._lottie.addEventListener('data_failed', function() {
-	                                        _this.currentState = exports.PlayerState.Error;
-	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
-	                                    });
-	                                    if (_this.container) {
-	                                        _this.container.addEventListener('mouseenter', function() {
-	                                            if (_this.hover && _this.currentState !== exports.PlayerState.Playing) {
-	                                                _this.play();
-	                                            }
-	                                        });
-	                                        _this.container.addEventListener('mouseleave', function() {
-	                                            if (_this.hover && _this.currentState === exports.PlayerState.Playing) {
-	                                                _this.stop();
-	                                            }
-	                                        });
-	                                    }
-	                                    _this.setSpeed(_this.speed);
-	                                    _this.setDirection(_this.direction);
-	                                    _this.setSubframe(!!_this.subframe);
-	                                    if (_this.autoplay) {
-	                                        if (_this.direction === -1) _this.seek('99%');
-	                                        _this.play();
-	                                    }
-	                                }
-	                                return [
-	                                    2
-	                                ];
-	                        }
-	                    });
-	                })();
+	        try {
+	            if (typeof src !== 'string' && typeof src !== 'object') {
+	                throw new Error('Broken file or invalid file format');
 	            }
-	        },
-	        {
-	            key: "_onVisibilityChange",
-	            value: function _onVisibilityChange() {
-	                if (document.hidden && this.currentState === exports.PlayerState.Playing) {
-	                    this.freeze();
-	                } else if (this.currentState === exports.PlayerState.Frozen) {
-	                    this.play();
+	            const srcParsed = typeof src === 'string' ? await fetchPath(src) : src;
+	            if (!this.isLottie(srcParsed)) {
+	                throw new Error('Broken or corrupted file');
+	            }
+	            if (this._lottie) this._lottie.destroy();
+	            this._lottie = Lottie.loadAnimation({
+	                ...options,
+	                animationData: srcParsed
+	            });
+	        } catch (err) {
+	            console.error(err);
+	            if (err instanceof Error) this._error = err?.message;
+	            this.currentState = exports.PlayerState.Error;
+	            this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
+	            return;
+	        }
+	        if (this._lottie) {
+	            this._lottie.addEventListener('enterFrame', ()=>{
+	                const { currentFrame, totalFrames } = this._lottie;
+	                this.seeker = currentFrame / totalFrames * 100;
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Frame, {
+	                    detail: {
+	                        frame: currentFrame,
+	                        seeker: this.seeker
+	                    }
+	                }));
+	            });
+	            this._lottie.addEventListener('complete', ()=>{
+	                this.currentState = exports.PlayerState.Completed;
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
+	            });
+	            const _loopComplete = ()=>{
+	                const { firstFrame, totalFrames, playDirection } = this._lottie;
+	                if (this.count) {
+	                    this.mode === exports.PlayMode.Bounce ? this._counter += 1 : this._counter += 0.5;
+	                    if (this._counter >= this.count) {
+	                        this.setLooping(false);
+	                        this.currentState = exports.PlayerState.Completed;
+	                        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
+	                        return;
+	                    }
 	                }
-	            }
-	        },
-	        {
-	            key: "_handleSeekChange",
-	            value: function _handleSeekChange(event) {
-	                if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return;
-	                var frame = Number(event.target.value) / 100 * this._lottie.totalFrames;
-	                this.seek(frame);
-	            }
-	        },
-	        {
-	            key: "isLottie",
-	            value: function isLottie(json) {
-	                var mandatory = [
-	                    'v',
-	                    'ip',
-	                    'op',
-	                    'layers',
-	                    'fr',
-	                    'w',
-	                    'h'
-	                ];
-	                return mandatory.every(function(field) {
-	                    return Object.prototype.hasOwnProperty.call(json, field);
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Loop));
+	                if (this.mode === exports.PlayMode.Bounce) {
+	                    this._lottie?.goToAndStop(playDirection === -1 ? firstFrame : totalFrames * .99, true);
+	                    this._lottie?.setDirection(playDirection * -1);
+	                    return setTimeout(()=>{
+	                        this._lottie?.play();
+	                    }, this.intermission);
+	                }
+	                this._lottie?.goToAndStop(playDirection === -1 ? totalFrames * .99 : firstFrame, true);
+	                return setTimeout(()=>{
+	                    this._lottie?.play();
+	                }, this.intermission);
+	            };
+	            this._lottie.addEventListener('loopComplete', _loopComplete);
+	            this._lottie.addEventListener('DOMLoaded', ()=>{
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Ready));
+	            });
+	            this._lottie.addEventListener('data_ready', ()=>{
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Load));
+	            });
+	            this._lottie.addEventListener('data_failed', ()=>{
+	                this.currentState = exports.PlayerState.Error;
+	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
+	            });
+	            if (this.container) {
+	                this.container.addEventListener('mouseenter', ()=>{
+	                    if (this.hover && this.currentState !== exports.PlayerState.Playing) {
+	                        this.play();
+	                    }
+	                });
+	                this.container.addEventListener('mouseleave', ()=>{
+	                    if (this.hover && this.currentState === exports.PlayerState.Playing) {
+	                        this.stop();
+	                    }
 	                });
 	            }
-	        },
-	        {
-	            key: "getLottie",
-	            value: function getLottie() {
-	                return this._lottie;
-	            }
-	        },
-	        {
-	            key: "play",
-	            value: function play() {
-	                if (!this._lottie) return;
-	                this.currentState = exports.PlayerState.Playing;
-	                this._lottie.play();
-	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Play));
-	            }
-	        },
-	        {
-	            key: "pause",
-	            value: function pause() {
-	                if (!this._lottie) return;
-	                this.currentState = exports.PlayerState.Paused;
-	                this._lottie.pause();
-	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Pause));
-	            }
-	        },
-	        {
-	            key: "stop",
-	            value: function stop() {
-	                if (!this._lottie) return;
-	                this.currentState = exports.PlayerState.Stopped;
-	                this._counter = 0;
-	                this._lottie.stop();
-	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Stop));
-	            }
-	        },
-	        {
-	            key: "destroy",
-	            value: function destroy() {
-	                if (!this._lottie) return;
-	                this.currentState = exports.PlayerState.Destroyed;
-	                this._lottie.destroy();
-	                this._lottie = null;
-	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Destroyed));
-	                this.remove();
-	            }
-	        },
-	        {
-	            key: "seek",
-	            value: function seek(value) {
-	                if (!this._lottie) return;
-	                var matches = value.toString().match(/^([0-9]+)(%?)$/);
-	                if (!matches) {
-	                    return;
-	                }
-	                var frame = matches[2] === '%' ? this._lottie.totalFrames * Number(matches[1]) / 100 : Number(matches[1]);
-	                this.seeker = Number(frame);
-	                if (this.currentState === exports.PlayerState.Playing) {
-	                    this._lottie.goToAndPlay(frame, true);
-	                } else {
-	                    this._lottie.goToAndStop(frame, true);
-	                    this._lottie.pause();
-	                }
-	            }
-	        },
-	        {
-	            key: "snapshot",
-	            value: function snapshot() {
-	                var download = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : true;
-	                if (!this.shadowRoot) return;
-	                var svgElement = this.shadowRoot.querySelector('.animation svg');
-	                var data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null;
-	                if (!data) return;
-	                if (download) {
-	                    var element = document.createElement('a');
-	                    element.href = 'data:image/svg+xmlcharset=utf-8,' + encodeURIComponent(data);
-	                    element.download = 'download_' + this.seeker + '.svg';
-	                    document.body.appendChild(element);
-	                    element.click();
-	                    document.body.removeChild(element);
-	                }
-	                return data;
-	            }
-	        },
-	        {
-	            key: "setSubframe",
-	            value: function setSubframe(value) {
-	                if (!this._lottie) return;
-	                this.subframe = value;
-	                this._lottie.setSubframe(value);
-	            }
-	        },
-	        {
-	            key: "freeze",
-	            value: function freeze() {
-	                if (!this._lottie) return;
-	                this.currentState = exports.PlayerState.Frozen;
-	                this._lottie.pause();
-	                this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Freeze));
-	            }
-	        },
-	        {
-	            key: "reload",
-	            value: function reload() {
-	                var _this = this;
-	                return _async_to_generator(function() {
-	                    return _ts_generator(this, function(_state) {
-	                        switch(_state.label){
-	                            case 0:
-	                                if (!_this._lottie) return [
-	                                    2
-	                                ];
-	                                _this._lottie.destroy();
-	                                if (!_this.src) return [
-	                                    3,
-	                                    2
-	                                ];
-	                                return [
-	                                    4,
-	                                    _this.load(_this.src)
-	                                ];
-	                            case 1:
-	                                _state.sent();
-	                                _state.label = 2;
-	                            case 2:
-	                                return [
-	                                    2
-	                                ];
-	                        }
-	                    });
-	                })();
-	            }
-	        },
-	        {
-	            key: "setSpeed",
-	            value: function setSpeed() {
-	                var value = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : 1;
-	                if (!this._lottie) return;
-	                this.speed = value;
-	                this._lottie.setSpeed(value);
-	            }
-	        },
-	        {
-	            key: "setDirection",
-	            value: function setDirection(value) {
-	                if (!this._lottie) return;
-	                this.direction = value;
-	                this._lottie.setDirection(value);
-	            }
-	        },
-	        {
-	            key: "setLooping",
-	            value: function setLooping(value) {
-	                if (this._lottie) {
-	                    this.loop = value;
-	                    this._lottie.setLoop(value);
-	                }
-	            }
-	        },
-	        {
-	            key: "togglePlay",
-	            value: function togglePlay() {
-	                if (!this._lottie) return;
-	                var _this__lottie = this._lottie, currentFrame = _this__lottie.currentFrame, playDirection = _this__lottie.playDirection, totalFrames = _this__lottie.totalFrames;
-	                if (this.currentState === exports.PlayerState.Playing) return this.pause();
-	                if (this.currentState === exports.PlayerState.Completed) {
-	                    this.currentState = exports.PlayerState.Playing;
-	                    if (this.mode === exports.PlayMode.Bounce) {
-	                        this.setDirection(playDirection * -1);
-	                        return this._lottie.goToAndPlay(currentFrame, true);
-	                    }
-	                    if (playDirection === -1) {
-	                        return this._lottie.goToAndPlay(totalFrames, true);
-	                    }
-	                    return this._lottie.goToAndPlay(0, true);
-	                }
-	                return this.play();
-	            }
-	        },
-	        {
-	            key: "toggleLooping",
-	            value: function toggleLooping() {
-	                this.setLooping(!this.loop);
-	            }
-	        },
-	        {
-	            key: "toggleBoomerang",
-	            value: function toggleBoomerang() {
-	                if (this.mode === exports.PlayMode.Normal) {
-	                    this.mode = exports.PlayMode.Bounce;
-	                } else {
-	                    this.mode = exports.PlayMode.Normal;
-	                }
-	            }
-	        },
-	        {
-	            key: "connectedCallback",
-	            value: function connectedCallback() {
-	                _get(_get_prototype_of(DotLottiePlayer.prototype), "connectedCallback", this).call(this);
-	                if (typeof document.hidden !== 'undefined') {
-	                    document.addEventListener('visibilitychange', this._onVisibilityChange);
-	                }
-	            }
-	        },
-	        {
-	            key: "firstUpdated",
-	            value: function firstUpdated() {
-	                var _this = this;
-	                return _async_to_generator(function() {
-	                    return _ts_generator(this, function(_state) {
-	                        switch(_state.label){
-	                            case 0:
-	                                if ('IntersectionObserver' in window) {
-	                                    _this._io = new IntersectionObserver(function(entries) {
-	                                        if (entries[0].isIntersecting) {
-	                                            if (!document.hidden && _this.currentState === exports.PlayerState.Frozen) {
-	                                                _this.play();
-	                                            }
-	                                        } else if (_this.currentState === exports.PlayerState.Playing) {
-	                                            _this.freeze();
-	                                        }
-	                                    });
-	                                    _this._io.observe(_this.container);
-	                                }
-	                                if (!_this.src) return [
-	                                    3,
-	                                    2
-	                                ];
-	                                return [
-	                                    4,
-	                                    _this.load(_this.src)
-	                                ];
-	                            case 1:
-	                                _state.sent();
-	                                _state.label = 2;
-	                            case 2:
-	                                _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Rendered));
-	                                return [
-	                                    2
-	                                ];
-	                        }
-	                    });
-	                })();
-	            }
-	        },
-	        {
-	            key: "disconnectedCallback",
-	            value: function disconnectedCallback() {
-	                _get(_get_prototype_of(DotLottiePlayer.prototype), "disconnectedCallback", this).call(this);
-	                if (this._io) {
-	                    this._io.disconnect();
-	                    this._io = undefined;
-	                }
-	                if (this._lottie) this._lottie.destroy();
-	                document.removeEventListener('visibilitychange', this._onVisibilityChange);
-	            }
-	        },
-	        {
-	            key: "renderControls",
-	            value: function renderControls() {
-	                var _this = this;
-	                var isPlaying = this.currentState === exports.PlayerState.Playing, isPaused = this.currentState === exports.PlayerState.Paused, isStopped = this.currentState === exports.PlayerState.Stopped, isError = this.currentState === exports.PlayerState.Error;
-	                var _this_seeker, _this_seeker1;
-	                return x$1(_templateObject2(), "lottie-controls toolbar ".concat(isError ? 'has-error' : ''), this.togglePlay, isPlaying || isPaused ? 'active' : '', isPlaying ? x$1(_templateObject()) : x$1(_templateObject1()), this.stop, isStopped ? 'active' : '', (_this_seeker = this.seeker) !== null && _this_seeker !== void 0 ? _this_seeker : 0, this._handleSeekChange, function() {
-	                    _this._prevState = _this.currentState;
-	                    _this.freeze();
-	                }, function() {
-	                    _this._prevState === exports.PlayerState.Playing && _this.play();
-	                }, (_this_seeker1 = this.seeker) !== null && _this_seeker1 !== void 0 ? _this_seeker1 : 0, this.toggleLooping, this.loop ? 'active' : '', this.toggleBoomerang, this.mode === exports.PlayMode.Bounce ? 'active' : '');
-	            }
-	        },
-	        {
-	            key: "render",
-	            value: function render() {
-	                var _document_documentElement, _document;
-	                var className = this.controls ? 'main controls' : 'main', animationClass = this.controls ? 'animation controls' : 'animation';
-	                var _this_description;
-	                return x$1(_templateObject4(), "animation-container ".concat(className), this.description ? (_document = document) === null || _document === void 0 ? void 0 : (_document_documentElement = _document.documentElement) === null || _document_documentElement === void 0 ? void 0 : _document_documentElement.lang : 'en', (_this_description = this.description) !== null && _this_description !== void 0 ? _this_description : 'Lottie animation', animationClass, this.background, this.currentState === exports.PlayerState.Error ? x$1(_templateObject3(), this._error) : A, this.controls ? this.renderControls() : A);
+	            this.setSpeed(this.speed);
+	            this.setDirection(this.direction);
+	            this.setSubframe(!!this.subframe);
+	            if (this.autoplay) {
+	                if (this.direction === -1) this.seek('99%');
+	                this.play();
 	            }
 	        }
-	    ], [
-	        {
-	            key: "styles",
-	            get: function get() {
-	                return styles;
-	            }
+	    }
+	    _onVisibilityChange() {
+	        if (document.hidden && this.currentState === exports.PlayerState.Playing) {
+	            this.freeze();
+	        } else if (this.currentState === exports.PlayerState.Frozen) {
+	            this.play();
 	        }
-	    ]);
-	    return DotLottiePlayer;
-	}(s);
+	    }
+	    _handleSeekChange(event) {
+	        if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return;
+	        const frame = Number(event.target.value) / 100 * this._lottie.totalFrames;
+	        this.seek(frame);
+	    }
+	    isLottie(json) {
+	        const mandatory = [
+	            'v',
+	            'ip',
+	            'op',
+	            'layers',
+	            'fr',
+	            'w',
+	            'h'
+	        ];
+	        return mandatory.every((field)=>Object.prototype.hasOwnProperty.call(json, field));
+	    }
+	    getLottie() {
+	        return this._lottie;
+	    }
+	    play() {
+	        if (!this._lottie) return;
+	        this.currentState = exports.PlayerState.Playing;
+	        this._lottie.play();
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Play));
+	    }
+	    pause() {
+	        if (!this._lottie) return;
+	        this.currentState = exports.PlayerState.Paused;
+	        this._lottie.pause();
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Pause));
+	    }
+	    stop() {
+	        if (!this._lottie) return;
+	        this.currentState = exports.PlayerState.Stopped;
+	        this._counter = 0;
+	        this._lottie.stop();
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Stop));
+	    }
+	    destroy() {
+	        if (!this._lottie) return;
+	        this.currentState = exports.PlayerState.Destroyed;
+	        this._lottie.destroy();
+	        this._lottie = null;
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Destroyed));
+	        this.remove();
+	    }
+	    seek(value) {
+	        if (!this._lottie) return;
+	        const matches = value.toString().match(/^([0-9]+)(%?)$/);
+	        if (!matches) {
+	            return;
+	        }
+	        const frame = matches[2] === '%' ? this._lottie.totalFrames * Number(matches[1]) / 100 : Number(matches[1]);
+	        this.seeker = Number(frame);
+	        if (this.currentState === exports.PlayerState.Playing) {
+	            this._lottie.goToAndPlay(frame, true);
+	        } else {
+	            this._lottie.goToAndStop(frame, true);
+	            this._lottie.pause();
+	        }
+	    }
+	    snapshot(download = true) {
+	        if (!this.shadowRoot) return;
+	        const svgElement = this.shadowRoot.querySelector('.animation svg');
+	        const data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null;
+	        if (!data) return;
+	        if (download) {
+	            const element = document.createElement('a');
+	            element.href = 'data:image/svg+xmlcharset=utf-8,' + encodeURIComponent(data);
+	            element.download = 'download_' + this.seeker + '.svg';
+	            document.body.appendChild(element);
+	            element.click();
+	            document.body.removeChild(element);
+	        }
+	        return data;
+	    }
+	    setSubframe(value) {
+	        if (!this._lottie) return;
+	        this.subframe = value;
+	        this._lottie.setSubframe(value);
+	    }
+	    freeze() {
+	        if (!this._lottie) return;
+	        this.currentState = exports.PlayerState.Frozen;
+	        this._lottie.pause();
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Freeze));
+	    }
+	    async reload() {
+	        if (!this._lottie) return;
+	        this._lottie.destroy();
+	        if (this.src) {
+	            await this.load(this.src);
+	        }
+	    }
+	    setSpeed(value = 1) {
+	        if (!this._lottie) return;
+	        this.speed = value;
+	        this._lottie.setSpeed(value);
+	    }
+	    setDirection(value) {
+	        if (!this._lottie) return;
+	        this.direction = value;
+	        this._lottie.setDirection(value);
+	    }
+	    setLooping(value) {
+	        if (this._lottie) {
+	            this.loop = value;
+	            this._lottie.setLoop(value);
+	        }
+	    }
+	    togglePlay() {
+	        if (!this._lottie) return;
+	        const { currentFrame, playDirection, totalFrames } = this._lottie;
+	        if (this.currentState === exports.PlayerState.Playing) return this.pause();
+	        if (this.currentState === exports.PlayerState.Completed) {
+	            this.currentState = exports.PlayerState.Playing;
+	            if (this.mode === exports.PlayMode.Bounce) {
+	                this.setDirection(playDirection * -1);
+	                return this._lottie.goToAndPlay(currentFrame, true);
+	            }
+	            if (playDirection === -1) {
+	                return this._lottie.goToAndPlay(totalFrames, true);
+	            }
+	            return this._lottie.goToAndPlay(0, true);
+	        }
+	        return this.play();
+	    }
+	    toggleLooping() {
+	        this.setLooping(!this.loop);
+	    }
+	    toggleBoomerang() {
+	        if (this.mode === exports.PlayMode.Normal) {
+	            this.mode = exports.PlayMode.Bounce;
+	        } else {
+	            this.mode = exports.PlayMode.Normal;
+	        }
+	    }
+	    static get styles() {
+	        return styles;
+	    }
+	    connectedCallback() {
+	        super.connectedCallback();
+	        if (typeof document.hidden !== 'undefined') {
+	            document.addEventListener('visibilitychange', this._onVisibilityChange);
+	        }
+	    }
+	    async firstUpdated() {
+	        if ('IntersectionObserver' in window) {
+	            this._io = new IntersectionObserver((entries)=>{
+	                if (entries[0].isIntersecting) {
+	                    if (!document.hidden && this.currentState === exports.PlayerState.Frozen) {
+	                        this.play();
+	                    }
+	                } else if (this.currentState === exports.PlayerState.Playing) {
+	                    this.freeze();
+	                }
+	            });
+	            this._io.observe(this.container);
+	        }
+	        if (this.src) {
+	            await this.load(this.src);
+	        }
+	        this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Rendered));
+	    }
+	    disconnectedCallback() {
+	        super.disconnectedCallback();
+	        if (this._io) {
+	            this._io.disconnect();
+	            this._io = undefined;
+	        }
+	        if (this._lottie) this._lottie.destroy();
+	        document.removeEventListener('visibilitychange', this._onVisibilityChange);
+	    }
+	    renderControls() {
+	        const isPlaying = this.currentState === exports.PlayerState.Playing, isPaused = this.currentState === exports.PlayerState.Paused, isStopped = this.currentState === exports.PlayerState.Stopped, isError = this.currentState === exports.PlayerState.Error;
+	        return x$1`<div class="${`lottie-controls toolbar ${isError ? 'has-error' : ''}`}" aria-label="Lottie Animation Controls"><button @click="${this.togglePlay}" class="${isPlaying || isPaused ? 'active' : ''}" style="align-items:center" tabindex="0" aria-label="Toggle Play/Pause">${isPlaying ? x$1`<svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M14.016 5.016H18v13.969h-3.984V5.016zM6 18.984V5.015h3.984v13.969H6z"/></svg>` : x$1`<svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M8.016 5.016L18.985 12 8.016 18.984V5.015z"/></svg>`}</button> <button @click="${this.stop}" class="${isStopped ? 'active' : ''}" style="align-items:center" tabindex="0" aria-label="Stop"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6h12v12H6V6z"/></svg></button> <input class="seeker" type="range" min="0" max="100" value="${this.seeker ?? 0}" @input="${this._handleSeekChange}" @mousedown="${()=>{
+            this._prevState = this.currentState;
+            this.freeze();
+        }}" @mouseup="${()=>{
+            this._prevState === exports.PlayerState.Playing && this.play();
+        }}" aria-valuemin="0" aria-valuemax="100" role="slider" aria-valuenow="${this.seeker ?? 0}" tabindex="0" aria-label="Slider for search"> <button @click="${this.toggleLooping}" class="${this.loop ? 'active' : ''}" style="align-items:center" tabindex="0" aria-label="Toggle looping"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="M17.016 17.016v-4.031h1.969v6h-12v3l-3.984-3.984 3.984-3.984v3h10.031zM6.984 6.984v4.031H5.015v-6h12v-3l3.984 3.984-3.984 3.984v-3H6.984z"/></svg></button> <button @click="${this.toggleBoomerang}" class="${this.mode === exports.PlayMode.Bounce ? 'active' : ''}" aria-label="Toggle boomerang" style="align-items:center" tabindex="0"><svg width="24" height="24" aria-hidden="true" focusable="false"><path d="m11.8 13.2-.3.3c-.5.5-1.1 1.1-1.7 1.5-.5.4-1 .6-1.5.8-.5.2-1.1.3-1.6.3s-1-.1-1.5-.3c-.6-.2-1-.5-1.4-1-.5-.6-.8-1.2-.9-1.9-.2-.9-.1-1.8.3-2.6.3-.7.8-1.2 1.3-1.6.3-.2.6-.4 1-.5.2-.2.5-.2.8-.3.3 0 .7-.1 1 0 .3 0 .6.1.9.2.9.3 1.7.9 2.4 1.5.4.4.8.7 1.1 1.1l.1.1.4-.4c.6-.6 1.2-1.2 1.9-1.6.5-.3 1-.6 1.5-.7.4-.1.7-.2 1-.2h.9c1 .1 1.9.5 2.6 1.4.4.5.7 1.1.8 1.8.2.9.1 1.7-.2 2.5-.4.9-1 1.5-1.8 2-.4.2-.7.4-1.1.4-.4.1-.8.1-1.2.1-.5 0-.9-.1-1.3-.3-.8-.3-1.5-.9-2.1-1.5-.4-.4-.8-.7-1.1-1.1h-.3zm-1.1-1.1c-.1-.1-.1-.1 0 0-.3-.3-.6-.6-.8-.9-.5-.5-1-.9-1.6-1.2-.4-.3-.8-.4-1.3-.4-.4 0-.8 0-1.1.2-.5.2-.9.6-1.1 1-.2.3-.3.7-.3 1.1 0 .3 0 .6.1.9.1.5.4.9.8 1.2.5.4 1.1.5 1.7.5.5 0 1-.2 1.5-.5.6-.4 1.1-.8 1.6-1.3.1-.3.3-.5.5-.6zM13 12c.5.5 1 1 1.5 1.4.5.5 1.1.9 1.9 1 .4.1.8 0 1.2-.1.3-.1.6-.3.9-.5.4-.4.7-.9.8-1.4.1-.5 0-.9-.1-1.4-.3-.8-.8-1.2-1.7-1.4-.4-.1-.8-.1-1.2 0-.5.1-1 .4-1.4.7-.5.4-1 .8-1.4 1.2-.2.2-.4.3-.5.5z"/></svg></button></div>`;
+	    }
+	    render() {
+	        const className = this.controls ? 'main controls' : 'main', animationClass = this.controls ? 'animation controls' : 'animation';
+	        return x$1`<div class="${`animation-container ${className}`}" lang="${this.description ? document?.documentElement?.lang : 'en'}" role="img" aria-label="${this.description ?? 'Lottie animation'}"><div class="${animationClass}" style="background:${this.background}">${this.currentState === exports.PlayerState.Error ? x$1`<div class="error"><svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1920" height="1080" viewBox="0 0 1920 1080"><path fill="#fff" d="M0 0h1920v1080H0z"/><path fill="#3a6d8b" d="M1190.2 531 1007 212.4c-22-38.2-77.2-38-98.8.5L729.5 531.3c-21.3 37.9 6.1 84.6 49.5 84.6l361.9.3c43.7 0 71.1-47.3 49.3-85.2zM937.3 288.7c.2-7.5 3.3-23.9 23.2-23.9 16.3 0 23 16.1 23 23.5 0 55.3-10.7 197.2-12.2 214.5-.1 1-.9 1.7-1.9 1.7h-18.3c-1 0-1.8-.7-1.9-1.7-1.4-17.5-13.4-162.9-11.9-214.1zm24.2 283.8c-13.1 0-23.7-10.6-23.7-23.7s10.6-23.7 23.7-23.7 23.7 10.6 23.7 23.7-10.6 23.7-23.7 23.7zM722.1 644h112.6v34.4h-70.4V698h58.8v31.7h-58.8v22.6h72.4v36.2H722.1V644zm162 57.1h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5h36.4v15.6zm78.9 0h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5H963v15.6zm39.5 36.2c0-31.3 22.2-54.8 56.6-54.8 34.4 0 56.2 23.5 56.2 54.8s-21.8 54.6-56.2 54.6c-34.4-.1-56.6-23.3-56.6-54.6zm74 0c0-17.4-6.1-29.1-17.8-29.1-11.7 0-17.4 11.7-17.4 29.1 0 17.4 5.7 29.1 17.4 29.1s17.8-11.8 17.8-29.1zm83.1-36.2h.6c8.3-12.9 18.2-17.8 31.3-17.8 3 0 5.1.4 6.3 1v32.6h-.8c-22.4-3.8-35.6 6.3-35.6 29.5v42.3h-38.2V685.5h36.4v15.6z"/><path fill="none" d="M718.9 807.7h645v285.4h-645z"/><text fill="#3a6d8b" style="text-align:center;position:absolute;left:100%;font-size:47px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'.SFNSText-Regular',sans-serif" x="50%" y="848.017" text-anchor="middle">${this._error}</text></svg></div>` : A}</div>${this.controls ? this.renderControls() : A}</div>`;
+	    }
+	    constructor(...args){
+	        super(...args);
+	        this.background = 'transparent';
+	        this.controls = false;
+	        this.currentState = exports.PlayerState.Loading;
+	        this.direction = 1;
+	        this.hover = false;
+	        this.intermission = 0;
+	        this.loop = false;
+	        this.mode = exports.PlayMode.Normal;
+	        this.objectfit = 'contain';
+	        this.renderer = 'svg';
+	        this.speed = 1;
+	        this.subframe = false;
+	        this._lottie = null;
+	        this._counter = 0;
+	        this._error = 'Something went wrong';
+	    }
+	};
 	_ts_decorate([
 	    n$1({
 	        type: Boolean,
 	        reflect: true
-	    }),
-	    _ts_metadata("design:type", typeof Autoplay === "undefined" ? Object : Autoplay)
+	    })
 	], exports.DotLottiePlayer.prototype, "autoplay", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", String)
+	    })
 	], exports.DotLottiePlayer.prototype, "background", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Boolean,
 	        reflect: true
-	    }),
-	    _ts_metadata("design:type", typeof Controls === "undefined" ? Object : Controls)
+	    })
 	], exports.DotLottiePlayer.prototype, "controls", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Number
-	    }),
-	    _ts_metadata("design:type", Number)
+	    })
 	], exports.DotLottiePlayer.prototype, "count", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", typeof exports.PlayerState === "undefined" ? Object : exports.PlayerState)
+	    })
 	], exports.DotLottiePlayer.prototype, "currentState", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", String)
+	    })
 	], exports.DotLottiePlayer.prototype, "description", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Number
-	    }),
-	    _ts_metadata("design:type", typeof AnimationDirection === "undefined" ? Object : AnimationDirection)
+	    })
 	], exports.DotLottiePlayer.prototype, "direction", void 0);
 	_ts_decorate([
 	    n$1({
@@ -24399,66 +23635,55 @@
 	    n$1({
 	        type: Boolean,
 	        reflect: true
-	    }),
-	    _ts_metadata("design:type", typeof Loop === "undefined" ? Object : Loop)
+	    })
 	], exports.DotLottiePlayer.prototype, "loop", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", typeof exports.PlayMode === "undefined" ? Object : exports.PlayMode)
+	    })
 	], exports.DotLottiePlayer.prototype, "mode", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", typeof ObjectFit === "undefined" ? Object : ObjectFit)
+	    })
 	], exports.DotLottiePlayer.prototype, "objectfit", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", typeof PreserveAspectRatio === "undefined" ? Object : PreserveAspectRatio)
+	    })
 	], exports.DotLottiePlayer.prototype, "preserveAspectRatio", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", typeof RendererType === "undefined" ? Object : RendererType)
+	    })
 	], exports.DotLottiePlayer.prototype, "renderer", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Array
-	    }),
-	    _ts_metadata("design:type", typeof AnimationSegment === "undefined" ? Object : AnimationSegment)
+	    })
 	], exports.DotLottiePlayer.prototype, "segment", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Number
-	    }),
-	    _ts_metadata("design:type", Number)
+	    })
 	], exports.DotLottiePlayer.prototype, "seeker", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Number
-	    }),
-	    _ts_metadata("design:type", Number)
+	    })
 	], exports.DotLottiePlayer.prototype, "speed", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: String
-	    }),
-	    _ts_metadata("design:type", String)
+	    })
 	], exports.DotLottiePlayer.prototype, "src", void 0);
 	_ts_decorate([
 	    n$1({
 	        type: Boolean
-	    }),
-	    _ts_metadata("design:type", typeof Subframe === "undefined" ? Object : Subframe)
+	    })
 	], exports.DotLottiePlayer.prototype, "subframe", void 0);
 	_ts_decorate([
-	    i$2('.animation'),
-	    _ts_metadata("design:type", typeof HTMLElement === "undefined" ? Object : HTMLElement)
+	    i$2('.animation')
 	], exports.DotLottiePlayer.prototype, "container", void 0);
 	exports.DotLottiePlayer = _ts_decorate([
 	    e$1('dotlottie-player')
