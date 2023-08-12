@@ -367,10 +367,11 @@ export class DotLottiePlayer extends LitElement {
    * Handles click and drag actions on the progress track
    */
   private _handleSeekChange(event: Event & { target: HTMLInputElement }) {
-    if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return
+    if (!event.target || !this._lottie || isNaN(Number(event.target.value)))
+      return
 
     const frame: number =
-      (Number(event.target.value) / 100) * this._lottie.totalFrames
+      Math.floor((Number(event.target.value) / 100) * this._lottie.totalFrames)
 
     this.seek(frame)
   }

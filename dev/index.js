@@ -23380,7 +23380,7 @@
 	    }
 	    _handleSeekChange(event) {
 	        if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return;
-	        const frame = Number(event.target.value) / 100 * this._lottie.totalFrames;
+	        const frame = Math.floor(Number(event.target.value) / 100 * this._lottie.totalFrames);
 	        this.seek(frame);
 	    }
 	    isLottie(json) {
