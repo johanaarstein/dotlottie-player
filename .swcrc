@@ -5,6 +5,7 @@
     "coreJs": "3.32"
   },
   "jsc": {
+    "baseUrl": ".",
     "assumptions": {
       "setPublicClassFields": true
     },
@@ -19,6 +20,11 @@
     "transform": {
       "legacyDecorator": true,
       "decoratorMetadata": true
+    },
+    "minify": {
+      "compress": false,
+      "mangle": false
     }
-  }
+  },
+  "minify": true
 }

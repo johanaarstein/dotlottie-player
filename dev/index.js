@@ -23177,13 +23177,13 @@
 	        trys: [],
 	        ops: []
 	    };
-	    return(g = {
+	    return g = {
 	        next: verb(0),
 	        "throw": verb(1),
 	        "return": verb(2)
 	    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
 	        return this;
-	    }), g);
+	    }), g;
 	    function verb(n) {
 	        return function(v) {
 	            return step([
@@ -23818,49 +23818,25 @@
 	    };
 	    return data;
 	}
-	exports.DotLottiePlayer = /*#__PURE__*/ function(LitElement1) {
+	exports.DotLottiePlayer = function(LitElement1) {
 	    _inherits(DotLottiePlayer, LitElement1);
 	    var _super = _create_super(DotLottiePlayer);
 	    function DotLottiePlayer() {
 	        _class_call_check(this, DotLottiePlayer);
 	        var _this;
 	        _this = _super.apply(this, arguments);
-	        /**
-	   * Background color
-	   */ _this.background = 'transparent';
-	        /**
-	   * Display controls
-	   */ _this.controls = false;
-	        /**
-	   * Player state
-	   */ _this.currentState = exports.PlayerState.Loading;
-	        /**
-	   * Direction of animation
-	   */ _this.direction = 1;
-	        /**
-	   * Whether to play on mouseover
-	   */ _this.hover = false;
-	        /**
-	   * Intermission
-	   */ _this.intermission = 0;
-	        /**
-	   * Whether to loop
-	   */ _this.loop = false;
-	        /**
-	   * Play mode
-	   */ _this.mode = exports.PlayMode.Normal;
-	        /**
-	   * Resizing to container
-	  */ _this.objectfit = 'contain';
-	        /**
-	   * Renderer to use (svg, canvas or html)
-	   */ _this.renderer = 'svg';
-	        /**
-	   * Speed
-	   */ _this.speed = 1;
-	        /**
-	   * Subframe
-	   */ _this.subframe = false;
+	        _this.background = 'transparent';
+	        _this.controls = false;
+	        _this.currentState = exports.PlayerState.Loading;
+	        _this.direction = 1;
+	        _this.hover = false;
+	        _this.intermission = 0;
+	        _this.loop = false;
+	        _this.mode = exports.PlayMode.Normal;
+	        _this.objectfit = 'contain';
+	        _this.renderer = 'svg';
+	        _this.speed = 1;
+	        _this.subframe = false;
 	        _this._lottie = null;
 	        _this._counter = 0;
 	        _this._error = 'Something went wrong';
@@ -23869,9 +23845,7 @@
 	    _create_class(DotLottiePlayer, [
 	        {
 	            key: "load",
-	            value: /**
-	   * Initialize Lottie Web player
-	   */ function load(src) {
+	            value: function load(src) {
 	                var _this = this;
 	                return _async_to_generator(function() {
 	                    var _this_preserveAspectRatio, preserveAspectRatio, options, srcParsed, _tmp, err, _err, _loopComplete;
@@ -23944,9 +23918,7 @@
 	                                if (!_this.isLottie(srcParsed)) {
 	                                    throw new Error('Broken or corrupted file');
 	                                }
-	                                // Clear previous animation, if any
 	                                if (_this._lottie) _this._lottie.destroy();
-	                                // Initialize lottie player and load animation
 	                                _this._lottie = Lottie.loadAnimation(_object_spread_props(_object_spread({}, options), {
 	                                    animationData: srcParsed
 	                                }));
@@ -23965,7 +23937,6 @@
 	                                ];
 	                            case 6:
 	                                if (_this._lottie) {
-	                                    // Calculate and save the current progress of the animation
 	                                    _this._lottie.addEventListener('enterFrame', function() {
 	                                        var _this__lottie = _this._lottie, currentFrame = _this__lottie.currentFrame, totalFrames = _this__lottie.totalFrames;
 	                                        _this.seeker = currentFrame / totalFrames * 100;
@@ -23976,7 +23947,6 @@
 	                                            }
 	                                        }));
 	                                    });
-	                                    // Handle animation play complete
 	                                    _this._lottie.addEventListener('complete', function() {
 	                                        _this.currentState = exports.PlayerState.Completed;
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Complete));
@@ -24010,21 +23980,17 @@
 	                                        }, _this.intermission);
 	                                    };
 	                                    _this._lottie.addEventListener('loopComplete', _loopComplete);
-	                                    // Handle lottie-web ready event
 	                                    _this._lottie.addEventListener('DOMLoaded', function() {
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Ready));
 	                                    });
-	                                    // Handle animation data load complete
 	                                    _this._lottie.addEventListener('data_ready', function() {
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Load));
 	                                    });
-	                                    // Set error state when animation load fail event triggers
 	                                    _this._lottie.addEventListener('data_failed', function() {
 	                                        _this.currentState = exports.PlayerState.Error;
 	                                        _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
 	                                    });
 	                                    if (_this.container) {
-	                                        // Set handlers to auto play animation on hover if enabled
 	                                        _this.container.addEventListener('mouseenter', function() {
 	                                            if (_this.hover && _this.currentState !== exports.PlayerState.Playing) {
 	                                                _this.play();
@@ -24036,11 +24002,9 @@
 	                                            }
 	                                        });
 	                                    }
-	                                    // Set initial playback speed and direction
 	                                    _this.setSpeed(_this.speed);
 	                                    _this.setDirection(_this.direction);
 	                                    _this.setSubframe(!!_this.subframe);
-	                                    // Start playing if autoplay is enabled
 	                                    if (_this.autoplay) {
 	                                        if (_this.direction === -1) _this.seek('99%');
 	                                        _this.play();
@@ -24056,9 +24020,7 @@
 	        },
 	        {
 	            key: "_onVisibilityChange",
-	            value: /**
-	   * Handle visibility change events
-	   */ function _onVisibilityChange() {
+	            value: function _onVisibilityChange() {
 	                if (document.hidden && this.currentState === exports.PlayerState.Playing) {
 	                    this.freeze();
 	                } else if (this.currentState === exports.PlayerState.Frozen) {
@@ -24068,9 +24030,7 @@
 	        },
 	        {
 	            key: "_handleSeekChange",
-	            value: /**
-	   * Handles click and drag actions on the progress track
-	   */ function _handleSeekChange(event) {
+	            value: function _handleSeekChange(event) {
 	                if (!event.target || !this._lottie || isNaN(Number(event.target.value))) return;
 	                var frame = Number(event.target.value) / 100 * this._lottie.totalFrames;
 	                this.seek(frame);
@@ -24095,17 +24055,13 @@
 	        },
 	        {
 	            key: "getLottie",
-	            value: /**
-	   * Returns the lottie-web instance used in the component
-	   */ function getLottie() {
+	            value: function getLottie() {
 	                return this._lottie;
 	            }
 	        },
 	        {
 	            key: "play",
-	            value: /**
-	   * Play
-	   */ function play() {
+	            value: function play() {
 	                if (!this._lottie) return;
 	                this.currentState = exports.PlayerState.Playing;
 	                this._lottie.play();
@@ -24114,9 +24070,7 @@
 	        },
 	        {
 	            key: "pause",
-	            value: /**
-	   * Pause
-	   */ function pause() {
+	            value: function pause() {
 	                if (!this._lottie) return;
 	                this.currentState = exports.PlayerState.Paused;
 	                this._lottie.pause();
@@ -24125,9 +24079,7 @@
 	        },
 	        {
 	            key: "stop",
-	            value: /**
-	   * Stop
-	   */ function stop() {
+	            value: function stop() {
 	                if (!this._lottie) return;
 	                this.currentState = exports.PlayerState.Stopped;
 	                this._counter = 0;
@@ -24137,9 +24089,7 @@
 	        },
 	        {
 	            key: "destroy",
-	            value: /**
-	   * Destroy animation and element
-	   */ function destroy() {
+	            value: function destroy() {
 	                if (!this._lottie) return;
 	                this.currentState = exports.PlayerState.Destroyed;
 	                this._lottie.destroy();
@@ -24150,20 +24100,14 @@
 	        },
 	        {
 	            key: "seek",
-	            value: /**
-	   * Seek to a given frame
-	   */ function seek(value) {
+	            value: function seek(value) {
 	                if (!this._lottie) return;
-	                // Extract frame number from either number or percentage value
 	                var matches = value.toString().match(/^([0-9]+)(%?)$/);
 	                if (!matches) {
 	                    return;
 	                }
-	                // Calculate and set the frame number
 	                var frame = matches[2] === '%' ? this._lottie.totalFrames * Number(matches[1]) / 100 : Number(matches[1]);
-	                // Set seeker to new frame number
 	                this.seeker = Number(frame);
-	                // Send lottie player to the new frame
 	                if (this.currentState === exports.PlayerState.Playing) {
 	                    this._lottie.goToAndPlay(frame, true);
 	                } else {
@@ -24174,18 +24118,12 @@
 	        },
 	        {
 	            key: "snapshot",
-	            value: /**
-	   * Snapshot the current frame as SVG
-	   *
-	   * If 'download' is true, a download is triggered in the browser
-	   */ function snapshot() {
+	            value: function snapshot() {
 	                var download = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : true;
 	                if (!this.shadowRoot) return;
-	                // Get SVG element and serialize markup
 	                var svgElement = this.shadowRoot.querySelector('.animation svg');
 	                var data = svgElement instanceof Node ? new XMLSerializer().serializeToString(svgElement) : null;
 	                if (!data) return;
-	                // Trigger file download
 	                if (download) {
 	                    var element = document.createElement('a');
 	                    element.href = 'data:image/svg+xmlcharset=utf-8,' + encodeURIComponent(data);
@@ -24207,11 +24145,7 @@
 	        },
 	        {
 	            key: "freeze",
-	            value: /**
-	   * Freeze animation.
-	   * This internal state pauses animation and is used to differentiate between
-	   * user requested pauses and component instigated pauses.
-	   */ function freeze() {
+	            value: function freeze() {
 	                if (!this._lottie) return;
 	                this.currentState = exports.PlayerState.Frozen;
 	                this._lottie.pause();
@@ -24220,9 +24154,7 @@
 	        },
 	        {
 	            key: "reload",
-	            value: /**
-	   * Reload animation
-	   */ function reload() {
+	            value: function reload() {
 	                var _this = this;
 	                return _async_to_generator(function() {
 	                    return _ts_generator(this, function(_state) {
@@ -24254,10 +24186,7 @@
 	        },
 	        {
 	            key: "setSpeed",
-	            value: /**
-	   * Set animation play speed
-	   * @param value Playback speed.
-	   */ function setSpeed() {
+	            value: function setSpeed() {
 	                var value = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : 1;
 	                if (!this._lottie) return;
 	                this.speed = value;
@@ -24266,10 +24195,7 @@
 	        },
 	        {
 	            key: "setDirection",
-	            value: /**
-	   * Animation play direction
-	   * @param value AnimationDirection
-	   */ function setDirection(value) {
+	            value: function setDirection(value) {
 	                if (!this._lottie) return;
 	                this.direction = value;
 	                this._lottie.setDirection(value);
@@ -24277,9 +24203,7 @@
 	        },
 	        {
 	            key: "setLooping",
-	            value: /**
-	   * Set loop
-	   */ function setLooping(value) {
+	            value: function setLooping(value) {
 	                if (this._lottie) {
 	                    this.loop = value;
 	                    this._lottie.setLoop(value);
@@ -24288,9 +24212,7 @@
 	        },
 	        {
 	            key: "togglePlay",
-	            value: /**
-	   * Toggle playing state
-	   */ function togglePlay() {
+	            value: function togglePlay() {
 	                if (!this._lottie) return;
 	                var _this__lottie = this._lottie, currentFrame = _this__lottie.currentFrame, playDirection = _this__lottie.playDirection, totalFrames = _this__lottie.totalFrames;
 	                if (this.currentState === exports.PlayerState.Playing) return this.pause();
@@ -24310,17 +24232,13 @@
 	        },
 	        {
 	            key: "toggleLooping",
-	            value: /**
-	   * Toggle loop
-	   */ function toggleLooping() {
+	            value: function toggleLooping() {
 	                this.setLooping(!this.loop);
 	            }
 	        },
 	        {
 	            key: "toggleBoomerang",
-	            value: /**
-	   * Toggle Boomerang
-	   */ function toggleBoomerang() {
+	            value: function toggleBoomerang() {
 	                if (this.mode === exports.PlayMode.Normal) {
 	                    this.mode = exports.PlayMode.Bounce;
 	                } else {
@@ -24330,11 +24248,8 @@
 	        },
 	        {
 	            key: "connectedCallback",
-	            value: /**
-	   * Initialize everything on component first render
-	   */ function connectedCallback() {
+	            value: function connectedCallback() {
 	                _get(_get_prototype_of(DotLottiePlayer.prototype), "connectedCallback", this).call(this);
-	                // Add listener for Visibility API's change event.
 	                if (typeof document.hidden !== 'undefined') {
 	                    document.addEventListener('visibilitychange', this._onVisibilityChange);
 	                }
@@ -24348,7 +24263,6 @@
 	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
-	                                // Add intersection observer for detecting component being out-of-view.
 	                                if ('IntersectionObserver' in window) {
 	                                    _this._io = new IntersectionObserver(function(entries) {
 	                                        if (entries[0].isIntersecting) {
@@ -24384,18 +24298,13 @@
 	        },
 	        {
 	            key: "disconnectedCallback",
-	            value: /**
-	   * Cleanup on component destroy
-	   */ function disconnectedCallback() {
+	            value: function disconnectedCallback() {
 	                _get(_get_prototype_of(DotLottiePlayer.prototype), "disconnectedCallback", this).call(this);
-	                // Remove intersection observer for detecting component being out-of-view
 	                if (this._io) {
 	                    this._io.disconnect();
 	                    this._io = undefined;
 	                }
-	                // Destroy the animation instance
 	                if (this._lottie) this._lottie.destroy();
-	                // Remove the attached Visibility API's change event listener
 	                document.removeEventListener('visibilitychange', this._onVisibilityChange);
 	            }
 	        },
@@ -24425,9 +24334,7 @@
 	    ], [
 	        {
 	            key: "styles",
-	            get: /**
-	   * Return the styles for the component
-	   */ function get() {
+	            get: function get() {
 	                return styles;
 	            }
 	        }
