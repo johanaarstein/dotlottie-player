@@ -1,7 +1,10 @@
 import { html, LitElement, nothing } from 'lit'
-import type { CSSResult, TemplateResult } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
+
+import { aspectRatio, fetchPath } from './functions'
+import { PlayMode, PlayerEvents, PlayerState } from './types'
+
 import type {
   AnimationConfig,
   AnimationDirection,
@@ -10,8 +13,6 @@ import type {
   AnimationSegment,
   RendererType
 } from 'lottie-web'
-
-import { PlayMode, PlayerEvents, PlayerState } from './types'
 import type {
   Autoplay,
   Controls,
@@ -20,8 +21,6 @@ import type {
   PreserveAspectRatio,
   Subframe
 } from './types'
-
-import { aspectRatio, fetchPath } from './functions'
 
 import styles from './styles'
 
@@ -159,15 +158,14 @@ export class DotLottiePlayer extends LitElement {
   private _lottie: AnimationItem | null = null
   private _prevState?: PlayerState
   private _counter = 0
-  private _error?: string
+  private _error?: string = 'Something went wrong'
 
   /**
    * Initialize Lottie Web player
    */
   public async load(src: string | Record<string, number | undefined> | JSON) {
-    if (!this.shadowRoot) {
+    if (!this.shadowRoot)
       return
-    }
 
     const preserveAspectRatio =
       this.preserveAspectRatio ?? (this.objectfit && aspectRatio(this.objectfit)),
@@ -227,9 +225,11 @@ export class DotLottiePlayer extends LitElement {
         ...options,
         animationData: srcParsed,
       })
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      this._error = err?.message
+      
+      if (err instanceof Error)
+        this._error = err?.message
       
       this.currentState = PlayerState.Error
 
@@ -386,7 +386,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Returns the lottie-web instance used in the component
    */
-  public getLottie(): AnimationItem | null {
+  public getLottie() {
     return this._lottie
   }
 
@@ -475,7 +475,7 @@ export class DotLottiePlayer extends LitElement {
    *
    * If 'download' is true, a download is triggered in the browser
    */
-  public snapshot(download = true): string | void {
+  public snapshot(download = true) {
     if (!this.shadowRoot) return
 
     // Get SVG element and serialize markup
@@ -524,7 +524,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Reload animation
    */
-  public async reload(): Promise<void> {
+  public async reload() {
     if (!this._lottie) return
     
     this._lottie.destroy()
@@ -607,7 +607,7 @@ export class DotLottiePlayer extends LitElement {
   /**
    * Return the styles for the component
    */
-  static override get styles(): CSSResult {
+  static override get styles() {
     return styles
   }
 
@@ -758,7 +758,7 @@ export class DotLottiePlayer extends LitElement {
     `
   }
 
-  protected override render(): TemplateResult | void {
+  protected override render() {
     const className: string = this.controls ? 'main controls' : 'main',
       animationClass: string = this.controls ? 'animation controls' : 'animation'
     

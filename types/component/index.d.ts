@@ -1,7 +1,6 @@
 import { LitElement } from 'lit';
-import type { CSSResult, TemplateResult } from 'lit';
-import type { AnimationDirection, AnimationItem, AnimationSegment, RendererType } from 'lottie-web';
 import { PlayMode, PlayerState } from './types';
+import type { AnimationDirection, AnimationItem, AnimationSegment, RendererType } from 'lottie-web';
 import type { Autoplay, Controls, Loop, ObjectFit, PreserveAspectRatio, Subframe } from './types';
 export declare class DotLottiePlayer extends LitElement {
     autoplay?: Autoplay;
@@ -39,7 +38,7 @@ export declare class DotLottiePlayer extends LitElement {
     stop(): void;
     destroy(): void;
     seek(value: number | string): void;
-    snapshot(download?: boolean): string | void;
+    snapshot(download?: boolean): string | undefined;
     setSubframe(value: boolean): void;
     private freeze;
     reload(): Promise<void>;
@@ -49,11 +48,11 @@ export declare class DotLottiePlayer extends LitElement {
     togglePlay(): void;
     toggleLooping(): void;
     toggleBoomerang(): void;
-    static get styles(): CSSResult;
+    static get styles(): import("lit").CSSResult;
     connectedCallback(): void;
     protected firstUpdated(): Promise<void>;
     disconnectedCallback(): void;
-    protected renderControls(): TemplateResult<1>;
-    protected render(): TemplateResult | void;
+    protected renderControls(): import("lit").TemplateResult<1>;
+    protected render(): import("lit").TemplateResult<1>;
 }
 //# sourceMappingURL=index.d.ts.map

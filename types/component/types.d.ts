@@ -1,4 +1,5 @@
 import type { Unzipped } from 'fflate';
+import type { RefObject } from 'react';
 import type { DotLottiePlayer } from '.';
 export declare enum PlayerState {
     Completed = "completed",
@@ -49,8 +50,8 @@ export type ObjectFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
 export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin slice' | 'none';
 interface ReactLottiePlayer extends Partial<DotLottiePlayer> {
     class?: string;
-    ref?: any;
-    style?: any;
+    ref?: RefObject<unknown>;
+    style?: CSSStyleDeclaration;
 }
 declare global {
     interface HTMLElementTagNameMap {

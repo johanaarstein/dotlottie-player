@@ -20153,38 +20153,6 @@
 	var lottieExports = lottie.exports;
 	var Lottie = /*@__PURE__*/getDefaultExportFromCjs(lottieExports);
 
-	exports.PlayerState = void 0;
-	(function(PlayerState) {
-	    PlayerState["Completed"] = 'completed';
-	    PlayerState["Destroyed"] = 'destroyed';
-	    PlayerState["Error"] = 'error';
-	    PlayerState["Frozen"] = 'frozen';
-	    PlayerState["Loading"] = 'loading';
-	    PlayerState["Paused"] = 'paused';
-	    PlayerState["Playing"] = 'playing';
-	    PlayerState["Stopped"] = 'stopped';
-	})(exports.PlayerState || (exports.PlayerState = {}));
-	exports.PlayMode = void 0;
-	(function(PlayMode) {
-	    PlayMode["Bounce"] = 'bounce';
-	    PlayMode["Normal"] = 'normal';
-	})(exports.PlayMode || (exports.PlayMode = {}));
-	exports.PlayerEvents = void 0;
-	(function(PlayerEvents) {
-	    PlayerEvents["Complete"] = 'complete';
-	    PlayerEvents["Destroyed"] = 'destroyed';
-	    PlayerEvents["Error"] = 'error';
-	    PlayerEvents["Frame"] = 'frame';
-	    PlayerEvents["Freeze"] = 'freeze';
-	    PlayerEvents["Load"] = 'load';
-	    PlayerEvents["Loop"] = 'loop';
-	    PlayerEvents["Pause"] = 'pause';
-	    PlayerEvents["Play"] = 'play';
-	    PlayerEvents["Ready"] = 'ready';
-	    PlayerEvents["Rendered"] = 'rendered';
-	    PlayerEvents["Stop"] = 'stop';
-	})(exports.PlayerEvents || (exports.PlayerEvents = {}));
-
 	// DEFLATE is a complex format; to read this code, you should probably check the RFC first:
 	// https://tools.ietf.org/html/rfc1951
 	// You may also wish to take a look at the guide I made about this program:
@@ -23310,11 +23278,12 @@
 	    }
 	}, fetchPath = function() {
 	    var _ref = _async_to_generator$1(function(path) {
-	        var _path_split_pop, ext, _unzipped, result, buffer$1, unzipped, manifestFile, manifest, _, id, lottieString, lottieJson;
+	        var _path_split_pop, ext, status, _unzipped, result, buffer$1, unzipped, manifestFile, manifest, _, id, lottieString, lottieJson;
 	        return _ts_generator$1(this, function(_state) {
 	            switch(_state.label){
 	                case 0:
 	                    ext = (_path_split_pop = path.split('.').pop()) === null || _path_split_pop === void 0 ? void 0 : _path_split_pop.toLowerCase();
+	                    status = 200;
 	                    _state.label = 1;
 	                case 1:
 	                    _state.trys.push([
@@ -23329,6 +23298,7 @@
 	                    ];
 	                case 2:
 	                    result = _state.sent();
+	                    status = result.status;
 	                    if (!(ext === 'json')) return [
 	                        3,
 	                        4
@@ -23365,7 +23335,7 @@
 	                case 6:
 	                    unzipped = _state.sent(), manifestFile = strFromU8(unzipped['manifest.json']), manifest = JSON.parse(manifestFile);
 	                    if (!('animations' in manifest)) throw new Error('Manifest not found');
-	                    if (!manifest.animations.length) throw new Error('No animations listed in the manifest');
+	                    if (!manifest.animations.length) throw new Error('No animations listed in manifest');
 	                    id = manifest.animations[0].id, lottieString = strFromU8((_unzipped = unzipped) === null || _unzipped === void 0 ? void 0 : _unzipped["animations/".concat(id, ".json")]);
 	                    return [
 	                        4,
@@ -23407,7 +23377,11 @@
 	                    ];
 	                case 8:
 	                    _state.sent();
-	                    throw new Error('Unable to load file');
+	                    if (status === 404) {
+	                        throw new Error('File not found');
+	                    } else {
+	                        throw new Error('Unable to load file');
+	                    }
 	                case 9:
 	                    return [
 	                        2
@@ -23419,6 +23393,38 @@
 	        return _ref.apply(this, arguments);
 	    };
 	}();
+
+	exports.PlayerState = void 0;
+	(function(PlayerState) {
+	    PlayerState["Completed"] = 'completed';
+	    PlayerState["Destroyed"] = 'destroyed';
+	    PlayerState["Error"] = 'error';
+	    PlayerState["Frozen"] = 'frozen';
+	    PlayerState["Loading"] = 'loading';
+	    PlayerState["Paused"] = 'paused';
+	    PlayerState["Playing"] = 'playing';
+	    PlayerState["Stopped"] = 'stopped';
+	})(exports.PlayerState || (exports.PlayerState = {}));
+	exports.PlayMode = void 0;
+	(function(PlayMode) {
+	    PlayMode["Bounce"] = 'bounce';
+	    PlayMode["Normal"] = 'normal';
+	})(exports.PlayMode || (exports.PlayMode = {}));
+	exports.PlayerEvents = void 0;
+	(function(PlayerEvents) {
+	    PlayerEvents["Complete"] = 'complete';
+	    PlayerEvents["Destroyed"] = 'destroyed';
+	    PlayerEvents["Error"] = 'error';
+	    PlayerEvents["Frame"] = 'frame';
+	    PlayerEvents["Freeze"] = 'freeze';
+	    PlayerEvents["Load"] = 'load';
+	    PlayerEvents["Loop"] = 'loop';
+	    PlayerEvents["Pause"] = 'pause';
+	    PlayerEvents["Play"] = 'play';
+	    PlayerEvents["Ready"] = 'ready';
+	    PlayerEvents["Rendered"] = 'rendered';
+	    PlayerEvents["Stop"] = 'stop';
+	})(exports.PlayerEvents || (exports.PlayerEvents = {}));
 
 	function _tagged_template_literal$1(strings, raw) {
 	    if (!raw) {
@@ -23857,6 +23863,7 @@
 	   */ _this.subframe = false;
 	        _this._lottie = null;
 	        _this._counter = 0;
+	        _this._error = 'Something went wrong';
 	        return _this;
 	    }
 	    _create_class(DotLottiePlayer, [
@@ -23871,11 +23878,9 @@
 	                    return _ts_generator(this, function(_state) {
 	                        switch(_state.label){
 	                            case 0:
-	                                if (!_this.shadowRoot) {
-	                                    return [
-	                                        2
-	                                    ];
-	                                }
+	                                if (!_this.shadowRoot) return [
+	                                    2
+	                                ];
 	                                preserveAspectRatio = (_this_preserveAspectRatio = _this.preserveAspectRatio) !== null && _this_preserveAspectRatio !== void 0 ? _this_preserveAspectRatio : _this.objectfit && aspectRatio(_this.objectfit), options = {
 	                                    container: _this.container,
 	                                    loop: !!_this.loop,
@@ -23952,7 +23957,7 @@
 	                            case 5:
 	                                err = _state.sent();
 	                                console.error(err);
-	                                _this._error = (_err = err) === null || _err === void 0 ? void 0 : _err.message;
+	                                if (err instanceof Error) _this._error = (_err = err) === null || _err === void 0 ? void 0 : _err.message;
 	                                _this.currentState = exports.PlayerState.Error;
 	                                _this.dispatchEvent(new CustomEvent(exports.PlayerEvents.Error));
 	                                return [

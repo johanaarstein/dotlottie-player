@@ -1302,7 +1302,8 @@
               "type": {
                 "text": "string | undefined"
               },
-              "privacy": "private"
+              "privacy": "private",
+              "default": "'Something went wrong'"
             },
             {
               "kind": "method",
@@ -1355,11 +1356,6 @@
               "kind": "method",
               "name": "getLottie",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "AnimationItem | null"
-                }
-              },
               "description": "Returns the lottie-web instance used in the component"
             },
             {
@@ -1404,11 +1400,6 @@
               "kind": "method",
               "name": "snapshot",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "string | void"
-                }
-              },
               "parameters": [
                 {
                   "name": "download",
@@ -1440,11 +1431,6 @@
               "kind": "method",
               "name": "reload",
               "privacy": "public",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              },
               "description": "Reload animation"
             },
             {
@@ -1510,9 +1496,6 @@
             {
               "kind": "field",
               "name": "styles",
-              "type": {
-                "text": "CSSResult"
-              },
               "static": true,
               "description": "Return the styles for the component"
             },
@@ -1529,12 +1512,7 @@
             {
               "kind": "method",
               "name": "render",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "TemplateResult | void"
-                }
-              }
+              "privacy": "protected"
             }
           ],
           "events": [
