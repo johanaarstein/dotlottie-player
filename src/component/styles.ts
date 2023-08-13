@@ -50,7 +50,7 @@ export default css`
     align-items: center;
     justify-items: center;
     background: var(--lottie-player-toolbar-background-color);
-    margin: 0 5px;
+    margin: 0;
     height: 35px;
     padding: 5px;
     border-radius: 5px;
@@ -88,51 +88,63 @@ export default css`
     display: none;
   }
 
-  .seeker, .seeker::-webkit-slider-runnable-track, .seeker::-webkit-slider-thumb {
+  .progress-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .seeker, .seeker::-webkit-slider-runnable-track, .seeker::-webkit-slider-thumb, progress {
     -webkit-appearance: none;
     appearance: none;
     outline: none;
   }
 
   .seeker {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 95%;
-    background-color: var(--lottie-player-toolbar-background-color);
-    display: var(--lottie-player-seeker-display);
-    color: var(--lottie-player-seeker-thumb-color);
-  }
-
-  .seeker::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
-    cursor: pointer;
-    background-color: var(--lottie-player-seeker-track-color);
     border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+    /* background-color: var(--lottie-player-seeker-track-color); */
+    display: var(--lottie-player-seeker-display);
+    color: var(--lottie-player-seeker-thumb-color);
+    margin: 0;
+    position: relative;
+    z-index: 1;
   }
-  .seeker::-webkit-progress-value {
+  progress {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 3px;
+    border: 0;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: var(--lottie-player-seeker-track-color);
+    pointer-events: none;
+  }
+  ::-moz-progress-bar {
+    background-color: var(--lottie-player-seeker-thumb-color);
+  }
+  ::-webkit-progress-inner-element {
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  ::-webkit-slider-runnable-track {
+    background-color: transparent;
+  }
+  ::-webkit-progress-value {
     background-color: var(--lottie-player-seeker-thumb-color);
   }
   .seeker::-webkit-slider-thumb {
     height: 15px;
     width: 15px;
     border-radius: 50%;
+    border: 0;
     background-color: var(--lottie-player-seeker-thumb-color);
     cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    margin-top: -5px;
-  }
-  .seeker:focus::-webkit-slider-runnable-track {
-    background-color: var(--lottie-player-seeker-track-color);
-  }
-  .seeker::-moz-range-track {
-    width: 100%;
-    height: 5px;
-    cursor: pointer;
-    background-color: var(--lottie-player-seeker-track-color);
-    border-radius: 3px;
-    border: 0;
   }
   .seeker::-moz-range-progress {
     background-color: var(--lottie-player-seeker-thumb-color);

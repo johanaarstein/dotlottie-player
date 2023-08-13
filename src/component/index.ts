@@ -3,7 +3,11 @@ import { customElement, property, query } from 'lit/decorators.js'
 import Lottie from 'lottie-web'
 
 import { aspectRatio, fetchPath } from './functions'
-import { PlayMode, PlayerEvents, PlayerState } from './types'
+import {
+  PlayMode,
+  PlayerEvents,
+  PlayerState
+} from './types'
 
 import type {
   AnimationConfig,
@@ -211,7 +215,8 @@ export class DotLottiePlayer extends LitElement {
         throw new Error('Broken file or invalid file format')
       }
 
-      const srcParsed = typeof src === 'string' ? await fetchPath(src) : src
+      const srcParsed =
+        typeof src === 'string' ? await fetchPath(src) : src
 
       if (!this.isLottie(srcParsed)) {
         throw new Error('Broken or corrupted file')
@@ -242,7 +247,7 @@ export class DotLottiePlayer extends LitElement {
       // Calculate and save the current progress of the animation
       this._lottie.addEventListener<AnimationEventName>('enterFrame', () => {
         const { currentFrame, totalFrames } = this._lottie as AnimationItem
-        this.seeker = (currentFrame / totalFrames) * 100
+        this.seeker = Math.floor((currentFrame / totalFrames) * 100)
 
         this.dispatchEvent(
           new CustomEvent(PlayerEvents.Frame, {
@@ -367,7 +372,11 @@ export class DotLottiePlayer extends LitElement {
    * Handles click and drag actions on the progress track
    */
   private _handleSeekChange(event: Event & { target: HTMLInputElement }) {
-    if (!event.target || !this._lottie || isNaN(Number(event.target.value)))
+    if (
+      !event.target ||
+      !this._lottie ||
+      isNaN(Number(event.target.value))
+    )
       return
 
     const frame: number =
@@ -457,10 +466,12 @@ export class DotLottiePlayer extends LitElement {
 
     // Calculate and set the frame number
     const frame =
-      matches[2] === '%' ? (this._lottie.totalFrames * Number(matches[1])) / 100 : Number(matches[1])
+      matches[2] === '%' ?
+        (this._lottie.totalFrames * Number(matches[1])) / 100 :
+          Number(matches[1])
 
     // Set seeker to new frame number
-    this.seeker = Number(frame)
+    this.seeker = frame
 
     // Send lottie player to the new frame
     if (this.currentState === PlayerState.Playing) {
@@ -490,8 +501,8 @@ export class DotLottiePlayer extends LitElement {
     // Trigger file download
     if (download) {
       const element = document.createElement('a')
-      element.href = 'data:image/svg+xmlcharset=utf-8,' + encodeURIComponent(data)
-      element.download = 'download_' + this.seeker + '.svg'
+      element.href = `data:image/svg+xmlcharset=utf-8,${encodeURIComponent(data)}`
+      element.download = `download_${this.seeker}.svg`
       document.body.appendChild(element)
 
       element.click()
@@ -708,27 +719,36 @@ export class DotLottiePlayer extends LitElement {
             <path d="M6 6h12v12H6V6z" />
           </svg>
         </button>
-        <input
-          class="seeker"
-          type="range"
-          min="0"
-          max="100"
-          value=${this.seeker ?? 0}
-          @input=${this._handleSeekChange}
-          @mousedown=${() => {
-            this._prevState = this.currentState
-            this.freeze()
-          }}
-          @mouseup=${() => {
-            this._prevState === PlayerState.Playing && this.play()
-          }}
-          aria-valuemin="0"
-          aria-valuemax="100"
-          role="slider"
-          aria-valuenow=${this.seeker ?? 0}
-          tabindex="0"
-          aria-label="Slider for search"
-        />
+        <div class="progress-container">
+          <input
+            class="seeker"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value=${this.seeker ?? 0}
+            @change=${this._handleSeekChange}
+            @mousedown=${() => {
+              this._prevState = this.currentState
+              this.freeze()
+            }}
+            @mouseup=${() => {
+              this._prevState === PlayerState.Playing && this.play()
+            }}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            role="slider"
+            aria-valuenow=${this.seeker ?? 0}
+            tabindex="0"
+            aria-label="Slider for search"
+          />
+          <progress
+            min="0"
+            max="100"
+            value=${this.seeker ?? 0}
+          >
+          </progress>
+        </div>
         <button
           @click=${this.toggleLooping}
           class=${this.loop ? 'active' : ''}
