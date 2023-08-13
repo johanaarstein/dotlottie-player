@@ -61,7 +61,8 @@ export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin
 interface ReactLottiePlayer extends Partial<DotLottiePlayer> {
   class?: string
   ref?: RefObject<unknown>
-  style?: CSSStyleDeclaration
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  style?: any
 }
 
 declare global {
