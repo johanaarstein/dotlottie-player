@@ -1,6 +1,6 @@
 {
   "name": "@johanaarstein/dotlottie-player",
-  "version": "1.5.21",
+  "version": "1.5.22",
   "description": "Web Component for playing Lottie animations in your web app",
   "exports": {
     ".": {
@@ -31,6 +31,7 @@
     "build": "pnpm run cleanup && rollup -c",
     "build:types": "tsc --declaration",
     "build:cem": "npx cem analyze",
+    "prod": "pnpm run build:types && pnpm run build && pnpm run build:cem",
     "dev": "pnpm run cleanup && rollup -c --watch",
     "lint": "tsc && eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",

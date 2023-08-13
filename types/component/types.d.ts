@@ -51,7 +51,7 @@ export type PreserveAspectRatio = 'xMidYMid meet' | 'xMidYMid slice' | 'xMinYMin
 interface ReactLottiePlayer extends Partial<DotLottiePlayer> {
     class?: string;
     ref?: RefObject<unknown>;
-    style?: CSSStyleDeclaration;
+    style?: any;
 }
 declare global {
     interface HTMLElementTagNameMap {
