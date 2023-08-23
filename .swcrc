@@ -11,7 +11,7 @@
       "decoratorsBeforeExport": true,
       "dynamicImport": true
     },
-    "target": "es2020",
+    "target": "es2015",
     "minify": {
       "compress": false,
       "mangle": false
