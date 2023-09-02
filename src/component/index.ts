@@ -132,7 +132,7 @@ export class DotLottiePlayer extends LitElement {
    * Seeker
    */
   @property({ type: Number })
-  seeker?: number
+  seeker?: number = 0
 
   /**
    * Speed
