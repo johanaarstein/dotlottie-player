@@ -1,6 +1,8 @@
-# Lottie Player Web Component
-
+# DEPRECATED
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 ![Awesome Vector Animations](/.github/readmeBanner.svg)
+
+This package is no longer supported. Please consider using ['@aarsteinmedia/dotlottie-player'](https://www.npmjs.com/package/@aarsteinmedia/dotlottie-player) instead. That one has double the functionality and weigh even less.
 
 This started as a fork of [@dotlottie/player-component](https://github.com/dotlottie/player-component), mainly made to address issues with render settings and aspect ratio. Since then we've added some functionalities here and tweaked some configurations there, and now this is the most versatile Lottie Player Web Component out there!
 
